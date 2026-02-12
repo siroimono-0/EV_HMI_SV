@@ -1,0 +1,76 @@
+{
+    "classes": [
+        {
+            "className": "StatStore",
+            "lineNumber": 8,
+            "object": true,
+            "qualifiedClassName": "StatStore",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_stat",
+                            "type": "stat_data"
+                        }
+                    ],
+                    "index": 0,
+                    "name": "sig_Stat_changed",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_stat",
+                            "type": "stat_data"
+                        }
+                    ],
+                    "index": 1,
+                    "name": "slot_update_FromSoc",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_stat",
+                            "type": "stat_data"
+                        }
+                    ],
+                    "index": 2,
+                    "name": "slot_update_FromSerial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_stat",
+                            "type": "stat_data"
+                        }
+                    ],
+                    "index": 3,
+                    "name": "slot_update_FromModule",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 4,
+                    "name": "slot_update_current",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "StatStore.h",
+    "outputRevision": 69
+}

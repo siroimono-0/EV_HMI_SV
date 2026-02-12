@@ -1,0 +1,32 @@
+{
+    "classes": [
+        {
+            "className": "WK_Serial",
+            "lineNumber": 17,
+            "object": true,
+            "qualifiedClassName": "WK_Serial",
+            "slots": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "name": "test_read",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 1,
+                    "name": "slot_modbus_write",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "WK_Serial.h",
+    "outputRevision": 69
+}

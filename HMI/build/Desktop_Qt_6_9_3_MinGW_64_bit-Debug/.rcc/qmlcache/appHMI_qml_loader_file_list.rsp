@@ -1,0 +1,17 @@
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/qmake_HMI.qrc
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/appHMI_raw_qml_0.qrc
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/appHMI_raw_qml_0_extra_qmldirs.qrc
+/qt/qml/HMI/Main.qml
+/qt/qml/HMI/Start_page.qml
+/qt/qml/HMI/HMI_main.qml
+/qt/qml/HMI/Select_charge.qml
+/qt/qml/HMI/Select_card.qml
+/qt/qml/HMI/Select_amount.qml
+/qt/qml/HMI/./Qml_Module/Popup_Text.qml
+/qt/qml/HMI/./Qml_Module/Keypad_Number.qml
+/qt/qml/HMI/./Qml_Module/BackGround.qml
+/qt/qml/HMI/./Qml_Module/RecBtn.qml
+/qt/qml/HMI/Qml_Module/Circle_Number.qml

@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/Start_page/">
+    <file alias="Main.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Start_page/Main.qml</file>
+  </qresource>
+</RCC>
+

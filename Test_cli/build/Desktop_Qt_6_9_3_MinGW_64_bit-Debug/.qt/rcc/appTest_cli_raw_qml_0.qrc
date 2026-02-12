@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/Test_cli/">
+    <file alias="Main.qml">C:/Users/siroi/siroimono/w_qt/EV/Test_cli/Main.qml</file>
+  </qresource>
+</RCC>
+

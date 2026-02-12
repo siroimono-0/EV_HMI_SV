@@ -1,0 +1,196 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-4493625df709e0a4cca8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "HMI",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "all_aotstats::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_aotstats-Debug-82b70f0af019ae68bd67.json",
+					"name" : "all_aotstats",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Debug-658bce61325b27cb51e6.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Debug-c245ef29168eefb3e894.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Debug-6eddf4c1bf0c0489e239.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Debug-d3448f137c211c96c95f.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI-Debug-c55057a6812691578c03.json",
+					"name" : "appHMI",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_autogen-Debug-ed80affe281f010e82df.json",
+					"name" : "appHMI_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_autogen_timestamp_deps-Debug-0ee18683fa5c6daa9dfb.json",
+					"name" : "appHMI_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_copy_qml::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_copy_qml-Debug-e9326757eb5cf6bc894a.json",
+					"name" : "appHMI_copy_qml",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_copy_res::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_copy_res-Debug-b3aaef45078f636d3e02.json",
+					"name" : "appHMI_copy_res",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_qmlimportscan-Debug-0f3e34cbb5861a88805a.json",
+					"name" : "appHMI_qmlimportscan",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_qmllint-Debug-9a1493de272a893240a5.json",
+					"name" : "appHMI_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_qmllint_json-Debug-20e4d3e2abb19f8fe097.json",
+					"name" : "appHMI_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_qmllint_module-Debug-47ba116985add1e6f07c.json",
+					"name" : "appHMI_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appHMI_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appHMI_qmltyperegistration-Debug-7156f3749c6a253218dc.json",
+					"name" : "appHMI_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "module_appHMI_aotstats_target::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-module_appHMI_aotstats_target-Debug-d7cd78b1e37b2e892f27.json",
+					"name" : "module_appHMI_aotstats_target",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug",
+		"source" : "C:/Users/siroi/siroimono/w_qt/EV/HMI"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

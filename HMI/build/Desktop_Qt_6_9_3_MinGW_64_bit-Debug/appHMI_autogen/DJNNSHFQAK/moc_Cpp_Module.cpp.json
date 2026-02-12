@@ -1,0 +1,56 @@
+{
+    "classes": [
+        {
+            "className": "Cpp_Module",
+            "lineNumber": 13,
+            "methods": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "location",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 2,
+                    "name": "join_WebSv",
+                    "returnType": "void"
+                }
+            ],
+            "object": true,
+            "qualifiedClassName": "Cpp_Module",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "msg",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 0,
+                    "name": "sig_SocErr_ToQml",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 1,
+                    "name": "sig_SocSuccess_ToQml",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "Cpp_Module.h",
+    "outputRevision": 69
+}

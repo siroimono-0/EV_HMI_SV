@@ -1,0 +1,6 @@
+module Test_sv
+typeinfo appTest_sv.qmltypes
+prefer :/qt/qml/Test_sv/
+Main 1.0 Main.qml
+depends QtQuick
+

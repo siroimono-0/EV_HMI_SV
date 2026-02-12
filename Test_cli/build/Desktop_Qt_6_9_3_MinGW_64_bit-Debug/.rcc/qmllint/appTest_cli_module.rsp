@@ -1,0 +1,10 @@
+-I
+C:/Users/siroi/siroimono/w_qt/EV/Test_cli/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug
+-I
+C:/Qt/6.9.3/mingw_64/qml
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/Test_cli/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/qmake_Test_cli.qrc
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/Test_cli/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/appTest_cli_raw_qml_0.qrc
+--module
+Test_cli

@@ -1,0 +1,16 @@
+module HMI
+typeinfo appHMI.qmltypes
+prefer :/qt/qml/HMI/
+Main 1.0 Main.qml
+Start_page 1.0 Start_page.qml
+HMI_main 1.0 HMI_main.qml
+Select_charge 1.0 Select_charge.qml
+Select_card 1.0 Select_card.qml
+Select_amount 1.0 Select_amount.qml
+Popup_Text 1.0 ./Qml_Module/Popup_Text.qml
+Keypad_Number 1.0 ./Qml_Module/Keypad_Number.qml
+BackGround 1.0 ./Qml_Module/BackGround.qml
+RecBtn 1.0 ./Qml_Module/RecBtn.qml
+Circle_Number 1.0 Qml_Module/Circle_Number.qml
+depends QtQuick
+

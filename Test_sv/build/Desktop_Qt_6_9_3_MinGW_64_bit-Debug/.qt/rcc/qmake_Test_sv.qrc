@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/Test_sv">
+    <file alias="qmldir">C:/Users/siroi/siroimono/w_qt/EV/Test_sv/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/Test_sv/qmldir</file>
+  </qresource>
+</RCC>
+

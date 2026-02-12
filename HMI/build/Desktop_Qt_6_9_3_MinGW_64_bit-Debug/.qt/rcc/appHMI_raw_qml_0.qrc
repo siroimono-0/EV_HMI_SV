@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="/qt/qml/HMI/">
+    <file alias="Main.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Main.qml</file>
+    <file alias="Start_page.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Start_page.qml</file>
+    <file alias="HMI_main.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/HMI_main.qml</file>
+    <file alias="Select_charge.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Select_charge.qml</file>
+    <file alias="Select_card.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Select_card.qml</file>
+    <file alias="Select_amount.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Select_amount.qml</file>
+    <file alias="./Qml_Module/Popup_Text.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Popup_Text.qml</file>
+    <file alias="./Qml_Module/Keypad_Number.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Keypad_Number.qml</file>
+    <file alias="./Qml_Module/BackGround.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BackGround.qml</file>
+    <file alias="./Qml_Module/RecBtn.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/RecBtn.qml</file>
+    <file alias="Qml_Module/Circle_Number.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Circle_Number.qml</file>
+  </qresource>
+</RCC>
+

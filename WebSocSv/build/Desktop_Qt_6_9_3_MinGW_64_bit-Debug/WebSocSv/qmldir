@@ -1,0 +1,9 @@
+module WebSocSv
+typeinfo appWebSocSv.qmltypes
+prefer :/qt/qml/WebSocSv/
+Main 1.0 Main.qml
+Start_page 1.0 Start_page.qml
+SV_info_page 1.0 SV_info_page.qml
+BackBtn 1.0 BackBtn.qml
+depends QtQuick
+

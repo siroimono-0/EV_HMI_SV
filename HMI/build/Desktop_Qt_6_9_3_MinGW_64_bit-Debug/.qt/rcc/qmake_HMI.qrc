@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/HMI">
+    <file alias="qmldir">C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/qmldir</file>
+  </qresource>
+</RCC>
+

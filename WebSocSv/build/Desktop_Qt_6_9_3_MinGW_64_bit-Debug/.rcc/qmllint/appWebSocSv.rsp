@@ -1,0 +1,13 @@
+--bare
+-I
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug
+-I
+C:/Qt/6.9.3/mingw_64/qml
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/qmake_WebSocSv.qrc
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/appWebSocSv_raw_qml_0.qrc
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/Main.qml
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/Start_page.qml
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/SV_info_page.qml
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/BackBtn.qml

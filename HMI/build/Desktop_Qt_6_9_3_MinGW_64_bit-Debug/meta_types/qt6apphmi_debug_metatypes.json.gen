@@ -1,0 +1,230 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Cpp_Module",
+                "lineNumber": 13,
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "id",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "location",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 2,
+                        "name": "join_WebSv",
+                        "returnType": "void"
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "Cpp_Module",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "msg",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 0,
+                        "name": "sig_SocErr_ToQml",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 1,
+                        "name": "sig_SocSuccess_ToQml",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "Cpp_Module.h",
+        "outputRevision": 69
+    },
+    {
+        "classes": [
+            {
+                "className": "StatStore",
+                "lineNumber": 8,
+                "object": true,
+                "qualifiedClassName": "StatStore",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_stat",
+                                "type": "stat_data"
+                            }
+                        ],
+                        "index": 0,
+                        "name": "sig_Stat_changed",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_stat",
+                                "type": "stat_data"
+                            }
+                        ],
+                        "index": 1,
+                        "name": "slot_update_FromSoc",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_stat",
+                                "type": "stat_data"
+                            }
+                        ],
+                        "index": 2,
+                        "name": "slot_update_FromSerial",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_stat",
+                                "type": "stat_data"
+                            }
+                        ],
+                        "index": 3,
+                        "name": "slot_update_FromModule",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 4,
+                        "name": "slot_update_current",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "StatStore.h",
+        "outputRevision": 69
+    },
+    {
+        "classes": [
+            {
+                "className": "WK_Serial",
+                "lineNumber": 17,
+                "object": true,
+                "qualifiedClassName": "WK_Serial",
+                "slots": [
+                    {
+                        "access": "public",
+                        "index": 0,
+                        "name": "test_read",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 1,
+                        "name": "slot_modbus_write",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "WK_Serial.h",
+        "outputRevision": 69
+    },
+    {
+        "classes": [
+            {
+                "className": "WK_WebSocket",
+                "lineNumber": 14,
+                "object": true,
+                "qualifiedClassName": "WK_WebSocket",
+                "signals": [
+                    {
+                        "access": "public",
+                        "index": 0,
+                        "name": "sig_end",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "public",
+                        "index": 1,
+                        "name": "slot_stop",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 2,
+                        "name": "slot_Connect_Sv",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "error",
+                                "type": "QAbstractSocket::SocketError"
+                            }
+                        ],
+                        "index": 3,
+                        "name": "slot_SocErr",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_stat",
+                                "type": "stat_data"
+                            }
+                        ],
+                        "index": 4,
+                        "name": "slot_sendData",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "WK_WebSocket.h",
+        "outputRevision": 69
+    }
+]

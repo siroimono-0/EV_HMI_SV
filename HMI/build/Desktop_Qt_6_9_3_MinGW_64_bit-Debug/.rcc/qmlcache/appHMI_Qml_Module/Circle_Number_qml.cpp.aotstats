@@ -1,0 +1,140 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessful": true,
+                        "column": 13,
+                        "durationMicroseconds": 202,
+                        "errorMessage": "",
+                        "functionName": "radius",
+                        "line": 10
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 20,
+                        "durationMicroseconds": 121,
+                        "errorMessage": "",
+                        "functionName": "onClicked",
+                        "line": 27
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 20,
+                        "durationMicroseconds": 34,
+                        "errorMessage": "",
+                        "functionName": "onClicked",
+                        "line": 27
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 35,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 26
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 17,
+                        "durationMicroseconds": 78,
+                        "errorMessage": "",
+                        "functionName": "radius",
+                        "line": 39
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 34,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 42
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 17,
+                        "durationMicroseconds": 65,
+                        "errorMessage": "Cannot load property radius from (component in C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Circle_Number.qml)::parent with type QQuickItem.",
+                        "functionName": "radius",
+                        "line": 58
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 38,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 59
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 16,
+                        "durationMicroseconds": 89,
+                        "errorMessage": "",
+                        "functionName": "width",
+                        "line": 78
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 43,
+                        "durationMicroseconds": 79,
+                        "errorMessage": "",
+                        "functionName": "height",
+                        "line": 78
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 17,
+                        "durationMicroseconds": 53,
+                        "errorMessage": "",
+                        "functionName": "radius",
+                        "line": 79
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 9,
+                        "durationMicroseconds": 100,
+                        "errorMessage": "",
+                        "functionName": "restart",
+                        "line": 119
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 26,
+                        "durationMicroseconds": 49,
+                        "errorMessage": "",
+                        "functionName": "orientation",
+                        "line": 83
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 27,
+                        "durationMicroseconds": 38,
+                        "errorMessage": "",
+                        "functionName": "centerIn",
+                        "line": 98
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 36,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 104
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 35,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 111
+                    }
+                ],
+                "filePath": "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Circle_Number.qml"
+            }
+        ],
+        "moduleId": "HMI(appHMI)"
+    }
+]
