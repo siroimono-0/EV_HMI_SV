@@ -17,9 +17,17 @@ struct stat_data
     QString location;
     int stat;
 };
+Q_DECLARE_METATYPE(stat_data)
 
 struct details
 {};
 
-Q_DECLARE_METATYPE(stat_data)
+struct store_info
+{
+    int id;
+    QString name;
+    QString location;
+};
+
+Q_DECLARE_METATYPE(store_info)
 #endif // STATDATA_H

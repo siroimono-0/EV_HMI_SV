@@ -7,10 +7,20 @@ HMI_main 1.0 HMI_main.qml
 Select_charge 1.0 Select_charge.qml
 Select_card 1.0 Select_card.qml
 Select_amount 1.0 Select_amount.qml
+Card_Ready 1.0 Card_Ready.qml
+Card_Socket 1.0 Card_Socket.qml
+Charging_Ready 1.0 Charging_Ready.qml
+Card_Failed 1.0 Card_Failed.qml
 Popup_Text 1.0 ./Qml_Module/Popup_Text.qml
 Keypad_Number 1.0 ./Qml_Module/Keypad_Number.qml
 BackGround 1.0 ./Qml_Module/BackGround.qml
 RecBtn 1.0 ./Qml_Module/RecBtn.qml
-Circle_Number 1.0 Qml_Module/Circle_Number.qml
+Circle_Number 1.0 ./Qml_Module/Circle_Number.qml
+BtnGreen 1.0 ./Qml_Module/BtnGreen.qml
+NeonLabel 1.0 ./Qml_Module/NeonLabel.qml
+BackGround_Plus 1.0 ./Qml_Module/BackGround_Plus.qml
+Keypad_New 1.0 ./Qml_Module/Keypad_New.qml
+Rec_Number 1.0 ./Qml_Module/Rec_Number.qml
+BackGround_Card 1.0 ./Qml_Module/BackGround_Card.qml
 depends QtQuick
 

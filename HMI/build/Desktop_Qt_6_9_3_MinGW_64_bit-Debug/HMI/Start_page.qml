@@ -237,6 +237,11 @@ Item {
             text: "HMI Server Connection"
             anchors.centerIn: parent
         }
+
+        onSig_Clicked: function()
+        {
+            root.next_page(root.id);
+        }
     }
 
     Label{
@@ -274,7 +279,7 @@ Item {
 
     BusyIndicator{
         id: root_indicator
-        width: 100; height: 100;
+        width: 400; height: 400;
         running: false;
         visible: false;
         anchors.centerIn: parent
@@ -282,19 +287,21 @@ Item {
 
     function next_page(s)
     {
-        if(tf_id.text === "")
+        if(root.id === "")
         {
             root_Pop_Text.open("ID를 입력하여 주십시오");
         }
         else
         {
-            cpp_module.join_WebSv(tf_id.text, tf_location.text);
+            // 이미 서버 연결시도 했으면 중복 X해야댐
+            // ID만 다시 물어볼 수 있도록
+            cpp_module.join_WebSv(root.id);
             // 로딩 이미지 띄워놓음
             root_indicator.visible = true;
             root_indicator.running = true;
 
             // 임시 서버 미연결 화면전환
-            root.stk_push();
+            // root.stk_push();
         }
     }
 
@@ -308,7 +315,8 @@ Item {
         target: cpp_module
 
         function onSig_SocErr_ToQml(s){
-            console.log(s);
+
+            root_Pop_Text.open(s);
             // 로딩 이미지 투명
             // 실패 팝업창 생성
             root_indicator.visible = false;
@@ -320,6 +328,14 @@ Item {
             root_indicator.visible = false;
             root_indicator.running = false;
             root.stk_push();
+        }
+
+        function onSig_SocFailed_ToQml(s){
+
+            root_Pop_Text.open(s);
+            // 로딩 이미지 투명
+            root_indicator.visible = false;
+            root_indicator.running = false;
         }
     }
 }

@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../../Cpp_Module/WK_WebSocket.h"
+#include <QtNetwork/QSslError>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -43,12 +44,22 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         "",
         "slot_stop",
         "slot_Connect_Sv",
+        "slot_ID_Check",
+        "slot_ID_Resert",
+        "resert",
         "slot_SocErr",
         "QAbstractSocket::SocketError",
         "error",
-        "slot_sendData",
+        "slot_Send_TextData",
         "stat_data",
-        "st_stat"
+        "st_stat",
+        "slot_Recv_TextData",
+        "recvData",
+        "slot_netAccess_reply",
+        "QNetworkReply*",
+        "reply",
+        "slot_netAccess_post",
+        "qba"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -58,13 +69,31 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_Connect_Sv'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'slot_SocErr'
-        QtMocHelpers::SlotData<void(QAbstractSocket::SocketError)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 6, 7 },
+        // Slot 'slot_ID_Check'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_ID_Resert'
+        QtMocHelpers::SlotData<void(bool)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 7 },
         }}),
-        // Slot 'slot_sendData'
-        QtMocHelpers::SlotData<void(stat_data)>(8, 2, QMC::AccessPublic, QMetaType::Void, {{
+        // Slot 'slot_SocErr'
+        QtMocHelpers::SlotData<void(QAbstractSocket::SocketError)>(8, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 9, 10 },
+        }}),
+        // Slot 'slot_Send_TextData'
+        QtMocHelpers::SlotData<void(stat_data)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 12, 13 },
+        }}),
+        // Slot 'slot_Recv_TextData'
+        QtMocHelpers::SlotData<void(QString)>(14, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 15 },
+        }}),
+        // Slot 'slot_netAccess_reply'
+        QtMocHelpers::SlotData<void(QNetworkReply *)>(16, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 17, 18 },
+        }}),
+        // Slot 'slot_netAccess_post'
+        QtMocHelpers::SlotData<void(QByteArray)>(19, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QByteArray, 20 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -92,26 +121,38 @@ void WK_WebSocket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 0: _t->sig_end(); break;
         case 1: _t->slot_stop(); break;
         case 2: _t->slot_Connect_Sv(); break;
-        case 3: _t->slot_SocErr((*reinterpret_cast< std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
-        case 4: _t->slot_sendData((*reinterpret_cast< std::add_pointer_t<stat_data>>(_a[1]))); break;
+        case 3: _t->slot_ID_Check(); break;
+        case 4: _t->slot_ID_Resert((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 5: _t->slot_SocErr((*reinterpret_cast< std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
+        case 6: _t->slot_Send_TextData((*reinterpret_cast< std::add_pointer_t<stat_data>>(_a[1]))); break;
+        case 7: _t->slot_Recv_TextData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 8: _t->slot_netAccess_reply((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
+        case 9: _t->slot_netAccess_post((*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[1]))); break;
         default: ;
         }
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-        case 3:
+        case 5:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QAbstractSocket::SocketError >(); break;
             }
             break;
-        case 4:
+        case 6:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< stat_data >(); break;
+            }
+            break;
+        case 8:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QNetworkReply* >(); break;
             }
             break;
         }
@@ -141,14 +182,14 @@ int WK_WebSocket::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 10;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 10;
     }
     return _id;
 }

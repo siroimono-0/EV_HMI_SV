@@ -9,6 +9,12 @@ find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS WebSockets)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS QuickEffects)
+find_package(Qt6 REQUIRED COMPONENTS QuickControls2)
+
+
+find_package(Qt6 COMPONENTS Sql REQUIRED)
 
 
 qt_standard_project_setup(REQUIRES 6.8)
@@ -25,12 +31,18 @@ qt_add_qml_module(appWebSocSv
         Start_page.qml
         SV_info_page.qml
         BackBtn.qml
+        StoreManagement.qml
+        ./Qml_Module/BackGround.qml
+        ./Qml_Module/Popup_Text.qml
+        ./Qml_Module/RecBtn.qml
+        ./Qml_Module/PopUp_CreateStore_DB.qml
 
     SOURCES
         ./Cpp_Module/Cpp_Module.h ./Cpp_Module/Cpp_Module.cpp
         ./Cpp_Module/StatModel.h ./Cpp_Module/StatModel.cpp
         ./Cpp_Module/Hub.h ./Cpp_Module/Hub.cpp
         ./Cpp_Module/WK_Soc.h ./Cpp_Module/WK_Soc.cpp
+        ./Cpp_Module/DB_PostgreSQL.h ./Cpp_Module/DB_PostgreSQL.cpp
         ../Common/StatData.h
 
 )
@@ -53,6 +65,10 @@ target_link_libraries(appWebSocSv PRIVATE Qt6::Core)
 target_link_libraries(appWebSocSv PRIVATE Qt6::WebSockets)
 target_link_libraries(appWebSocSv PRIVATE Qt6::Core)
 target_link_libraries(appWebSocSv PRIVATE Qt6::Core)
+target_link_libraries(appWebSocSv PRIVATE Qt6::Core)
+target_link_libraries(appWebSocSv PRIVATE Qt6::Sql)
+target_link_libraries(appWebSocSv PRIVATE Qt6::QuickEffects)
+target_link_libraries(appWebSocSv PRIVATE Qt6::QuickControls2)
 
 include(GNUInstallDirs)
 install(TARGETS appWebSocSv
@@ -60,3 +76,14 @@ install(TARGETS appWebSocSv
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+set(PG_BIN_DIR "C:/Program Files/PostgreSQL/18/bin")
+
+add_custom_command(TARGET appWebSocSv POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${PG_BIN_DIR}/libpq.dll"
+    $<TARGET_FILE_DIR:appWebSocSv>
+)
+
+
+

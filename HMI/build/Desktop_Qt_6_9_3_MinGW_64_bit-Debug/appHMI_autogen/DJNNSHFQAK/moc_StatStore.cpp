@@ -46,7 +46,8 @@ template <> constexpr inline auto StatStore::qt_create_metaobjectdata<qt_meta_ta
         "slot_update_FromSoc",
         "slot_update_FromSerial",
         "slot_update_FromModule",
-        "slot_update_current"
+        "slot_update_current",
+        "slot_get_stat"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -68,6 +69,8 @@ template <> constexpr inline auto StatStore::qt_create_metaobjectdata<qt_meta_ta
         }}),
         // Slot 'slot_update_current'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_get_stat'
+        QtMocHelpers::SlotData<stat_data()>(9, 2, QMC::AccessPublic, 0x80000000 | 3),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -96,6 +99,8 @@ void StatStore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 2: _t->slot_update_FromSerial((*reinterpret_cast< std::add_pointer_t<stat_data>>(_a[1]))); break;
         case 3: _t->slot_update_FromModule((*reinterpret_cast< std::add_pointer_t<stat_data>>(_a[1]))); break;
         case 4: _t->slot_update_current(); break;
+        case 5: { stat_data _r = _t->slot_get_stat();
+            if (_a[0]) *reinterpret_cast< stat_data*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
@@ -157,14 +162,14 @@ int StatStore::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

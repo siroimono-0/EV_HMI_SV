@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="332" viewBox="0 0 100 130">
+  <defs>
+    <!-- white glow (same as your previous SVGs) -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.6" result="b1"/>
+      <feGaussianBlur stdDeviation="3.6" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g filter="url(#glow)" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- battery body (outline only) -->
+    <rect x="24" y="18" width="52" height="98" rx="6" ry="6"
+          fill="none" stroke-width="6"/>
+
+    <!-- top terminal (outline only) -->
+    <rect x="40" y="10" width="20" height="10" rx="3" ry="3"
+          fill="none" stroke-width="6"/>
+
+    <!-- inner fill area padding -->
+    <!-- (filled bars: no stroke to avoid overlap) -->
+    <g fill="#fff" stroke="none">
+      <!-- <rect x="32" y="34" width="36" height="14" rx="3" ry="3"/> -->
+      <rect x="32" y="52" width="36" height="14" rx="3" ry="3"/>
+      <rect x="32" y="70" width="36" height="14" rx="3" ry="3"/>
+      <rect x="32" y="88" width="36" height="14" rx="3" ry="3"/>
+    </g>
+  </g>
+</svg>

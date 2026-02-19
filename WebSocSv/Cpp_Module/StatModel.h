@@ -36,6 +36,7 @@ public:
     // QML에서 model.text로 접근할 수 있도록 role과 이름 매핑
     QHash<int, QByteArray> roleNames() const override;
 
+    Q_INVOKABLE void reset_md();
 public slots:
     void slot_qvec_update(stat_data st_stat);
     void slot_qvec_del(int id_common);

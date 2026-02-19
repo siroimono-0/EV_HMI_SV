@@ -1,8 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(HMI VERSION 0.1 LANGUAGES CXX)
+project(HMI VERSION 0.1 LANGUAGES C CXX)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set_source_files_properties(
+    ${CMAKE_CURRENT_SOURCE_DIR}/External_Library/crc16.c
+    PROPERTIES LANGUAGE C
+)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core)
@@ -13,7 +20,6 @@ find_package(Qt6 REQUIRED COMPONENTS SerialPort)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS QuickEffects)
 find_package(Qt6 REQUIRED COMPONENTS QuickControls2)
-
 
 
 
@@ -33,10 +39,21 @@ qt_add_qml_module(appHMI
         Select_charge.qml
         Select_card.qml
         Select_amount.qml
+        Card_Ready.qml
+        Card_Socket.qml
+        Charging_Ready.qml
+        Card_Failed.qml
         ./Qml_Module/Popup_Text.qml
         ./Qml_Module/Keypad_Number.qml
         ./Qml_Module/BackGround.qml
         ./Qml_Module/RecBtn.qml
+        ./Qml_Module/Circle_Number.qml
+        ./Qml_Module/BtnGreen.qml
+        ./Qml_Module/NeonLabel.qml
+        ./Qml_Module/BackGround_Plus.qml
+        ./Qml_Module/Keypad_New.qml
+        ./Qml_Module/Rec_Number.qml
+        ./Qml_Module/BackGround_Card.qml
 
     SOURCES
         ./Cpp_Module/Cpp_Module.h ./Cpp_Module/Cpp_Module.cpp
@@ -44,7 +61,18 @@ qt_add_qml_module(appHMI
         ./Cpp_Module/WK_Serial.h ./Cpp_Module/WK_Serial.cpp
         ./Cpp_Module/StatStore.h ./Cpp_Module/StatStore.cpp
         ../Common/StatData.h
-        QML_FILES Qml_Module/Circle_Number.qml
+        ./External_Library/checksum.h ./External_Library/crc16.c
+
+    RESOURCES
+        ./images/combo.svg
+        ./images/memberCard.svg
+        ./images/creditCard.svg
+        ./images/time.svg
+        ./images/won.svg
+        ./images/voltage.svg
+        ./images/battery.svg
+        ./images/cardReady.svg
+        ./images/cardInsert.svg
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

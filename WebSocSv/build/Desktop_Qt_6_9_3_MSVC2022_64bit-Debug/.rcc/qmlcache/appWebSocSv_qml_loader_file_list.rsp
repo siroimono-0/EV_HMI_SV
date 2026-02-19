@@ -1,0 +1,15 @@
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-Debug/.qt/rcc/qmake_WebSocSv.qrc
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-Debug/.qt/rcc/appWebSocSv_raw_qml_0.qrc
+--resource
+C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-Debug/.qt/rcc/appWebSocSv_raw_qml_0_extra_qmldirs.qrc
+/qt/qml/WebSocSv/Main.qml
+/qt/qml/WebSocSv/Start_page.qml
+/qt/qml/WebSocSv/SV_info_page.qml
+/qt/qml/WebSocSv/BackBtn.qml
+/qt/qml/WebSocSv/StoreManagement.qml
+/qt/qml/WebSocSv/./Qml_Module/BackGround.qml
+/qt/qml/WebSocSv/./Qml_Module/Popup_Text.qml
+/qt/qml/WebSocSv/./Qml_Module/RecBtn.qml
+/qt/qml/WebSocSv/./Qml_Module/PopUp_CreateStore_DB.qml

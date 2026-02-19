@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import HMI 1.0
 
 Window {
     id: root
@@ -11,6 +12,7 @@ Window {
     StackView{
         id: root_stkView
         initialItem: "Start_page.qml"
+        // initialItem: "./Qml_Module/Keypad_New.qml"
 
         anchors.fill: parent
     }

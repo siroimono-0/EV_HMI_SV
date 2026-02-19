@@ -43,9 +43,16 @@ template <> constexpr inline auto Cpp_Module::qt_create_metaobjectdata<qt_meta_t
         "",
         "msg",
         "sig_SocSuccess_ToQml",
+        "sig_SocFailed_ToQml",
+        "sig_card_success_ToQml",
+        "sig_card_failed_ToQml",
+        "sig_card_compare_ToQml",
         "join_WebSv",
         "id",
-        "location"
+        "set_card_stat",
+        "stat",
+        "chargingConnecter_open",
+        "chargingConnecter_ready"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -55,10 +62,30 @@ template <> constexpr inline auto Cpp_Module::qt_create_metaobjectdata<qt_meta_t
         }}),
         // Signal 'sig_SocSuccess_ToQml'
         QtMocHelpers::SignalData<void()>(4, 2, QMC::AccessPublic, QMetaType::Void),
-        // Method 'join_WebSv'
-        QtMocHelpers::MethodData<void(QString, QString)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 6 }, { QMetaType::QString, 7 },
+        // Signal 'sig_SocFailed_ToQml'
+        QtMocHelpers::SignalData<void(QString)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 3 },
         }}),
+        // Signal 'sig_card_success_ToQml'
+        QtMocHelpers::SignalData<void()>(6, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'sig_card_failed_ToQml'
+        QtMocHelpers::SignalData<void(QString)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 3 },
+        }}),
+        // Signal 'sig_card_compare_ToQml'
+        QtMocHelpers::SignalData<void()>(8, 2, QMC::AccessPublic, QMetaType::Void),
+        // Method 'join_WebSv'
+        QtMocHelpers::MethodData<void(QString)>(9, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 10 },
+        }}),
+        // Method 'set_card_stat'
+        QtMocHelpers::MethodData<void(bool)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 12 },
+        }}),
+        // Method 'chargingConnecter_open'
+        QtMocHelpers::MethodData<void()>(13, 2, QMC::AccessPublic, QMetaType::Void),
+        // Method 'chargingConnecter_ready'
+        QtMocHelpers::MethodData<void()>(14, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -84,7 +111,14 @@ void Cpp_Module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->sig_SocErr_ToQml((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 1: _t->sig_SocSuccess_ToQml(); break;
-        case 2: _t->join_WebSv((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 2: _t->sig_SocFailed_ToQml((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 3: _t->sig_card_success_ToQml(); break;
+        case 4: _t->sig_card_failed_ToQml((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 5: _t->sig_card_compare_ToQml(); break;
+        case 6: _t->join_WebSv((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 7: _t->set_card_stat((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 8: _t->chargingConnecter_open(); break;
+        case 9: _t->chargingConnecter_ready(); break;
         default: ;
         }
     }
@@ -92,6 +126,14 @@ void Cpp_Module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)(QString )>(_a, &Cpp_Module::sig_SocErr_ToQml, 0))
             return;
         if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_SocSuccess_ToQml, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)(QString )>(_a, &Cpp_Module::sig_SocFailed_ToQml, 2))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_card_success_ToQml, 3))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)(QString )>(_a, &Cpp_Module::sig_card_failed_ToQml, 4))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_card_compare_ToQml, 5))
             return;
     }
 }
@@ -115,14 +157,14 @@ int Cpp_Module::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 10;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 10)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 10;
     }
     return _id;
 }
@@ -137,5 +179,29 @@ void Cpp_Module::sig_SocErr_ToQml(QString _t1)
 void Cpp_Module::sig_SocSuccess_ToQml()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void Cpp_Module::sig_SocFailed_ToQml(QString _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
+}
+
+// SIGNAL 3
+void Cpp_Module::sig_card_success_ToQml()
+{
+    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+}
+
+// SIGNAL 4
+void Cpp_Module::sig_card_failed_ToQml(QString _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 4, nullptr, _t1);
+}
+
+// SIGNAL 5
+void Cpp_Module::sig_card_compare_ToQml()
+{
+    QMetaObject::activate(this, &staticMetaObject, 5, nullptr);
 }
 QT_WARNING_POP

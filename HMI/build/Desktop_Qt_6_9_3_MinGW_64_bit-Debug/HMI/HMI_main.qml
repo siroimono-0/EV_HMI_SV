@@ -10,14 +10,9 @@ Item {
         anchors.fill: parent
     }
 
-    Rectangle{
+    RecBtn{
         id: root_startBtn
         width: 300; height: 180;
-        color: "#800000FF"
-        border.color: "blue"
-        border.width: 2
-        radius: 10
-
         anchors.centerIn: parent
 
         Label{
@@ -29,17 +24,15 @@ Item {
             verticalAlignment: Text.AlignVCenter;
         }
 
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                root.stk_next();
-            }
+        onSig_Clicked: function()
+        {
+            root.stk_next();
         }
     }
 
     function stk_next()
     {
-        StackView.view.push("Select_charge.qml");
+        StackView.view.push("Select_amount.qml");
 
     }
 }

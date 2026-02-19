@@ -1,8 +1,11 @@
 C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/appHMI_autogen/DJNNSHFQAK/moc_WK_WebSocket.cpp: C:/Users/siroi/siroimono/w_qt/EV/HMI/Cpp_Module/WK_WebSocket.h \
   C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/appHMI_autogen/moc_predefs.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QDebug \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QFlags \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QIODevice \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QJsonObject \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QList \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QMetaType \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QObject \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QSharedDataPointer \
@@ -145,19 +148,25 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QAbstractSocket \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkAccessManager \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkProxy \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkReply \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkRequest \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QSslConfiguration \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QSslError \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qabstractsocket.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qhostaddress.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qhttpheaders.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkaccessmanager.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkproxy.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkreply.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkrequest.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qssl.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslcertificate.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslconfiguration.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslerror.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslsocket.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qtcpsocket.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qtnetwork-config.h \
@@ -381,4 +390,5 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
-  C:/Users/siroi/siroimono/w_qt/EV/Common/StatData.h
+  C:/Users/siroi/siroimono/w_qt/EV/Common/StatData.h \
+  C:/Users/siroi/siroimono/w_qt/EV/HMI/Cpp_Module/StatStore.h

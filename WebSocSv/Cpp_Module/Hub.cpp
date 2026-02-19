@@ -13,6 +13,12 @@ void Hub::set_p_md(StatModel *set_md)
     return;
 }
 
+void Hub::set_p_db(DB_PostgreSQL *set_db)
+{
+    this->p_obj_db = set_db;
+    return;
+}
+
 void Hub::slot_start_sv()
 {
     QString sv_name = "WebSocSv";
@@ -31,6 +37,23 @@ void Hub::slot_start_sv()
     {
         qDebug() << Q_FUNC_INFO << " listen OK";
     }
+}
+
+void Hub::slot_end()
+{
+    if (this->p_webSoc_Sv && this->p_webSoc_Sv->isListening())
+    {
+        this->p_webSoc_Sv->close();
+    }
+
+    for (auto wk : qmp_wk)
+    {
+        wk->deleteLater();
+    }
+
+    qmp_wk.clear();
+    emit this->sig_end();
+    return;
 }
 
 void Hub::slot_new_connection()
@@ -55,6 +78,7 @@ void Hub::slot_new_connection()
     wk->set_p_md(this->p_md);
     wk->set_p_webSoc(new_cli, new_id);
     wk->set_p_Hub(this);
+    wk->set_p_db(this->p_obj_db);
 
     this->qmp_wk.insert(new_id, wk);
     qDebug() << Q_FUNC_INFO << "워커 추가 완료";

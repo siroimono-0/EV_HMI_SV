@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="332" viewBox="0 0 100 130">
+  <defs>
+    <!-- white glow -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.6" result="b1"/>
+      <feGaussianBlur stdDeviation="3.6" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- hourglass -->
+  <g filter="url(#glow)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- top bar -->
+    <rect x="12" y="10" width="76" height="10" rx="5" ry="5" stroke-width="6"/>
+
+    <!-- bottom bar -->
+    <rect x="12" y="110" width="76" height="10" rx="5" ry="5" stroke-width="6"/>
+
+    <!-- body outline -->
+    <path stroke-width="6"
+      d="
+        M 26 24
+        H 74
+        C 74 40 67 48 59 54
+        C 52 58 52 72 59 76
+        C 67 82 74 90 74 106
+        H 26
+        C 26 90 33 82 41 76
+        C 48 72 48 58 41 54
+        C 33 48 26 40 26 24
+      "
+    />
+  </g>
+</svg>

@@ -1,85 +1,251 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 import HMI 1.0
 
 Item {
     id: root
 
-    BackGround{
-        id: background
-        anchors.fill: parent
+    function stk_next(s)
+    {
+        if(s === "memberCard")
+        {
+            // 임시 그냥 다음 화면으로
+            // StackView.view.push("Select_amount.qml");
+        }
+        else if(s === "creditCard")
+        {
+            StackView.view.push("Card_Ready.qml");
+        }
     }
 
+    function stk_prev()
+    {
+        StackView.view.pop();
+    }
 
-    Rectangle{
-        id: root_left
+    function stk_home()
+    {
+        while(StackView.view.depth > 2)
+        {
+            StackView.view.pop();
+        }
+    }
+
+    BackGround_Plus{
+        id: back
+        anchors.fill: parent
+
+        onSig_stk_prev: function(){
+            root.stk_prev();
+        }
+        onSig_stk_home: function()
+        {
+            root.stk_home();
+        }
+    }
+
+    Label{
+        id: root_lb
+        text: "결제 방식을 선택하세요"
         color: "white"
-        border.color: "blue"
-        border.width: 2
-        radius: 10
+        font.pixelSize: 60
+        font.family: "DIN"
+        font.bold: true
+
+        anchors.top: parent.top
+        anchors.topMargin: 90
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+    }
+    Label{
+        id: root_lb_neon
+        text: "결제 방식을 선택하세요"
+        color: "white"
+        font.pixelSize: 60
+        font.family: "DIN"
+        font.bold: true
+
+        anchors.fill:   root_lb
+        anchors.margins: -20;
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+
+        layer.enabled: true
+
+        layer.effect: MultiEffect{
+            shadowEnabled: true;
+            shadowBlur: 1
+            shadowColor: "#FFFFFF"
+            shadowOpacity: 1
+            shadowVerticalOffset: 0;
+            shadowHorizontalOffset: 0;
+        }
+    }
+
+    RecBtn{
+        id: root_left
 
         anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: 75
         anchors.right: parent.horizontalCenter
-        anchors.rightMargin: 10
+        anchors.rightMargin: 25
         anchors.top: parent.top
-        anchors.topMargin: 100
+        anchors.topMargin: 200
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 100
+        anchors.bottomMargin: 200
+
+        onSig_Clicked: function()
+        {
+            root.stk_next("memberCard");
+        }
+
+        Image{
+            id: left_img
+            source: "./images/memberCard.svg"
+            fillMode: Image.PreserveAspectFit;
+            anchors.top: parent.top
+            anchors.topMargin: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 100
+            anchors.left: parent.left
+            anchors.leftMargin: 30
+            anchors.right: parent.right
+            anchors.rightMargin: 30
+
+            layer.enabled: true;
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#00FFD0"
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
 
         Label{
             id: left_BtnText
-            text: "회원 카드"
-            font.pixelSize: 15
-            anchors.fill: parent
+            text: "회원인증"
+            color: "white"
+            font.pixelSize: 60
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.top: left_img.bottom
+            anchors.horizontalCenter: left_img.horizontalCenter
+
             horizontalAlignment: Text.AlignHCenter;
             verticalAlignment: Text.AlignVCenter;
         }
+        Label{
+            id: left_BtnText_neon
+            text: "회원인증"
+            color: "white"
+            font.pixelSize: 60
+            font.family: "DIN"
+            font.bold: true
 
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                root.stk_next("left");
+            anchors.fill: left_BtnText
+            anchors.margins: -20;
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+
+            layer.enabled: true
+
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#FFFFFF"
+                shadowOpacity: 1
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
             }
         }
     }
 
-    Rectangle{
+    RecBtn{
         id: root_right
-        color: "white"
-        border.color: "blue"
-        border.width: 2
-        radius: 10
 
-        anchors.left: parent.horizontalCenter
-        anchors.leftMargin: 10
         anchors.right: parent.right
-        anchors.rightMargin: 10
+        anchors.rightMargin: 75
+        anchors.left: parent.horizontalCenter
+        anchors.leftMargin: 25
         anchors.top: parent.top
-        anchors.topMargin: 100
+        anchors.topMargin: 200
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 100
+        anchors.bottomMargin: 200
+
+        onSig_Clicked: function()
+        {
+            root.stk_next("creditCard");
+        }
+
+        Image{
+            id: right_img
+            source: "./images/creditCard.svg"
+            fillMode: Image.PreserveAspectFit;
+
+            anchors.top: parent.top
+            anchors.topMargin: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 100
+            anchors.left: parent.left
+            anchors.leftMargin: 30
+            anchors.right: parent.right
+            anchors.rightMargin: 30
+
+            layer.enabled: true;
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#00FFD0"
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
 
         Label{
             id: right_BtnText
-            text: "신용 카드"
-            font.pixelSize: 15
-            anchors.fill: parent
+            text: "신용카드"
+            font.pixelSize: 60
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.top: right_img.bottom
+            anchors.horizontalCenter: right_img.horizontalCenter
+
             horizontalAlignment: Text.AlignHCenter;
             verticalAlignment: Text.AlignVCenter;
         }
+        Label{
+            id: right_BtnText_neon
+            text: "신용카드"
+            font.pixelSize: 60
+            font.family: "DIN"
+            font.bold: true
 
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                root.stk_next("right");
+            anchors.fill: right_BtnText
+            anchors.margins: -20
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+
+            layer.enabled: true;
+
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#FFFFFF"
+                shadowOpacity: 1
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+
             }
         }
     }
 
-    function stk_next(s)
-    {
-        // 임시 그냥 다음 화면으로
-        StackView.view.push("Select_amount.qml");
-    }
 }

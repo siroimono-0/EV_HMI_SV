@@ -1,13 +1,16 @@
 appHMI_autogen/timestamp: \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QDebug \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QFlags \
+	C:/Qt/6.9.3/mingw_64/include/QtCore/QIODevice \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QJsonDocument \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QJsonObject \
+	C:/Qt/6.9.3/mingw_64/include/QtCore/QList \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QMetaType \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QObject \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QSharedDataPointer \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QString \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QThread \
+	C:/Qt/6.9.3/mingw_64/include/QtCore/QTimer \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QUrl \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/QVariant \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/q17memory.h \
@@ -18,6 +21,7 @@ appHMI_autogen/timestamp: \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/q20utility.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/q23utility.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/q26numeric.h \
+	C:/Qt/6.9.3/mingw_64/include/QtCore/qabstracteventdispatcher.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qalgorithms.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qanystringview.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qarraydata.h \
@@ -27,6 +31,7 @@ appHMI_autogen/timestamp: \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qatomic.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qatomic_cxx11.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qbasicatomic.h \
+	C:/Qt/6.9.3/mingw_64/include/QtCore/qbasictimer.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qbindingstorage.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qbytearray.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
@@ -54,6 +59,7 @@ appHMI_autogen/timestamp: \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qdebug.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qelapsedtimer.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qendian.h \
+	C:/Qt/6.9.3/mingw_64/include/QtCore/qeventloop.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qexceptionhandling.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qflags.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qfloat16.h \
@@ -132,6 +138,7 @@ appHMI_autogen/timestamp: \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qtextstream.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qtformat_impl.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qthread.h \
+	C:/Qt/6.9.3/mingw_64/include/QtCore/qtimer.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qtmetamacros.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qtnoop.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qtpreprocessorsupport.h \
@@ -151,19 +158,25 @@ appHMI_autogen/timestamp: \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qxptype_traits.h \
 	C:/Qt/6.9.3/mingw_64/include/QtCore/qyieldcpu.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/QAbstractSocket \
+	C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkAccessManager \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkProxy \
+	C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkReply \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkRequest \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/QSslConfiguration \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/QSslError \
+	C:/Qt/6.9.3/mingw_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qabstractsocket.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qhostaddress.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qhttpheaders.h \
+	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkaccessmanager.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkproxy.h \
+	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkreply.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkrequest.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qssl.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslcertificate.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslconfiguration.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslerror.h \
+	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qsslsocket.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qtcpsocket.h \
 	C:/Qt/6.9.3/mingw_64/include/QtNetwork/qtnetwork-config.h \
@@ -1060,6 +1073,7 @@ appHMI_autogen/timestamp: \
 	C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateConfigVersionImpl.cmake \
 	C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateTargets.cmake \
 	C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateVersionlessAliasTargets.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCInformation.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake \
@@ -1070,11 +1084,13 @@ appHMI_autogen/timestamp: \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeRCInformation.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CheckCXXCompilerFlag.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CheckCXXSourceCompiles.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CheckIncludeFileCXX.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CheckIncludeFile.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CheckLibraryExists.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Compiler/GNU.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake \
@@ -1085,6 +1101,8 @@ appHMI_autogen/timestamp: \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-C.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake \
@@ -1323,9 +1341,12 @@ appHMI_autogen/timestamp: \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/Cpp_Module/WK_Serial.h \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/Cpp_Module/WK_WebSocket.cpp \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/Cpp_Module/WK_WebSocket.h \
+	C:/Users/siroi/siroimono/w_qt/EV/HMI/External_Library/checksum.h \
+	C:/Users/siroi/siroimono/w_qt/EV/HMI/External_Library/crc16.c \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/qml_imports/appHMI_conf.cmake \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qtc/package-manager/maintenance_tool_provider.cmake \
+	C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCCompiler.cmake \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake \
 	C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake \

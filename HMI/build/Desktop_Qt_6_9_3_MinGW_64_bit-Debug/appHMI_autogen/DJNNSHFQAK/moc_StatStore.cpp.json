@@ -61,6 +61,12 @@
                     "index": 4,
                     "name": "slot_update_current",
                     "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 5,
+                    "name": "slot_get_stat",
+                    "returnType": "stat_data"
                 }
             ],
             "superClasses": [

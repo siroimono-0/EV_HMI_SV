@@ -44,3 +44,8 @@ void StatStore::slot_update_current()
     qDebug() << Q_FUNC_INFO;
     return;
 }
+
+stat_data StatStore::slot_get_stat()
+{
+    return this->st_stat;
+}

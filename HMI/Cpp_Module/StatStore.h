@@ -18,6 +18,8 @@ public slots:
     void slot_update_FromModule(stat_data st_stat);
     void slot_update_current();
 
+    stat_data slot_get_stat();
+
 signals:
     // 상태 값 변경시 발생
     void sig_Stat_changed(stat_data st_stat);

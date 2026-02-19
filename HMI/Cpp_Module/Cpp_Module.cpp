@@ -37,20 +37,30 @@ void Cpp_Module::end_p_wk_serial()
     return;
 }
 
-Q_INVOKABLE void Cpp_Module::join_WebSv(QString id, QString location)
+Q_INVOKABLE void Cpp_Module::join_WebSv(QString id)
 {
-    this->create_WebSoc();
-
     struct stat_data st_stat = {0};
 
-    QString qs_date = QDate::currentDate().toString("yyyy-MM-dd");
+    // QString qs_date = QDate::currentDate().toString("yyyy-MM-dd");
 
     st_stat.id = id.toInt();
-    st_stat.location = location;
-    st_stat.date = qs_date;
-    st_stat.stat = 0;
+    // st_stat.location = "";
+    // st_stat.date = qs_date;
+    // st_stat.stat = 0;
 
+    // 처음 상태 값 설정 - ID만 존재
     this->p_stat->set_First_stat(st_stat);
+
+    if (this->p_wk_websoc == nullptr)
+    {
+        this->create_WebSoc();
+    }
+    else
+    {
+        QMetaObject::invokeMethod(this->p_wk_websoc,
+                                  &WK_WebSocket::slot_ID_Check,
+                                  Qt::QueuedConnection);
+    }
 
     qDebug() << Q_FUNC_INFO;
     return;
@@ -70,6 +80,13 @@ void Cpp_Module::create_WebSoc()
     connect(this->p_th_websoc, &QThread::finished, this->p_th_websoc, &QThread::deleteLater);
 
     this->p_th_websoc->start();
+
+    //serial 객체에 soc객체 주소 전달
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_set_p_soc",
+                              Qt::QueuedConnection,
+                              Q_ARG(WK_WebSocket *, this->p_wk_websoc));
+
     qDebug() << Q_FUNC_INFO;
     return;
 }
@@ -78,8 +95,34 @@ void Cpp_Module::create_Serial()
 {
     this->p_th_serial = new QThread();
     this->p_wk_serial = new WK_Serial();
+    this->p_wk_serial->set_p_module(this);
+
     this->p_wk_serial->moveToThread(this->p_th_serial);
 
     this->p_th_serial->start();
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::set_card_stat(bool stat)
+{
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_set_card_stat",
+                              Qt::QueuedConnection,
+                              Q_ARG(bool, stat));
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::chargingConnecter_open()
+{
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_rs485_coil1_on_off",
+                              Qt::QueuedConnection,
+                              Q_ARG(bool, true));
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::chargingConnecter_ready()
+{
     return;
 }

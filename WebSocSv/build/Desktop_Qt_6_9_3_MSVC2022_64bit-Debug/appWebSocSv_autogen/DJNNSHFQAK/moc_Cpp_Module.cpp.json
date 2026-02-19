@@ -1,0 +1,72 @@
+{
+    "classes": [
+        {
+            "className": "Cpp_Module",
+            "lineNumber": 15,
+            "methods": [
+                {
+                    "access": "public",
+                    "index": 2,
+                    "name": "set_webSoc_Sv",
+                    "returnType": "bool"
+                }
+            ],
+            "object": true,
+            "properties": [
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 0,
+                    "name": "hmi_md",
+                    "notify": "sig_hmi_md_changed",
+                    "read": "get_hmi_md",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "StatModel*",
+                    "user": false
+                }
+            ],
+            "qualifiedClassName": "Cpp_Module",
+            "signals": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "name": "sig_hmi_md_changed",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "name",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "location",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 1,
+                    "name": "createStore_sql",
+                    "returnType": "bool"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "Cpp_Module.h",
+    "outputRevision": 69
+}

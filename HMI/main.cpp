@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 #include "./Cpp_Module/Cpp_Module.h"
+#include "./Cpp_Module/WK_WebSocket.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +12,9 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     Cpp_Module cpp_module;
+
+    qRegisterMetaType<WK_WebSocket *>("WK_WebSocket*");
+
     engine.rootContext()->setContextProperty("cpp_module", &cpp_module);
     QObject::connect(
         &engine,

@@ -1,4 +1,4 @@
-// /qt/qml/HMI/Qml_Module/Circle_Number.qml
+// /qt/qml/HMI/./Qml_Module/Circle_Number.qml
 #include <QtQml/qqmlprivate.h>
 #include <QtCore/qdatetime.h>
 #include <QtCore/qobject.h>
@@ -16,7 +16,7 @@
 #include <QtQml/qqmllist.h>
 #include <type_traits>
 namespace QmlCacheGeneratedCode {
-namespace _qt_qml_HMI_Qml_Module_Circle_Number_qml {
+namespace _qt_qml_HMI__0x2e__Qml_Module_Circle_Number_qml {
 extern const unsigned char qmlData alignas(16) [];
 extern const unsigned char qmlData alignas(16) [] = {
 

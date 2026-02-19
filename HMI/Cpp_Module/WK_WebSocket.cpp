@@ -4,7 +4,9 @@
 
 WK_WebSocket::WK_WebSocket(QObject *parent)
     : QObject{parent}
-{}
+{
+    this->create_netAccess();
+}
 
 void WK_WebSocket::slot_stop()
 {
@@ -25,6 +27,101 @@ void WK_WebSocket::set_p_Module(Cpp_Module *set_p_Module)
     return;
 }
 
+void WK_WebSocket::create_netAccess()
+{
+    this->p_netAccess = new QNetworkAccessManager(this);
+    connect(this->p_netAccess,
+            &QNetworkAccessManager::finished,
+            this,
+            &WK_WebSocket::slot_netAccess_reply);
+    return;
+}
+
+void WK_WebSocket::slot_netAccess_reply(QNetworkReply *reply)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        qDebug() << "error =" << reply->errorString();
+    }
+
+    int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+    qDebug() << "status =" << status;
+
+    QByteArray qba = reply->readAll();
+    // qDebug() << qba;
+    QJsonParseError json_err;
+    QJsonDocument json_doc = QJsonDocument::fromJson(qba, &json_err);
+
+    if (json_err.error != QJsonParseError::NoError)
+    {
+        qDebug() << "Json Err";
+    }
+
+    QJsonObject jsObj = json_doc.object();
+    QString qs_type = jsObj["type"].toString();
+
+    if (qs_type == "pay_ack")
+    {
+        if (jsObj["role"].toString() == "creditCard")
+        {
+            if (jsObj["ok"].toBool() == true)
+            {
+                // qml에 결제완료 신호 보내야댐
+                QMetaObject::invokeMethod(this->p_Module,
+                                          &Cpp_Module::sig_card_success_ToQml,
+                                          Qt::QueuedConnection);
+                qDebug() << "결제 완료";
+            }
+            else
+            {
+                QMetaObject::invokeMethod(this->p_Module,
+                                          "sig_card_failed_ToQml",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(QString, jsObj["err"].toString()));
+                qDebug() << "결제 실패";
+                qDebug() << "Err :: " << jsObj["err"].toString();
+            }
+        }
+        else
+        {
+            // 멤버쉽 카드는 httpSv로 안보냄
+        }
+    }
+    else
+    {
+        // 다른 타입 아직 없음
+    }
+
+    return;
+}
+
+void WK_WebSocket::slot_netAccess_post(QByteArray qba)
+{
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << qba;
+
+    QJsonObject jsObj;
+    jsObj.insert("type", "pay");
+    jsObj.insert("role", "creditCard");
+    jsObj.insert("uid", QString::fromUtf8(qba));
+
+    QJsonDocument jsDoc(jsObj);
+
+    QUrl url("http://127.0.0.1:8080/compare");
+    QNetworkRequest req(url);
+
+    //서버에서 어떻게 파싱할지 헤더 정의
+    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    this->p_netAccess->post(req, jsDoc.toJson(QJsonDocument::Compact));
+    return;
+}
+
+////////////////////////////////////////////////////////////////
+
 void WK_WebSocket::slot_Connect_Sv()
 {
     this->p_webSoc = new QWebSocket();
@@ -33,22 +130,24 @@ void WK_WebSocket::slot_Connect_Sv()
     // QObject::disconnect: wildcard call disconnects from destroyed signal of QTcpSocket::unnamed
     // 에러 뱉어냄
     // this->p_webSoc->setParent(this);
-    this->p_webSoc->open(QUrl("ws://192.168.123.103:12345"));
 
-    connect(this->p_stat, &StatStore::sig_Stat_changed, this, &WK_WebSocket::slot_sendData);
+    // 서버 연결 완료 시
+    connect(this->p_webSoc, &QWebSocket::connected, this, &WK_WebSocket::slot_ID_Check);
 
-    connect(this->p_webSoc, &QWebSocket::connected, this, [&]() {
-        // 상태 클래스 초기값 업데이트
-        QMetaObject::invokeMethod(this->p_stat,
-                                  &StatStore::slot_update_current,
-                                  Qt::QueuedConnection);
+    // 상태 클래스 상태값 변경시 SV 데이터 전송
+    connect(this->p_stat, &StatStore::sig_Stat_changed, this, &WK_WebSocket::slot_Send_TextData);
 
-        // 모듈 -> Qml 통신 시그널 발생
-        QMetaObject::invokeMethod(this->p_Module, &Cpp_Module::sig_SocSuccess_ToQml);
-    });
+    // 텍스트 메시지 수신시 발생 슬롯
+    connect(this->p_webSoc,
+            &QWebSocket::textMessageReceived,
+            this,
+            &WK_WebSocket::slot_Recv_TextData);
 
     connect(this->p_webSoc, &QWebSocket::errorOccurred, this, &WK_WebSocket::slot_SocErr);
     connect(this->p_webSoc, &QWebSocket::disconnected, this->p_webSoc, &QWebSocket::deleteLater);
+
+    // 커넥트 다 걸고  open
+    this->p_webSoc->open(QUrl("ws://192.168.123.100:12345"));
 
     qDebug() << Q_FUNC_INFO;
     return;
@@ -95,7 +194,7 @@ void WK_WebSocket::slot_SocErr(QAbstractSocket::SocketError error)
     return;
 }
 
-void WK_WebSocket::slot_sendData(stat_data st_stat)
+void WK_WebSocket::slot_Send_TextData(stat_data st_stat)
 {
     QJsonObject json_obj;
     json_obj.insert("number", st_stat.number);
@@ -109,6 +208,101 @@ void WK_WebSocket::slot_sendData(stat_data st_stat)
 
     this->p_webSoc->sendTextMessage(send_qs);
 
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_WebSocket::slot_Recv_TextData(QString recvData)
+{
+    qDebug() << Q_FUNC_INFO;
+    QByteArray qba = recvData.toUtf8();
+    QJsonParseError json_err;
+    QJsonDocument json_doc = QJsonDocument::fromJson(qba, &json_err);
+
+    if (json_err.error != QJsonParseError::NoError)
+    {
+        qDebug() << "Json Err";
+    }
+
+    QJsonObject jsObj = json_doc.object();
+    QString qs_type = jsObj["type"].toString();
+
+    if (jsObj.contains("type"))
+    {
+        if (qs_type == "hello_ack")
+        {
+            if (jsObj["ok"] == true)
+            {
+                this->slot_ID_Resert(true);
+            }
+            else
+            {
+                this->slot_ID_Resert(false);
+            }
+        }
+    }
+    else
+    {
+    }
+
+    return;
+}
+
+void WK_WebSocket::slot_ID_Check()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    struct stat_data st_stat = {0};
+
+    // stat클래스에서 상태 값 확인
+    // 블록킹
+    QMetaObject::invokeMethod(this->p_stat,
+                              &StatStore::slot_get_stat,
+                              Qt::BlockingQueuedConnection,
+                              Q_RETURN_ARG(stat_data, st_stat));
+
+    QJsonObject jsObj;
+    jsObj.insert("type", "hello");
+    jsObj.insert("role", "hmi");
+    jsObj.insert("token", "");
+    jsObj.insert("store_id", QString::number(st_stat.id));
+    // jsObj.insert("store_id", "1");
+    // qDebug() << st_stat.id;
+    jsObj.insert("hmi_id", "hmi_01");
+
+    QJsonDocument jsDoc(jsObj);
+    QString send_qs = jsDoc.toJson(QJsonDocument::Compact);
+
+    this->p_webSoc->sendTextMessage(send_qs);
+
+    qDebug() << Q_FUNC_INFO;
+
+    return;
+}
+
+void WK_WebSocket::slot_ID_Resert(bool resert)
+{
+    if (resert)
+    {
+        // 상태 클래스 초기값 업데이트
+        QMetaObject::invokeMethod(this->p_stat,
+                                  &StatStore::slot_update_current,
+                                  Qt::QueuedConnection);
+
+        // 모듈 -> Qml 통신 시그널 발생
+        QMetaObject::invokeMethod(this->p_Module,
+                                  &Cpp_Module::sig_SocSuccess_ToQml,
+                                  Qt::QueuedConnection);
+    }
+    else
+    {
+        // 모듈 -> Qml ID 없음
+        QString qs_id = "ID를 찾을 수 없습니다.";
+        QMetaObject::invokeMethod(this->p_Module,
+                                  "sig_SocFailed_ToQml",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(QString, qs_id));
+    }
     qDebug() << Q_FUNC_INFO;
     return;
 }

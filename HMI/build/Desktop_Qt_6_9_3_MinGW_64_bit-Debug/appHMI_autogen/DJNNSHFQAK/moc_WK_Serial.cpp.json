@@ -2,20 +2,80 @@
     "classes": [
         {
             "className": "WK_Serial",
-            "lineNumber": 17,
+            "lineNumber": 21,
             "object": true,
             "qualifiedClassName": "WK_Serial",
             "slots": [
                 {
                     "access": "public",
                     "index": 0,
-                    "name": "test_read",
+                    "name": "slot_serial_read",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
                     "index": 1,
                     "name": "slot_modbus_write",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "soc",
+                            "type": "WK_WebSocket*"
+                        }
+                    ],
+                    "index": 2,
+                    "name": "slot_set_p_soc",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "stat",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 3,
+                    "name": "slot_set_card_stat",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "onoff",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 4,
+                    "name": "slot_rs485_coil1_on_off",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "onoff",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 5,
+                    "name": "slot_rs485_coil234_on_off",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 6,
+                    "name": "slot_rs485_read",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 7,
+                    "name": "slot_rs485_modbus_end",
                     "returnType": "void"
                 }
             ],

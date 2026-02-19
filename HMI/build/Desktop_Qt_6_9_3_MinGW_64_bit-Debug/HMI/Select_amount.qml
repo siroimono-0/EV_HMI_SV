@@ -1,45 +1,367 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 import HMI 1.0
 
 Item {
+    id: root
 
-    BackGround{
-        id: background
-        anchors.fill: parent
+    function stk_home()
+    {
+        while(StackView.view.depth > 2)
+        {
+            StackView.view.pop();
+        }
     }
 
-    Rectangle{
-        id: root_percent
+    function stk_prev()
+    {
+        StackView.view.pop()
+    }
 
-        width: 150; height: 200;
-        color: "white"
-        border.color: "blue"
-        border.width: 2
-        radius: 10
+    function stk_next(s)
+    {
+        if(s === "p")
+        {
+            StackView.view.push("Select_card.qml");
+        }
+    }
 
+    BackGround_Plus{
+        id: background
+        anchors.fill: parent
+        onSig_stk_home: function()
+        {
+            root.stk_home();
+        }
+
+        onSig_stk_prev: function()
+        {
+            root.stk_prev();
+        }
+    }
+
+    RecBtn{
+        id: root_time
+
+        width: 295
         anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: 20
         anchors.top: parent.top
-        anchors.topMargin: 100
+        anchors.topMargin: 200
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 100
+        anchors.bottomMargin: 200
+
+        onSig_Clicked: function()
+        {
+
+        }
+
+        Image{
+            id: img_time
+            source: "./images/time.svg"
+            fillMode: Image.PreserveAspectFit;
+            anchors.top: parent.top
+            anchors.topMargin: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 100
+            anchors.left: parent.left
+            anchors.leftMargin: 30
+            anchors.right: parent.right
+            anchors.rightMargin: 30
+
+            layer.enabled: true;
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#00FFD0"
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
 
         Label{
-            id: left_BtnText
-            text: "80% 까지 충전"
-            font.pixelSize: 15
-            anchors.fill: parent
+            id: lb_time
+            text: "시간(분)"
+            color: "white"
+            font.pixelSize: 40
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.top: img_time.bottom
+            anchors.topMargin: 15;
+            anchors.horizontalCenter: img_time.horizontalCenter
+
             horizontalAlignment: Text.AlignHCenter;
             verticalAlignment: Text.AlignVCenter;
         }
+        Label{
+            id: lb_time_neon
+            text: "시간(분)"
+            color: "white"
+            font.pixelSize: 40
+            font.family: "DIN"
+            font.bold: true
 
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                // 임시 cpp 충전 시작하는 버튼으로 진행
+            anchors.fill: lb_time
+            anchors.margins: -20;
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+
+            layer.enabled: true
+
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#FFFFFF"
+                shadowOpacity: 1
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
             }
         }
     }
 
+    RecBtn{
+        id: root_won
+
+        width: 295
+        anchors.left: root_time.right
+        anchors.leftMargin: 20
+        anchors.top: parent.top
+        anchors.topMargin: 200
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 200
+
+        onSig_Clicked: function()
+        {
+
+        }
+
+        Image{
+            id: img_won
+            source: "./images/won.svg"
+            fillMode: Image.PreserveAspectFit;
+            anchors.top: parent.top
+            anchors.topMargin: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 100
+            anchors.left: parent.left
+            anchors.leftMargin: 30
+            anchors.right: parent.right
+            anchors.rightMargin: 30
+
+            layer.enabled: true;
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#00FFD0"
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
+
+        Label{
+            id: lb_won
+            text: "충전금액(원)"
+            color: "white"
+            font.pixelSize: 40
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.top: img_won.bottom
+            anchors.topMargin: 15;
+            anchors.horizontalCenter: img_won.horizontalCenter
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+        }
+        Label{
+            id: lb_won_neon
+            text: "충전금액(원)"
+            color: "white"
+            font.pixelSize: 40
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.fill: lb_won
+            anchors.margins: -20;
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+
+            layer.enabled: true
+
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#FFFFFF"
+                shadowOpacity: 1
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
+    }
+
+    RecBtn{
+        id: root_kw
+
+        width: 295
+        anchors.left: root_won.right
+        anchors.leftMargin: 20
+        anchors.top: parent.top
+        anchors.topMargin: 200
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 200
+
+        onSig_Clicked: function()
+        {
+
+        }
+
+        Image{
+            id: img_kw
+            source: "./images/voltage.svg"
+            fillMode: Image.PreserveAspectFit;
+            anchors.top: parent.top
+            anchors.topMargin: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 100
+            anchors.left: parent.left
+            anchors.leftMargin: 30
+            anchors.right: parent.right
+            anchors.rightMargin: 30
+
+            layer.enabled: true;
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#00FFD0"
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
+
+        Label{
+            id: lb_kw
+            text: "전력량(kWh)"
+            color: "white"
+            font.pixelSize: 40
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.top: img_kw.bottom
+            anchors.topMargin: 15;
+            anchors.horizontalCenter: img_kw.horizontalCenter
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+        }
+        Label{
+            id: lb_kw_neon
+            text: "전력량(kWh)"
+            color: "white"
+            font.pixelSize: 40
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.fill: lb_kw
+            anchors.margins: -20;
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+
+            layer.enabled: true
+
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#FFFFFF"
+                shadowOpacity: 1
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
+    }
+
+    RecBtn{
+        id: root_p
+
+        width: 295
+        anchors.left: root_kw.right
+        anchors.leftMargin: 20
+        anchors.top: parent.top
+        anchors.topMargin: 200
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 200
+
+        onSig_Clicked: function()
+        {
+            root.stk_next("p");
+        }
+
+        Image{
+            id: img_p
+            source: "./images/battery.svg"
+            fillMode: Image.PreserveAspectFit;
+            anchors.top: parent.top
+            anchors.topMargin: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 100
+            anchors.left: parent.left
+            anchors.leftMargin: 30
+            anchors.right: parent.right
+            anchors.rightMargin: 30
+
+            layer.enabled: true;
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#00FFD0"
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
+
+        Label{
+            id: lb_p
+            text: "80%까지 충전"
+            color: "white"
+            font.pixelSize: 40
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.top: img_p.bottom
+            anchors.topMargin: 15;
+            anchors.horizontalCenter: img_p.horizontalCenter
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+        }
+        Label{
+            id: lb_p_neon
+            text: "80%까지 충전"
+            color: "white"
+            font.pixelSize: 40
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.fill: lb_p
+            anchors.margins: -20;
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+
+            layer.enabled: true
+
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#FFFFFF"
+                shadowOpacity: 1
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
+    }
 }

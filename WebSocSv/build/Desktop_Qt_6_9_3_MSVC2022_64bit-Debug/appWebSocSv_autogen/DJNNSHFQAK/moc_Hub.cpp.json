@@ -1,0 +1,58 @@
+{
+    "classes": [
+        {
+            "className": "Hub",
+            "lineNumber": 14,
+            "object": true,
+            "qualifiedClassName": "Hub",
+            "signals": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "name": "sig_end",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "public",
+                    "index": 1,
+                    "name": "slot_start_sv",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 2,
+                    "name": "slot_end",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 3,
+                    "name": "slot_new_connection",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "idx",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 4,
+                    "name": "slot_del_mpWk",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "Hub.h",
+    "outputRevision": 69
+}

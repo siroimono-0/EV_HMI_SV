@@ -47,6 +47,34 @@ namespace _qt_qml_HMI_Select_amount_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
+namespace _qt_qml_HMI_Card_Ready_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI_Card_Socket_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI_Charging_Ready_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI_Card_Failed_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
 namespace _qt_qml_HMI__0x2e__Qml_Module_Popup_Text_qml { 
     extern const unsigned char qmlData[];
     extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
@@ -75,7 +103,49 @@ namespace _qt_qml_HMI__0x2e__Qml_Module_RecBtn_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
-namespace _qt_qml_HMI_Qml_Module_Circle_Number_qml { 
+namespace _qt_qml_HMI__0x2e__Qml_Module_Circle_Number_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI__0x2e__Qml_Module_BtnGreen_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI__0x2e__Qml_Module_NeonLabel_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI__0x2e__Qml_Module_BackGround_Plus_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI__0x2e__Qml_Module_Keypad_New_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI__0x2e__Qml_Module_Rec_Number_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_HMI__0x2e__Qml_Module_BackGround_Card_qml { 
     extern const unsigned char qmlData[];
     extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
     const QQmlPrivate::CachedQmlUnit unit = {
@@ -102,11 +172,21 @@ Registry::Registry() {
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Select_charge.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Select_charge_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Select_card.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Select_card_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Select_amount.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Select_amount_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Card_Ready.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Card_Ready_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Card_Socket.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Card_Socket_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Charging_Ready.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Charging_Ready_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Card_Failed.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Card_Failed_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/Popup_Text.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_Popup_Text_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/Keypad_Number.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_Keypad_Number_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/BackGround.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_BackGround_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/RecBtn.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_RecBtn_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Qml_Module/Circle_Number.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Qml_Module_Circle_Number_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/Circle_Number.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_Circle_Number_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/BtnGreen.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_BtnGreen_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/NeonLabel.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_NeonLabel_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/BackGround_Plus.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_BackGround_Plus_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/Keypad_New.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_Keypad_New_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/Rec_Number.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_Rec_Number_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/BackGround_Card.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_BackGround_Card_qml::unit);
     QQmlPrivate::RegisterQmlUnitCacheHook registration;
     registration.structVersion = 0;
     registration.lookupCachedQmlUnit = &lookupCachedUnit;

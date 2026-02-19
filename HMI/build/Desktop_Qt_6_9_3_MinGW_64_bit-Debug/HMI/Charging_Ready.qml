@@ -1,0 +1,136 @@
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Effects
+import HMI 1.0
+
+Item {
+    id: root
+
+    Component.onCompleted: {
+        // cpp에 rs485릴레이 모듈 1번코일 on 실행
+        // ... 전기차 커넥터 보관함 문 열리는거임 ... ㅋㅋ..
+        cpp_module.chargingConnecter_open();
+
+    }
+
+    function stk_next()
+    {
+        // 확인버튼 눌렀으면 케넉터 연결했다고 가정함
+        // 그럼 rs485릴레이 2..3..4 코일 on 실행
+        // 코일 다 켜졌으면 cpp -> qml signal 발생해서 다음페이지
+        StackView.view.push("");
+    }
+
+    function coli_set()
+    {
+        // 확인버튼 눌렀으면 케넉터 연결했다고 가정함
+        // 그럼 rs485릴레이 2..3..4 코일 on 실행
+        // 코일 다 켜졌으면 cpp -> qml signal 발생해서 다음페이지
+        StackView.view.push("");
+    }
+
+
+    BackGround_Card{
+        id: background
+        anchors.fill: parent
+    }
+
+    Image {
+        id: charging_Ready_img
+        source: ""
+        fillMode: Image.PreserveAspectFit
+        width: 500; height: 300;
+        anchors.top: parent.top
+        anchors.topMargin: 100
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
+
+    Label{
+        id: lb
+        text: "결제가 완료되었습니다.\n커넥터를 연결하여 충전을 시작해주세요"
+        font.pixelSize: 40
+        font.family: "DIN"
+        font.bold: true
+        anchors.top: card_img.bottom
+        // anchors.topMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+    }
+
+    Label{
+        id: lb_neon
+        text: "결제가 완료되었습니다.\n커넥터를 연결하여 충전을 시작해주세요"
+        font.pixelSize: 40
+        font.family: "DIN"
+        font.bold: true
+
+        anchors.fill: lb
+        anchors.margins: -20
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+
+        layer.enabled: true;
+
+        layer.effect: MultiEffect{
+            shadowEnabled: true;
+            shadowBlur: 1
+            shadowColor: "#FFFFFF"
+            shadowOpacity: 1
+            shadowVerticalOffset: 0;
+            shadowHorizontalOffset: 0;
+        }
+    }
+
+
+
+    BtnGreen{
+        id: btn
+        width: 300; height: 120;
+        anchors.top: lb.bottom
+        anchors.topMargin: 50
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        onSig_Clicked: function()
+        {
+            // root.stk_back();
+        }
+
+        Label{
+            id: lb2
+            text: "확인"
+            font.pixelSize: 60
+            font.family: "DIN"
+            font.bold: true
+            anchors.centerIn: parent
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+        }
+
+        Label{
+            id: lb2_neon
+            text: "확인"
+            font.pixelSize: 60
+            font.family: "DIN"
+            font.bold: true
+
+            anchors.fill: lb2
+            anchors.margins: -20
+
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+
+            layer.enabled: true;
+
+            layer.effect: MultiEffect{
+                shadowEnabled: true;
+                shadowBlur: 1
+                shadowColor: "#FFFFFF"
+                shadowOpacity: 1
+                shadowVerticalOffset: 0;
+                shadowHorizontalOffset: 0;
+            }
+        }
+    }
+}

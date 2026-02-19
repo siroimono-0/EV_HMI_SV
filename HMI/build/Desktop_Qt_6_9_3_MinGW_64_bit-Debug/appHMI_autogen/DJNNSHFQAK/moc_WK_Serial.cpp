@@ -39,16 +39,46 @@ template <> constexpr inline auto WK_Serial::qt_create_metaobjectdata<qt_meta_ta
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "WK_Serial",
-        "test_read",
+        "slot_serial_read",
         "",
-        "slot_modbus_write"
+        "slot_modbus_write",
+        "slot_set_p_soc",
+        "WK_WebSocket*",
+        "soc",
+        "slot_set_card_stat",
+        "stat",
+        "slot_rs485_coil1_on_off",
+        "onoff",
+        "slot_rs485_coil234_on_off",
+        "slot_rs485_read",
+        "slot_rs485_modbus_end"
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Slot 'test_read'
+        // Slot 'slot_serial_read'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_modbus_write'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_set_p_soc'
+        QtMocHelpers::SlotData<void(WK_WebSocket *)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 5, 6 },
+        }}),
+        // Slot 'slot_set_card_stat'
+        QtMocHelpers::SlotData<void(bool)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 8 },
+        }}),
+        // Slot 'slot_rs485_coil1_on_off'
+        QtMocHelpers::SlotData<void(bool)>(9, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 10 },
+        }}),
+        // Slot 'slot_rs485_coil234_on_off'
+        QtMocHelpers::SlotData<void(bool)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 10 },
+        }}),
+        // Slot 'slot_rs485_read'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_rs485_modbus_end'
+        QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -72,12 +102,17 @@ void WK_Serial::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     auto *_t = static_cast<WK_Serial *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->test_read(); break;
+        case 0: _t->slot_serial_read(); break;
         case 1: _t->slot_modbus_write(); break;
+        case 2: _t->slot_set_p_soc((*reinterpret_cast< std::add_pointer_t<WK_WebSocket*>>(_a[1]))); break;
+        case 3: _t->slot_set_card_stat((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 4: _t->slot_rs485_coil1_on_off((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 5: _t->slot_rs485_coil234_on_off((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 6: _t->slot_rs485_read(); break;
+        case 7: _t->slot_rs485_modbus_end(); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *WK_Serial::metaObject() const
@@ -99,14 +134,14 @@ int WK_Serial::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 8;
     }
     return _id;
 }

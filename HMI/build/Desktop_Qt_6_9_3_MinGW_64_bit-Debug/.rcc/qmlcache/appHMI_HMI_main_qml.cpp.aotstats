@@ -6,26 +6,42 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 288,
+                        "durationMicroseconds": 444,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_next",
-                        "line": 40
+                        "line": 33
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 180,
+                        "durationMicroseconds": 240,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 10
                     },
                     {
                         "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 148,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 27
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 47,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 27
+                    },
+                    {
+                        "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 45,
+                        "durationMicroseconds": 65,
                         "errorMessage": "",
                         "functionName": "centerIn",
-                        "line": 21
+                        "line": 16
                     },
                     {
                         "codegenSuccessful": false,
@@ -33,7 +49,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 28
+                        "line": 23
                     },
                     {
                         "codegenSuccessful": false,
@@ -41,7 +57,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 29
+                        "line": 24
                     },
                     {
                         "codegenSuccessful": false,
@@ -49,23 +65,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"fill\".",
                         "functionName": "fill",
-                        "line": 27
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 24,
-                        "durationMicroseconds": 119,
-                        "errorMessage": "",
-                        "functionName": "onClicked",
-                        "line": 34
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 27,
-                        "durationMicroseconds": 48,
-                        "errorMessage": "",
-                        "functionName": "fill",
-                        "line": 33
+                        "line": 22
                     }
                 ],
                 "filePath": "C:/Users/siroi/siroimono/w_qt/EV/HMI/HMI_main.qml"

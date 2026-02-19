@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 211,
+                        "durationMicroseconds": 191,
                         "errorMessage": "Cannot retrieve a non-object type by ID: recPop_lb",
                         "functionName": "close",
                         "line": 21
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 157,
+                        "durationMicroseconds": 211,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 6
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 112,
+                        "durationMicroseconds": 175,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 58
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 82,
+                        "durationMicroseconds": 123,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 59
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 110,
+                        "durationMicroseconds": 158,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 76
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 36,
+                        "durationMicroseconds": 56,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 76
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 43,
+                        "durationMicroseconds": 68,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 74

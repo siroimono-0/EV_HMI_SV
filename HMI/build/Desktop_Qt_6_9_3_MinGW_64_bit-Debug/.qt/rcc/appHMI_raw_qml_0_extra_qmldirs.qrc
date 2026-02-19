@@ -1,7 +1,6 @@
 <RCC>
   <qresource prefix="/qt/qml/HMI/">
     <file alias="Qml_Module/qmldir">C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/qmldir</file>
-    <file alias="Qml_Module/qmldir">C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Qml_Module/qmldir</file>
   </qresource>
 </RCC>
 

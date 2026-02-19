@@ -1,0 +1,112 @@
+{
+    "classes": [
+        {
+            "className": "WK_Soc",
+            "lineNumber": 16,
+            "object": true,
+            "qualifiedClassName": "WK_Soc",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_stat",
+                            "type": "stat_data"
+                        }
+                    ],
+                    "index": 0,
+                    "name": "sig_update_md",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "recvData",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 1,
+                    "name": "slot_Recv_TextData",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 2,
+                    "name": "slot_Disconnect_Soc",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "ret",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 3,
+                    "name": "slot_helloAck",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "jsObj",
+                            "type": "QJsonObject"
+                        }
+                    ],
+                    "index": 4,
+                    "name": "slot_registerReq",
+                    "returnType": "bool"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "ret",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 5,
+                    "name": "slot_registerAck",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "jsObj",
+                            "type": "QJsonObject"
+                        }
+                    ],
+                    "index": 6,
+                    "name": "slot_registerReq_hmi",
+                    "returnType": "bool"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "ret",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 7,
+                    "name": "slot_registerAck_hmi",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "WK_Soc.h",
+    "outputRevision": 69
+}

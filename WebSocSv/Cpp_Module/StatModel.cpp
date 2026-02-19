@@ -12,7 +12,7 @@ StatModel::StatModel(QObject *parent)
     test_data.id = 999;
     test_data.stat = 0;
 
-    this->qvec.push_back(test_data);
+    this->slot_qvec_update(test_data);
 }
 
 int StatModel::rowCount(const QModelIndex &parent) const
@@ -71,6 +71,12 @@ QHash<int, QByteArray> StatModel::roleNames() const
     qh[StatRole] = "stat";
 
     return qh;
+}
+
+Q_INVOKABLE void StatModel::reset_md()
+{
+    beginResetModel();
+    endResetModel();
 }
 
 void StatModel::slot_qvec_update(stat_data st_stat)
