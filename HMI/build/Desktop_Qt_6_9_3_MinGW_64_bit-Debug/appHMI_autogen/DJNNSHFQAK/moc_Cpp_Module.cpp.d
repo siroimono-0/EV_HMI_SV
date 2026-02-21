@@ -340,4 +340,5 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
-  C:/Users/siroi/siroimono/w_qt/EV/Common/StatData.h
+  C:/Users/siroi/siroimono/w_qt/EV/Common/StatData.h \
+  C:/Users/siroi/siroimono/w_qt/EV/HMI/Cpp_Module/StatStore.h

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 334" fill="none">
+  <defs>
+    <!-- 흰색 네온(글로우) -->
+    <filter id="neon" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="0" stdDeviation="6.6" flood-color="#ffffff" flood-opacity="0.90"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="15.0" flood-color="#ffffff" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#neon)" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" shape-rendering="geometricPrecision">
+    <!-- 충전기 본체 -->
+    <rect x="54" y="48" width="174" height="252" rx="30"/>
+
+    <!-- 상단 화면 -->
+    <rect x="90" y="72" width="102" height="60" rx="12"/>
+
+    <!-- 번개 아이콘 (x -2, y +2 이동) -->
+    <path d="M150 156 L114 216 H150 L126 270 L192 198 H156 L180 156 Z"/>
+
+    <!-- 하단 받침 -->
+    <path d="M42 312 H246"/>
+
+    <!-- 케이블 -->
+    <path d="M264 156
+             C294 156 300 168 300 192
+             V234
+             C300 276 336 276 336 234
+             V180" />
+
+    <!-- 플러그 몸통 -->
+    <rect x="318" y="132" width="42" height="42" rx="6"/>
+
+    <!-- 플러그 핀(두 개) -->
+    <path d="M330 108 V132"/>
+    <path d="M348 108 V132"/>
+  </g>
+</svg>

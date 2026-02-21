@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 #include "./Cpp_Module/Cpp_Module.h"
+#include "./Cpp_Module/WK_Serial.h"
 #include "./Cpp_Module/WK_WebSocket.h"
 
 int main(int argc, char *argv[])
@@ -14,6 +15,9 @@ int main(int argc, char *argv[])
     Cpp_Module cpp_module;
 
     qRegisterMetaType<WK_WebSocket *>("WK_WebSocket*");
+    qRegisterMetaType<WK_Serial *>("WK_Serial*");
+    qRegisterMetaType<CHARGING_TYPE>("CHARGING_TYPE");
+    qRegisterMetaType<charging_stat>("charging_stat");
 
     engine.rootContext()->setContextProperty("cpp_module", &cpp_module);
     QObject::connect(

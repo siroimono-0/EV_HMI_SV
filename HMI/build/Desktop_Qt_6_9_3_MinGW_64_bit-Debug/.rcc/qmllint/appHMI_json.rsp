@@ -19,6 +19,10 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/Card_Ready.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Card_Socket.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Charging_Ready.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Card_Failed.qml
+C:/Users/siroi/siroimono/w_qt/EV/HMI/Charging_Monitoring.qml
+C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Time.qml
+C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Won.qml
+C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Kwh.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Popup_Text.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Keypad_Number.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BackGround.qml
@@ -30,5 +34,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BackGround_Plus.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Keypad_New.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Rec_Number.qml
 C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BackGround_Card.qml
+C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BackGround_Amount.qml
+C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BtnLed.qml
 --json
 C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/appHMI_qmllint.json

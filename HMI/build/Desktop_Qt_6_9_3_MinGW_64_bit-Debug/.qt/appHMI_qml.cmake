@@ -22,6 +22,14 @@ set(src_and_dest_list
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Charging_Ready.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/Card_Failed.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Card_Failed.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/Charging_Monitoring.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Charging_Monitoring.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Time.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Input_Time.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Won.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Input_Won.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Kwh.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Input_Kwh.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Popup_Text.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/Popup_Text.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Keypad_Number.qml"
@@ -44,6 +52,10 @@ set(src_and_dest_list
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/Rec_Number.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BackGround_Card.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/BackGround_Card.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BackGround_Amount.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/BackGround_Amount.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BtnLed.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/BtnLed.qml"
 
 )
 set(timestamp_file "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/appHMI_qml.txt")

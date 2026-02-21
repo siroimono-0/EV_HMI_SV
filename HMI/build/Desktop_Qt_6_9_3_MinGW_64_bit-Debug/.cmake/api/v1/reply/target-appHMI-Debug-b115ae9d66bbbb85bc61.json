@@ -27,13 +27,13 @@
 			"qt6_add_qml_module",
 			"qt_add_qml_module",
 			"add_dependencies",
+			"_qt_internal_qml_copy_files_to_build_dir",
+			"qt6_target_qml_sources",
 			"_qt_internal_scan_qml_imports",
 			"_qt_internal_generate_deploy_qml_imports_script",
 			"cmake_language",
 			"_qt_internal_finalize_executable",
 			"qt6_finalize_target",
-			"_qt_internal_qml_copy_files_to_build_dir",
-			"qt6_target_qml_sources",
 			"target_include_directories",
 			"_qt_internal_qml_type_registration",
 			"target_sources",
@@ -104,37 +104,37 @@
 			{
 				"command" : 4,
 				"file" : 1,
+				"line" : 109,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 1,
 				"line" : 102,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 95,
+				"line" : 103,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 105,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 106,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
 				"line" : 96,
-				"parent" : 0
-			},
-			{
-				"command" : 5,
-				"file" : 1,
-				"line" : 98,
-				"parent" : 0
-			},
-			{
-				"command" : 5,
-				"file" : 1,
-				"line" : 99,
-				"parent" : 0
-			},
-			{
-				"command" : 5,
-				"file" : 1,
-				"line" : 89,
 				"parent" : 0
 			},
 			{
@@ -470,69 +470,69 @@
 				"parent" : 70
 			},
 			{
-				"file" : 1,
-				"line" : -1,
-				"parent" : 0
-			},
-			{
-				"command" : 18,
-				"file" : 23,
-				"line" : 1,
-				"parent" : 72
-			},
-			{
-				"command" : 17,
-				"file" : 0,
-				"line" : 877,
-				"parent" : 73
-			},
-			{
-				"command" : 16,
-				"file" : 0,
-				"line" : 799,
-				"parent" : 74
-			},
-			{
 				"command" : 15,
-				"file" : 0,
-				"line" : 799,
-				"parent" : 75
-			},
-			{
-				"command" : 14,
-				"file" : 12,
-				"line" : 4516,
-				"parent" : 76
-			},
-			{
-				"command" : 13,
-				"file" : 12,
-				"line" : 4291,
-				"parent" : 77
-			},
-			{
-				"command" : 20,
 				"file" : 12,
 				"line" : 951,
 				"parent" : 35
 			},
 			{
-				"command" : 19,
+				"command" : 14,
 				"file" : 12,
 				"line" : 3613,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 13,
 				"file" : 12,
 				"line" : 2976,
-				"parent" : 80
+				"parent" : 73
+			},
+			{
+				"file" : 1,
+				"line" : -1,
+				"parent" : 0
+			},
+			{
+				"command" : 20,
+				"file" : 23,
+				"line" : 1,
+				"parent" : 75
 			},
 			{
 				"command" : 19,
+				"file" : 0,
+				"line" : 877,
+				"parent" : 76
+			},
+			{
+				"command" : 18,
+				"file" : 0,
+				"line" : 799,
+				"parent" : 77
+			},
+			{
+				"command" : 17,
+				"file" : 0,
+				"line" : 799,
+				"parent" : 78
+			},
+			{
+				"command" : 16,
+				"file" : 12,
+				"line" : 4516,
+				"parent" : 79
+			},
+			{
+				"command" : 13,
+				"file" : 12,
+				"line" : 4291,
+				"parent" : 80
+			},
+			{
+				"command" : 14,
 				"file" : 12,
 				"line" : 3607,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 13,
@@ -616,13 +616,13 @@
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 29,
 				"file" : 12,
 				"line" : 3458,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
@@ -634,307 +634,379 @@
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3321,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 23,
 				"file" : 12,
 				"line" : 3514,
-				"parent" : 79
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3321,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3514,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3321,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3514,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3321,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3514,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3321,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3514,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3321,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3514,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3321,
+				"parent" : 72
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3514,
+				"parent" : 72
 			},
 			{
 				"command" : 28,
 				"file" : 12,
 				"line" : 3629,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 27,
 				"file" : 0,
 				"line" : 405,
-				"parent" : 140
+				"parent" : 152
 			},
 			{
 				"command" : 26,
 				"file" : 0,
 				"line" : 2594,
-				"parent" : 141
+				"parent" : 153
 			},
 			{
 				"command" : 23,
 				"file" : 0,
 				"line" : 2137,
-				"parent" : 142
+				"parent" : 154
 			},
 			{
 				"command" : 28,
 				"file" : 12,
 				"line" : 3665,
-				"parent" : 79
+				"parent" : 72
 			},
 			{
 				"command" : 27,
 				"file" : 0,
 				"line" : 405,
-				"parent" : 144
+				"parent" : 156
 			},
 			{
 				"command" : 26,
 				"file" : 0,
 				"line" : 2594,
-				"parent" : 145
+				"parent" : 157
 			},
 			{
 				"command" : 23,
 				"file" : 0,
 				"line" : 2137,
-				"parent" : 146
+				"parent" : 158
 			},
 			{
 				"command" : 30,
 				"file" : 0,
 				"line" : 871,
-				"parent" : 73
+				"parent" : 76
 			},
 			{
 				"command" : 23,
 				"file" : 0,
 				"line" : 2262,
-				"parent" : 148
+				"parent" : 160
 			}
 		]
 	},
@@ -1181,8 +1253,14 @@
 				54,
 				56,
 				58,
-				59,
-				60
+				60,
+				62,
+				64,
+				66,
+				68,
+				70,
+				71,
+				72
 			]
 		},
 		{
@@ -1631,16 +1709,12 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 78,
-			"id" : "appHMI_qmlimportscan::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "appHMI_autogen::@6890427a1f51a3e7e1df"
+			"backtrace" : 74,
+			"id" : "appHMI_copy_res::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 81,
-			"id" : "appHMI_copy_res::@6890427a1f51a3e7e1df"
+			"id" : "appHMI_qmlimportscan::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 83,
@@ -1648,6 +1722,10 @@
 		},
 		{
 			"id" : "appHMI_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "appHMI_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "appHMI::@6890427a1f51a3e7e1df",
@@ -1843,27 +1921,33 @@
 				54,
 				56,
 				58,
-				59,
 				60,
-				61,
 				62,
-				63,
+				64,
+				66,
+				68,
+				70,
+				71,
+				72,
 				73,
 				74,
 				75,
-				105,
-				106,
-				107,
-				108,
-				109,
-				110,
-				111,
-				112,
-				113,
-				114,
-				115,
-				116,
-				117
+				86,
+				87,
+				88,
+				124,
+				125,
+				126,
+				127,
+				128,
+				129,
+				130,
+				131,
+				132,
+				133,
+				134,
+				135,
+				136
 			]
 		},
 		{
@@ -1896,7 +1980,13 @@
 				51,
 				53,
 				55,
-				57
+				57,
+				59,
+				61,
+				63,
+				65,
+				67,
+				69
 			]
 		},
 		{
@@ -1915,21 +2005,6 @@
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				64,
-				65,
-				66,
-				67,
-				68,
-				69,
-				70,
-				71,
-				72
-			]
-		},
-		{
-			"name" : "CMake Rules",
-			"sourceIndexes" : 
-			[
 				76,
 				77,
 				78,
@@ -1939,10 +2014,13 @@
 				82,
 				83,
 				84,
-				85,
-				86,
-				87,
-				88,
+				85
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
 				89,
 				90,
 				91,
@@ -1958,7 +2036,26 @@
 				101,
 				102,
 				103,
-				104
+				104,
+				105,
+				106,
+				107,
+				108,
+				109,
+				110,
+				111,
+				112,
+				113,
+				114,
+				115,
+				116,
+				117,
+				118,
+				119,
+				120,
+				121,
+				122,
+				123
 			]
 		}
 	],
@@ -2186,221 +2283,298 @@
 		},
 		{
 			"backtrace" : 118,
-			"path" : "Qml_Module/Popup_Text.qml",
+			"path" : "Charging_Monitoring.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 119,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Popup_Text_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Charging_Monitoring_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 120,
-			"path" : "Qml_Module/Keypad_Number.qml",
+			"path" : "Input_Time.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 121,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Keypad_Number_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Input_Time_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 122,
-			"path" : "Qml_Module/BackGround.qml",
+			"path" : "Input_Won.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 123,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BackGround_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Input_Won_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 124,
-			"path" : "Qml_Module/RecBtn.qml",
+			"path" : "Input_Kwh.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 125,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/RecBtn_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Input_Kwh_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 126,
-			"path" : "Qml_Module/Circle_Number.qml",
+			"path" : "Qml_Module/Popup_Text.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 127,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Circle_Number_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Popup_Text_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 128,
-			"path" : "Qml_Module/BtnGreen.qml",
+			"path" : "Qml_Module/Keypad_Number.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 129,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BtnGreen_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Keypad_Number_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 130,
-			"path" : "Qml_Module/NeonLabel.qml",
+			"path" : "Qml_Module/BackGround.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 131,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/NeonLabel_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BackGround_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 132,
-			"path" : "Qml_Module/BackGround_Plus.qml",
+			"path" : "Qml_Module/RecBtn.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 133,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BackGround_Plus_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/RecBtn_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 134,
-			"path" : "Qml_Module/Keypad_New.qml",
+			"path" : "Qml_Module/Circle_Number.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 135,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Keypad_New_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Circle_Number_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 136,
-			"path" : "Qml_Module/Rec_Number.qml",
+			"path" : "Qml_Module/BtnGreen.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 137,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Rec_Number_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BtnGreen_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 138,
-			"path" : "Qml_Module/BackGround_Card.qml",
+			"path" : "Qml_Module/NeonLabel.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 139,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/NeonLabel_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 140,
+			"path" : "Qml_Module/BackGround_Plus.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 141,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BackGround_Plus_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 142,
+			"path" : "Qml_Module/Keypad_New.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 143,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Keypad_New_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 144,
+			"path" : "Qml_Module/Rec_Number.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 145,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Rec_Number_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 146,
+			"path" : "Qml_Module/BackGround_Card.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 147,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BackGround_Card_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 143,
+			"backtrace" : 148,
+			"path" : "Qml_Module/BackGround_Amount.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 149,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BackGround_Amount_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 150,
+			"path" : "Qml_Module/BtnLed.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 151,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BtnLed_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 155,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/qrc_appHMI_raw_qml_0.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 147,
+			"backtrace" : 159,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/qrc_appHMI_raw_qml_0_extra_qmldirs.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/qmake_HMI.qrc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/qmldir",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/appHMI_raw_qml_0.qrc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/combo.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/memberCard.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/creditCard.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/time.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/won.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/voltage.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/battery.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/cardReady.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"path" : "images/cardInsert.svg",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
+			"path" : "images/charging_ready.svg",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 161,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/rcc/appHMI_raw_qml_0_extra_qmldirs.qrc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 149,
+			"backtrace" : 161,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Qml_Module/qmldir",
 			"sourceGroupIndex" : 0
@@ -2498,6 +2672,30 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Charging_Monitoring_qml.cpp.rule",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Input_Time_qml.cpp.rule",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Input_Won_qml.cpp.rule",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Input_Kwh_qml.cpp.rule",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/Popup_Text_qml.cpp.rule",
 			"sourceGroupIndex" : 4
 		},
@@ -2559,6 +2757,18 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BackGround_Card_qml.cpp.rule",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BackGround_Amount_qml.cpp.rule",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.rcc/qmlcache/appHMI_Qml_Module/BtnLed_qml.cpp.rule",
 			"sourceGroupIndex" : 4
 		},
 		{

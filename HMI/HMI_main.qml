@@ -5,6 +5,11 @@ import QtQuick.Controls
 Item {
     id: root
 
+    Component.onCompleted: function()
+    {
+        cpp_module.charging_type_clear_To_statStore();
+    }
+
     BackGround{
         id: background
         anchors.fill: parent

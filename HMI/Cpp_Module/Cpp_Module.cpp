@@ -7,8 +7,13 @@ Cpp_Module::Cpp_Module(QObject *parent)
     : QObject{parent}
 {
     // this->set_p_wk_websoc();
-    this->create_Serial();
     this->p_stat = new StatStore(this);
+    this->create_Serial();
+}
+
+StatStore *Cpp_Module::statStore() const
+{
+    return this->p_stat;
 }
 
 Cpp_Module::~Cpp_Module()
@@ -81,7 +86,7 @@ void Cpp_Module::create_WebSoc()
 
     this->p_th_websoc->start();
 
-    //serial 객체에 soc객체 주소 전달
+    // serial 객체에 soc객체 주소 전달
     QMetaObject::invokeMethod(this->p_wk_serial,
                               "slot_set_p_soc",
                               Qt::QueuedConnection,
@@ -96,6 +101,13 @@ void Cpp_Module::create_Serial()
     this->p_th_serial = new QThread();
     this->p_wk_serial = new WK_Serial();
     this->p_wk_serial->set_p_module(this);
+    this->p_wk_serial->set_p_stat(this->p_stat);
+
+    // StatStore에 Serial클래스 주소 전달
+    QMetaObject::invokeMethod(this->p_stat,
+                              "slot_set_p_serial",
+                              Qt::QueuedConnection,
+                              Q_ARG(WK_Serial *, this->p_wk_serial));
 
     this->p_wk_serial->moveToThread(this->p_th_serial);
 
@@ -103,7 +115,7 @@ void Cpp_Module::create_Serial()
     return;
 }
 
-Q_INVOKABLE void Cpp_Module::set_card_stat(bool stat)
+Q_INVOKABLE void Cpp_Module::set_card_stat_To_serial(bool stat)
 {
     QMetaObject::invokeMethod(this->p_wk_serial,
                               "slot_set_card_stat",
@@ -113,7 +125,7 @@ Q_INVOKABLE void Cpp_Module::set_card_stat(bool stat)
     return;
 }
 
-Q_INVOKABLE void Cpp_Module::chargingConnecter_open()
+Q_INVOKABLE void Cpp_Module::chargingConnecter_open_To_serial()
 {
     QMetaObject::invokeMethod(this->p_wk_serial,
                               "slot_rs485_coil1_on_off",
@@ -122,7 +134,69 @@ Q_INVOKABLE void Cpp_Module::chargingConnecter_open()
     return;
 }
 
-Q_INVOKABLE void Cpp_Module::chargingConnecter_ready()
+Q_INVOKABLE void Cpp_Module::chargingConnecter_ready_To_serial()
 {
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_rs485_coil234_on_off",
+                              Qt::QueuedConnection,
+                              Q_ARG(bool, true));
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::charging_start_To_serial()
+{
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_rs232_cmd",
+                              Qt::QueuedConnection,
+                              Q_ARG(uint16_t, 0),
+                              Q_ARG(uint16_t, 1));
+
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::charging_stop_To_serial()
+{
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_rs232_cmd",
+                              Qt::QueuedConnection,
+                              Q_ARG(uint16_t, 1),
+                              Q_ARG(uint16_t, 1));
+
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::charging_type_To_statStore(QString type, qint32 val)
+{
+    CHARGING_TYPE charging_type;
+    if (type == "time")
+    {
+        charging_type = TIME;
+    }
+    else if (type == "won")
+    {
+        charging_type = WON;
+    }
+    else if (type == "kWh")
+    {
+        charging_type = KWH;
+    }
+    else if (type == "persent")
+    {
+        charging_type = PERSENT;
+    }
+
+    QMetaObject::invokeMethod(this->p_stat,
+                              "slot_set_charging_type",
+                              Qt::QueuedConnection,
+                              Q_ARG(CHARGING_TYPE, charging_type),
+                              Q_ARG(qint32, val));
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::charging_type_clear_To_statStore()
+{
+    QMetaObject::invokeMethod(this->p_stat,
+                              &StatStore::slot_clear_charging_type,
+                              Qt::QueuedConnection);
     return;
 }

@@ -11,6 +11,10 @@ Card_Ready 1.0 Card_Ready.qml
 Card_Socket 1.0 Card_Socket.qml
 Charging_Ready 1.0 Charging_Ready.qml
 Card_Failed 1.0 Card_Failed.qml
+Charging_Monitoring 1.0 Charging_Monitoring.qml
+Input_Time 1.0 Input_Time.qml
+Input_Won 1.0 Input_Won.qml
+Input_Kwh 1.0 Input_Kwh.qml
 Popup_Text 1.0 ./Qml_Module/Popup_Text.qml
 Keypad_Number 1.0 ./Qml_Module/Keypad_Number.qml
 BackGround 1.0 ./Qml_Module/BackGround.qml
@@ -22,5 +26,7 @@ BackGround_Plus 1.0 ./Qml_Module/BackGround_Plus.qml
 Keypad_New 1.0 ./Qml_Module/Keypad_New.qml
 Rec_Number 1.0 ./Qml_Module/Rec_Number.qml
 BackGround_Card 1.0 ./Qml_Module/BackGround_Card.qml
+BackGround_Amount 1.0 ./Qml_Module/BackGround_Amount.qml
+BtnLed 1.0 ./Qml_Module/BtnLed.qml
 depends QtQuick
 

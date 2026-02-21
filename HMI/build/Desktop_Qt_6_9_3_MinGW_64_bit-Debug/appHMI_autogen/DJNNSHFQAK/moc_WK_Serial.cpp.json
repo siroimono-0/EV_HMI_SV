@@ -2,7 +2,7 @@
     "classes": [
         {
             "className": "WK_Serial",
-            "lineNumber": 21,
+            "lineNumber": 24,
             "object": true,
             "qualifiedClassName": "WK_Serial",
             "slots": [
@@ -76,6 +76,40 @@
                     "access": "public",
                     "index": 7,
                     "name": "slot_rs485_modbus_end",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "addr",
+                            "type": "uint16_t"
+                        },
+                        {
+                            "name": "val",
+                            "type": "uint16_t"
+                        }
+                    ],
+                    "index": 8,
+                    "name": "slot_rs232_cmd",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 9,
+                    "name": "slot_rs232_read",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 10,
+                    "name": "slot_rs232_modbus_end",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 11,
+                    "name": "slot_rs232_reqTimer_timeout",
                     "returnType": "void"
                 }
             ],

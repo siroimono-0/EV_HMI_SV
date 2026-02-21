@@ -9,8 +9,7 @@ Item {
     Component.onCompleted: {
         // cpp에 rs485릴레이 모듈 1번코일 on 실행
         // ... 전기차 커넥터 보관함 문 열리는거임 ... ㅋㅋ..
-        cpp_module.chargingConnecter_open();
-
+        cpp_module.chargingConnecter_open_To_serial();
     }
 
     function stk_next()
@@ -18,7 +17,7 @@ Item {
         // 확인버튼 눌렀으면 케넉터 연결했다고 가정함
         // 그럼 rs485릴레이 2..3..4 코일 on 실행
         // 코일 다 켜졌으면 cpp -> qml signal 발생해서 다음페이지
-        StackView.view.push("");
+        StackView.view.push("Charging_Monitoring.qml");
     }
 
     function coli_set()
@@ -26,9 +25,18 @@ Item {
         // 확인버튼 눌렀으면 케넉터 연결했다고 가정함
         // 그럼 rs485릴레이 2..3..4 코일 on 실행
         // 코일 다 켜졌으면 cpp -> qml signal 발생해서 다음페이지
-        StackView.view.push("");
+        cpp_module.chargingConnecter_ready_To_serial();
     }
 
+    Connections{
+        target: cpp_module
+
+        // 코일 다켜짐 응답 받았으니 다음 페이지로
+        function onSig_coil_ready_ok_ToQml()
+        {
+            root.stk_next();
+        }
+    }
 
     BackGround_Card{
         id: background
@@ -36,13 +44,23 @@ Item {
     }
 
     Image {
-        id: charging_Ready_img
-        source: ""
+        id: img
+        source: "./images/charging_ready.svg"
         fillMode: Image.PreserveAspectFit
         width: 500; height: 300;
         anchors.top: parent.top
         anchors.topMargin: 100
         anchors.horizontalCenter: parent.horizontalCenter
+
+        layer.enabled: true;
+        layer.effect: MultiEffect{
+            shadowEnabled: true;
+            shadowBlur: 1
+            shadowColor: "#00FFD0"
+            shadowVerticalOffset: 0;
+            shadowHorizontalOffset: 0;
+        }
+
     }
 
     Label{
@@ -51,8 +69,8 @@ Item {
         font.pixelSize: 40
         font.family: "DIN"
         font.bold: true
-        anchors.top: card_img.bottom
-        // anchors.topMargin: 10
+        anchors.top: img.bottom
+        anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
@@ -94,7 +112,7 @@ Item {
 
         onSig_Clicked: function()
         {
-            // root.stk_back();
+            root.coli_set();
         }
 
         Label{

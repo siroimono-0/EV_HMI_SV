@@ -2,7 +2,7 @@
     "classes": [
         {
             "className": "Cpp_Module",
-            "lineNumber": 13,
+            "lineNumber": 14,
             "methods": [
                 {
                     "access": "public",
@@ -12,7 +12,7 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 6,
+                    "index": 8,
                     "name": "join_WebSv",
                     "returnType": "void"
                 },
@@ -24,24 +24,73 @@
                             "type": "bool"
                         }
                     ],
-                    "index": 7,
-                    "name": "set_card_stat",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "index": 8,
-                    "name": "chargingConnecter_open",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
                     "index": 9,
-                    "name": "chargingConnecter_ready",
+                    "name": "set_card_stat_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 10,
+                    "name": "chargingConnecter_open_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 11,
+                    "name": "chargingConnecter_ready_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 12,
+                    "name": "charging_start_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 13,
+                    "name": "charging_stop_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "type",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "val",
+                            "type": "qint32"
+                        }
+                    ],
+                    "index": 14,
+                    "name": "charging_type_To_statStore",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 15,
+                    "name": "charging_type_clear_To_statStore",
                     "returnType": "void"
                 }
             ],
             "object": true,
+            "properties": [
+                {
+                    "constant": true,
+                    "designable": true,
+                    "final": false,
+                    "index": 0,
+                    "name": "statStore",
+                    "read": "statStore",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "StatStore*",
+                    "user": false
+                }
+            ],
             "qualifiedClassName": "Cpp_Module",
             "signals": [
                 {
@@ -96,6 +145,18 @@
                     "access": "public",
                     "index": 5,
                     "name": "sig_card_compare_ToQml",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 6,
+                    "name": "sig_coil_ready_ok_ToQml",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 7,
+                    "name": "sig_charging_stop_ToQml",
                     "returnType": "void"
                 }
             ],

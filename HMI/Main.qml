@@ -12,7 +12,8 @@ Window {
     StackView{
         id: root_stkView
         initialItem: "Start_page.qml"
-        // initialItem: "./Qml_Module/Keypad_New.qml"
+        // initialItem: "Input_Time.qml"
+        // initialItem: "./Qml_Module/BackGround_Amount.qml"
 
         anchors.fill: parent
     }

@@ -258,7 +258,7 @@ Item {
 
                 onSig_Clicked: function()
                 {
-                    root.sig_Cilcked("3")
+                    root.sig_Cilcked("6")
                 }
 
                 Label{
@@ -401,7 +401,7 @@ Item {
 
                 onSig_Clicked: function()
                 {
-                    root.sig_Cilcked("6")
+                    root.sig_Cilcked("9")
                 }
 
                 Label{

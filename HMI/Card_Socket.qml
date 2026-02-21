@@ -8,7 +8,7 @@ Item {
 
     function stk_back()
     {
-        cpp_module.set_card_stat(false);
+        cpp_module.set_card_stat_To_serial(false);
 
         StackView.view.pop();
         StackView.view.pop();
@@ -16,13 +16,13 @@ Item {
 
     function stk_next_success()
     {
-        cpp_module.set_card_stat(false);
+        cpp_module.set_card_stat_To_serial(false);
         StackView.view.push("Charging_Ready.qml");
     }
 
     function stk_next_failed(msg)
     {
-        cpp_module.set_card_stat(false);
+        cpp_module.set_card_stat_To_serial(false);
         StackView.view.push("Card_Failed.qml", {err: msg});
     }
 
@@ -41,7 +41,7 @@ Item {
 
         function onSig_card_compare_ToQml()
         {
-            root_indicator.running();
+            root_indicator.running = true;
             btn.visible = false;
         }
     }

@@ -2,8 +2,115 @@
     "classes": [
         {
             "className": "StatStore",
-            "lineNumber": 8,
+            "lineNumber": 11,
             "object": true,
+            "properties": [
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 0,
+                    "name": "elapsed_time",
+                    "notify": "sig_elapsed_time_change",
+                    "read": "get_elapsed_time",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "write": "set_elapsed_time"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 1,
+                    "name": "remaining_time",
+                    "notify": "sig_remaining_time_change",
+                    "read": "get_remaining_time",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "write": "set_remaining_time"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 2,
+                    "name": "charging_speed",
+                    "notify": "sig_charging_speed_change",
+                    "read": "get_charging_speed",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "write": "set_charging_speed"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 3,
+                    "name": "charging_capacity",
+                    "notify": "sig_charging_capacity_change",
+                    "read": "get_charging_capacity",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "write": "set_charging_capacity"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 4,
+                    "name": "charging_amount",
+                    "notify": "sig_charging_amount_change",
+                    "read": "get_charging_amount",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "write": "set_charging_amount"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 5,
+                    "name": "battery_start_persent",
+                    "notify": "sig_battery_start_persent_change",
+                    "read": "get_battery_start_persent",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "write": "set_battery_start_persent"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": true,
+                    "index": 6,
+                    "name": "battery_current",
+                    "notify": "sig_battery_current_change",
+                    "read": "get_battery_current",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "write": "set_battery_current"
+                }
+            ],
             "qualifiedClassName": "StatStore",
             "signals": [
                 {
@@ -17,6 +124,48 @@
                     "index": 0,
                     "name": "sig_Stat_changed",
                     "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 1,
+                    "name": "sig_elapsed_time_change",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 2,
+                    "name": "sig_remaining_time_change",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 3,
+                    "name": "sig_charging_speed_change",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 4,
+                    "name": "sig_charging_capacity_change",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 5,
+                    "name": "sig_charging_amount_change",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 6,
+                    "name": "sig_battery_start_persent_change",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 7,
+                    "name": "sig_battery_current_change",
+                    "returnType": "void"
                 }
             ],
             "slots": [
@@ -28,7 +177,7 @@
                             "type": "stat_data"
                         }
                     ],
-                    "index": 1,
+                    "index": 8,
                     "name": "slot_update_FromSoc",
                     "returnType": "void"
                 },
@@ -40,7 +189,7 @@
                             "type": "stat_data"
                         }
                     ],
-                    "index": 2,
+                    "index": 9,
                     "name": "slot_update_FromSerial",
                     "returnType": "void"
                 },
@@ -52,21 +201,67 @@
                             "type": "stat_data"
                         }
                     ],
-                    "index": 3,
+                    "index": 10,
                     "name": "slot_update_FromModule",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 4,
+                    "index": 11,
                     "name": "slot_update_current",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 5,
+                    "index": 12,
                     "name": "slot_get_stat",
                     "returnType": "stat_data"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "serial",
+                            "type": "WK_Serial*"
+                        }
+                    ],
+                    "index": 13,
+                    "name": "slot_set_p_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "c_stat",
+                            "type": "charging_stat"
+                        }
+                    ],
+                    "index": 14,
+                    "name": "slot_update_chargingStat",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "charging_type",
+                            "type": "CHARGING_TYPE"
+                        },
+                        {
+                            "name": "val",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 15,
+                    "name": "slot_set_charging_type",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 16,
+                    "name": "slot_clear_charging_type",
+                    "returnType": "void"
                 }
             ],
             "superClasses": [

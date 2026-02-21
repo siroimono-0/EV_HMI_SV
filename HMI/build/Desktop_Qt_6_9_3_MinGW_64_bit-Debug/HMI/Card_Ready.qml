@@ -76,7 +76,7 @@ Item {
         onSig_Clicked: function()
         {
             // cppSv 카드리더기 상태 온
-            cpp_module.set_card_stat(true);
+            cpp_module.set_card_stat_To_serial(true);
             root.stk_next();
         }
 

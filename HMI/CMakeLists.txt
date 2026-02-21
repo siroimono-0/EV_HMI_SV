@@ -43,6 +43,10 @@ qt_add_qml_module(appHMI
         Card_Socket.qml
         Charging_Ready.qml
         Card_Failed.qml
+        Charging_Monitoring.qml
+        Input_Time.qml
+        Input_Won.qml
+        Input_Kwh.qml
         ./Qml_Module/Popup_Text.qml
         ./Qml_Module/Keypad_Number.qml
         ./Qml_Module/BackGround.qml
@@ -54,6 +58,8 @@ qt_add_qml_module(appHMI
         ./Qml_Module/Keypad_New.qml
         ./Qml_Module/Rec_Number.qml
         ./Qml_Module/BackGround_Card.qml
+        ./Qml_Module/BackGround_Amount.qml
+        ./Qml_Module/BtnLed.qml
 
     SOURCES
         ./Cpp_Module/Cpp_Module.h ./Cpp_Module/Cpp_Module.cpp
@@ -73,6 +79,7 @@ qt_add_qml_module(appHMI
         ./images/battery.svg
         ./images/cardReady.svg
         ./images/cardInsert.svg
+        ./images/charging_ready.svg
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

@@ -6,6 +6,11 @@ import HMI 1.0
 Item {
     id: root
 
+    Component.onCompleted: function()
+    {
+        cpp_module.charging_type_clear_To_statStore();
+    }
+
     function stk_home()
     {
         while(StackView.view.depth > 2)
@@ -21,10 +26,25 @@ Item {
 
     function stk_next(s)
     {
-        if(s === "p")
+        if(s === "time")
         {
+            StackView.view.push("Input_Time.qml");
+        }
+        else if(s === "won")
+        {
+            StackView.view.push("Input_Won.qml");
+        }
+        else if(s === "kWh")
+        {
+            StackView.view.push("Input_Kwh.qml");
+        }
+        else if(s === "persent")
+        {
+            cpp_module.charging_type_To_statStore(s, 80);
             StackView.view.push("Select_card.qml");
         }
+
+
     }
 
     BackGround_Plus{
@@ -54,7 +74,7 @@ Item {
 
         onSig_Clicked: function()
         {
-
+            root.stk_next("time");
         }
 
         Image{
@@ -135,7 +155,7 @@ Item {
 
         onSig_Clicked: function()
         {
-
+            root.stk_next("won");
         }
 
         Image{
@@ -216,7 +236,7 @@ Item {
 
         onSig_Clicked: function()
         {
-
+            root.stk_next("kWh");
         }
 
         Image{
@@ -297,7 +317,7 @@ Item {
 
         onSig_Clicked: function()
         {
-            root.stk_next("p");
+            root.stk_next("persent");
         }
 
         Image{

@@ -10,6 +10,10 @@
     <file alias="Card_Socket.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Card_Socket.qml</file>
     <file alias="Charging_Ready.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Charging_Ready.qml</file>
     <file alias="Card_Failed.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Card_Failed.qml</file>
+    <file alias="Charging_Monitoring.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Charging_Monitoring.qml</file>
+    <file alias="Input_Time.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Time.qml</file>
+    <file alias="Input_Won.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Won.qml</file>
+    <file alias="Input_Kwh.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Input_Kwh.qml</file>
     <file alias="./Qml_Module/Popup_Text.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Popup_Text.qml</file>
     <file alias="./Qml_Module/Keypad_Number.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Keypad_Number.qml</file>
     <file alias="./Qml_Module/BackGround.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BackGround.qml</file>
@@ -21,6 +25,8 @@
     <file alias="./Qml_Module/Keypad_New.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Keypad_New.qml</file>
     <file alias="./Qml_Module/Rec_Number.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Rec_Number.qml</file>
     <file alias="./Qml_Module/BackGround_Card.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BackGround_Card.qml</file>
+    <file alias="./Qml_Module/BackGround_Amount.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BackGround_Amount.qml</file>
+    <file alias="./Qml_Module/BtnLed.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BtnLed.qml</file>
     <file alias="./images/combo.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/combo.svg</file>
     <file alias="./images/memberCard.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/memberCard.svg</file>
     <file alias="./images/creditCard.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/creditCard.svg</file>
@@ -30,6 +36,7 @@
     <file alias="./images/battery.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/battery.svg</file>
     <file alias="./images/cardReady.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/cardReady.svg</file>
     <file alias="./images/cardInsert.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/cardInsert.svg</file>
+    <file alias="./images/charging_ready.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/charging_ready.svg</file>
   </qresource>
 </RCC>
 

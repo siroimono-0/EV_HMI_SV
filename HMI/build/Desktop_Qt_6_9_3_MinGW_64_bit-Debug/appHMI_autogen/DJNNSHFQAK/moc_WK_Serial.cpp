@@ -51,7 +51,14 @@ template <> constexpr inline auto WK_Serial::qt_create_metaobjectdata<qt_meta_ta
         "onoff",
         "slot_rs485_coil234_on_off",
         "slot_rs485_read",
-        "slot_rs485_modbus_end"
+        "slot_rs485_modbus_end",
+        "slot_rs232_cmd",
+        "uint16_t",
+        "addr",
+        "val",
+        "slot_rs232_read",
+        "slot_rs232_modbus_end",
+        "slot_rs232_reqTimer_timeout"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -79,6 +86,16 @@ template <> constexpr inline auto WK_Serial::qt_create_metaobjectdata<qt_meta_ta
         QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_rs485_modbus_end'
         QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_rs232_cmd'
+        QtMocHelpers::SlotData<void(uint16_t, uint16_t)>(14, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 15, 16 }, { 0x80000000 | 15, 17 },
+        }}),
+        // Slot 'slot_rs232_read'
+        QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_rs232_modbus_end'
+        QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_rs232_reqTimer_timeout'
+        QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -110,6 +127,10 @@ void WK_Serial::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 5: _t->slot_rs485_coil234_on_off((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         case 6: _t->slot_rs485_read(); break;
         case 7: _t->slot_rs485_modbus_end(); break;
+        case 8: _t->slot_rs232_cmd((*reinterpret_cast< std::add_pointer_t<uint16_t>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<uint16_t>>(_a[2]))); break;
+        case 9: _t->slot_rs232_read(); break;
+        case 10: _t->slot_rs232_modbus_end(); break;
+        case 11: _t->slot_rs232_reqTimer_timeout(); break;
         default: ;
         }
     }
@@ -134,14 +155,14 @@ int WK_Serial::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 12;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 12)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        _id -= 12;
     }
     return _id;
 }

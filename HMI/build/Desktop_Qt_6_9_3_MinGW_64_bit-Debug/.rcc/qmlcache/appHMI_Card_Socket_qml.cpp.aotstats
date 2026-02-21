@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 727,
+                        "durationMicroseconds": 748,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "stk_back",
                         "line": 9
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 326,
+                        "durationMicroseconds": 356,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "stk_next_success",
                         "line": 17
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 17,
-                        "durationMicroseconds": 77,
+                        "durationMicroseconds": 79,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "target",
                         "line": 30
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 275,
+                        "durationMicroseconds": 248,
                         "errorMessage": "",
                         "functionName": "onSig_card_success_ToQml",
                         "line": 32
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 9,
-                        "durationMicroseconds": 64,
+                        "durationMicroseconds": 46,
                         "errorMessage": "Cannot retrieve a non-object type by ID: root_indicator",
                         "functionName": "onSig_card_compare_ToQml",
                         "line": 42
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 101,
+                        "durationMicroseconds": 119,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 51
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 19,
-                        "durationMicroseconds": 123,
+                        "durationMicroseconds": 129,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 57
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 144,
+                        "durationMicroseconds": 150,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 59
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 128,
+                        "durationMicroseconds": 144,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 61
@@ -158,7 +158,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 47,
+                        "durationMicroseconds": 50,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 111
@@ -166,7 +166,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 22,
-                        "durationMicroseconds": 46,
+                        "durationMicroseconds": 42,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb",
                         "functionName": "top",
                         "line": 107
@@ -174,7 +174,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 139,
+                        "durationMicroseconds": 155,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 109
