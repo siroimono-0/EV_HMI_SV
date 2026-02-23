@@ -61,6 +61,47 @@ Item {
         }
     }
 
+    Label{
+        id: root_lb
+        text: "충전 방식을 선택하세요"
+        color: "white"
+        font.pixelSize: 60
+        font.family: "DIN"
+        font.bold: true
+
+        anchors.top: parent.top
+        anchors.topMargin: 45
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+    }
+    Label{
+        id: root_lb_neon
+        text: "충전 방식을 선택하세요"
+        color: "white"
+        font.pixelSize: 60
+        font.family: "DIN"
+        font.bold: true
+
+        anchors.fill:   root_lb
+        anchors.margins: -20;
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+
+        layer.enabled: true
+
+        layer.effect: MultiEffect{
+            shadowEnabled: true;
+            shadowBlur: 1
+            shadowColor: "#FFFFFF"
+            shadowOpacity: 1
+            shadowVerticalOffset: 0;
+            shadowHorizontalOffset: 0;
+        }
+    }
+
     RecBtn{
         id: root_time
 

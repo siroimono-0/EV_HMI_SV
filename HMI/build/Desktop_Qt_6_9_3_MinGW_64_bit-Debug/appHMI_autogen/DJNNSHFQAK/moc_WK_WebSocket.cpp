@@ -50,9 +50,9 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         "slot_SocErr",
         "QAbstractSocket::SocketError",
         "error",
-        "slot_Send_TextData",
-        "stat_data",
-        "st_stat",
+        "slot_send_db_update_textData",
+        "db_data",
+        "st_db_data",
         "slot_Recv_TextData",
         "recvData",
         "slot_netAccess_reply",
@@ -79,8 +79,8 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         QtMocHelpers::SlotData<void(QAbstractSocket::SocketError)>(8, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 9, 10 },
         }}),
-        // Slot 'slot_Send_TextData'
-        QtMocHelpers::SlotData<void(stat_data)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
+        // Slot 'slot_send_db_update_textData'
+        QtMocHelpers::SlotData<void(db_data)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 12, 13 },
         }}),
         // Slot 'slot_Recv_TextData'
@@ -124,7 +124,7 @@ void WK_WebSocket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 3: _t->slot_ID_Check(); break;
         case 4: _t->slot_ID_Resert((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         case 5: _t->slot_SocErr((*reinterpret_cast< std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
-        case 6: _t->slot_Send_TextData((*reinterpret_cast< std::add_pointer_t<stat_data>>(_a[1]))); break;
+        case 6: _t->slot_send_db_update_textData((*reinterpret_cast< std::add_pointer_t<db_data>>(_a[1]))); break;
         case 7: _t->slot_Recv_TextData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 8: _t->slot_netAccess_reply((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
         case 9: _t->slot_netAccess_post((*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[1]))); break;
@@ -139,13 +139,6 @@ void WK_WebSocket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QAbstractSocket::SocketError >(); break;
-            }
-            break;
-        case 6:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-            case 0:
-                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< stat_data >(); break;
             }
             break;
         case 8:

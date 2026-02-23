@@ -15,6 +15,7 @@ Charging_Monitoring 1.0 Charging_Monitoring.qml
 Input_Time 1.0 Input_Time.qml
 Input_Won 1.0 Input_Won.qml
 Input_Kwh 1.0 Input_Kwh.qml
+Charging_Complet 1.0 Charging_Complet.qml
 Popup_Text 1.0 ./Qml_Module/Popup_Text.qml
 Keypad_Number 1.0 ./Qml_Module/Keypad_Number.qml
 BackGround 1.0 ./Qml_Module/BackGround.qml

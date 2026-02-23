@@ -69,8 +69,8 @@ Item {
     BtnGreen{
         id: btn
         width: 300; height: 120;
-        anchors.top: lb.bottom
-        anchors.topMargin: 20
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 100
         anchors.horizontalCenter: parent.horizontalCenter
 
         onSig_Clicked: function()

@@ -11,6 +11,7 @@ Item {
 
     property string unit_type : ""
     property int unit_size : 60
+    property string tf_text: ""
 
     BackGround{
         id: background
@@ -66,6 +67,7 @@ Item {
         TextField{
             id: tf
 
+            text: root.tf_text;
             font.pixelSize: 75;
             font.family: "DIN"
 

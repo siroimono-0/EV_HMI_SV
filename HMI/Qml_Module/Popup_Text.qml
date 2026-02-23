@@ -41,6 +41,10 @@ Rectangle{
                 target: btn_ok
                 visible: false;
             }
+            PropertyChanges {
+                target:  mArea
+                visible: false;
+            }
 
         },
         State {
@@ -64,6 +68,10 @@ Rectangle{
             }
             PropertyChanges {
                 target: btn_ok
+                visible: true;
+            }
+            PropertyChanges {
+                target:  mArea
                 visible: true;
             }
         }

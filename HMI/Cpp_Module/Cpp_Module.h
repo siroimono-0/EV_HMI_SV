@@ -29,14 +29,28 @@ public:
     void end_p_wk_websoc();
     void end_p_wk_serial();
 
+    //==================================================================
     Q_INVOKABLE void set_card_stat_To_serial(bool stat);
+    //==================================================================
+
+    //==================================================================
     Q_INVOKABLE void chargingConnecter_open_To_serial();
     Q_INVOKABLE void chargingConnecter_ready_To_serial();
     Q_INVOKABLE void charging_start_To_serial();
     Q_INVOKABLE void charging_stop_To_serial();
+    Q_INVOKABLE void chargingConnecter_close_To_serial();
+    Q_INVOKABLE void chargingConnecter_off_To_serial();
+
+    Q_INVOKABLE void charging_start_To_statStore();
 
     Q_INVOKABLE void charging_type_To_statStore(QString type, qint32 val);
     Q_INVOKABLE void charging_type_clear_To_statStore();
+
+    //==================================================================
+    Q_INVOKABLE void set_payment_To_statStore();
+    //==================================================================
+
+    Q_INVOKABLE void chard_ok_To_statStore();
 
 public slots:
 
@@ -50,6 +64,7 @@ signals:
     void sig_card_compare_ToQml();
 
     void sig_coil_ready_ok_ToQml();
+    void sig_coil234_off_check_ToQml();
 
     void sig_charging_stop_ToQml();
 

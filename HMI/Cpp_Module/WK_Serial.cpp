@@ -42,6 +42,7 @@ WK_Serial::WK_Serial(QObject *parent)
 
 void WK_Serial::rs485_coil_all_off()
 {
+    this->coil_all_off_stat = true;
     this->slot_rs485_coil1_on_off(false);
     return;
 }
@@ -279,6 +280,10 @@ void WK_Serial::rs485_crc_compare()
             else if (cnv_uint8_t(this->rs485_readData.at(3)) == 0x03)
             {
                 this->connecter234_stat[2].second = false;
+                // 코일234 꺼진서 확인댓으면 qml에 다음페이지 요청
+                QMetaObject::invokeMethod(this->p_module,
+                                          &Cpp_Module::sig_coil234_off_check_ToQml,
+                                          Qt::QueuedConnection);
             }
         }
 
@@ -366,6 +371,7 @@ void WK_Serial::slot_rs232_cmd(uint16_t addr, uint16_t val)
 
     // 모드버스 wait 상태로 전환
     this->rs232_modbus_wait = true;
+
     return;
 }
 
@@ -655,6 +661,7 @@ void WK_Serial::slot_serial_read()
                 // 카드 리더기 종료
                 if (this->p_soc != nullptr)
                 {
+                    // http server 카드 정보 확인 요청
                     QMetaObject::invokeMethod(this->p_soc,
                                               "slot_netAccess_post",
                                               Qt::QueuedConnection,

@@ -13,7 +13,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 8,
+                        "index": 9,
                         "name": "join_WebSv",
                         "returnType": "void"
                     },
@@ -25,32 +25,50 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 9,
+                        "index": 10,
                         "name": "set_card_stat_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 10,
+                        "index": 11,
                         "name": "chargingConnecter_open_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 11,
+                        "index": 12,
                         "name": "chargingConnecter_ready_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 12,
+                        "index": 13,
                         "name": "charging_start_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 13,
+                        "index": 14,
                         "name": "charging_stop_To_serial",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 15,
+                        "name": "chargingConnecter_close_To_serial",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 16,
+                        "name": "chargingConnecter_off_To_serial",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 17,
+                        "name": "charging_start_To_statStore",
                         "returnType": "void"
                     },
                     {
@@ -65,14 +83,26 @@
                                 "type": "qint32"
                             }
                         ],
-                        "index": 14,
+                        "index": 18,
                         "name": "charging_type_To_statStore",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 15,
+                        "index": 19,
                         "name": "charging_type_clear_To_statStore",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 20,
+                        "name": "set_payment_To_statStore",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 21,
+                        "name": "chard_ok_To_statStore",
                         "returnType": "void"
                     }
                 ],
@@ -157,6 +187,12 @@
                     {
                         "access": "public",
                         "index": 7,
+                        "name": "sig_coil234_off_check_ToQml",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 8,
                         "name": "sig_charging_stop_ToQml",
                         "returnType": "void"
                     }
@@ -176,7 +212,7 @@
         "classes": [
             {
                 "className": "StatStore",
-                "lineNumber": 11,
+                "lineNumber": 13,
                 "object": true,
                 "properties": [
                     {
@@ -283,6 +319,51 @@
                         "type": "QString",
                         "user": false,
                         "write": "set_battery_current"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": true,
+                        "index": 7,
+                        "name": "advance_payment",
+                        "notify": "sig_advance_payment_change",
+                        "read": "get_advance_payment",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "write": "set_advance_payment"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": true,
+                        "index": 8,
+                        "name": "actual_payment",
+                        "notify": "sig_actual_payment_change",
+                        "read": "get_actual_payment",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "write": "set_actual_payment"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": true,
+                        "index": 9,
+                        "name": "cancle_payment",
+                        "notify": "sig_cancle_payment_change",
+                        "read": "get_cancle_payment",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "write": "set_cancle_payment"
                     }
                 ],
                 "qualifiedClassName": "StatStore",
@@ -291,12 +372,12 @@
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "st_stat",
-                                "type": "stat_data"
+                                "name": "st_db_data",
+                                "type": "db_data"
                             }
                         ],
                         "index": 0,
-                        "name": "sig_Stat_changed",
+                        "name": "sig_stat_db_update",
                         "returnType": "void"
                     },
                     {
@@ -340,56 +421,38 @@
                         "index": 7,
                         "name": "sig_battery_current_change",
                         "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 8,
+                        "name": "sig_advance_payment_change",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 9,
+                        "name": "sig_actual_payment_change",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 10,
+                        "name": "sig_cancle_payment_change",
+                        "returnType": "void"
                     }
                 ],
                 "slots": [
                     {
                         "access": "public",
-                        "arguments": [
-                            {
-                                "name": "st_stat",
-                                "type": "stat_data"
-                            }
-                        ],
-                        "index": 8,
-                        "name": "slot_update_FromSoc",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "st_stat",
-                                "type": "stat_data"
-                            }
-                        ],
-                        "index": 9,
-                        "name": "slot_update_FromSerial",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "st_stat",
-                                "type": "stat_data"
-                            }
-                        ],
-                        "index": 10,
-                        "name": "slot_update_FromModule",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
                         "index": 11,
-                        "name": "slot_update_current",
-                        "returnType": "void"
+                        "name": "slot_get_store_id",
+                        "returnType": "int"
                     },
                     {
                         "access": "public",
                         "index": 12,
-                        "name": "slot_get_stat",
-                        "returnType": "stat_data"
+                        "name": "slot_get_mac_addr",
+                        "returnType": "QString"
                     },
                     {
                         "access": "public",
@@ -435,6 +498,36 @@
                         "access": "public",
                         "index": 16,
                         "name": "slot_clear_charging_type",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 17,
+                        "name": "slot_set_payment",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "set",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 18,
+                        "name": "slot_set_card_uid",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 19,
+                        "name": "slot_set_charging_start_time",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 20,
+                        "name": "slot_card_ok_db_update",
                         "returnType": "void"
                     }
                 ],
@@ -637,12 +730,12 @@
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "st_stat",
-                                "type": "stat_data"
+                                "name": "st_db_data",
+                                "type": "db_data"
                             }
                         ],
                         "index": 6,
-                        "name": "slot_Send_TextData",
+                        "name": "slot_send_db_update_textData",
                         "returnType": "void"
                     },
                     {

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 import QtQuick.Layouts
 import HMI 1.0
 
@@ -45,12 +46,35 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+                Label{
+                    id: btn1_lb_neon
+                    text: "1"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill: btn1_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -67,12 +91,34 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+                Label{
+                    id: btn2_lb_neon
+                    text: "2"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill: btn2_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+
+                    }
                 }
                 onSig_Clicked: function()
                 {
@@ -89,12 +135,36 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+                Label{
+                    id: btn3_lb_neon
+                    text: "3"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill: btn3_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -107,16 +177,39 @@ Rectangle{
 
                 Label{
                     id: btn4_lb
-                    text: "1"
+                    text: "4"
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+                Label{
+                    id: btn4_lb_neon
+                    text: "4"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill: btn4_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -133,12 +226,36 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+
+                Label{
+                    id: btn5_lb_neon
+                    text: "5"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill: btn5_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -155,12 +272,36 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 80
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+
+                Label{
+                    id: btDel_lb_neon
+                    text: "<<"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 80
+
+                    anchors.fill:  btnDel1_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -184,12 +325,36 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+
+                Label{
+                    id: bt6_lb_neon
+                    text: "6"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill:  btn6_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -206,12 +371,35 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+                Label{
+                    id: bt7_lb_neon
+                    text: "7"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill:  btn7_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -228,12 +416,36 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+
+                Label{
+                    id: bt8_lb_neon
+                    text: "8"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill:  btn8_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -250,12 +462,36 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+
+                Label{
+                    id: bt9_lb_neon
+                    text: "9"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill:  btn9_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -272,12 +508,36 @@ Rectangle{
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 160
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+
+                Label{
+                    id: bt0_lb_neon
+                    text: "0"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill:  btn0_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {
@@ -290,16 +550,40 @@ Rectangle{
 
                 Label{
                     id: btnDel2_lb
-                    text: "삭제"
+                    text: "X"
                     color: "white"
                     font.family: "DIN"
                     font.pixelSize: 80
-                    style: Text.Outline
-                    styleColor: "#22000000"
 
                     anchors.centerIn: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                }
+
+                Label{
+                    id: btDel2_lb_neon
+                    text: "X"
+                    color: "white"
+                    font.family: "DIN"
+                    font.pixelSize: 160
+
+                    anchors.fill:  btnDel2_lb
+                    anchors.margins: -20;
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    layer.enabled: true;
+
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
+
                 }
                 onSig_Clicked: function()
                 {

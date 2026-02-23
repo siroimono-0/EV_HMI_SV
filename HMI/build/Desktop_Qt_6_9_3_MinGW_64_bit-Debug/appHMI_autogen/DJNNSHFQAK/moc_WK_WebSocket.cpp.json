@@ -60,12 +60,12 @@
                     "access": "public",
                     "arguments": [
                         {
-                            "name": "st_stat",
-                            "type": "stat_data"
+                            "name": "st_db_data",
+                            "type": "db_data"
                         }
                     ],
                     "index": 6,
-                    "name": "slot_Send_TextData",
+                    "name": "slot_send_db_update_textData",
                     "returnType": "void"
                 },
                 {

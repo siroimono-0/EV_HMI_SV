@@ -103,6 +103,13 @@ namespace _qt_qml_HMI_Input_Kwh_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
+namespace _qt_qml_HMI_Charging_Complet_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
 namespace _qt_qml_HMI__0x2e__Qml_Module_Popup_Text_qml { 
     extern const unsigned char qmlData[];
     extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
@@ -222,6 +229,7 @@ Registry::Registry() {
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Input_Time.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Input_Time_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Input_Won.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Input_Won_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Input_Kwh.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Input_Kwh_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/Charging_Complet.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI_Charging_Complet_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/Popup_Text.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_Popup_Text_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/Keypad_Number.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_Keypad_Number_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/BackGround.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_BackGround_qml::unit);

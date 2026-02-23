@@ -4,10 +4,14 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/QMetaType \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QObject \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QThread \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QTime \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q20functional.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/q20iterator.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q20memory.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q20type_traits.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/q20utility.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/q23utility.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qalgorithms.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qanystringview.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qarraydata.h \
@@ -22,6 +26,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qbytearraylist.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qbytearrayview.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qcalendar.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qchar.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qcompare.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qcompare_impl.h \
@@ -35,6 +40,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qcontiguouscache.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qdatastream.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qdatetime.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qdeadlinetimer.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qdebug.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qelapsedtimer.h \
@@ -49,11 +55,13 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qglobalstatic.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qhash.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qhashfunctions.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qiodevice.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qiodevicebase.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qiterable.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qiterator.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qlatin1stringview.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qlist.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qlocale.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qlogging.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qmalloc.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qmap.h \
@@ -78,6 +86,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qshareddata_impl.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qsharedpointer.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qsharedpointer_impl.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qspan.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qstdlibdetection.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qstring.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qstringalgorithms.h \
@@ -117,10 +126,18 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qtypeinfo.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qtypes.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qutf8stringview.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qvarlengtharray.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkInterface \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qabstractsocket.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qhostaddress.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkinterface.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qtnetwork-config.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qtnetworkexports.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qtnetworkglobal.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/array \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \
@@ -218,6 +235,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator_args.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/utility.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/vector.tcc \
+  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cassert \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cctype \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cerrno \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/chrono \

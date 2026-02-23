@@ -16,7 +16,12 @@ Item {
 
     function stk_next_success()
     {
+        // 카드 인증 시리얼 통신 막음
         cpp_module.set_card_stat_To_serial(false);
+
+        // db 업데이트 요청 // 카드 인증 완료됨
+        // statStore -> webSoc -> Sv -> db update
+        cpp_module.chard_ok_To_statStore();
         StackView.view.push("Charging_Ready.qml");
     }
 
@@ -104,8 +109,8 @@ Item {
     BtnGreen{
         id: btn
         width: 300; height: 120;
-        anchors.top: lb.bottom
-        anchors.topMargin: 50
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 100
         anchors.horizontalCenter: parent.horizontalCenter
 
         onSig_Clicked: function()

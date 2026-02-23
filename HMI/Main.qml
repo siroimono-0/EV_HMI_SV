@@ -13,6 +13,7 @@ Window {
         id: root_stkView
         initialItem: "Start_page.qml"
         // initialItem: "Input_Time.qml"
+        // initialItem: "Charging_Monitoring.qml"
         // initialItem: "./Qml_Module/BackGround_Amount.qml"
 
         anchors.fill: parent

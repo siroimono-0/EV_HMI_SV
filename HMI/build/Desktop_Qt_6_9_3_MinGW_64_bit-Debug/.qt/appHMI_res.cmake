@@ -22,6 +22,8 @@ set(src_and_dest_list
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./images/cardInsert.svg"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/images/charging_ready.svg"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./images/charging_ready.svg"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/images/voltage_green.svg"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./images/voltage_green.svg"
 
 )
 set(timestamp_file "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/appHMI_res.txt")

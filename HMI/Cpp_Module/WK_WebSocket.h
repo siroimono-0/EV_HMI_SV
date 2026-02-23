@@ -33,7 +33,9 @@ public slots:
 
     void slot_SocErr(QAbstractSocket::SocketError error);
 
-    void slot_Send_TextData(stat_data st_stat);
+    // 수정부분 안씀
+    // void slot_Send_TextData(stat_data st_stat);
+    void slot_send_db_update_textData(db_data st_db_data);
     void slot_Recv_TextData(QString recvData);
 
     ////////////////////////////////////////////////

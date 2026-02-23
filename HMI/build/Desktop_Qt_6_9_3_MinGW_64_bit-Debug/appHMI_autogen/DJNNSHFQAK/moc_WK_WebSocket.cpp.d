@@ -10,6 +10,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/QObject \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QSharedDataPointer \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QString \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QTime \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QUrl \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QVariant \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q17memory.h \
@@ -149,6 +150,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QAbstractSocket \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkAccessManager \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkInterface \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkProxy \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkReply \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/QNetworkRequest \
@@ -159,6 +161,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qhostaddress.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qhttpheaders.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkaccessmanager.h \
+  C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkinterface.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkproxy.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkreply.h \
   C:/Qt/6.9.3/mingw_64/include/QtNetwork/qnetworkrequest.h \

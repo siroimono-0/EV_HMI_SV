@@ -69,6 +69,13 @@ void WK_WebSocket::slot_netAccess_reply(QNetworkReply *reply)
         {
             if (jsObj["ok"].toBool() == true)
             {
+                // 카드 승인 statStore에 카드 uid 업데이트
+                QString qs_card_uid = jsObj["uid"].toString();
+                QMetaObject::invokeMethod(this->p_stat,
+                                          "slot_set_card_uid",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(QString, qs_card_uid));
+
                 // qml에 결제완료 신호 보내야댐
                 QMetaObject::invokeMethod(this->p_Module,
                                           &Cpp_Module::sig_card_success_ToQml,
@@ -134,8 +141,17 @@ void WK_WebSocket::slot_Connect_Sv()
     // 서버 연결 완료 시
     connect(this->p_webSoc, &QWebSocket::connected, this, &WK_WebSocket::slot_ID_Check);
 
+    /*
+     수정 부분 안씀
     // 상태 클래스 상태값 변경시 SV 데이터 전송
     connect(this->p_stat, &StatStore::sig_Stat_changed, this, &WK_WebSocket::slot_Send_TextData);
+    */
+
+    // statStore db_data 전송
+    connect(this->p_stat,
+            &StatStore::sig_stat_db_update,
+            this,
+            &WK_WebSocket::slot_send_db_update_textData);
 
     // 텍스트 메시지 수신시 발생 슬롯
     connect(this->p_webSoc,
@@ -194,6 +210,14 @@ void WK_WebSocket::slot_SocErr(QAbstractSocket::SocketError error)
     return;
 }
 
+void WK_WebSocket::slot_send_db_update_textData(db_data st_db_data)
+{
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+/*
+ 수정부분 안씀
 void WK_WebSocket::slot_Send_TextData(stat_data st_stat)
 {
     QJsonObject json_obj;
@@ -211,6 +235,7 @@ void WK_WebSocket::slot_Send_TextData(stat_data st_stat)
     qDebug() << Q_FUNC_INFO;
     return;
 }
+*/
 
 void WK_WebSocket::slot_Recv_TextData(QString recvData)
 {
@@ -252,6 +277,7 @@ void WK_WebSocket::slot_ID_Check()
 {
     qDebug() << Q_FUNC_INFO;
 
+    /* 수정필요 구현 삭제 예정
     struct stat_data st_stat = {0};
 
     // stat클래스에서 상태 값 확인
@@ -260,15 +286,26 @@ void WK_WebSocket::slot_ID_Check()
                               &StatStore::slot_get_stat,
                               Qt::BlockingQueuedConnection,
                               Q_RETURN_ARG(stat_data, st_stat));
+    */
+
+    int store_id;
+    QMetaObject::invokeMethod(this->p_stat,
+                              &StatStore::slot_get_store_id,
+                              Qt::BlockingQueuedConnection,
+                              Q_RETURN_ARG(int, store_id));
+
+    QString hmi_id;
+    QMetaObject::invokeMethod(this->p_stat,
+                              &StatStore::slot_get_mac_addr,
+                              Qt::BlockingQueuedConnection,
+                              Q_RETURN_ARG(QString, hmi_id));
 
     QJsonObject jsObj;
     jsObj.insert("type", "hello");
     jsObj.insert("role", "hmi");
     jsObj.insert("token", "");
-    jsObj.insert("store_id", QString::number(st_stat.id));
-    // jsObj.insert("store_id", "1");
-    // qDebug() << st_stat.id;
-    jsObj.insert("hmi_id", "hmi_01");
+    jsObj.insert("store_id", QString::number(store_id));
+    jsObj.insert("hmi_id", hmi_id);
 
     QJsonDocument jsDoc(jsObj);
     QString send_qs = jsDoc.toJson(QJsonDocument::Compact);
@@ -284,10 +321,13 @@ void WK_WebSocket::slot_ID_Resert(bool resert)
 {
     if (resert)
     {
+        /*
+     구현 수정
         // 상태 클래스 초기값 업데이트
         QMetaObject::invokeMethod(this->p_stat,
                                   &StatStore::slot_update_current,
                                   Qt::QueuedConnection);
+    */
 
         // 모듈 -> Qml 통신 시그널 발생
         QMetaObject::invokeMethod(this->p_Module,

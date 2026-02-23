@@ -54,7 +54,7 @@ Item {
         font.bold: true
 
         anchors.top: parent.top
-        anchors.topMargin: 90
+        anchors.topMargin: 45
         anchors.horizontalCenter: parent.horizontalCenter
 
         horizontalAlignment: Text.AlignHCenter;

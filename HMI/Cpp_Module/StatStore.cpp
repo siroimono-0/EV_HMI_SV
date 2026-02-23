@@ -3,8 +3,7 @@
 
 StatStore::StatStore(QObject *parent)
     : QObject{parent}
-{
-}
+{}
 
 void StatStore::set_First_stat(stat_data st_stat)
 {
@@ -18,6 +17,7 @@ void StatStore::slot_set_p_serial(WK_Serial *serial)
     return;
 }
 
+/*
 void StatStore::slot_update_FromSoc(stat_data st_stat)
 {
     this->st_stat = st_stat;
@@ -57,11 +57,32 @@ stat_data StatStore::slot_get_stat()
 {
     return this->st_stat;
 }
+*/
 
 void StatStore::slot_set_charging_type(CHARGING_TYPE charging_type, int val)
 {
     this->charging_type = charging_type;
     this->charging_val = val;
+
+    // enum CHARGING_TYPE { NOT_SET = 0, TIME = 1, WON = 2, KWH = 3, PERSENT = 4 };
+
+    if (charging_type == TIME)
+    {
+        this->i_adv_pay = val * this->charge_price_min;
+    }
+    else if (charging_type == WON)
+    {
+        this->i_adv_pay = val;
+    }
+    else if (charging_type == KWH)
+    {
+        this->i_adv_pay = val * this->charge_price_kWh;
+    }
+    else if (charging_type == PERSENT)
+    {
+        this->i_adv_pay = 20000;
+    }
+
     qDebug() << Q_FUNC_INFO;
     qDebug() << charging_type << " :: " << val;
 
@@ -74,6 +95,32 @@ void StatStore::slot_clear_charging_type()
     this->charging_val = 0;
     qDebug() << Q_FUNC_INFO;
     return;
+}
+
+void StatStore::slot_set_payment()
+{
+    QString qs_adv = QString::number(this->i_adv_pay);
+    if (qs_adv.size() > 3)
+    {
+        qs_adv.insert(qs_adv.size() - 3, ",");
+    }
+    qs_adv += " 원";
+    this->set_advance_payment(qs_adv);
+
+    QString qs_act = QString::number(this->i_act_pay);
+    if (qs_act.size() > 3)
+    {
+        qs_act.insert(qs_act.size() - 3, ",");
+    }
+    this->set_actual_payment(qs_act + " 원");
+
+    this->i_can_pay = this->i_adv_pay - this->i_act_pay;
+    QString qs_can = QString::number(this->i_can_pay);
+    if (qs_can.size() > 3)
+    {
+        qs_can.insert(qs_can.size() - 3, ",");
+    }
+    this->set_cancle_payment(qs_can + " 원");
 }
 
 void StatStore::slot_update_chargingStat(charging_stat c_stat)
@@ -103,12 +150,20 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
     this->set_charging_speed(qs_c_sp);
     qDebug() << charging_speed << " :: 충전 속도";
 
-    QString qs_cp = QString::number(charging_capacity, 'f', 2) + " kw";
+    QString qs_cp = QString::number(charging_capacity, 'f', 2) + " kWh";
     this->set_charging_capacity(qs_cp);
+    // 누적 충전량 증가
+    this->accumulate_kWh += charging_capacity;
     qDebug() << charging_capacity << " :: 충전량";
 
-    QString qs_amount = QString::number(charging_amount) + " 원";
-    this->set_charging_amount(qs_amount);
+    QString qs_amount = QString::number(charging_amount);
+    if (qs_amount.size() > 3)
+    {
+        qs_amount.insert(qs_amount.size() - 3, ",");
+    }
+
+    this->set_charging_amount(qs_amount + " 원");
+    this->i_act_pay = charging_amount;
     qDebug() << charging_amount << " :: 충전금액";
 
     float battery_current_persent = ((float) battery_current / (float) battery_full) * 100;
@@ -260,6 +315,21 @@ QString StatStore::get_battery_current()
     return this->battery_current;
 }
 
+QString StatStore::get_advance_payment()
+{
+    return this->advance_payment;
+}
+
+QString StatStore::get_actual_payment()
+{
+    return this->actual_payment;
+}
+
+QString StatStore::get_cancle_payment()
+{
+    return this->cancle_payment;
+}
+
 void StatStore::set_elapsed_time(const QString set)
 {
     this->elapsed_time = set;
@@ -298,6 +368,7 @@ void StatStore::set_charging_amount(const QString set)
 void StatStore::set_battery_start_persent(const QString set)
 {
     this->battery_start_persent = set;
+    // db 업데이트 요청 필요
     emit this->sig_battery_start_persent_change();
     return;
 }
@@ -306,5 +377,87 @@ void StatStore::set_battery_current(const QString set)
 {
     this->battery_current = set;
     emit this->sig_battery_current_change();
+    return;
+}
+
+void StatStore::set_advance_payment(QString set)
+{
+    this->advance_payment = set;
+    emit this->sig_advance_payment_change();
+}
+
+void StatStore::set_actual_payment(QString set)
+{
+    this->actual_payment = set;
+    emit this->sig_actual_payment_change();
+}
+
+void StatStore::set_cancle_payment(QString set)
+{
+    this->cancle_payment = set;
+    emit this->sig_cancle_payment_change();
+}
+
+void StatStore::set_store_id(int set)
+{
+    this->store_id = set;
+    return;
+}
+
+int StatStore::slot_get_store_id()
+{
+    return this->store_id;
+}
+
+QString StatStore::slot_get_mac_addr()
+{
+    return this->mac_addr;
+}
+
+void StatStore::slot_set_card_uid(QString set)
+{
+    this->card_uid = set;
+    return;
+}
+
+void StatStore::slot_set_charging_start_time()
+{
+    this->charging_start_time = QTime::currentTime().toString("hh:mm:ss");
+    return;
+}
+
+void StatStore::slot_card_ok_db_update()
+{
+    this->st_db_data.store_id = this->store_id;
+    this->st_db_data.hmi_id = this->mac_addr;
+    this->st_db_data.card_uid = this->card_uid;
+    this->st_db_data.advance_payment = this->i_adv_pay;
+    this->st_db_data.unit_price = this->charge_price_kWh;
+    if (this->charging_type == TIME)
+    {
+        this->st_db_data.tariff_type = "TIME";
+    }
+    else if (this->charging_type == WON)
+    {
+        this->st_db_data.tariff_type = "WON";
+    }
+    else if (this->charging_type == KWH)
+    {
+        this->st_db_data.tariff_type = "KWH";
+    }
+    else if (this->charging_type == PERSENT)
+    {
+        this->st_db_data.tariff_type = "PERSENT";
+    }
+
+    qDebug() << this->st_db_data.store_id << " store_id";
+    qDebug() << this->st_db_data.hmi_id << " hmi_id";
+    qDebug() << this->st_db_data.card_uid << " card";
+    qDebug() << this->st_db_data.advance_payment << " adv";
+    qDebug() << this->st_db_data.unit_price << " unit";
+    qDebug() << this->st_db_data.tariff_type << " tariff";
+
+    emit this->sig_stat_db_update(this->st_db_data);
+
     return;
 }

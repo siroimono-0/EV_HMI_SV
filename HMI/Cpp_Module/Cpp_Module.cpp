@@ -56,6 +56,9 @@ Q_INVOKABLE void Cpp_Module::join_WebSv(QString id)
     // 처음 상태 값 설정 - ID만 존재
     this->p_stat->set_First_stat(st_stat);
 
+    //========================================
+    this->p_stat->set_store_id(id.toInt());
+
     if (this->p_wk_websoc == nullptr)
     {
         this->create_WebSoc();
@@ -165,6 +168,26 @@ Q_INVOKABLE void Cpp_Module::charging_stop_To_serial()
     return;
 }
 
+Q_INVOKABLE void Cpp_Module::chargingConnecter_close_To_serial()
+{
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_rs485_coil1_on_off",
+                              Qt::QueuedConnection,
+                              Q_ARG(bool, false));
+
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::chargingConnecter_off_To_serial()
+{
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_rs485_coil234_on_off",
+                              Qt::QueuedConnection,
+                              Q_ARG(bool, false));
+
+    return;
+}
+
 Q_INVOKABLE void Cpp_Module::charging_type_To_statStore(QString type, qint32 val)
 {
     CHARGING_TYPE charging_type;
@@ -197,6 +220,28 @@ Q_INVOKABLE void Cpp_Module::charging_type_clear_To_statStore()
 {
     QMetaObject::invokeMethod(this->p_stat,
                               &StatStore::slot_clear_charging_type,
+                              Qt::QueuedConnection);
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::set_payment_To_statStore()
+{
+    QMetaObject::invokeMethod(this->p_stat, &StatStore::slot_set_payment, Qt::QueuedConnection);
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::charging_start_To_statStore()
+{
+    QMetaObject::invokeMethod(this->p_stat,
+                              &StatStore::slot_set_charging_start_time,
+                              Qt::QueuedConnection);
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::chard_ok_To_statStore()
+{
+    QMetaObject::invokeMethod(this->p_stat,
+                              &StatStore::slot_card_ok_db_update,
                               Qt::QueuedConnection);
     return;
 }
