@@ -52,6 +52,7 @@ public:
 
 
     QString cnv_time(uint32_t time);
+    float reverse_cnv_time(QString s_time);
 
     QString get_elapsed_time();
     QString get_remaining_time();
@@ -82,6 +83,9 @@ public:
     void set_cancle_payment(QString set);
     //=============================================
     void set_store_id(int set);
+    //=============================================
+    void charging_start_db_update(double start_persent);
+    void charging_finished_db_update();
 
 public slots:
     /*
@@ -106,9 +110,13 @@ public slots:
     void slot_set_payment();             // qml 충전완료 시
     void slot_set_card_uid(QString set); // http sv 카드 승인 rep발생시 업뎃
     void slot_set_charging_start_time(); // 차징 시작 시 생성
+    void slot_charging_end_stat_clear(); // qml 차징 종료시
 
     //====================================================
     void slot_card_ok_db_update();
+    // soc에서 온 chargingLog_ack msg 에서 session_id 등록
+    void slot_set_session_id(uint64_t set);
+    void slot_set_ocpp_tx_id(uint32_t set);
 
 signals:
     // 상태 값 변경시 발생
@@ -135,8 +143,8 @@ private:
 
     WK_Serial *p_serial = nullptr;
     //===================================================
-    QString elapsed_time;          // 남은 시간
-    QString remaining_time;        // 경과 시간
+    QString elapsed_time;          // 경과 시간
+    QString remaining_time;        // 남은 시간
     QString charging_speed;        // 충전 속도
     QString charging_capacity;     // 충전 용량
     QString charging_amount;       // 충전 금액

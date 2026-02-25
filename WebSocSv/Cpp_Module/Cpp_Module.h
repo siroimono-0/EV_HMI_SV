@@ -28,7 +28,7 @@ public:
     void create_obj_DB();
 
 public slots:
-    Q_INVOKABLE bool createStore_sql(QString id, const QString name, const QString location);
+    // Q_INVOKABLE bool createStore_sql(QString id, const QString name, const QString location); 수정
 
 signals:
     void sig_hmi_md_changed();

@@ -70,7 +70,12 @@ template <> constexpr inline auto StatStore::qt_create_metaobjectdata<qt_meta_ta
         "slot_set_card_uid",
         "set",
         "slot_set_charging_start_time",
+        "slot_charging_end_stat_clear",
         "slot_card_ok_db_update",
+        "slot_set_session_id",
+        "uint64_t",
+        "slot_set_ocpp_tx_id",
+        "uint32_t",
         "elapsed_time",
         "remaining_time",
         "charging_speed",
@@ -134,30 +139,40 @@ template <> constexpr inline auto StatStore::qt_create_metaobjectdata<qt_meta_ta
         }}),
         // Slot 'slot_set_charging_start_time'
         QtMocHelpers::SlotData<void()>(31, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'slot_card_ok_db_update'
+        // Slot 'slot_charging_end_stat_clear'
         QtMocHelpers::SlotData<void()>(32, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_card_ok_db_update'
+        QtMocHelpers::SlotData<void()>(33, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_set_session_id'
+        QtMocHelpers::SlotData<void(uint64_t)>(34, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 35, 30 },
+        }}),
+        // Slot 'slot_set_ocpp_tx_id'
+        QtMocHelpers::SlotData<void(uint32_t)>(36, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 37, 30 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
         // property 'elapsed_time'
-        QtMocHelpers::PropertyData<QString>(33, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 1),
+        QtMocHelpers::PropertyData<QString>(38, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 1),
         // property 'remaining_time'
-        QtMocHelpers::PropertyData<QString>(34, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 2),
+        QtMocHelpers::PropertyData<QString>(39, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 2),
         // property 'charging_speed'
-        QtMocHelpers::PropertyData<QString>(35, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 3),
+        QtMocHelpers::PropertyData<QString>(40, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 3),
         // property 'charging_capacity'
-        QtMocHelpers::PropertyData<QString>(36, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 4),
+        QtMocHelpers::PropertyData<QString>(41, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 4),
         // property 'charging_amount'
-        QtMocHelpers::PropertyData<QString>(37, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 5),
+        QtMocHelpers::PropertyData<QString>(42, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 5),
         // property 'battery_start_persent'
-        QtMocHelpers::PropertyData<QString>(38, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 6),
+        QtMocHelpers::PropertyData<QString>(43, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 6),
         // property 'battery_current'
-        QtMocHelpers::PropertyData<QString>(39, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 7),
+        QtMocHelpers::PropertyData<QString>(44, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 7),
         // property 'advance_payment'
-        QtMocHelpers::PropertyData<QString>(40, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 8),
+        QtMocHelpers::PropertyData<QString>(45, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 8),
         // property 'actual_payment'
-        QtMocHelpers::PropertyData<QString>(41, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 9),
+        QtMocHelpers::PropertyData<QString>(46, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 9),
         // property 'cancle_payment'
-        QtMocHelpers::PropertyData<QString>(42, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 10),
+        QtMocHelpers::PropertyData<QString>(47, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 10),
     };
     QtMocHelpers::UintData qt_enums {
     };
@@ -201,7 +216,10 @@ void StatStore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 17: _t->slot_set_payment(); break;
         case 18: _t->slot_set_card_uid((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 19: _t->slot_set_charging_start_time(); break;
-        case 20: _t->slot_card_ok_db_update(); break;
+        case 20: _t->slot_charging_end_stat_clear(); break;
+        case 21: _t->slot_card_ok_db_update(); break;
+        case 22: _t->slot_set_session_id((*reinterpret_cast< std::add_pointer_t<uint64_t>>(_a[1]))); break;
+        case 23: _t->slot_set_ocpp_tx_id((*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[1]))); break;
         default: ;
         }
     }
@@ -301,14 +319,14 @@ int StatStore::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 21)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 21;
+        _id -= 24;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 21)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 21;
+        _id -= 24;
     }
     if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty

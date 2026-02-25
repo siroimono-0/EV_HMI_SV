@@ -59,8 +59,10 @@ struct db_data
 {
     // 카드 인증시 insert
     // 충전 시작시 update
-    // 충전 데이터 받아오면 update 1회
     // 충전 종료시 update
+
+    // type == chargingLog
+    // role == hmi
 
     uint64_t session_id; // db에서 자동생성
     uint32_t store_id;   // store클래스 멤버변수 // 카드 인증시 생성
@@ -72,12 +74,12 @@ struct db_data
     // 시간/결과
     // created_at / updated_at는 DB가 자동 관리(DEFAULT + 트리거)
     QString start_time;     // store클래스 멤버변수 // 충전 시작시 생성
-    uint32_t end_time;      // 추가 필요 // 충전 완료시 생성
-    uint32_t duration_time; // 경과 시간 // 충전 완료시 생성
-    uint32_t average_kWh;   // 추가 필요 // 충전 완료시 생성
+    QString end_time;       // 추가 필요 // 충전 완료시 생성
+    QString duration_time;  // 경과 시간 // 충전 완료시 생성
+    double average_kWh;     // 추가 필요 // 충전 완료시 생성
 
-    uint32_t soc_start; // 충전 시작시 생성
-    uint32_t soc_end;   // 충전 완료시 생성
+    double soc_start; // 충전 시작시 생성
+    double soc_end;   // 충전 완료시 생성
 
     // 금액(정산용)
     uint32_t advance_payment; // (선결제 “가정” 금액) // 카드 인증시 생성
@@ -90,8 +92,8 @@ struct db_data
     QString session_status; // db 업데이트마다 지속 갱신
     /*
     Authorize Accepted → AUTHORIZED
-    StartTransaction OK → CHARGING
-    StopTransaction OK → FINISHED
+    StartTransaction OK → CHARGING_START
+    StopTransaction OK → CHARGING_FINISHED
     FAILED
     TIMEOUT
     */

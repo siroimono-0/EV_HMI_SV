@@ -42,18 +42,21 @@ template <> constexpr inline auto DB_PostgreSQL::qt_create_metaobjectdata<qt_met
         "sig_end",
         "",
         "slot_end",
+        "slot_set_p_soc",
+        "WK_Soc*",
+        "soc",
         "slot_createStore",
         "id",
         "name",
         "location",
-        "slot_query_find_id",
-        "store_info",
-        "find_id",
         "slot_query_register",
         "slot_query_register_hmi",
         "storeId",
         "hmiId",
-        "slot_query_find_hello_hmi"
+        "slot_query_find_hello_hmi",
+        "slot_chargingLog_From_soc",
+        "db_data",
+        "st_db_data"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -61,17 +64,17 @@ template <> constexpr inline auto DB_PostgreSQL::qt_create_metaobjectdata<qt_met
         QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_end'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'slot_createStore'
-        QtMocHelpers::SlotData<bool(int, QString, QString)>(4, 2, QMC::AccessPublic, QMetaType::Bool, {{
-            { QMetaType::Int, 5 }, { QMetaType::QString, 6 }, { QMetaType::QString, 7 },
+        // Slot 'slot_set_p_soc'
+        QtMocHelpers::SlotData<void(WK_Soc *)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 5, 6 },
         }}),
-        // Slot 'slot_query_find_id'
-        QtMocHelpers::SlotData<store_info(QString)>(8, 2, QMC::AccessPublic, 0x80000000 | 9, {{
-            { QMetaType::QString, 10 },
+        // Slot 'slot_createStore'
+        QtMocHelpers::SlotData<bool(int, QString, QString)>(7, 2, QMC::AccessPublic, QMetaType::Bool, {{
+            { QMetaType::Int, 8 }, { QMetaType::QString, 9 }, { QMetaType::QString, 10 },
         }}),
         // Slot 'slot_query_register'
         QtMocHelpers::SlotData<bool(const QString, const QString, const QString)>(11, 2, QMC::AccessPublic, QMetaType::Bool, {{
-            { QMetaType::QString, 5 }, { QMetaType::QString, 6 }, { QMetaType::QString, 7 },
+            { QMetaType::QString, 8 }, { QMetaType::QString, 9 }, { QMetaType::QString, 10 },
         }}),
         // Slot 'slot_query_register_hmi'
         QtMocHelpers::SlotData<bool(const QString, const QString)>(12, 2, QMC::AccessPublic, QMetaType::Bool, {{
@@ -80,6 +83,10 @@ template <> constexpr inline auto DB_PostgreSQL::qt_create_metaobjectdata<qt_met
         // Slot 'slot_query_find_hello_hmi'
         QtMocHelpers::SlotData<bool(const QString, const QString)>(15, 2, QMC::AccessPublic, QMetaType::Bool, {{
             { QMetaType::QString, 13 }, { QMetaType::QString, 14 },
+        }}),
+        // Slot 'slot_chargingLog_From_soc'
+        QtMocHelpers::SlotData<void(db_data)>(16, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 17, 18 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -106,16 +113,16 @@ void DB_PostgreSQL::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         switch (_id) {
         case 0: _t->sig_end(); break;
         case 1: _t->slot_end(); break;
-        case 2: { bool _r = _t->slot_createStore((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])));
+        case 2: _t->slot_set_p_soc((*reinterpret_cast< std::add_pointer_t<WK_Soc*>>(_a[1]))); break;
+        case 3: { bool _r = _t->slot_createStore((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: { store_info _r = _t->slot_query_find_id((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
-            if (_a[0]) *reinterpret_cast< store_info*>(_a[0]) = std::move(_r); }  break;
         case 4: { bool _r = _t->slot_query_register((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 5: { bool _r = _t->slot_query_register_hmi((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 6: { bool _r = _t->slot_query_find_hello_hmi((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 7: _t->slot_chargingLog_From_soc((*reinterpret_cast< std::add_pointer_t<db_data>>(_a[1]))); break;
         default: ;
         }
     }
@@ -144,14 +151,14 @@ int DB_PostgreSQL::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

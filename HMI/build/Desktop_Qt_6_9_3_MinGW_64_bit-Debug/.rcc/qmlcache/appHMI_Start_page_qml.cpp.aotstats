@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 9,
-                        "durationMicroseconds": 315,
+                        "durationMicroseconds": 329,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_push",
                         "line": 459
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 203,
+                        "durationMicroseconds": 204,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 14
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 73,
+                        "durationMicroseconds": 77,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 19
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 72,
+                        "durationMicroseconds": 66,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 28
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 31,
-                        "durationMicroseconds": 312,
+                        "durationMicroseconds": 221,
                         "errorMessage": "Cannot retrieve a non-object type by ID: keypad_tf",
                         "functionName": "onSig_btnClicked",
                         "line": 75
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 69,
+                        "durationMicroseconds": 61,
                         "errorMessage": "",
                         "functionName": "onSig_btnClicked",
                         "line": 75
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 26,
-                        "durationMicroseconds": 38,
+                        "durationMicroseconds": 33,
                         "errorMessage": "Cannot retrieve a non-object type by ID: keypad_tf",
                         "functionName": "top",
                         "line": 70
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 159,
+                        "durationMicroseconds": 161,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 72
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 29,
-                        "durationMicroseconds": 106,
+                        "durationMicroseconds": 84,
                         "errorMessage": "",
                         "functionName": "target",
                         "line": 105
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 29,
-                        "durationMicroseconds": 84,
+                        "durationMicroseconds": 90,
                         "errorMessage": "",
                         "functionName": "target",
                         "line": 96
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 27,
-                        "durationMicroseconds": 133,
+                        "durationMicroseconds": 127,
                         "errorMessage": "Cannot retrieve a non-object type by ID: keypad_tf",
                         "functionName": "onSig_Clicked",
                         "line": 162
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 49,
+                        "durationMicroseconds": 44,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 162
@@ -150,7 +150,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 26,
-                        "durationMicroseconds": 141,
+                        "durationMicroseconds": 123,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 118
@@ -158,7 +158,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 29,
-                        "durationMicroseconds": 141,
+                        "durationMicroseconds": 131,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 120
@@ -166,7 +166,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 133,
+                        "durationMicroseconds": 103,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 122
@@ -222,7 +222,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 105,
+                        "durationMicroseconds": 100,
                         "errorMessage": "Cannot retrieve a non-object type by ID: keypad_tf",
                         "functionName": "onSig_Clicked",
                         "line": 220
@@ -230,7 +230,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 49,
+                        "durationMicroseconds": 45,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 220
@@ -238,7 +238,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 26,
-                        "durationMicroseconds": 124,
+                        "durationMicroseconds": 119,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 177
@@ -246,7 +246,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 29,
-                        "durationMicroseconds": 135,
+                        "durationMicroseconds": 134,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 179
@@ -254,7 +254,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 109,
+                        "durationMicroseconds": 97,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 181
@@ -310,7 +310,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 145,
+                        "durationMicroseconds": 144,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 235
@@ -318,7 +318,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 33,
-                        "durationMicroseconds": 145,
+                        "durationMicroseconds": 103,
                         "errorMessage": "",
                         "functionName": "verticalCenter",
                         "line": 237
@@ -374,7 +374,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 597,
+                        "durationMicroseconds": 461,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 280
@@ -382,7 +382,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 66,
+                        "durationMicroseconds": 57,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 280
@@ -390,7 +390,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 74,
+                        "durationMicroseconds": 98,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 278
@@ -398,7 +398,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 220,
+                        "durationMicroseconds": 202,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "onSig_Clicked",
                         "line": 339
@@ -406,7 +406,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 43,
+                        "durationMicroseconds": 39,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 339
@@ -414,7 +414,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 122,
+                        "durationMicroseconds": 108,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 298
@@ -422,7 +422,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 37,
-                        "durationMicroseconds": 110,
+                        "durationMicroseconds": 98,
                         "errorMessage": "",
                         "functionName": "verticalCenter",
                         "line": 300
@@ -558,7 +558,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 89,
+                        "durationMicroseconds": 121,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 428
@@ -574,7 +574,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 21,
-                        "durationMicroseconds": 124,
+                        "durationMicroseconds": 101,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "target",
                         "line": 466
@@ -590,7 +590,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 13,
-                        "durationMicroseconds": 63,
+                        "durationMicroseconds": 61,
                         "errorMessage": "Cannot retrieve a non-object type by ID: root_indicator",
                         "functionName": "onSig_SocSuccess_ToQml",
                         "line": 477

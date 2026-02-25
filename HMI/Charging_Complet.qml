@@ -18,11 +18,6 @@ Item {
         }
     }
 
-    Component.onCompleted: {
-        cpp_module.set_payment_To_statStore();
-
-        // 서버에 statStore 값들 전송해야댐
-    }
 
     BackGround_Card{
         id: background

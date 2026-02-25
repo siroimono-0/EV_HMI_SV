@@ -2,7 +2,7 @@
     "classes": [
         {
             "className": "DB_PostgreSQL",
-            "lineNumber": 11,
+            "lineNumber": 12,
             "object": true,
             "qualifiedClassName": "DB_PostgreSQL",
             "signals": [
@@ -24,6 +24,18 @@
                     "access": "public",
                     "arguments": [
                         {
+                            "name": "soc",
+                            "type": "WK_Soc*"
+                        }
+                    ],
+                    "index": 2,
+                    "name": "slot_set_p_soc",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
                             "name": "id",
                             "type": "int"
                         },
@@ -36,21 +48,9 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 2,
+                    "index": 3,
                     "name": "slot_createStore",
                     "returnType": "bool"
-                },
-                {
-                    "access": "public",
-                    "arguments": [
-                        {
-                            "name": "find_id",
-                            "type": "QString"
-                        }
-                    ],
-                    "index": 3,
-                    "name": "slot_query_find_id",
-                    "returnType": "store_info"
                 },
                 {
                     "access": "public",
@@ -103,6 +103,18 @@
                     "index": 6,
                     "name": "slot_query_find_hello_hmi",
                     "returnType": "bool"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_db_data",
+                            "type": "db_data"
+                        }
+                    ],
+                    "index": 7,
+                    "name": "slot_chargingLog_From_soc",
+                    "returnType": "void"
                 }
             ],
             "superClasses": [

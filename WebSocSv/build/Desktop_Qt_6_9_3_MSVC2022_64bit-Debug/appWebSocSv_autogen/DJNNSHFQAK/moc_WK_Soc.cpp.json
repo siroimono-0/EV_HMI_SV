@@ -17,6 +17,18 @@
                     "index": 0,
                     "name": "sig_update_md",
                     "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_db_data",
+                            "type": "db_data"
+                        }
+                    ],
+                    "index": 1,
+                    "name": "sig_chargingLog_To_DB",
+                    "returnType": "void"
                 }
             ],
             "slots": [
@@ -28,13 +40,13 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 1,
+                    "index": 2,
                     "name": "slot_Recv_TextData",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 2,
+                    "index": 3,
                     "name": "slot_Disconnect_Soc",
                     "returnType": "void"
                 },
@@ -46,7 +58,7 @@
                             "type": "bool"
                         }
                     ],
-                    "index": 3,
+                    "index": 4,
                     "name": "slot_helloAck",
                     "returnType": "void"
                 },
@@ -58,7 +70,7 @@
                             "type": "QJsonObject"
                         }
                     ],
-                    "index": 4,
+                    "index": 5,
                     "name": "slot_registerReq",
                     "returnType": "bool"
                 },
@@ -70,7 +82,7 @@
                             "type": "bool"
                         }
                     ],
-                    "index": 5,
+                    "index": 6,
                     "name": "slot_registerAck",
                     "returnType": "void"
                 },
@@ -82,7 +94,7 @@
                             "type": "QJsonObject"
                         }
                     ],
-                    "index": 6,
+                    "index": 7,
                     "name": "slot_registerReq_hmi",
                     "returnType": "bool"
                 },
@@ -94,8 +106,38 @@
                             "type": "bool"
                         }
                     ],
-                    "index": 7,
+                    "index": 8,
                     "name": "slot_registerAck_hmi",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "session_id",
+                            "type": "uint64_t"
+                        }
+                    ],
+                    "index": 9,
+                    "name": "slot_chargingLog_authorized_ack_To_hmi",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "ocpp_tx_id",
+                            "type": "uint32_t"
+                        }
+                    ],
+                    "index": 10,
+                    "name": "slot_chargingLog_charging_start_ack_To_hmi",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 11,
+                    "name": "slot_chargingLog_charging_finished_ack_To_hmi",
                     "returnType": "void"
                 }
             ],

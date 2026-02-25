@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 12,
-                        "durationMicroseconds": 126,
+                        "durationMicroseconds": 148,
                         "errorMessage": "Cannot load property width from (component in C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/Main.qml)::screen with type QObject.",
                         "functionName": "width",
                         "line": 6
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 13,
-                        "durationMicroseconds": 20,
+                        "durationMicroseconds": 25,
                         "errorMessage": "Cannot load property height from (component in C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/Main.qml)::screen with type QObject.",
                         "functionName": "height",
                         "line": 7

@@ -45,12 +45,16 @@ public:
 
     Q_INVOKABLE void charging_type_To_statStore(QString type, qint32 val);
     Q_INVOKABLE void charging_type_clear_To_statStore();
+    // 시작 베터리 초기화
+    Q_INVOKABLE void charging_end_stat_clear_To_statStore();
 
     //==================================================================
     Q_INVOKABLE void set_payment_To_statStore();
     //==================================================================
 
     Q_INVOKABLE void chard_ok_To_statStore();
+    // 충전 종료시 요청 db업데이트 요청
+    Q_INVOKABLE void charging_finished_To_statStore();
 
 public slots:
 

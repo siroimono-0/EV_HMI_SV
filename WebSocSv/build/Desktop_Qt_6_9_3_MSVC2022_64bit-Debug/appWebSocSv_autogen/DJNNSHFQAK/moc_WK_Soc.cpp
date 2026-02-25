@@ -43,6 +43,9 @@ template <> constexpr inline auto WK_Soc::qt_create_metaobjectdata<qt_meta_tag_Z
         "",
         "stat_data",
         "st_stat",
+        "sig_chargingLog_To_DB",
+        "db_data",
+        "st_db_data",
         "slot_Recv_TextData",
         "recvData",
         "slot_Disconnect_Soc",
@@ -52,7 +55,14 @@ template <> constexpr inline auto WK_Soc::qt_create_metaobjectdata<qt_meta_tag_Z
         "jsObj",
         "slot_registerAck",
         "slot_registerReq_hmi",
-        "slot_registerAck_hmi"
+        "slot_registerAck_hmi",
+        "slot_chargingLog_authorized_ack_To_hmi",
+        "uint64_t",
+        "session_id",
+        "slot_chargingLog_charging_start_ack_To_hmi",
+        "uint32_t",
+        "ocpp_tx_id",
+        "slot_chargingLog_charging_finished_ack_To_hmi"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -60,32 +70,46 @@ template <> constexpr inline auto WK_Soc::qt_create_metaobjectdata<qt_meta_tag_Z
         QtMocHelpers::SignalData<void(stat_data)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 3, 4 },
         }}),
+        // Signal 'sig_chargingLog_To_DB'
+        QtMocHelpers::SignalData<void(db_data)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 6, 7 },
+        }}),
         // Slot 'slot_Recv_TextData'
-        QtMocHelpers::SlotData<void(QString)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 6 },
+        QtMocHelpers::SlotData<void(QString)>(8, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 9 },
         }}),
         // Slot 'slot_Disconnect_Soc'
-        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_helloAck'
-        QtMocHelpers::SlotData<void(bool)>(8, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 9 },
+        QtMocHelpers::SlotData<void(bool)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 12 },
         }}),
         // Slot 'slot_registerReq'
-        QtMocHelpers::SlotData<bool(const QJsonObject &)>(10, 2, QMC::AccessPublic, QMetaType::Bool, {{
-            { QMetaType::QJsonObject, 11 },
+        QtMocHelpers::SlotData<bool(const QJsonObject &)>(13, 2, QMC::AccessPublic, QMetaType::Bool, {{
+            { QMetaType::QJsonObject, 14 },
         }}),
         // Slot 'slot_registerAck'
-        QtMocHelpers::SlotData<void(bool)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 9 },
+        QtMocHelpers::SlotData<void(bool)>(15, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 12 },
         }}),
         // Slot 'slot_registerReq_hmi'
-        QtMocHelpers::SlotData<bool(const QJsonObject &)>(13, 2, QMC::AccessPublic, QMetaType::Bool, {{
-            { QMetaType::QJsonObject, 11 },
+        QtMocHelpers::SlotData<bool(const QJsonObject &)>(16, 2, QMC::AccessPublic, QMetaType::Bool, {{
+            { QMetaType::QJsonObject, 14 },
         }}),
         // Slot 'slot_registerAck_hmi'
-        QtMocHelpers::SlotData<void(bool)>(14, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 9 },
+        QtMocHelpers::SlotData<void(bool)>(17, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 12 },
         }}),
+        // Slot 'slot_chargingLog_authorized_ack_To_hmi'
+        QtMocHelpers::SlotData<void(uint64_t)>(18, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 19, 20 },
+        }}),
+        // Slot 'slot_chargingLog_charging_start_ack_To_hmi'
+        QtMocHelpers::SlotData<void(uint32_t)>(21, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 22, 23 },
+        }}),
+        // Slot 'slot_chargingLog_charging_finished_ack_To_hmi'
+        QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -110,15 +134,19 @@ void WK_Soc::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->sig_update_md((*reinterpret_cast< std::add_pointer_t<stat_data>>(_a[1]))); break;
-        case 1: _t->slot_Recv_TextData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 2: _t->slot_Disconnect_Soc(); break;
-        case 3: _t->slot_helloAck((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        case 4: { bool _r = _t->slot_registerReq((*reinterpret_cast< std::add_pointer_t<QJsonObject>>(_a[1])));
+        case 1: _t->sig_chargingLog_To_DB((*reinterpret_cast< std::add_pointer_t<db_data>>(_a[1]))); break;
+        case 2: _t->slot_Recv_TextData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 3: _t->slot_Disconnect_Soc(); break;
+        case 4: _t->slot_helloAck((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 5: { bool _r = _t->slot_registerReq((*reinterpret_cast< std::add_pointer_t<QJsonObject>>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 5: _t->slot_registerAck((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        case 6: { bool _r = _t->slot_registerReq_hmi((*reinterpret_cast< std::add_pointer_t<QJsonObject>>(_a[1])));
+        case 6: _t->slot_registerAck((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 7: { bool _r = _t->slot_registerReq_hmi((*reinterpret_cast< std::add_pointer_t<QJsonObject>>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 7: _t->slot_registerAck_hmi((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 8: _t->slot_registerAck_hmi((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 9: _t->slot_chargingLog_authorized_ack_To_hmi((*reinterpret_cast< std::add_pointer_t<uint64_t>>(_a[1]))); break;
+        case 10: _t->slot_chargingLog_charging_start_ack_To_hmi((*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[1]))); break;
+        case 11: _t->slot_chargingLog_charging_finished_ack_To_hmi(); break;
         default: ;
         }
     }
@@ -136,6 +164,8 @@ void WK_Soc::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     }
     if (_c == QMetaObject::IndexOfMethod) {
         if (QtMocHelpers::indexOfMethod<void (WK_Soc::*)(stat_data )>(_a, &WK_Soc::sig_update_md, 0))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (WK_Soc::*)(db_data )>(_a, &WK_Soc::sig_chargingLog_To_DB, 1))
             return;
     }
 }
@@ -159,14 +189,14 @@ int WK_Soc::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 12;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 12;
     }
     return _id;
 }
@@ -175,5 +205,11 @@ int WK_Soc::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 void WK_Soc::sig_update_md(stat_data _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1);
+}
+
+// SIGNAL 1
+void WK_Soc::sig_chargingLog_To_DB(db_data _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
 }
 QT_WARNING_POP

@@ -95,13 +95,25 @@
                 {
                     "access": "public",
                     "index": 20,
-                    "name": "set_payment_To_statStore",
+                    "name": "charging_end_stat_clear_To_statStore",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
                     "index": 21,
+                    "name": "set_payment_To_statStore",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 22,
                     "name": "chard_ok_To_statStore",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 23,
+                    "name": "charging_finished_To_statStore",
                     "returnType": "void"
                 }
             ],

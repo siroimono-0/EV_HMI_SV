@@ -6,7 +6,7 @@
             "methods": [
                 {
                     "access": "public",
-                    "index": 2,
+                    "index": 1,
                     "name": "set_webSoc_Sv",
                     "returnType": "bool"
                 }
@@ -35,28 +35,6 @@
                     "index": 0,
                     "name": "sig_hmi_md_changed",
                     "returnType": "void"
-                }
-            ],
-            "slots": [
-                {
-                    "access": "public",
-                    "arguments": [
-                        {
-                            "name": "id",
-                            "type": "QString"
-                        },
-                        {
-                            "name": "name",
-                            "type": "QString"
-                        },
-                        {
-                            "name": "location",
-                            "type": "QString"
-                        }
-                    ],
-                    "index": 1,
-                    "name": "createStore_sql",
-                    "returnType": "bool"
                 }
             ],
             "superClasses": [

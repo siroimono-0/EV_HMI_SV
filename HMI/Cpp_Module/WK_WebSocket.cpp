@@ -212,6 +212,38 @@ void WK_WebSocket::slot_SocErr(QAbstractSocket::SocketError error)
 
 void WK_WebSocket::slot_send_db_update_textData(db_data st_db_data)
 {
+    QJsonObject jsObj;
+
+    jsObj.insert("type", "chargingLog");
+    jsObj.insert("role", "hmi");
+
+    QString qs_session_id = QString::number(st_db_data.session_id);
+    jsObj.insert("session_id", qs_session_id);
+    jsObj.insert("store_id", static_cast<int>(st_db_data.store_id));
+    jsObj.insert("hmi_id", st_db_data.hmi_id);
+    jsObj.insert("ocpp_tx_id", static_cast<int>(st_db_data.ocpp_tx_id));
+    jsObj.insert("card_uid", st_db_data.card_uid);
+
+    jsObj.insert("start_time", st_db_data.start_time);
+    jsObj.insert("end_time", st_db_data.end_time);
+    jsObj.insert("duration_time", st_db_data.duration_time);
+    jsObj.insert("average_kWh", static_cast<double>(st_db_data.average_kWh));
+
+    jsObj.insert("soc_start", static_cast<double>(st_db_data.soc_start));
+    jsObj.insert("soc_end", static_cast<double>(st_db_data.soc_end));
+
+    jsObj.insert("advance_payment", static_cast<int>(st_db_data.advance_payment));
+    jsObj.insert("cancel_payment", static_cast<int>(st_db_data.cancel_payment));
+    jsObj.insert("actual_payment", static_cast<int>(st_db_data.actual_payment));
+    jsObj.insert("unit_price", static_cast<int>(st_db_data.unit_price));
+    jsObj.insert("tariff_type", st_db_data.tariff_type);
+
+    jsObj.insert("session_status", st_db_data.session_status);
+    jsObj.insert("stop_reason", st_db_data.stop_reason);
+
+    QJsonDocument jsDoc(jsObj);
+    this->p_webSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+
     qDebug() << Q_FUNC_INFO;
     return;
 }
@@ -263,6 +295,29 @@ void WK_WebSocket::slot_Recv_TextData(QString recvData)
             else
             {
                 this->slot_ID_Resert(false);
+            }
+        }
+        else if (qs_type == "chargingLog_ack")
+        {
+            if (jsObj["session_status"] == "authorized")
+            {
+                uint64_t session_id = jsObj["session_id"].toString().toULongLong();
+                QMetaObject::invokeMethod(this->p_stat,
+                                          "slot_set_session_id",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(uint64_t, session_id));
+            }
+            else if (jsObj["session_status"] == "charging_start")
+            {
+                uint32_t ocpp_tx_id = jsObj["ocpp_tx_id"].toInt();
+                QMetaObject::invokeMethod(this->p_stat,
+                                          "slot_set_ocpp_tx_id",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(uint32_t, ocpp_tx_id));
+            }
+            else if (jsObj["session_status"] == "charging_finished")
+            {
+                qDebug() << "charging_finished ack ok";
             }
         }
     }

@@ -7,7 +7,7 @@
                 "methods": [
                     {
                         "access": "public",
-                        "index": 2,
+                        "index": 1,
                         "name": "set_webSoc_Sv",
                         "returnType": "bool"
                     }
@@ -38,28 +38,6 @@
                         "returnType": "void"
                     }
                 ],
-                "slots": [
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "id",
-                                "type": "QString"
-                            },
-                            {
-                                "name": "name",
-                                "type": "QString"
-                            },
-                            {
-                                "name": "location",
-                                "type": "QString"
-                            }
-                        ],
-                        "index": 1,
-                        "name": "createStore_sql",
-                        "returnType": "bool"
-                    }
-                ],
                 "superClasses": [
                     {
                         "access": "public",
@@ -75,7 +53,7 @@
         "classes": [
             {
                 "className": "DB_PostgreSQL",
-                "lineNumber": 11,
+                "lineNumber": 12,
                 "object": true,
                 "qualifiedClassName": "DB_PostgreSQL",
                 "signals": [
@@ -97,6 +75,18 @@
                         "access": "public",
                         "arguments": [
                             {
+                                "name": "soc",
+                                "type": "WK_Soc*"
+                            }
+                        ],
+                        "index": 2,
+                        "name": "slot_set_p_soc",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
                                 "name": "id",
                                 "type": "int"
                             },
@@ -109,21 +99,9 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 2,
+                        "index": 3,
                         "name": "slot_createStore",
                         "returnType": "bool"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "find_id",
-                                "type": "QString"
-                            }
-                        ],
-                        "index": 3,
-                        "name": "slot_query_find_id",
-                        "returnType": "store_info"
                     },
                     {
                         "access": "public",
@@ -176,6 +154,18 @@
                         "index": 6,
                         "name": "slot_query_find_hello_hmi",
                         "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_db_data",
+                                "type": "db_data"
+                            }
+                        ],
+                        "index": 7,
+                        "name": "slot_chargingLog_From_soc",
+                        "returnType": "void"
                     }
                 ],
                 "superClasses": [
@@ -332,6 +322,18 @@
                         "index": 0,
                         "name": "sig_update_md",
                         "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_db_data",
+                                "type": "db_data"
+                            }
+                        ],
+                        "index": 1,
+                        "name": "sig_chargingLog_To_DB",
+                        "returnType": "void"
                     }
                 ],
                 "slots": [
@@ -343,13 +345,13 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 1,
+                        "index": 2,
                         "name": "slot_Recv_TextData",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 2,
+                        "index": 3,
                         "name": "slot_Disconnect_Soc",
                         "returnType": "void"
                     },
@@ -361,7 +363,7 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 3,
+                        "index": 4,
                         "name": "slot_helloAck",
                         "returnType": "void"
                     },
@@ -373,7 +375,7 @@
                                 "type": "QJsonObject"
                             }
                         ],
-                        "index": 4,
+                        "index": 5,
                         "name": "slot_registerReq",
                         "returnType": "bool"
                     },
@@ -385,7 +387,7 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 5,
+                        "index": 6,
                         "name": "slot_registerAck",
                         "returnType": "void"
                     },
@@ -397,7 +399,7 @@
                                 "type": "QJsonObject"
                             }
                         ],
-                        "index": 6,
+                        "index": 7,
                         "name": "slot_registerReq_hmi",
                         "returnType": "bool"
                     },
@@ -409,8 +411,38 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 7,
+                        "index": 8,
                         "name": "slot_registerAck_hmi",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "session_id",
+                                "type": "uint64_t"
+                            }
+                        ],
+                        "index": 9,
+                        "name": "slot_chargingLog_authorized_ack_To_hmi",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "ocpp_tx_id",
+                                "type": "uint32_t"
+                            }
+                        ],
+                        "index": 10,
+                        "name": "slot_chargingLog_charging_start_ack_To_hmi",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 11,
+                        "name": "slot_chargingLog_charging_finished_ack_To_hmi",
                         "returnType": "void"
                     }
                 ],

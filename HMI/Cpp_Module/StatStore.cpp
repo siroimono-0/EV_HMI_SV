@@ -167,12 +167,18 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
     qDebug() << charging_amount << " :: 충전금액";
 
     float battery_current_persent = ((float) battery_current / (float) battery_full) * 100;
+
+    //================================================
     if (this->battery_start_persent.isEmpty())
     {
         QString qs_b_st_p = QString::number(battery_current_persent, 'f', 2) + "%";
         this->set_battery_start_persent(qs_b_st_p);
+
+        // statStore 업데이트 충전시작 -> soc -> sv  ...
+        this->charging_start_db_update((double) battery_current_persent);
     }
     qDebug() << this->battery_start_persent << " :: 처음 배터리";
+    //================================================
 
     QString qs_b_cur = QString::number(battery_current_persent, 'f', 2) + "%";
     this->set_battery_current(qs_b_cur);
@@ -190,6 +196,7 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
         if (remaining_time >= this->charging_val)
         {
             this->slot_clear_charging_type();
+            this->slot_charging_end_stat_clear();
             uint16_t reg_pos = 0x01;
             uint16_t reg_val = 0x01;
             // 시리얼 통신으로 종료 요청
@@ -206,6 +213,7 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
         if (charging_amount >= this->charging_val)
         {
             this->slot_clear_charging_type();
+            this->slot_charging_end_stat_clear();
             uint16_t reg_pos = 0x01;
             uint16_t reg_val = 0x01;
             // 시리얼 통신으로 종료 요청
@@ -222,6 +230,7 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
         if (charging_capacity >= this->charging_val)
         {
             this->slot_clear_charging_type();
+            this->slot_charging_end_stat_clear();
             uint16_t reg_pos = 0x01;
             uint16_t reg_val = 0x01;
             // 시리얼 통신으로 종료 요청
@@ -238,6 +247,7 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
         if (battery_current_persent >= this->charging_val)
         {
             this->slot_clear_charging_type();
+            this->slot_charging_end_stat_clear();
             uint16_t reg_pos = 0x01;
             uint16_t reg_val = 0x01;
             // 시리얼 통신으로 종료 요청
@@ -284,6 +294,36 @@ QString StatStore::cnv_time(uint32_t time)
     QString ret = qs_h + ":" + qs_m + ":" + qs_s;
 
     return ret;
+}
+
+float StatStore::reverse_cnv_time(QString s_time)
+{
+    std::string s = s_time.toStdString();
+    std::vector<std::string> vec;
+
+    size_t start = 0;
+    size_t eend = s.find(':');
+
+    while (1)
+    {
+        std::string tmp = s.substr(start, eend + start);
+        vec.push_back(tmp);
+        start = eend + 1;
+        eend = s.find(':', start);
+
+        if (eend == std::string::npos)
+        {
+            std::string tmp = s.substr(start);
+            vec.push_back(tmp);
+            break;
+        }
+    }
+
+    int hh = std::stoi(vec[0]);
+    int mm = std::stoi(vec[1]);
+    int ss = std::stoi(vec[2]);
+    int total_second = (hh * 3600) + (mm * 60) + ss;
+    return total_second;
 }
 
 QString StatStore::get_elapsed_time()
@@ -449,6 +489,7 @@ void StatStore::slot_card_ok_db_update()
     {
         this->st_db_data.tariff_type = "PERSENT";
     }
+    this->st_db_data.session_status = "authorized";
 
     qDebug() << this->st_db_data.store_id << " store_id";
     qDebug() << this->st_db_data.hmi_id << " hmi_id";
@@ -459,5 +500,76 @@ void StatStore::slot_card_ok_db_update()
 
     emit this->sig_stat_db_update(this->st_db_data);
 
+    return;
+}
+
+void StatStore::slot_charging_end_stat_clear()
+{
+    this->battery_start_persent.clear();
+    return;
+}
+
+void StatStore::charging_start_db_update(double start_persent)
+{
+    QString qs_time = QTime::currentTime().toString("hh:mm:ss");
+    this->st_db_data.start_time = qs_time;
+    this->st_db_data.soc_start = start_persent;
+    this->st_db_data.session_status = "charging_start";
+
+    qDebug() << this->st_db_data.start_time << " start_time";
+    qDebug() << this->st_db_data.soc_start << " soc_start";
+
+    emit this->sig_stat_db_update(this->st_db_data);
+    return;
+}
+
+void StatStore::slot_set_session_id(uint64_t set)
+{
+    this->st_db_data.session_id = set;
+
+    qDebug() << set << " :: session_id";
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void StatStore::slot_set_ocpp_tx_id(uint32_t set)
+{
+    this->st_db_data.ocpp_tx_id = set;
+
+    qDebug() << set << " :: ocpp_tx_id";
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void StatStore::charging_finished_db_update()
+{
+    QString qs_time = QTime::currentTime().toString("hh:mm:ss");
+    this->st_db_data.end_time = qs_time;
+    this->st_db_data.duration_time = this->elapsed_time;
+
+    float total_kwh = this->accumulate_kWh / 3600;
+    float total_time_h = this->reverse_cnv_time(this->elapsed_time) / 3600;
+    float ave_kwh = total_kwh / total_time_h;
+    this->st_db_data.average_kWh = ave_kwh;
+
+    QString number_current;
+    for (auto &v : this->battery_current)
+    {
+        if (v >= '0' && v <= '9' || v == '.')
+        {
+            number_current += v;
+        }
+    }
+
+    this->st_db_data.soc_end = number_current.toDouble();
+    this->st_db_data.cancel_payment = (uint32_t) this->i_can_pay;
+    this->st_db_data.actual_payment = (uint32_t) this->i_act_pay;
+    this->st_db_data.session_status = "charging_finished";
+
+    qDebug() << this->st_db_data.cancel_payment << " can";
+    qDebug() << this->st_db_data.actual_payment << " act";
+    qDebug() << this->st_db_data.average_kWh << " ave";
+
+    emit this->sig_stat_db_update(this->st_db_data);
     return;
 }

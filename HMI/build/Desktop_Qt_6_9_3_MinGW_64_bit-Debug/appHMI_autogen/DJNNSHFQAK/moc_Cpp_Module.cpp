@@ -65,8 +65,10 @@ template <> constexpr inline auto Cpp_Module::qt_create_metaobjectdata<qt_meta_t
         "type",
         "val",
         "charging_type_clear_To_statStore",
+        "charging_end_stat_clear_To_statStore",
         "set_payment_To_statStore",
         "chard_ok_To_statStore",
+        "charging_finished_To_statStore",
         "statStore",
         "StatStore*"
     };
@@ -124,14 +126,18 @@ template <> constexpr inline auto Cpp_Module::qt_create_metaobjectdata<qt_meta_t
         }}),
         // Method 'charging_type_clear_To_statStore'
         QtMocHelpers::MethodData<void()>(26, 2, QMC::AccessPublic, QMetaType::Void),
-        // Method 'set_payment_To_statStore'
+        // Method 'charging_end_stat_clear_To_statStore'
         QtMocHelpers::MethodData<void()>(27, 2, QMC::AccessPublic, QMetaType::Void),
-        // Method 'chard_ok_To_statStore'
+        // Method 'set_payment_To_statStore'
         QtMocHelpers::MethodData<void()>(28, 2, QMC::AccessPublic, QMetaType::Void),
+        // Method 'chard_ok_To_statStore'
+        QtMocHelpers::MethodData<void()>(29, 2, QMC::AccessPublic, QMetaType::Void),
+        // Method 'charging_finished_To_statStore'
+        QtMocHelpers::MethodData<void()>(30, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
         // property 'statStore'
-        QtMocHelpers::PropertyData<StatStore*>(29, 0x80000000 | 30, QMC::DefaultPropertyFlags | QMC::EnumOrFlag | QMC::Constant),
+        QtMocHelpers::PropertyData<StatStore*>(31, 0x80000000 | 32, QMC::DefaultPropertyFlags | QMC::EnumOrFlag | QMC::Constant),
     };
     QtMocHelpers::UintData qt_enums {
     };
@@ -173,8 +179,10 @@ void Cpp_Module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 17: _t->charging_start_To_statStore(); break;
         case 18: _t->charging_type_To_statStore((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<qint32>>(_a[2]))); break;
         case 19: _t->charging_type_clear_To_statStore(); break;
-        case 20: _t->set_payment_To_statStore(); break;
-        case 21: _t->chard_ok_To_statStore(); break;
+        case 20: _t->charging_end_stat_clear_To_statStore(); break;
+        case 21: _t->set_payment_To_statStore(); break;
+        case 22: _t->chard_ok_To_statStore(); break;
+        case 23: _t->charging_finished_To_statStore(); break;
         default: ;
         }
     }
@@ -233,14 +241,14 @@ int Cpp_Module::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 22)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 22;
+        _id -= 24;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 22)
+        if (_id < 24)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 22;
+        _id -= 24;
     }
     if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty

@@ -23,6 +23,10 @@ public:
     void set_p_Hub(Hub *set_Hub);
     void set_p_db(DB_PostgreSQL *set_db);
 
+    // hmi에서 log업데이트 요청 받으면
+    // recv_textData 에서 발생
+    void req_chargingLog_To_DB(const QJsonObject &jsObj);
+
 public slots:
     void slot_Recv_TextData(QString recvData);
     void slot_Disconnect_Soc();
@@ -35,8 +39,21 @@ public slots:
     bool slot_registerReq_hmi(const QJsonObject &jsObj);
     void slot_registerAck_hmi(bool ret);
 
+    void slot_chargingLog_authorized_ack_To_hmi(uint64_t session_id);
+    void slot_chargingLog_charging_start_ack_To_hmi(uint32_t ocpp_tx_id);
+    void slot_chargingLog_charging_finished_ack_To_hmi();
+    // void slot_chargingLog_charging_fist_ack_To_hmi(bool ret);
+    // void slot_chargingLog_charging_second_ack_To_hmi(bool ret);
+    // void slot_chargingLog_finished_ack_To_hmi(bool ret);
+    // void slot_chargingLog_failed_ack_To_hmi(bool ret);
+    // void slot_chargingLog_timeout_ack_To_hmi(bool ret);
+
 signals:
     void sig_update_md(stat_data st_stat);
+
+    // set_p_db에서 커넥트
+    //  >>  slot_chargingLog_From_soc
+    void sig_chargingLog_To_DB(db_data st_db_data);
 
 private:
     QWebSocket *p_WebSoc;
@@ -52,5 +69,7 @@ private:
     int id_Mp = 0;
     bool stat_Disconnect = false;
 };
+
+Q_DECLARE_METATYPE(WK_Soc *)
 
 #endif // WK_SOC_H

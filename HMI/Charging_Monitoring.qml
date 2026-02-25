@@ -31,6 +31,16 @@ Item {
 
     function stk_next()
     {
+        // 충전금액 정산
+        cpp_module.set_payment_To_statStore();
+
+        // 서버에 statStore 값들 전송해야댐
+
+        // charging_finished으로 세션 상태 업데이트
+        // module -> statStore -> soc -> sv
+        // -> http sv 승인취소 요청 -> 응답 확인 -> soc -> db
+        // ack로 완료처리 응답 받고서 다음 페이지 진행
+        cpp_module.charging_finished_To_statStore();
         StackView.view.push("Charging_Complet.qml");
     }
 
@@ -47,6 +57,7 @@ Item {
         // 234코일 중지 확인 모드버스 받았으면
         function onSig_coil234_off_check_ToQml()
         {
+            cpp_module.charging_end_stat_clear_To_statStore();
             root.stk_next();
         }
     }

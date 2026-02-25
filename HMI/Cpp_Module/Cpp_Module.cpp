@@ -218,30 +218,55 @@ Q_INVOKABLE void Cpp_Module::charging_type_To_statStore(QString type, qint32 val
 
 Q_INVOKABLE void Cpp_Module::charging_type_clear_To_statStore()
 {
+    this->p_stat->slot_clear_charging_type();
+    /*
     QMetaObject::invokeMethod(this->p_stat,
                               &StatStore::slot_clear_charging_type,
                               Qt::QueuedConnection);
+*/
     return;
 }
 
 Q_INVOKABLE void Cpp_Module::set_payment_To_statStore()
 {
-    QMetaObject::invokeMethod(this->p_stat, &StatStore::slot_set_payment, Qt::QueuedConnection);
+    this->p_stat->slot_set_payment();
+    /*
+    QMetaObject::invokeMethod(this->p_stat, &StatStore::slot_set_payment, Qt::QueuedConnection);*/
     return;
 }
 
 Q_INVOKABLE void Cpp_Module::charging_start_To_statStore()
 {
+    this->p_stat->slot_set_charging_start_time();
+    /*j
     QMetaObject::invokeMethod(this->p_stat,
                               &StatStore::slot_set_charging_start_time,
-                              Qt::QueuedConnection);
+                              Qt::QueuedConnection);*/
     return;
 }
 
 Q_INVOKABLE void Cpp_Module::chard_ok_To_statStore()
 {
+    this->p_stat->slot_card_ok_db_update();
+    /*
     QMetaObject::invokeMethod(this->p_stat,
                               &StatStore::slot_card_ok_db_update,
-                              Qt::QueuedConnection);
+                              Qt::QueuedConnection);*/
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::charging_end_stat_clear_To_statStore()
+{
+    this->p_stat->slot_charging_end_stat_clear();
+    /*
+    QMetaObject::invokeMethod(this->p_stat,
+                              &StatStore::slot_charging_end_stat_clear,
+                              Qt::QueuedConnection);*/
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::charging_finished_To_statStore()
+{
+    this->p_stat->charging_finished_db_update();
     return;
 }

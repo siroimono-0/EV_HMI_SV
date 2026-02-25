@@ -317,7 +317,37 @@
                 {
                     "access": "public",
                     "index": 20,
+                    "name": "slot_charging_end_stat_clear",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 21,
                     "name": "slot_card_ok_db_update",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "set",
+                            "type": "uint64_t"
+                        }
+                    ],
+                    "index": 22,
+                    "name": "slot_set_session_id",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "set",
+                            "type": "uint32_t"
+                        }
+                    ],
+                    "index": 23,
+                    "name": "slot_set_ocpp_tx_id",
                     "returnType": "void"
                 }
             ],

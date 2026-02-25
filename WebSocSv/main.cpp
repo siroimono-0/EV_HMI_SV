@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 #include "./Cpp_Module/Cpp_Module.h"
+#include "./Cpp_Module/WK_Soc.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
 
     qRegisterMetaType<stat_data>("stat_data");
     qRegisterMetaType<store_info>("store_info");
+    qRegisterMetaType<WK_Soc *>("WK_Socc*");
     engine.rootContext()->setContextProperty("cppSv", &cpp_Module);
 
     QObject::connect(

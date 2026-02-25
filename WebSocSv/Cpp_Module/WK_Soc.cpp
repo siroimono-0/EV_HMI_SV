@@ -57,6 +57,17 @@ void WK_Soc::set_p_Hub(Hub *set_Hub)
 void WK_Soc::set_p_db(DB_PostgreSQL *set_db)
 {
     this->p_obj_db = set_db;
+    // db에 wk 주소 전달
+
+    QMetaObject::invokeMethod(this->p_obj_db,
+                              "slot_set_p_soc",
+                              Qt::QueuedConnection,
+                              Q_ARG(WK_Soc *, this));
+
+    connect(this,
+            &WK_Soc::sig_chargingLog_To_DB,
+            this->p_obj_db,
+            &DB_PostgreSQL::slot_chargingLog_From_soc);
     return;
 }
 
@@ -111,14 +122,17 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
 
     if (jsObj.contains("type"))
     {
+        // 소켓 연결대상 확인용 타입
         if (qs_type == "hello")
         {
+            // 연결대상 확정
             if (jsObj["role"].toString() == "admin")
             {
                 this->connectRole = "admin";
                 this->roleId = jsObj["adminId"].toString();
                 this->slot_helloAck(true);
             }
+            // 연결대상 확정
             else if (jsObj["role"].toString() == "hmi")
             {
                 this->connectRole = "hmi";
@@ -128,7 +142,6 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
                 bool ret_hello = false;
 
                 QString storeId = jsObj["store_id"].toString();
-
                 QString hmiId = jsObj["hmi_id"].toString();
 
                 qDebug() << hmiId << " :: hmiId";
@@ -152,7 +165,7 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
                 }
             }
         }
-        else if (qs_type == "register")
+        else if (qs_type == "register") // admin
         {
             // register은 admin의 타입
             // admin이 아닌 소켓 연결에서 요청시 무시
@@ -162,11 +175,13 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
             }
             else if (this->connectRole == "admin")
             {
+                // db 등록요청
                 bool ret_query = this->slot_registerReq(jsObj);
+                // 등록 여부 반환
                 this->slot_registerAck(ret_query);
             }
         }
-        else if (qs_type == "register_hmi")
+        else if (qs_type == "register_hmi") // admin
         {
             // register은 admin의 타입
             // admin이 아닌 소켓 연결에서 요청시 무시
@@ -176,12 +191,31 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
             }
             else if (this->connectRole == "admin")
             {
+                // db 등록요청
                 bool ret_query = this->slot_registerReq_hmi(jsObj);
+                // 등록 여부 반환
                 this->slot_registerAck_hmi(ret_query);
             }
         }
+        else if (qs_type == "chargingLog") // hmi
+        {
+            if (this->connectRole != "hmi")
+            {
+                return;
+            }
+
+            // jsobj 파싱 -> st로 만듬
+            // db클래스에 st 전달 // connect 로 sig
+            // db클래스에서 st파싱 -> query 등록 요청
+            // 등록 여부 sv로 응답
+            // sv -> hmi ack 발생
+            this->req_chargingLog_To_DB(jsObj);
+        }
     }
 
+    // ???
+    /*
+     수정 필요
     if (jsObj.contains("id_Check"))
     {
         QString find_id = jsObj["id"].toString();
@@ -236,6 +270,7 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
         this->id_Common = st_stat.id;
         emit sig_update_md(st_stat);
     }
+*/
 
     qDebug() << Q_FUNC_INFO;
     return;
@@ -357,6 +392,86 @@ void WK_Soc::slot_registerAck_hmi(bool ret)
 
         this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
     }
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::req_chargingLog_To_DB(const QJsonObject &jsObj)
+{
+    struct db_data st_db_data = {0};
+
+    // session_id는 보내는 쪽에서 문자열로 보냄
+    st_db_data.session_id = jsObj["session_id"].toString().toULongLong();
+
+    // uint32_t들은 unsigned로 받는 게 안전
+    st_db_data.store_id = jsObj["store_id"].toVariant().toUInt();
+    st_db_data.hmi_id = jsObj["hmi_id"].toString();
+    st_db_data.ocpp_tx_id = jsObj["ocpp_tx_id"].toVariant().toUInt();
+    st_db_data.card_uid = jsObj["card_uid"].toString();
+
+    st_db_data.start_time = jsObj["start_time"].toString();
+    st_db_data.end_time = jsObj["end_time"].toString();
+    st_db_data.duration_time = jsObj["duration_time"].toString();
+    st_db_data.average_kWh = jsObj["average_kWh"].toDouble();
+
+    st_db_data.soc_start = jsObj["soc_start"].toVariant().toDouble();
+    st_db_data.soc_end = jsObj["soc_end"].toVariant().toDouble();
+
+    st_db_data.advance_payment = jsObj["advance_payment"].toVariant().toUInt();
+    st_db_data.cancel_payment = jsObj["cancel_payment"].toVariant().toUInt();
+    st_db_data.actual_payment = jsObj["actual_payment"].toVariant().toUInt();
+    st_db_data.unit_price = jsObj["unit_price"].toVariant().toUInt();
+    st_db_data.tariff_type = jsObj["tariff_type"].toString();
+
+    st_db_data.session_status = jsObj["session_status"].toString();
+    st_db_data.stop_reason = jsObj["stop_reason"].toString();
+
+    emit this->sig_chargingLog_To_DB(st_db_data);
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_chargingLog_authorized_ack_To_hmi(uint64_t session_id)
+{
+    QString qs_session_id = QString::number(session_id);
+    qDebug() << session_id << "session val";
+    QJsonObject jsObj;
+    jsObj.insert("type", "chargingLog_ack");
+    jsObj.insert("session_status", "authorized");
+    jsObj.insert("session_id", qs_session_id);
+
+    qDebug() << jsObj["session_id"].toString() << "session jsobj";
+    QJsonDocument jsDoc(jsObj);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_chargingLog_charging_start_ack_To_hmi(uint32_t ocpp_tx_id)
+{
+    qDebug() << ocpp_tx_id << "ocpp val";
+    QJsonObject jsObj;
+    jsObj.insert("type", "chargingLog_ack");
+    jsObj.insert("session_status", "charging_start");
+    jsObj.insert("ocpp_tx_id", static_cast<qint32>(ocpp_tx_id));
+
+    QJsonDocument jsDoc(jsObj);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_chargingLog_charging_finished_ack_To_hmi()
+{
+    QJsonObject jsObj;
+    jsObj.insert("type", "chargingLog_ack");
+    jsObj.insert("session_status", "charging_finished");
+
+    QJsonDocument jsDoc(jsObj);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+
     qDebug() << Q_FUNC_INFO;
     return;
 }

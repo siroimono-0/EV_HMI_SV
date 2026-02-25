@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 344,
+                        "durationMicroseconds": 301,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_prev",
                         "line": 22
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 612,
+                        "durationMicroseconds": 539,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_home",
                         "line": 27
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 249,
+                        "durationMicroseconds": 208,
                         "errorMessage": "",
                         "functionName": "onSig_stk_prev",
                         "line": 39
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 45,
+                        "durationMicroseconds": 38,
                         "errorMessage": "",
                         "functionName": "onSig_stk_prev",
                         "line": 39
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 85,
+                        "durationMicroseconds": 80,
                         "errorMessage": "",
                         "functionName": "onSig_stk_home",
                         "line": 42
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 30,
+                        "durationMicroseconds": 27,
                         "errorMessage": "",
                         "functionName": "onSig_stk_home",
                         "line": 42
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 85,
+                        "durationMicroseconds": 86,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 37
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 24,
-                        "durationMicroseconds": 152,
+                        "durationMicroseconds": 139,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "onSig_Clicked",
                         "line": 101
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 34,
+                        "durationMicroseconds": 33,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 101
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 126,
+                        "durationMicroseconds": 113,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 92
@@ -150,7 +150,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 104,
+                        "durationMicroseconds": 82,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 94
@@ -158,7 +158,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 131,
+                        "durationMicroseconds": 91,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 96
@@ -166,7 +166,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 92,
+                        "durationMicroseconds": 72,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 98
@@ -174,7 +174,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 110,
+                        "durationMicroseconds": 86,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 109
@@ -182,7 +182,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 26,
-                        "durationMicroseconds": 170,
+                        "durationMicroseconds": 90,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 110
@@ -190,7 +190,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 29,
-                        "durationMicroseconds": 378,
+                        "durationMicroseconds": 86,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 112
@@ -198,7 +198,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 196,
+                        "durationMicroseconds": 89,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 114
@@ -206,7 +206,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 335,
+                        "durationMicroseconds": 77,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 116
@@ -270,7 +270,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 24,
-                        "durationMicroseconds": 182,
+                        "durationMicroseconds": 113,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "onSig_Clicked",
                         "line": 182
@@ -278,7 +278,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 51,
+                        "durationMicroseconds": 32,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 182
@@ -286,7 +286,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 151,
+                        "durationMicroseconds": 100,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 173
@@ -294,7 +294,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 102,
+                        "durationMicroseconds": 79,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 175
@@ -302,7 +302,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 139,
+                        "durationMicroseconds": 71,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 177
@@ -310,7 +310,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 112,
+                        "durationMicroseconds": 100,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 179
@@ -318,7 +318,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 104,
+                        "durationMicroseconds": 68,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 190
@@ -326,7 +326,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 26,
-                        "durationMicroseconds": 129,
+                        "durationMicroseconds": 88,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 192
@@ -334,7 +334,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 29,
-                        "durationMicroseconds": 105,
+                        "durationMicroseconds": 79,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 194
@@ -342,7 +342,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 142,
+                        "durationMicroseconds": 81,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 196
@@ -350,7 +350,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 109,
+                        "durationMicroseconds": 99,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 198

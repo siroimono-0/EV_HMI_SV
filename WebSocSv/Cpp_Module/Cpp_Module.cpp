@@ -75,6 +75,7 @@ StatModel *Cpp_Module::get_hmi_md()
     return this->hmi_md;
 }
 
+/* 수정
 Q_INVOKABLE bool Cpp_Module::createStore_sql(QString id, const QString name, const QString location)
 {
     int cnv_id = id.toInt();
@@ -88,4 +89,4 @@ Q_INVOKABLE bool Cpp_Module::createStore_sql(QString id, const QString name, con
                               Q_RETURN_ARG(bool, ret_slot_createStore));
 
     return ret_slot_createStore;
-}
+} */
