@@ -6,6 +6,10 @@ import HMI 1.0
 Item {
     id: root
 
+    StackView.onActivated: {
+        cpp_module.set_screen_name("카드 준비");
+    }
+
     function stk_next()
     {
         StackView.view.push("Card_Socket.qml");
@@ -75,8 +79,6 @@ Item {
 
         onSig_Clicked: function()
         {
-            // cppSv 카드리더기 상태 온
-            cpp_module.set_card_stat_To_serial(true);
             root.stk_next();
         }
 

@@ -5,8 +5,7 @@
 
 WK_Soc::WK_Soc(QObject *parent)
     : QObject{parent}
-{
-}
+{}
 
 void WK_Soc::set_p_webSoc(QWebSocket *set_webSoc, int id_mp)
 {
@@ -68,6 +67,12 @@ void WK_Soc::set_p_db(DB_PostgreSQL *set_db)
             &WK_Soc::sig_chargingLog_To_DB,
             this->p_obj_db,
             &DB_PostgreSQL::slot_chargingLog_From_soc);
+
+    connect(this,
+            &WK_Soc::sig_heartbitData_To_DB,
+            this->p_obj_db,
+            &DB_PostgreSQL::slot_heartbitData_From_soc);
+
     return;
 }
 
@@ -210,6 +215,33 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
             // 등록 여부 sv로 응답
             // sv -> hmi ack 발생
             this->req_chargingLog_To_DB(jsObj);
+        }
+        else if (qs_type == "heartbit_pong") // hmi
+        {
+            if (this->connectRole != "hmi")
+            {
+                return;
+            }
+
+            this->req_heartbitData_To_DB(jsObj);
+        }
+        else if (qs_type == "membershipCard_authorized") // hmi
+        {
+            if (this->connectRole != "hmi")
+            {
+                return;
+            }
+
+            this->req_membershipCard_authorized_To_DB(jsObj);
+        }
+        else if (qs_type == "membershipCard_finished")
+        {
+            if (this->connectRole != "hmi")
+            {
+                return;
+            }
+
+            this->req_membershipCard_finished_To_DB(jsObj);
         }
     }
 
@@ -473,5 +505,102 @@ void WK_Soc::slot_chargingLog_charging_finished_ack_To_hmi()
     this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
 
     qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::occur_heartbit()
+{
+    QJsonObject jsObj;
+    jsObj.insert("type", "heartbit_ping");
+
+    QJsonDocument jsDoc(jsObj);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::req_heartbitData_To_DB(const QJsonObject &jsObj)
+{
+    struct heartbit_data st_hb_data;
+    st_hb_data.hmi_id = jsObj["hmi_id"].toString();
+    st_hb_data.store_id = jsObj["store_id"].toInt();
+    st_hb_data.ws_connected = this->p_WebSoc->isValid();
+    st_hb_data.last_heartbeat_at = QDateTime::currentDateTimeUtc();
+    st_hb_data.screen_name = jsObj["screen_name"].toString();
+
+    qDebug() << "json " << jsObj["screen_name"].toString();
+    emit this->sig_heartbitData_To_DB(st_hb_data);
+    return;
+}
+
+void WK_Soc::req_membershipCard_authorized_To_DB(const QJsonObject &jsObj)
+{
+    int adv_pay = jsObj["adv_pay"].toInt();
+    QString card_uid = jsObj["card_uid"].toString();
+    QString request_id = jsObj["request_id"].toString();
+
+    QMetaObject::invokeMethod(this->p_obj_db,
+                              "slot_membershipCard_authorized_From_soc",
+                              Qt::QueuedConnection,
+                              Q_ARG(int, adv_pay),
+                              Q_ARG(QString, card_uid),
+                              Q_ARG(QString, request_id));
+    return;
+}
+
+void WK_Soc::slot_membershipCard_authorized_ack_To_hmi(bool ok, QString msg)
+{
+    QJsonObject jsObj;
+    if (ok == true)
+    {
+        jsObj.insert("type", "membershipCard_authorized_ack");
+        jsObj.insert("ok", ok);
+        jsObj.insert("transaction_id", msg);
+    }
+    else
+    {
+        jsObj.insert("type", "membershipCard_authorized_ack");
+        jsObj.insert("ok", ok);
+        jsObj.insert("failed_msg", msg);
+    }
+
+    QJsonDocument jsDoc(jsObj);
+    // ack 미전송 테스트 완료
+    // this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    return;
+}
+
+void WK_Soc::req_membershipCard_finished_To_DB(const QJsonObject &jsObj)
+{
+    int adv_pay = jsObj["adv_pay"].toInt();
+    int act_pay = jsObj["act_pay"].toInt();
+    int can_pay = jsObj["can_pay"].toInt();
+    QString card_uid = jsObj["card_uid"].toString();
+    uint32_t t_id = jsObj["transaction_id"].toInt();
+    QString request_id = jsObj["request_id"].toString();
+
+    QMetaObject::invokeMethod(this->p_obj_db,
+                              "slot_membershipCard_finished_From_soc",
+                              Qt::QueuedConnection,
+                              Q_ARG(int, adv_pay),
+                              Q_ARG(int, act_pay),
+                              Q_ARG(int, can_pay),
+                              Q_ARG(QString, card_uid),
+                              Q_ARG(uint32_t, t_id),
+                              Q_ARG(QString, request_id));
+    return;
+}
+
+void WK_Soc::slot_membershipCard_finished_ack_To_hmi(bool ok)
+{
+    // finished는 이미 홀드 잡은거 처리하는거라서
+    // 전송에러 말고 다른거 없음
+    QJsonObject jsObj;
+    jsObj.insert("type", "membershipCard_finished_ack");
+    jsObj.insert("ok", ok);
+
+    QJsonDocument jsDoc(jsObj);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
     return;
 }

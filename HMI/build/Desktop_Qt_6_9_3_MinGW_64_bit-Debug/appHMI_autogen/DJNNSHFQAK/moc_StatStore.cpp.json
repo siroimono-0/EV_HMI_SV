@@ -2,7 +2,7 @@
     "classes": [
         {
             "className": "StatStore",
-            "lineNumber": 13,
+            "lineNumber": 15,
             "object": true,
             "properties": [
                 {
@@ -229,20 +229,38 @@
                     "index": 10,
                     "name": "sig_cancle_payment_change",
                     "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_hb_data",
+                            "type": "heartbit_data"
+                        }
+                    ],
+                    "index": 11,
+                    "name": "sig_heartbit_pong",
+                    "returnType": "void"
                 }
             ],
             "slots": [
                 {
                     "access": "public",
-                    "index": 11,
+                    "index": 12,
                     "name": "slot_get_store_id",
                     "returnType": "int"
                 },
                 {
                     "access": "public",
-                    "index": 12,
+                    "index": 13,
                     "name": "slot_get_mac_addr",
                     "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "index": 14,
+                    "name": "slot_get_advPay_hmiId",
+                    "returnType": "std::pair<int,QString>"
                 },
                 {
                     "access": "public",
@@ -252,9 +270,15 @@
                             "type": "WK_Serial*"
                         }
                     ],
-                    "index": 13,
+                    "index": 15,
                     "name": "slot_set_p_serial",
                     "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 16,
+                    "name": "slot_get_i_adv_pay",
+                    "returnType": "int"
                 },
                 {
                     "access": "public",
@@ -264,7 +288,7 @@
                             "type": "charging_stat"
                         }
                     ],
-                    "index": 14,
+                    "index": 17,
                     "name": "slot_update_chargingStat",
                     "returnType": "void"
                 },
@@ -280,19 +304,19 @@
                             "type": "int"
                         }
                     ],
-                    "index": 15,
+                    "index": 18,
                     "name": "slot_set_charging_type",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 16,
+                    "index": 19,
                     "name": "slot_clear_charging_type",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 17,
+                    "index": 20,
                     "name": "slot_set_payment",
                     "returnType": "void"
                 },
@@ -304,25 +328,25 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 18,
+                    "index": 21,
                     "name": "slot_set_card_uid",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 19,
+                    "index": 22,
                     "name": "slot_set_charging_start_time",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 20,
+                    "index": 23,
                     "name": "slot_charging_end_stat_clear",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 21,
+                    "index": 24,
                     "name": "slot_card_ok_db_update",
                     "returnType": "void"
                 },
@@ -334,7 +358,7 @@
                             "type": "uint64_t"
                         }
                     ],
-                    "index": 22,
+                    "index": 25,
                     "name": "slot_set_session_id",
                     "returnType": "void"
                 },
@@ -346,8 +370,26 @@
                             "type": "uint32_t"
                         }
                     ],
-                    "index": 23,
+                    "index": 26,
                     "name": "slot_set_ocpp_tx_id",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 27,
+                    "name": "slot_heartbit_ping",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "set",
+                            "type": "uint32_t"
+                        }
+                    ],
+                    "index": 28,
+                    "name": "slot_set_membership_t_id",
                     "returnType": "void"
                 }
             ],

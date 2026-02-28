@@ -59,6 +59,10 @@ QHttpServerResponse HttpSv::slot_compare(const QHttpServerRequest &req)
                 }
             }
         }
+        else if (type == "cancle")
+        {
+            return this->slot_cancle_ack(SUCCESS, jsObj);
+        }
     }
 }
 
@@ -91,4 +95,44 @@ QHttpServerResponse HttpSv::slot_pay_ack(int compare_role, const QJsonObject &js
     // 생성자에서 자동으로 Content-Type 으로 헤더 생성
     QHttpServerResponse rep("application/json", send_qs.toUtf8());
     return rep;
+
+    /* ack 미전송 테스트
+    QHttpServerResponse test("application/json", "test");
+    return test;
+    */
+}
+
+QHttpServerResponse HttpSv::slot_cancle_ack(int compare_role, const QJsonObject &jsObj)
+{
+    QJsonObject send_jsObj;
+
+    send_jsObj.insert("type", "cancle_ack");
+    send_jsObj.insert("role", jsObj["role"].toString());
+    send_jsObj.insert("uid", jsObj["uid"].toString());
+
+    if (compare_role == SUCCESS)
+    {
+        send_jsObj.insert("ok", true);
+    }
+    else if (compare_role == NOT_FIND)
+    {
+        send_jsObj.insert("ok", false);
+        send_jsObj.insert("err", "미등록 카드");
+    }
+    else if (compare_role == NOT_MONEY)
+    {
+        send_jsObj.insert("ok", false);
+        send_jsObj.insert("err", "금액 부족");
+    }
+
+    QJsonDocument jsDoc(send_jsObj);
+    QString send_qs = jsDoc.toJson(QJsonDocument::Compact);
+
+    /*ack 미전송 테스트
+    // 생성자에서 자동으로 Content-Type 으로 헤더 생성
+    QHttpServerResponse rep("application/json", send_qs.toUtf8());
+    return rep;*/
+
+    QHttpServerResponse test("application/json", "tesy");
+    return test;
 }

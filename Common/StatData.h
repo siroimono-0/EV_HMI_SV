@@ -1,5 +1,6 @@
 #ifndef STATDATA_H
 #define STATDATA_H
+#include <QDateTime>
 #include <QMetaType>
 #include <QObject>
 
@@ -55,6 +56,32 @@ struct store_info
 
 Q_DECLARE_METATYPE(store_info)
 
+struct membership_log
+{
+    QString card_uid;
+    uint32_t transaction_id; // db생성
+    QString event_type;
+    uint32_t amount;
+    uint32_t balance_available_before;
+    uint32_t balance_available_after;
+    uint32_t hold_amount_before;
+    uint32_t hold_amount_after;
+    QString transaction_state_before;
+    QString transaction_state_after;
+    QString request_id;
+};
+
+struct heartbit_data
+{
+    QString hmi_id;              // hmi 생성
+    uint32_t store_id;           // hmi 생성
+    bool ws_connected;           // sv가 수신 후 생성
+    QDateTime last_heartbeat_at; // sv가 수신한 후 생성
+    QString screen_name;         // hmi 갱신
+    // updated_at // db 자동생성
+};
+Q_DECLARE_METATYPE(heartbit_data)
+
 struct db_data
 {
     // 카드 인증시 insert
@@ -82,6 +109,7 @@ struct db_data
     double soc_end;   // 충전 완료시 생성
 
     // 금액(정산용)
+    QString card_type;
     uint32_t advance_payment; // (선결제 “가정” 금액) // 카드 인증시 생성
     uint32_t cancel_payment;  // (부분취소된 금액) // 충전 완료시 생성
     uint32_t actual_payment;  //(실제청구 = advance - cancel)  // 충전 완료시 생성

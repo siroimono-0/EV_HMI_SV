@@ -55,6 +55,7 @@ C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-
   C:/Program\ Files/Microsoft\ Visual\ Studio/2022/Community/VC/Tools/MSVC/14.43.34808/include/version \
   C:/Program\ Files/Microsoft\ Visual\ Studio/2022/Community/VC/Tools/MSVC/14.43.34808/include/yvals.h \
   C:/Program\ Files/Microsoft\ Visual\ Studio/2022/Community/VC/Tools/MSVC/14.43.34808/include/yvals_core.h \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/QDateTime \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QFlags \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QJsonObject \
@@ -63,6 +64,7 @@ C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QObject \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QSharedDataPointer \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QString \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/QTimer \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QUrl \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QVariant \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/q17memory.h \
@@ -73,6 +75,7 @@ C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/q20utility.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/q23utility.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/q26numeric.h \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/qabstracteventdispatcher.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qalgorithms.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qanystringview.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qarraydata.h \
@@ -82,6 +85,7 @@ C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qatomic.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qatomic_cxx11.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qbasicatomic.h \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/qbasictimer.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qbindingstorage.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qbytearray.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qbytearrayalgorithms.h \
@@ -105,8 +109,11 @@ C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qdatastream.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qdatetime.h \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/qdeadlinetimer.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qdebug.h \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/qelapsedtimer.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qendian.h \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/qeventloop.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qexceptionhandling.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qflags.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qfloat16.h \
@@ -182,6 +189,7 @@ C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qtenvironmentvariables.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qtextstream.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qtformat_impl.h \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/qtimer.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qtmetamacros.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qtnoop.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/qtpreprocessorsupport.h \

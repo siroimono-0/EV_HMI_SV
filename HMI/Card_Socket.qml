@@ -6,6 +6,10 @@ import HMI 1.0
 Item {
     id: root
 
+    StackView.onActivated: {
+        cpp_module.set_screen_name("카드 삽입 및 인증");
+    }
+
     function stk_back()
     {
         cpp_module.set_card_stat_To_serial(false);
@@ -14,7 +18,7 @@ Item {
         StackView.view.pop();
     }
 
-    function stk_next_success()
+    function card_authorized_success()
     {
         // 카드 인증 시리얼 통신 막음
         cpp_module.set_card_stat_To_serial(false);
@@ -22,6 +26,10 @@ Item {
         // db 업데이트 요청 // 카드 인증 완료됨
         // statStore -> webSoc -> Sv -> db update
         cpp_module.chard_ok_To_statStore();
+    }
+
+    function stk_next()
+    {
         StackView.view.push("Charging_Ready.qml");
     }
 
@@ -36,7 +44,12 @@ Item {
 
         function onSig_card_success_ToQml()
         {
-            root.stk_next_success();
+            root.card_authorized_success();
+        }
+
+        function onSig_card_authorized_db_update_ack_ToQml()
+        {
+            root.stk_next();
         }
 
         function onSig_card_failed_ToQml(msg)
@@ -47,6 +60,7 @@ Item {
         function onSig_card_compare_ToQml()
         {
             root_indicator.running = true;
+            root_indicator.visible = true;
             btn.visible = false;
         }
     }

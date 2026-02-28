@@ -46,12 +46,12 @@
                     "access": "public",
                     "arguments": [
                         {
-                            "name": "onoff",
-                            "type": "bool"
+                            "name": "set",
+                            "type": "QString"
                         }
                     ],
                     "index": 4,
-                    "name": "slot_rs485_coil1_on_off",
+                    "name": "slot_set_card_type",
                     "returnType": "void"
                 },
                 {
@@ -63,18 +63,30 @@
                         }
                     ],
                     "index": 5,
+                    "name": "slot_rs485_coil1_on_off",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "onoff",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 6,
                     "name": "slot_rs485_coil234_on_off",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 6,
+                    "index": 7,
                     "name": "slot_rs485_read",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 7,
+                    "index": 8,
                     "name": "slot_rs485_modbus_end",
                     "returnType": "void"
                 },
@@ -90,25 +102,25 @@
                             "type": "uint16_t"
                         }
                     ],
-                    "index": 8,
+                    "index": 9,
                     "name": "slot_rs232_cmd",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 9,
+                    "index": 10,
                     "name": "slot_rs232_read",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 10,
+                    "index": 11,
                     "name": "slot_rs232_modbus_end",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 11,
+                    "index": 12,
                     "name": "slot_rs232_reqTimer_timeout",
                     "returnType": "void"
                 }

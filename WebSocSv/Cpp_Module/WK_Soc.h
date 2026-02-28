@@ -5,8 +5,10 @@
 #include <QJsonObject>
 #include <QJsonParseError>
 #include <QObject>
+#include <QTimer>
 #include <QWebSocket>
-#include "../Common/StatData.h"
+#include "../../Common/StatData.h"
+// #include "../Common/StatData.h"
 
 struct details;
 class StatModel;
@@ -27,6 +29,13 @@ public:
     // recv_textData 에서 발생
     void req_chargingLog_To_DB(const QJsonObject &jsObj);
 
+    void req_heartbitData_To_DB(const QJsonObject &jsObj);
+
+    void req_membershipCard_authorized_To_DB(const QJsonObject &jsObj);
+    void req_membershipCard_finished_To_DB(const QJsonObject &jsObj);
+
+    //===============================================
+    void occur_heartbit();
 public slots:
     void slot_Recv_TextData(QString recvData);
     void slot_Disconnect_Soc();
@@ -48,12 +57,22 @@ public slots:
     // void slot_chargingLog_failed_ack_To_hmi(bool ret);
     // void slot_chargingLog_timeout_ack_To_hmi(bool ret);
 
+    void slot_membershipCard_authorized_ack_To_hmi(bool ok, QString msg = "");
+    void slot_membershipCard_finished_ack_To_hmi(bool ok);
+
 signals:
     void sig_update_md(stat_data st_stat);
 
     // set_p_db에서 커넥트
     //  >>  slot_chargingLog_From_soc
     void sig_chargingLog_To_DB(db_data st_db_data);
+
+    // set_p_db에서 커넥트
+    // connect(this,
+    // &WK_Soc::sig_hartbitData_To_DB,
+    // this->p_obj_db,
+    // &DB_PostgreSQL::slot_hartbitData_From_soc);
+    void sig_heartbitData_To_DB(heartbit_data st_db_data);
 
 private:
     QWebSocket *p_WebSoc;

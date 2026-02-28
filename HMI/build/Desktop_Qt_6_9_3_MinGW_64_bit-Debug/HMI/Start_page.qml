@@ -9,6 +9,10 @@ Item {
     // anchors.fill: parent
     property string id: "";
 
+    StackView.onActivated: {
+        cpp_module.set_screen_name("관리자 로그인");
+    }
+
     BackGround{
         id: background
         anchors.fill: parent

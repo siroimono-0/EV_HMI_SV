@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<WK_Serial *>("WK_Serial*");
     qRegisterMetaType<CHARGING_TYPE>("CHARGING_TYPE");
     qRegisterMetaType<charging_stat>("charging_stat");
+    qRegisterMetaType<heartbit_data>("heartbit_data");
 
     engine.rootContext()->setContextProperty("cpp_module", &cpp_module);
     QObject::connect(

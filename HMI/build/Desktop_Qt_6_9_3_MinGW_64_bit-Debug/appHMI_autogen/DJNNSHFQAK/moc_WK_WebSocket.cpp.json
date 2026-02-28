@@ -2,7 +2,7 @@
     "classes": [
         {
             "className": "WK_WebSocket",
-            "lineNumber": 17,
+            "lineNumber": 20,
             "object": true,
             "qualifiedClassName": "WK_WebSocket",
             "signals": [
@@ -11,24 +11,30 @@
                     "index": 0,
                     "name": "sig_end",
                     "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 1,
+                    "name": "sig_heartbit_ping_To_statStore",
+                    "returnType": "void"
                 }
             ],
             "slots": [
                 {
                     "access": "public",
-                    "index": 1,
+                    "index": 2,
                     "name": "slot_stop",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 2,
+                    "index": 3,
                     "name": "slot_Connect_Sv",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 3,
+                    "index": 4,
                     "name": "slot_ID_Check",
                     "returnType": "void"
                 },
@@ -40,7 +46,7 @@
                             "type": "bool"
                         }
                     ],
-                    "index": 4,
+                    "index": 5,
                     "name": "slot_ID_Resert",
                     "returnType": "void"
                 },
@@ -52,7 +58,7 @@
                             "type": "QAbstractSocket::SocketError"
                         }
                     ],
-                    "index": 5,
+                    "index": 6,
                     "name": "slot_SocErr",
                     "returnType": "void"
                 },
@@ -64,7 +70,7 @@
                             "type": "db_data"
                         }
                     ],
-                    "index": 6,
+                    "index": 7,
                     "name": "slot_send_db_update_textData",
                     "returnType": "void"
                 },
@@ -76,7 +82,7 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 7,
+                    "index": 8,
                     "name": "slot_Recv_TextData",
                     "returnType": "void"
                 },
@@ -88,7 +94,7 @@
                             "type": "QNetworkReply*"
                         }
                     ],
-                    "index": 8,
+                    "index": 9,
                     "name": "slot_netAccess_reply",
                     "returnType": "void"
                 },
@@ -100,8 +106,98 @@
                             "type": "QByteArray"
                         }
                     ],
-                    "index": 9,
+                    "index": 10,
                     "name": "slot_netAccess_post",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 11,
+                    "name": "slot_timeOut_pay_ack",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "card_uid",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 12,
+                    "name": "slot_netAccess_post_cancle",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 13,
+                    "name": "slot_timeOut_cancle_ack",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "adv_pay",
+                            "type": "int"
+                        },
+                        {
+                            "name": "card_uid",
+                            "type": "QByteArray"
+                        },
+                        {
+                            "name": "hmi_id",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 14,
+                    "name": "slot_send_membership_authorized_textData",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 15,
+                    "name": "slot_timeOut_membership_authorized_ack",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "adv_pay",
+                            "type": "int"
+                        },
+                        {
+                            "name": "act_pay",
+                            "type": "int"
+                        },
+                        {
+                            "name": "can_pay",
+                            "type": "int"
+                        },
+                        {
+                            "name": "card_uid",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "t_id",
+                            "type": "uint32_t"
+                        }
+                    ],
+                    "index": 16,
+                    "name": "slot_send_membership_finished_textData",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "st_hb_data",
+                            "type": "heartbit_data"
+                        }
+                    ],
+                    "index": 17,
+                    "name": "slot_send_heartbit_pong",
                     "returnType": "void"
                 }
             ],

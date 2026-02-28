@@ -5,6 +5,9 @@
 Hub::Hub(QObject *parent)
     : QObject{parent}
 {
+    this->p_timer = new QTimer(this);
+    connect(this->p_timer, &QTimer::timeout, this, &Hub::slot_timeOut_heartbit);
+    this->p_timer->start(10000);
 }
 
 void Hub::set_p_md(StatModel *set_md)
@@ -21,8 +24,44 @@ void Hub::set_p_db(DB_PostgreSQL *set_db)
 
 void Hub::slot_start_sv()
 {
+    QFile cert_file("../../../ssl/server.crt");
+    QFile key_file("../../../ssl/server.key");
     QString sv_name = "WebSocSv";
-    this->p_webSoc_Sv = new QWebSocketServer(sv_name, QWebSocketServer::NonSecureMode, this);
+
+    if (!cert_file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "cert open fail";
+        return;
+    }
+
+    if (!key_file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "key open fail";
+        return;
+    }
+
+    QSslCertificate cert(&cert_file, QSsl::Pem);
+    QSslKey key(&key_file, QSsl::Rsa, QSsl::Pem);
+
+    QSslConfiguration ssl_cfg = QSslConfiguration::defaultConfiguration();
+    ssl_cfg.setLocalCertificate(cert);
+    ssl_cfg.setPrivateKey(key);
+    ssl_cfg.setProtocol(QSsl::TlsV1_2OrLater);
+
+    this->p_webSoc_Sv = new QWebSocketServer(sv_name, QWebSocketServer::SecureMode, this);
+
+    this->p_webSoc_Sv->setSslConfiguration(ssl_cfg);
+
+    QObject::connect(this->p_webSoc_Sv,
+                     &QWebSocketServer::sslErrors,
+                     [](const QList<QSslError> &vl_err) {
+                         qDebug() << "ssl error";
+                         for (const QSslError &err : vl_err)
+                         {
+                             qDebug() << err.errorString();
+                         }
+                     });
+
     bool ret_listen = this->p_webSoc_Sv->listen(QHostAddress::Any, 12345);
 
     if (ret_listen == false)
@@ -89,5 +128,15 @@ void Hub::slot_new_connection()
 void Hub::slot_del_mpWk(int id_mp)
 {
     this->qmp_wk.remove(id_mp);
+    return;
+}
+
+void Hub::slot_timeOut_heartbit()
+{
+    for (auto it = qmp_wk.begin(); it != qmp_wk.end(); it++)
+    {
+        it.value()->occur_heartbit();
+    }
+
     return;
 }

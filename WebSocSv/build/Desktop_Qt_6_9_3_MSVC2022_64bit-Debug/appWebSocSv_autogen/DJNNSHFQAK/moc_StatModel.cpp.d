@@ -56,6 +56,7 @@ C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-
   C:/Program\ Files/Microsoft\ Visual\ Studio/2022/Community/VC/Tools/MSVC/14.43.34808/include/yvals_core.h \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QAbstractListModel \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QDate \
+  C:/Qt/6.9.3/msvc2022_64/include/QtCore/QDateTime \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QMetaType \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/QObject \
   C:/Qt/6.9.3/msvc2022_64/include/QtCore/q17memory.h \

@@ -31,7 +31,12 @@ public:
 
     //==================================================================
     Q_INVOKABLE void set_card_stat_To_serial(bool stat);
+    Q_INVOKABLE void set_card_type_To_serial(QString set);
+    Q_INVOKABLE void set_card_type_To_statStore(QString set);
     //==================================================================
+
+    Q_INVOKABLE void set_screen_name(QString set);
+    Q_INVOKABLE void set_heartbit_storeId_hmiId();
 
     //==================================================================
     Q_INVOKABLE void chargingConnecter_open_To_serial();
@@ -64,13 +69,20 @@ signals:
     void sig_SocFailed_ToQml(QString msg);
 
     void sig_card_success_ToQml();
+    // 카드 결제완료 후 db 업데이트 완료대면 받는 ack
+    void sig_card_authorized_db_update_ack_ToQml();
     void sig_card_failed_ToQml(QString msg);
     void sig_card_compare_ToQml();
+
+    // void sig_membership_ack_ToQml(bool ok, QString failed_msg = "");
 
     void sig_coil_ready_ok_ToQml();
     void sig_coil234_off_check_ToQml();
 
     void sig_charging_stop_ToQml();
+
+    void sig_cancle_payment_ok_ToQml();
+    void sig_charging_finished_ack_ToQml();
 
 private:
     StatStore *p_stat = nullptr;

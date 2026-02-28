@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 132,
+                        "durationMicroseconds": 131,
                         "errorMessage": "Cannot retrieve a non-object type by ID: back_lb",
                         "functionName": "close",
                         "line": 24
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 134,
+                        "durationMicroseconds": 154,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 7
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 33,
-                        "durationMicroseconds": 61,
+                        "durationMicroseconds": 69,
                         "errorMessage": "",
                         "functionName": "verticalCenter",
                         "line": 54
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 88,
+                        "durationMicroseconds": 94,
                         "errorMessage": "Cannot retrieve a non-object type by ID: recPop_tfID",
                         "functionName": "onSig_Clicked",
                         "line": 126
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 30,
+                        "durationMicroseconds": 37,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 126
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 75,
+                        "durationMicroseconds": 81,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 138
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 55,
+                        "durationMicroseconds": 67,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 139
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 92,
+                        "durationMicroseconds": 102,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 156
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 32,
+                        "durationMicroseconds": 48,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 154

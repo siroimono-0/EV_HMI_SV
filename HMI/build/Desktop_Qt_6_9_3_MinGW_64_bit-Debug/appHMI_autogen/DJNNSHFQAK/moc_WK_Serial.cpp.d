@@ -1,5 +1,6 @@
 C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/appHMI_autogen/DJNNSHFQAK/moc_WK_Serial.cpp: C:/Users/siroi/siroimono/w_qt/EV/HMI/Cpp_Module/WK_Serial.h \
   C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/appHMI_autogen/moc_predefs.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QDateTime \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QDebug \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QMetaType \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QObject \
@@ -9,6 +10,8 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/q20iterator.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q20memory.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q20type_traits.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/q20utility.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/q23utility.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qabstracteventdispatcher.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qalgorithms.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qanystringview.h \
@@ -25,6 +28,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qbytearraylist.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qbytearrayview.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qcalendar.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qchar.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qcompare.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qcompare_impl.h \
@@ -38,6 +42,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qcontiguouscache.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qdatastream.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qdatetime.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qdeadlinetimer.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qdebug.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qelapsedtimer.h \
@@ -59,6 +64,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qiterator.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qlatin1stringview.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qlist.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qlocale.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qlogging.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qmalloc.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qmap.h \
@@ -125,6 +131,7 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/a
   C:/Qt/6.9.3/mingw_64/include/QtCore/qtypeinfo.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qtypes.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qutf8stringview.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qvarlengtharray.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/qxptype_traits.h \

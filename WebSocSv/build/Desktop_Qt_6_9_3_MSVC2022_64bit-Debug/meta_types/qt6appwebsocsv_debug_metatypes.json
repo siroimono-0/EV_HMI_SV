@@ -166,6 +166,18 @@
                         "index": 7,
                         "name": "slot_chargingLog_From_soc",
                         "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_hb_data",
+                                "type": "heartbit_data"
+                            }
+                        ],
+                        "index": 8,
+                        "name": "slot_heartbitData_From_soc",
+                        "returnType": "void"
                     }
                 ],
                 "superClasses": [
@@ -183,7 +195,7 @@
         "classes": [
             {
                 "className": "Hub",
-                "lineNumber": 14,
+                "lineNumber": 15,
                 "object": true,
                 "qualifiedClassName": "Hub",
                 "signals": [
@@ -223,6 +235,12 @@
                         ],
                         "index": 4,
                         "name": "slot_del_mpWk",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 5,
+                        "name": "slot_timeOut_heartbit",
                         "returnType": "void"
                     }
                 ],
@@ -307,7 +325,7 @@
         "classes": [
             {
                 "className": "WK_Soc",
-                "lineNumber": 16,
+                "lineNumber": 17,
                 "object": true,
                 "qualifiedClassName": "WK_Soc",
                 "signals": [
@@ -334,6 +352,18 @@
                         "index": 1,
                         "name": "sig_chargingLog_To_DB",
                         "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "st_db_data",
+                                "type": "heartbit_data"
+                            }
+                        ],
+                        "index": 2,
+                        "name": "sig_heartbitData_To_DB",
+                        "returnType": "void"
                     }
                 ],
                 "slots": [
@@ -345,13 +375,13 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 2,
+                        "index": 3,
                         "name": "slot_Recv_TextData",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 3,
+                        "index": 4,
                         "name": "slot_Disconnect_Soc",
                         "returnType": "void"
                     },
@@ -363,7 +393,7 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 4,
+                        "index": 5,
                         "name": "slot_helloAck",
                         "returnType": "void"
                     },
@@ -375,7 +405,7 @@
                                 "type": "QJsonObject"
                             }
                         ],
-                        "index": 5,
+                        "index": 6,
                         "name": "slot_registerReq",
                         "returnType": "bool"
                     },
@@ -387,7 +417,7 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 6,
+                        "index": 7,
                         "name": "slot_registerAck",
                         "returnType": "void"
                     },
@@ -399,7 +429,7 @@
                                 "type": "QJsonObject"
                             }
                         ],
-                        "index": 7,
+                        "index": 8,
                         "name": "slot_registerReq_hmi",
                         "returnType": "bool"
                     },
@@ -411,7 +441,7 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 8,
+                        "index": 9,
                         "name": "slot_registerAck_hmi",
                         "returnType": "void"
                     },
@@ -423,7 +453,7 @@
                                 "type": "uint64_t"
                             }
                         ],
-                        "index": 9,
+                        "index": 10,
                         "name": "slot_chargingLog_authorized_ack_To_hmi",
                         "returnType": "void"
                     },
@@ -435,13 +465,13 @@
                                 "type": "uint32_t"
                             }
                         ],
-                        "index": 10,
+                        "index": 11,
                         "name": "slot_chargingLog_charging_start_ack_To_hmi",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 11,
+                        "index": 12,
                         "name": "slot_chargingLog_charging_finished_ack_To_hmi",
                         "returnType": "void"
                     }

@@ -6,15 +6,15 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 519,
+                        "durationMicroseconds": 341,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_next",
-                        "line": 38
+                        "line": 44
                     },
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 179,
+                        "durationMicroseconds": 307,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "onCompleted",
                         "line": 8
@@ -22,42 +22,50 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 129,
+                        "durationMicroseconds": 108,
                         "errorMessage": "",
                         "functionName": "onCompleted",
                         "line": 8
                     },
                     {
-                        "codegenSuccessful": true,
-                        "column": 23,
-                        "durationMicroseconds": 105,
-                        "errorMessage": "",
-                        "functionName": "fill",
+                        "codegenSuccessful": false,
+                        "column": 28,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find signal \"activated\".",
+                        "functionName": "onActivated",
                         "line": 15
                     },
                     {
                         "codegenSuccessful": true,
-                        "column": 24,
-                        "durationMicroseconds": 119,
+                        "column": 23,
+                        "durationMicroseconds": 117,
                         "errorMessage": "",
-                        "functionName": "onSig_Clicked",
-                        "line": 32
+                        "functionName": "fill",
+                        "line": 21
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 33,
+                        "durationMicroseconds": 145,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
-                        "line": 32
+                        "line": 38
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 52,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 38
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 49,
+                        "durationMicroseconds": 74,
                         "errorMessage": "",
                         "functionName": "centerIn",
-                        "line": 21
+                        "line": 27
                     },
                     {
                         "codegenSuccessful": false,
@@ -65,7 +73,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 28
+                        "line": 34
                     },
                     {
                         "codegenSuccessful": false,
@@ -73,7 +81,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 29
+                        "line": 35
                     },
                     {
                         "codegenSuccessful": false,
@@ -81,7 +89,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"fill\".",
                         "functionName": "fill",
-                        "line": 27
+                        "line": 33
                     }
                 ],
                 "filePath": "C:/Users/siroi/siroimono/w_qt/EV/HMI/HMI_main.qml"

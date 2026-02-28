@@ -4,7 +4,7 @@
 #include <QAbstractListModel>
 #include <QDate>
 #include <QObject>
-#include "../Common/StatData.h"
+#include "../../Common/StatData.h"
 
 // 등록 시간
 // 충전기 도로명

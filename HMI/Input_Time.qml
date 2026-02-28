@@ -6,6 +6,10 @@ import HMI 1.0
 Item {
     id: root
 
+    StackView.onActivated: {
+        cpp_module.set_screen_name("시간 입력");
+    }
+
     function stk_home()
     {
         while(StackView.view.depth > 2)
@@ -23,6 +27,7 @@ Item {
     {
         cpp_module.charging_type_To_statStore("time", s_int);
         StackView.view.push("Select_card.qml");
+        // StackView.view.push("Select_card.qml", {charging_tpye: "time"}, {charging_val: s_int});
     }
 
     BackGround_Amount{

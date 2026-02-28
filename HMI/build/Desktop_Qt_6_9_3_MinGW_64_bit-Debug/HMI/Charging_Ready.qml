@@ -6,6 +6,10 @@ import HMI 1.0
 Item {
     id: root
 
+    StackView.onActivated: {
+        cpp_module.set_screen_name("커넥터 연결 준비");
+    }
+
     Component.onCompleted: {
         // cpp에 rs485릴레이 모듈 1번코일 on 실행
         // ... 전기차 커넥터 보관함 문 열리는거임 ... ㅋㅋ..

@@ -45,7 +45,8 @@ template <> constexpr inline auto Hub::qt_create_metaobjectdata<qt_meta_tag_ZN3H
         "slot_end",
         "slot_new_connection",
         "slot_del_mpWk",
-        "idx"
+        "idx",
+        "slot_timeOut_heartbit"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -61,6 +62,8 @@ template <> constexpr inline auto Hub::qt_create_metaobjectdata<qt_meta_tag_ZN3H
         QtMocHelpers::SlotData<void(int)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::Int, 7 },
         }}),
+        // Slot 'slot_timeOut_heartbit'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -89,6 +92,7 @@ void Hub::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **
         case 2: _t->slot_end(); break;
         case 3: _t->slot_new_connection(); break;
         case 4: _t->slot_del_mpWk((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 5: _t->slot_timeOut_heartbit(); break;
         default: ;
         }
     }
@@ -117,14 +121,14 @@ int Hub::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

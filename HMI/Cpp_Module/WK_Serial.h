@@ -53,6 +53,7 @@ public slots:
     void slot_set_p_soc(WK_WebSocket *soc);
 
     void slot_set_card_stat(bool stat);
+    void slot_set_card_type(QString set);
 
     void slot_rs485_coil1_on_off(bool onoff);
     void slot_rs485_coil234_on_off(bool onoff);
@@ -69,6 +70,7 @@ signals:
 private:
     QSerialPort *p_serial = nullptr;
     QByteArray readData;
+    QString card_type;
 
     QSerialPort *p_rs485_modbus = nullptr;
     QTimer *p_rs485_tm_silent;

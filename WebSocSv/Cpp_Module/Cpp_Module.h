@@ -6,7 +6,8 @@
 #include <QThread>
 #include <QTimer>
 #include <QVariant>
-#include "../Common/StatData.h"
+#include "../../Common/StatData.h"
+// #include "../Common/StatData.h"
 #include "DB_PostgreSQL.h"
 #include "StatModel.h"
 

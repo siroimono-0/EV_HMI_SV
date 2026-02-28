@@ -661,11 +661,38 @@ void WK_Serial::slot_serial_read()
                 // 카드 리더기 종료
                 if (this->p_soc != nullptr)
                 {
-                    // http server 카드 정보 확인 요청
-                    QMetaObject::invokeMethod(this->p_soc,
-                                              "slot_netAccess_post",
-                                              Qt::QueuedConnection,
-                                              Q_ARG(QByteArray, this->readData));
+                    if (this->card_type == "creditCard")
+                    {
+                        // http server 카드 정보 확인 요청
+                        QMetaObject::invokeMethod(this->p_soc,
+                                                  "slot_netAccess_post",
+                                                  Qt::QueuedConnection,
+                                                  Q_ARG(QByteArray, this->readData));
+                    }
+                    else if (this->card_type == "membershipCard")
+                    {
+                        QPair<int, QString> qp;
+                        QMetaObject::invokeMethod(this->p_stat,
+                                                  &StatStore::slot_get_advPay_hmiId,
+                                                  Qt::BlockingQueuedConnection,
+                                                  qReturnArg(qp));
+
+                        int adv_pay = qp.first;
+                        QString hmi_id = qp.second;
+                        QString request_id = hmi_id + "_" + QTime::currentTime().toString();
+
+                        QMetaObject::invokeMethod(this->p_stat,
+                                                  "slot_set_card_uid",
+                                                  Qt::QueuedConnection,
+                                                  Q_ARG(QString, QString::fromUtf8(this->readData)));
+
+                        QMetaObject::invokeMethod(this->p_soc,
+                                                  "slot_send_membership_authorized_textData",
+                                                  Qt::QueuedConnection,
+                                                  Q_ARG(int, adv_pay),
+                                                  Q_ARG(QByteArray, this->readData),
+                                                  Q_ARG(QString, request_id));
+                    }
                 }
             }
             else
@@ -694,5 +721,11 @@ void WK_Serial::slot_modbus_write()
     modbus.append(char(0x01)); // quantity
 
     this->p_serial->write(modbus);
+    return;
+}
+
+void WK_Serial::slot_set_card_type(QString set)
+{
+    this->card_type = set;
     return;
 }

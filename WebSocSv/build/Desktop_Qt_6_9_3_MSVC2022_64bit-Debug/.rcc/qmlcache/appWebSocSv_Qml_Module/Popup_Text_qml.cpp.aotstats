@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 154,
+                        "durationMicroseconds": 130,
                         "errorMessage": "Cannot retrieve a non-object type by ID: recPop_lb",
                         "functionName": "close",
                         "line": 21
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 152,
+                        "durationMicroseconds": 131,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 6
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 144,
+                        "durationMicroseconds": 119,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 58
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 97,
+                        "durationMicroseconds": 80,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 59
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 134,
+                        "durationMicroseconds": 118,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 76
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 42,
+                        "durationMicroseconds": 37,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 76

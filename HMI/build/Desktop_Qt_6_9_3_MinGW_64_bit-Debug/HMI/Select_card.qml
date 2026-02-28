@@ -5,16 +5,30 @@ import HMI 1.0
 
 Item {
     id: root
+    // property string charging_type: "";
+    // property string charging_val: "";
+
+    StackView.onActivated: {
+        cpp_module.set_screen_name("카드 종류 선택");
+    }
+
+    Component.onCompleted: {
+        // cppSv 카드리더기 상태 온
+        cpp_module.set_card_stat_To_serial(true);
+    }
 
     function stk_next(s)
     {
-        if(s === "memberCard")
+        if(s === "membershipCard")
         {
-            // 임시 그냥 다음 화면으로
-            // StackView.view.push("Select_amount.qml");
+            cpp_module.set_card_type_To_statStore("membershipCard");
+            cpp_module.set_card_type_To_serial("membershipCard");
+            StackView.view.push("Card_Socket.qml");
         }
         else if(s === "creditCard")
         {
+            cpp_module.set_card_type_To_statStore("creditCard");
+            cpp_module.set_card_type_To_serial("creditCard");
             StackView.view.push("Card_Ready.qml");
         }
     }
@@ -100,7 +114,7 @@ Item {
 
         onSig_Clicked: function()
         {
-            root.stk_next("memberCard");
+            root.stk_next("membershipCard");
         }
 
         Image{

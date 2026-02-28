@@ -8,6 +8,7 @@ Cpp_Module::Cpp_Module(QObject *parent)
 {
     // this->set_p_wk_websoc();
     this->p_stat = new StatStore(this);
+    this->p_stat->set_p_module(this);
     this->create_Serial();
 }
 
@@ -94,6 +95,9 @@ void Cpp_Module::create_WebSoc()
                               "slot_set_p_soc",
                               Qt::QueuedConnection,
                               Q_ARG(WK_WebSocket *, this->p_wk_websoc));
+
+    // statStore 객체에 soc객체 주소 전달
+    this->p_stat->set_p_soc(this->p_wk_websoc);
 
     qDebug() << Q_FUNC_INFO;
     return;
@@ -229,7 +233,9 @@ Q_INVOKABLE void Cpp_Module::charging_type_clear_To_statStore()
 
 Q_INVOKABLE void Cpp_Module::set_payment_To_statStore()
 {
+    // 환불 금액 확인도 같이해줌
     this->p_stat->slot_set_payment();
+
     /*
     QMetaObject::invokeMethod(this->p_stat, &StatStore::slot_set_payment, Qt::QueuedConnection);*/
     return;
@@ -268,5 +274,33 @@ Q_INVOKABLE void Cpp_Module::charging_end_stat_clear_To_statStore()
 Q_INVOKABLE void Cpp_Module::charging_finished_To_statStore()
 {
     this->p_stat->charging_finished_db_update();
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::set_screen_name(QString set)
+{
+    this->p_stat->set_screen_name(set);
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::set_heartbit_storeId_hmiId()
+{
+    this->p_stat->set_heartbit_storeId_hmiId();
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::set_card_type_To_serial(QString set)
+{
+    QMetaObject::invokeMethod(this->p_wk_serial,
+                              "slot_set_card_type",
+                              Qt::QueuedConnection,
+                              Q_ARG(QString, set));
+
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::set_card_type_To_statStore(QString set)
+{
+    this->p_stat->set_card_type(set);
     return;
 }

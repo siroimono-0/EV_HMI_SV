@@ -11,6 +11,10 @@ Item {
         cpp_module.charging_type_clear_To_statStore();
     }
 
+    StackView.onActivated: {
+        cpp_module.set_screen_name("충전 방식 선택");
+    }
+
     function stk_home()
     {
         while(StackView.view.depth > 2)
@@ -41,7 +45,8 @@ Item {
         else if(s === "persent")
         {
             cpp_module.charging_type_To_statStore(s, 80);
-            StackView.view.push("Select_card.qml");
+        StackView.view.push("Select_card.qml");
+        // StackView.view.push("Select_card.qml", {charging_tpye: "persent"}, {charging_val: "80"});
         }
 
 

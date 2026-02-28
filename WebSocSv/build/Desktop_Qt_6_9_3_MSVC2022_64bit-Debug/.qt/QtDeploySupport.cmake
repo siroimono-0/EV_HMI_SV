@@ -60,7 +60,6 @@ set(__QT_DEPLOY_QT_DEBUG_POSTFIX "d")
 set(__qt_deploy_support_files
     "C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-Debug/.qt/QtDeployTargets.cmake"
     "C:/Qt/6.9.3/msvc2022_64/lib/cmake/Qt6Core/Qt6CoreDeploySupport.cmake"
-    "C:/Qt/6.9.3/msvc2022_64/lib/cmake/Qt6Qml/Qt6QmlDeploySupport.cmake"
 )
 foreach(__qt_deploy_support_file IN LISTS __qt_deploy_support_files)
     include("${__qt_deploy_support_file}")

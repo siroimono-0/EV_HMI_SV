@@ -1,5 +1,6 @@
 C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/appHMI_autogen/DJNNSHFQAK/moc_StatStore.cpp: C:/Users/siroi/siroimono/w_qt/EV/HMI/Cpp_Module/StatStore.h \
   C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/appHMI_autogen/moc_predefs.h \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QDateTime \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QDebug \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QMetaType \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QObject \

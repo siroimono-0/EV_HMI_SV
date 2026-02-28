@@ -6,11 +6,16 @@ import HMI 1.0
 Item {
     id: root
 
+    StackView.onActivated: {
+        cpp_module.set_screen_name("충전 완료");
+    }
+
     function stk_home()
     {
         // 충전 완료되었고 고객이 커넥터 원위치 한다고 가정함
         // 커넥터함 off  // 릴레이모듈 coil1 off
         cpp_module.chargingConnecter_close_To_serial();
+        cpp_module.charging_end_stat_clear_To_statStore();
 
         while(StackView.view.depth > 2)
         {

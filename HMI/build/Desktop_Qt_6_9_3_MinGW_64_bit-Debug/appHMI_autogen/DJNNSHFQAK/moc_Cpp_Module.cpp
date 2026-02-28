@@ -45,15 +45,23 @@ template <> constexpr inline auto Cpp_Module::qt_create_metaobjectdata<qt_meta_t
         "sig_SocSuccess_ToQml",
         "sig_SocFailed_ToQml",
         "sig_card_success_ToQml",
+        "sig_card_authorized_db_update_ack_ToQml",
         "sig_card_failed_ToQml",
         "sig_card_compare_ToQml",
         "sig_coil_ready_ok_ToQml",
         "sig_coil234_off_check_ToQml",
         "sig_charging_stop_ToQml",
+        "sig_cancle_payment_ok_ToQml",
+        "sig_charging_finished_ack_ToQml",
         "join_WebSv",
         "id",
         "set_card_stat_To_serial",
         "stat",
+        "set_card_type_To_serial",
+        "set",
+        "set_card_type_To_statStore",
+        "set_screen_name",
+        "set_heartbit_storeId_hmiId",
         "chargingConnecter_open_To_serial",
         "chargingConnecter_ready_To_serial",
         "charging_start_To_serial",
@@ -86,58 +94,78 @@ template <> constexpr inline auto Cpp_Module::qt_create_metaobjectdata<qt_meta_t
         }}),
         // Signal 'sig_card_success_ToQml'
         QtMocHelpers::SignalData<void()>(6, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'sig_card_authorized_db_update_ack_ToQml'
+        QtMocHelpers::SignalData<void()>(7, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'sig_card_failed_ToQml'
-        QtMocHelpers::SignalData<void(QString)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::SignalData<void(QString)>(8, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 3 },
         }}),
         // Signal 'sig_card_compare_ToQml'
-        QtMocHelpers::SignalData<void()>(8, 2, QMC::AccessPublic, QMetaType::Void),
-        // Signal 'sig_coil_ready_ok_ToQml'
         QtMocHelpers::SignalData<void()>(9, 2, QMC::AccessPublic, QMetaType::Void),
-        // Signal 'sig_coil234_off_check_ToQml'
+        // Signal 'sig_coil_ready_ok_ToQml'
         QtMocHelpers::SignalData<void()>(10, 2, QMC::AccessPublic, QMetaType::Void),
-        // Signal 'sig_charging_stop_ToQml'
+        // Signal 'sig_coil234_off_check_ToQml'
         QtMocHelpers::SignalData<void()>(11, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'sig_charging_stop_ToQml'
+        QtMocHelpers::SignalData<void()>(12, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'sig_cancle_payment_ok_ToQml'
+        QtMocHelpers::SignalData<void()>(13, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'sig_charging_finished_ack_ToQml'
+        QtMocHelpers::SignalData<void()>(14, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'join_WebSv'
-        QtMocHelpers::MethodData<void(QString)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 13 },
+        QtMocHelpers::MethodData<void(QString)>(15, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 16 },
         }}),
         // Method 'set_card_stat_To_serial'
-        QtMocHelpers::MethodData<void(bool)>(14, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 15 },
+        QtMocHelpers::MethodData<void(bool)>(17, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 18 },
         }}),
+        // Method 'set_card_type_To_serial'
+        QtMocHelpers::MethodData<void(QString)>(19, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 20 },
+        }}),
+        // Method 'set_card_type_To_statStore'
+        QtMocHelpers::MethodData<void(QString)>(21, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 20 },
+        }}),
+        // Method 'set_screen_name'
+        QtMocHelpers::MethodData<void(QString)>(22, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 20 },
+        }}),
+        // Method 'set_heartbit_storeId_hmiId'
+        QtMocHelpers::MethodData<void()>(23, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'chargingConnecter_open_To_serial'
-        QtMocHelpers::MethodData<void()>(16, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(24, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'chargingConnecter_ready_To_serial'
-        QtMocHelpers::MethodData<void()>(17, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(25, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'charging_start_To_serial'
-        QtMocHelpers::MethodData<void()>(18, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(26, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'charging_stop_To_serial'
-        QtMocHelpers::MethodData<void()>(19, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(27, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'chargingConnecter_close_To_serial'
-        QtMocHelpers::MethodData<void()>(20, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(28, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'chargingConnecter_off_To_serial'
-        QtMocHelpers::MethodData<void()>(21, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(29, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'charging_start_To_statStore'
-        QtMocHelpers::MethodData<void()>(22, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(30, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'charging_type_To_statStore'
-        QtMocHelpers::MethodData<void(QString, qint32)>(23, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 24 }, { QMetaType::Int, 25 },
+        QtMocHelpers::MethodData<void(QString, qint32)>(31, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 32 }, { QMetaType::Int, 33 },
         }}),
         // Method 'charging_type_clear_To_statStore'
-        QtMocHelpers::MethodData<void()>(26, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(34, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'charging_end_stat_clear_To_statStore'
-        QtMocHelpers::MethodData<void()>(27, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(35, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'set_payment_To_statStore'
-        QtMocHelpers::MethodData<void()>(28, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(36, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'chard_ok_To_statStore'
-        QtMocHelpers::MethodData<void()>(29, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(37, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'charging_finished_To_statStore'
-        QtMocHelpers::MethodData<void()>(30, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(38, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
         // property 'statStore'
-        QtMocHelpers::PropertyData<StatStore*>(31, 0x80000000 | 32, QMC::DefaultPropertyFlags | QMC::EnumOrFlag | QMC::Constant),
+        QtMocHelpers::PropertyData<StatStore*>(39, 0x80000000 | 40, QMC::DefaultPropertyFlags | QMC::EnumOrFlag | QMC::Constant),
     };
     QtMocHelpers::UintData qt_enums {
     };
@@ -163,26 +191,33 @@ void Cpp_Module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->sig_SocSuccess_ToQml(); break;
         case 2: _t->sig_SocFailed_ToQml((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 3: _t->sig_card_success_ToQml(); break;
-        case 4: _t->sig_card_failed_ToQml((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 5: _t->sig_card_compare_ToQml(); break;
-        case 6: _t->sig_coil_ready_ok_ToQml(); break;
-        case 7: _t->sig_coil234_off_check_ToQml(); break;
-        case 8: _t->sig_charging_stop_ToQml(); break;
-        case 9: _t->join_WebSv((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 10: _t->set_card_stat_To_serial((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        case 11: _t->chargingConnecter_open_To_serial(); break;
-        case 12: _t->chargingConnecter_ready_To_serial(); break;
-        case 13: _t->charging_start_To_serial(); break;
-        case 14: _t->charging_stop_To_serial(); break;
-        case 15: _t->chargingConnecter_close_To_serial(); break;
-        case 16: _t->chargingConnecter_off_To_serial(); break;
-        case 17: _t->charging_start_To_statStore(); break;
-        case 18: _t->charging_type_To_statStore((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<qint32>>(_a[2]))); break;
-        case 19: _t->charging_type_clear_To_statStore(); break;
-        case 20: _t->charging_end_stat_clear_To_statStore(); break;
-        case 21: _t->set_payment_To_statStore(); break;
-        case 22: _t->chard_ok_To_statStore(); break;
-        case 23: _t->charging_finished_To_statStore(); break;
+        case 4: _t->sig_card_authorized_db_update_ack_ToQml(); break;
+        case 5: _t->sig_card_failed_ToQml((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 6: _t->sig_card_compare_ToQml(); break;
+        case 7: _t->sig_coil_ready_ok_ToQml(); break;
+        case 8: _t->sig_coil234_off_check_ToQml(); break;
+        case 9: _t->sig_charging_stop_ToQml(); break;
+        case 10: _t->sig_cancle_payment_ok_ToQml(); break;
+        case 11: _t->sig_charging_finished_ack_ToQml(); break;
+        case 12: _t->join_WebSv((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 13: _t->set_card_stat_To_serial((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 14: _t->set_card_type_To_serial((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 15: _t->set_card_type_To_statStore((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 16: _t->set_screen_name((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 17: _t->set_heartbit_storeId_hmiId(); break;
+        case 18: _t->chargingConnecter_open_To_serial(); break;
+        case 19: _t->chargingConnecter_ready_To_serial(); break;
+        case 20: _t->charging_start_To_serial(); break;
+        case 21: _t->charging_stop_To_serial(); break;
+        case 22: _t->chargingConnecter_close_To_serial(); break;
+        case 23: _t->chargingConnecter_off_To_serial(); break;
+        case 24: _t->charging_start_To_statStore(); break;
+        case 25: _t->charging_type_To_statStore((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<qint32>>(_a[2]))); break;
+        case 26: _t->charging_type_clear_To_statStore(); break;
+        case 27: _t->charging_end_stat_clear_To_statStore(); break;
+        case 28: _t->set_payment_To_statStore(); break;
+        case 29: _t->chard_ok_To_statStore(); break;
+        case 30: _t->charging_finished_To_statStore(); break;
         default: ;
         }
     }
@@ -195,15 +230,21 @@ void Cpp_Module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             return;
         if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_card_success_ToQml, 3))
             return;
-        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)(QString )>(_a, &Cpp_Module::sig_card_failed_ToQml, 4))
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_card_authorized_db_update_ack_ToQml, 4))
             return;
-        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_card_compare_ToQml, 5))
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)(QString )>(_a, &Cpp_Module::sig_card_failed_ToQml, 5))
             return;
-        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_coil_ready_ok_ToQml, 6))
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_card_compare_ToQml, 6))
             return;
-        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_coil234_off_check_ToQml, 7))
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_coil_ready_ok_ToQml, 7))
             return;
-        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_charging_stop_ToQml, 8))
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_coil234_off_check_ToQml, 8))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_charging_stop_ToQml, 9))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_cancle_payment_ok_ToQml, 10))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Cpp_Module::*)()>(_a, &Cpp_Module::sig_charging_finished_ack_ToQml, 11))
             return;
     }
     if (_c == QMetaObject::RegisterPropertyMetaType) {
@@ -241,14 +282,14 @@ int Cpp_Module::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 31)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 31;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 24)
+        if (_id < 31)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 24;
+        _id -= 31;
     }
     if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty
@@ -284,32 +325,50 @@ void Cpp_Module::sig_card_success_ToQml()
 }
 
 // SIGNAL 4
-void Cpp_Module::sig_card_failed_ToQml(QString _t1)
+void Cpp_Module::sig_card_authorized_db_update_ack_ToQml()
 {
-    QMetaObject::activate<void>(this, &staticMetaObject, 4, nullptr, _t1);
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 
 // SIGNAL 5
-void Cpp_Module::sig_card_compare_ToQml()
+void Cpp_Module::sig_card_failed_ToQml(QString _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 5, nullptr);
+    QMetaObject::activate<void>(this, &staticMetaObject, 5, nullptr, _t1);
 }
 
 // SIGNAL 6
-void Cpp_Module::sig_coil_ready_ok_ToQml()
+void Cpp_Module::sig_card_compare_ToQml()
 {
     QMetaObject::activate(this, &staticMetaObject, 6, nullptr);
 }
 
 // SIGNAL 7
-void Cpp_Module::sig_coil234_off_check_ToQml()
+void Cpp_Module::sig_coil_ready_ok_ToQml()
 {
     QMetaObject::activate(this, &staticMetaObject, 7, nullptr);
 }
 
 // SIGNAL 8
-void Cpp_Module::sig_charging_stop_ToQml()
+void Cpp_Module::sig_coil234_off_check_ToQml()
 {
     QMetaObject::activate(this, &staticMetaObject, 8, nullptr);
+}
+
+// SIGNAL 9
+void Cpp_Module::sig_charging_stop_ToQml()
+{
+    QMetaObject::activate(this, &staticMetaObject, 9, nullptr);
+}
+
+// SIGNAL 10
+void Cpp_Module::sig_cancle_payment_ok_ToQml()
+{
+    QMetaObject::activate(this, &staticMetaObject, 10, nullptr);
+}
+
+// SIGNAL 11
+void Cpp_Module::sig_charging_finished_ack_ToQml()
+{
+    QMetaObject::activate(this, &staticMetaObject, 11, nullptr);
 }
 QT_WARNING_POP

@@ -18,6 +18,16 @@ void WK_WebSocket::slot_stop()
 void WK_WebSocket::set_p_stat(StatStore *set_p_stat)
 {
     this->p_stat = set_p_stat;
+    connect(this,
+            &WK_WebSocket::sig_heartbit_ping_To_statStore,
+            this->p_stat,
+            &StatStore::slot_heartbit_ping);
+
+    connect(this->p_stat,
+            &StatStore::sig_heartbit_pong,
+            this,
+            &WK_WebSocket::slot_send_heartbit_pong);
+
     return;
 }
 
@@ -76,6 +86,8 @@ void WK_WebSocket::slot_netAccess_reply(QNetworkReply *reply)
                                           Qt::QueuedConnection,
                                           Q_ARG(QString, qs_card_uid));
 
+                this->pay_ack = true;
+
                 // qml에 결제완료 신호 보내야댐
                 QMetaObject::invokeMethod(this->p_Module,
                                           &Cpp_Module::sig_card_success_ToQml,
@@ -97,8 +109,30 @@ void WK_WebSocket::slot_netAccess_reply(QNetworkReply *reply)
             // 멤버쉽 카드는 httpSv로 안보냄
         }
     }
-    else
+    else if (qs_type == "cancle_ack")
     {
+        if (jsObj["role"].toString() == "creditCard")
+        {
+            if (jsObj["ok"].toBool() == true)
+            {
+                this->cancle_ack = true;
+
+                // qml에 결제 부분취소 신호 보내야댐
+                QMetaObject::invokeMethod(this->p_Module,
+                                          &Cpp_Module::sig_cancle_payment_ok_ToQml,
+                                          Qt::QueuedConnection);
+                qDebug() << "결제 취소 완료";
+            }
+            else
+            {
+                QMetaObject::invokeMethod(this->p_Module,
+                                          "sig_card_failed_ToQml",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(QString, jsObj["err"].toString()));
+                qDebug() << "승인취소 실패";
+                qDebug() << "Err :: " << jsObj["err"].toString();
+            }
+        }
         // 다른 타입 아직 없음
     }
 
@@ -124,9 +158,43 @@ void WK_WebSocket::slot_netAccess_post(QByteArray qba)
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     this->p_netAccess->post(req, jsDoc.toJson(QJsonDocument::Compact));
+
+    // ack 못받을 시 재전송 위한 정보 저장
+    this->slot_netAccess_post_Data = qba;
+
+    // ack못받으면 재전송 타이머
+    QTimer::singleShot(3000, this, &WK_WebSocket::slot_timeOut_pay_ack);
     return;
 }
 
+void WK_WebSocket::slot_netAccess_post_cancle(QString card_uid)
+{
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << card_uid;
+
+    QJsonObject jsObj;
+    jsObj.insert("type", "cancle");
+    jsObj.insert("role", "creditCard");
+    jsObj.insert("uid", card_uid);
+
+    QJsonDocument jsDoc(jsObj);
+
+    QUrl url("http://127.0.0.1:8080/compare");
+    QNetworkRequest req(url);
+
+    //서버에서 어떻게 파싱할지 헤더 정의
+    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    this->p_netAccess->post(req, jsDoc.toJson(QJsonDocument::Compact));
+
+    // ack 못받을 시 재전송 위한 정보 저장
+    this->slot_netAccess_post_cancle_Data = card_uid;
+
+    // ack못받으면 재전송 타이머
+    QTimer::singleShot(3000, this, &WK_WebSocket::slot_timeOut_cancle_ack);
+
+    return;
+}
 ////////////////////////////////////////////////////////////////
 
 void WK_WebSocket::slot_Connect_Sv()
@@ -137,6 +205,35 @@ void WK_WebSocket::slot_Connect_Sv()
     // QObject::disconnect: wildcard call disconnects from destroyed signal of QTcpSocket::unnamed
     // 에러 뱉어냄
     // this->p_webSoc->setParent(this);
+
+    QFile cert_file("../../../ssl/server.crt");
+    // qDebug() << QDir::currentPath();
+    if (!cert_file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "server.crt open fail";
+        return;
+    }
+
+    QSslCertificate cert(&cert_file, QSsl::Pem);
+    if (cert.isNull())
+    {
+        qDebug() << "invalid cert";
+        return;
+    }
+
+    QSslConfiguration ssl_cfg = QSslConfiguration::defaultConfiguration();
+    ssl_cfg.addCaCertificate(cert); // 이 인증서를 신뢰 목록에 추가
+    ssl_cfg.setProtocol(QSsl::TlsV1_2OrLater);
+
+    this->p_webSoc->setSslConfiguration(ssl_cfg); // open() 전에 설정
+
+    QObject::connect(this->p_webSoc, &QWebSocket::sslErrors, [](const QList<QSslError> &vl_err) {
+        qDebug() << "ssl error";
+        for (const QSslError &err : vl_err)
+        {
+            qDebug() << err.errorString();
+        }
+    });
 
     // 서버 연결 완료 시
     connect(this->p_webSoc, &QWebSocket::connected, this, &WK_WebSocket::slot_ID_Check);
@@ -163,7 +260,7 @@ void WK_WebSocket::slot_Connect_Sv()
     connect(this->p_webSoc, &QWebSocket::disconnected, this->p_webSoc, &QWebSocket::deleteLater);
 
     // 커넥트 다 걸고  open
-    this->p_webSoc->open(QUrl("ws://192.168.123.100:12345"));
+    this->p_webSoc->open(QUrl("wss://192.168.123.100:12345"));
 
     qDebug() << Q_FUNC_INFO;
     return;
@@ -306,6 +403,10 @@ void WK_WebSocket::slot_Recv_TextData(QString recvData)
                                           "slot_set_session_id",
                                           Qt::QueuedConnection,
                                           Q_ARG(uint64_t, session_id));
+
+                QMetaObject::invokeMethod(this->p_Module,
+                                          &Cpp_Module::sig_card_authorized_db_update_ack_ToQml,
+                                          Qt::QueuedConnection);
             }
             else if (jsObj["session_status"] == "charging_start")
             {
@@ -317,7 +418,53 @@ void WK_WebSocket::slot_Recv_TextData(QString recvData)
             }
             else if (jsObj["session_status"] == "charging_finished")
             {
-                qDebug() << "charging_finished ack ok";
+                QMetaObject::invokeMethod(this->p_Module,
+                                          &Cpp_Module::sig_charging_finished_ack_ToQml,
+                                          Qt::QueuedConnection);
+            }
+        }
+        else if (qs_type == "heartbit_ping")
+        {
+            emit this->sig_heartbit_ping_To_statStore();
+            qDebug() << "heartbit ping";
+        }
+        else if (qs_type == "membershipCard_authorized_ack")
+        {
+            this->member_ack = true;
+            bool ok = jsObj["ok"].toBool();
+            if (ok == true)
+            {
+                uint32_t t_id = jsObj["transaction_id"].toString().toInt();
+                QMetaObject::invokeMethod(this->p_stat,
+                                          "slot_set_membership_t_id",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(uint32_t, t_id));
+
+                QMetaObject::invokeMethod(this->p_Module,
+                                          &Cpp_Module::sig_card_success_ToQml,
+                                          Qt::QueuedConnection);
+            }
+            else
+            {
+                QString failed_msg = jsObj["failed_msg"].toString();
+                QMetaObject::invokeMethod(this->p_Module,
+                                          "sig_card_failed_ToQml",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(QString, failed_msg));
+            }
+        }
+        else if (qs_type == "membershipCard_finished_ack")
+        {
+            bool ok = jsObj["ok"].toBool();
+            if (ok == true)
+            {
+                QMetaObject::invokeMethod(this->p_Module,
+                                          &Cpp_Module::sig_cancle_payment_ok_ToQml,
+                                          Qt::QueuedConnection);
+            }
+            else
+            {
+                // db 재요청?
             }
         }
     }
@@ -399,5 +546,198 @@ void WK_WebSocket::slot_ID_Resert(bool resert)
                                   Q_ARG(QString, qs_id));
     }
     qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_WebSocket::slot_send_heartbit_pong(heartbit_data st_hb_data)
+{
+    QJsonObject jsObj;
+
+    jsObj.insert("type", "heartbit_pong");
+    jsObj.insert("role", "hmi");
+
+    jsObj.insert("hmi_id", st_hb_data.hmi_id);
+    jsObj.insert("store_id", static_cast<qint32>(st_hb_data.store_id));
+    jsObj.insert("screen_name", st_hb_data.screen_name);
+
+    qDebug() << st_hb_data.screen_name << " heartbit";
+
+    QJsonDocument jsDoc(jsObj);
+
+    this->p_webSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    return;
+}
+
+void WK_WebSocket::slot_send_membership_authorized_textData(int adv_pay,
+                                                            QByteArray card_uid,
+                                                            QString request_id)
+{
+    // QString request_id = hmi_id +
+    QJsonObject jsObj;
+
+    jsObj.insert("type", "membershipCard_authorized");
+    jsObj.insert("role", "hmi");
+    jsObj.insert("card_uid", QString::fromUtf8(card_uid));
+    jsObj.insert("adv_pay", adv_pay);
+    jsObj.insert("request_id", request_id);
+
+    QJsonDocument jsDoc(jsObj);
+
+    this->p_webSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+
+    // 타임아웃 함수 데이터 저장
+    this->membership_authorized_Data = QPair<int, QByteArray>({adv_pay, card_uid});
+    this->membership_authorized_requestId_Data = request_id;
+
+    // 타임아웃 설정
+    QTimer::singleShot(10000, this, &WK_WebSocket::slot_timeOut_membership_authorized_ack);
+
+    return;
+}
+void WK_WebSocket::slot_send_membership_finished_textData(
+    int adv_pay, int act_pay, int can_pay, QString card_uid, uint32_t t_id, QString request_id)
+{
+    QJsonObject jsObj;
+
+    jsObj.insert("type", "membershipCard_finished");
+    jsObj.insert("role", "hmi");
+    jsObj.insert("card_uid", card_uid);
+    jsObj.insert("adv_pay", adv_pay);
+    jsObj.insert("act_pay", act_pay);
+    jsObj.insert("can_pay", can_pay);
+    jsObj.insert("transaction_id", static_cast<qint32>(t_id));
+    jsObj.insert("request_id", request_id);
+    qDebug() << t_id << " :: tid";
+
+    QJsonDocument jsDoc(jsObj);
+
+    this->p_webSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+
+    this->adv_pay = adv_pay;
+    this->act_pay = act_pay;
+    this->can_pay = can_pay;
+    this->card_uid = card_uid;
+    this->t_id = t_id;
+    this->membership_finished_requestId_Data = request_id;
+
+    // 타임아웃 설정
+    QTimer::singleShot(10000, this, &WK_WebSocket::slot_timeOut_membership_finished_ack);
+
+    return;
+}
+
+void WK_WebSocket::slot_timeOut_pay_ack()
+{
+    this->pay_ack_cnt++;
+    if (this->pay_ack == true)
+    {
+        this->pay_ack = false;
+        this->pay_ack_cnt = 0;
+        return;
+    }
+
+    if (this->pay_ack_cnt > 2)
+    {
+        this->pay_ack_cnt = 0;
+
+        QMetaObject::invokeMethod(this->p_Module,
+                                  "sig_card_failed_ToQml",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(QString, "http SV 미응답\n 고객센터에 문의 해주세요"));
+
+        return;
+    }
+
+    this->slot_netAccess_post(this->slot_netAccess_post_Data);
+    return;
+}
+
+void WK_WebSocket::slot_timeOut_cancle_ack()
+{
+    this->cancle_ack_cnt++;
+    if (this->cancle_ack == true)
+    {
+        this->cancle_ack = false;
+        this->cancle_ack_cnt = 0;
+        return;
+    }
+
+    if (this->cancle_ack_cnt > 2)
+    {
+        this->cancle_ack_cnt = 0;
+
+        QMetaObject::invokeMethod(this->p_Module,
+                                  "sig_card_failed_ToQml",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(QString, "http SV 미응답\n 고객센터에 문의 해주세요"));
+
+        return;
+    }
+
+    this->slot_netAccess_post_cancle(this->slot_netAccess_post_cancle_Data);
+    return;
+}
+
+void WK_WebSocket::slot_timeOut_membership_authorized_ack()
+{
+    this->member_ack_cnt++;
+    if (this->member_ack == true)
+    {
+        this->member_ack = false;
+        this->member_ack_cnt = 0;
+        return;
+    }
+
+    if (this->member_ack_cnt > 2)
+    {
+        this->member_ack_cnt = 0;
+
+        QMetaObject::invokeMethod(this->p_Module,
+                                  "sig_card_failed_ToQml",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(QString, "OCPP SV 미응답\n 고객센터에 문의 해주세요"));
+
+        return;
+    }
+
+    // 재전송
+    int adv_pay = this->membership_authorized_Data.first;
+    QByteArray card_uid = this->membership_authorized_Data.second;
+    this->slot_send_membership_authorized_textData(adv_pay,
+                                                   card_uid,
+                                                   this->membership_authorized_requestId_Data);
+    return;
+}
+
+void WK_WebSocket::slot_timeOut_membership_finished_ack()
+{
+    this->member_finished_ack_cnt++;
+    if (this->member_finished_ack == true)
+    {
+        this->member_finished_ack = false;
+        this->member_finished_ack_cnt = 0;
+        return;
+    }
+
+    if (this->member_finished_ack_cnt > 2)
+    {
+        this->member_finished_ack_cnt = 0;
+
+        QMetaObject::invokeMethod(this->p_Module,
+                                  "sig_card_failed_ToQml",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(QString, "OCPP SV 미응답\n 고객센터에 문의 해주세요"));
+
+        return;
+    }
+
+    // 재전송
+    this->slot_send_membership_finished_textData(this->adv_pay,
+                                                 this->act_pay,
+                                                 this->can_pay,
+                                                 this->card_uid,
+                                                 this->t_id,
+                                                 this->membership_finished_requestId_Data);
+
     return;
 }

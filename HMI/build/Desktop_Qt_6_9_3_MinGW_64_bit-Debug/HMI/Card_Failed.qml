@@ -7,11 +7,16 @@ Item {
     id: root;
     property string err: ""
 
+    StackView.onActivated: {
+        cpp_module.set_screen_name("카드 인증 실패");
+    }
+
     function stk_prev()
     {
-        StackView.view.pop();
-        StackView.view.pop();
-        StackView.view.pop();
+        while(StackView.view.depth > 2)
+        {
+            StackView.view.pop();
+        }
     }
 
     BackGround_Card{

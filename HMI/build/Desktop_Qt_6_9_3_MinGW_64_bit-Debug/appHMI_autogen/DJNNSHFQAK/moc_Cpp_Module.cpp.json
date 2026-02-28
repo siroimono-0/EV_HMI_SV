@@ -12,7 +12,7 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 9,
+                    "index": 12,
                     "name": "join_WebSv",
                     "returnType": "void"
                 },
@@ -24,49 +24,91 @@
                             "type": "bool"
                         }
                     ],
-                    "index": 10,
+                    "index": 13,
                     "name": "set_card_stat_To_serial",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 11,
-                    "name": "chargingConnecter_open_To_serial",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "index": 12,
-                    "name": "chargingConnecter_ready_To_serial",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "index": 13,
-                    "name": "charging_start_To_serial",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "set",
+                            "type": "QString"
+                        }
+                    ],
                     "index": 14,
-                    "name": "charging_stop_To_serial",
+                    "name": "set_card_type_To_serial",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
+                    "arguments": [
+                        {
+                            "name": "set",
+                            "type": "QString"
+                        }
+                    ],
                     "index": 15,
-                    "name": "chargingConnecter_close_To_serial",
+                    "name": "set_card_type_To_statStore",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
+                    "arguments": [
+                        {
+                            "name": "set",
+                            "type": "QString"
+                        }
+                    ],
                     "index": 16,
-                    "name": "chargingConnecter_off_To_serial",
+                    "name": "set_screen_name",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
                     "index": 17,
+                    "name": "set_heartbit_storeId_hmiId",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 18,
+                    "name": "chargingConnecter_open_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 19,
+                    "name": "chargingConnecter_ready_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 20,
+                    "name": "charging_start_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 21,
+                    "name": "charging_stop_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 22,
+                    "name": "chargingConnecter_close_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 23,
+                    "name": "chargingConnecter_off_To_serial",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 24,
                     "name": "charging_start_To_statStore",
                     "returnType": "void"
                 },
@@ -82,37 +124,37 @@
                             "type": "qint32"
                         }
                     ],
-                    "index": 18,
+                    "index": 25,
                     "name": "charging_type_To_statStore",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 19,
+                    "index": 26,
                     "name": "charging_type_clear_To_statStore",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 20,
+                    "index": 27,
                     "name": "charging_end_stat_clear_To_statStore",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 21,
+                    "index": 28,
                     "name": "set_payment_To_statStore",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 22,
+                    "index": 29,
                     "name": "chard_ok_To_statStore",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 23,
+                    "index": 30,
                     "name": "charging_finished_To_statStore",
                     "returnType": "void"
                 }
@@ -173,38 +215,56 @@
                 },
                 {
                     "access": "public",
+                    "index": 4,
+                    "name": "sig_card_authorized_db_update_ack_ToQml",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
                     "arguments": [
                         {
                             "name": "msg",
                             "type": "QString"
                         }
                     ],
-                    "index": 4,
+                    "index": 5,
                     "name": "sig_card_failed_ToQml",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 5,
+                    "index": 6,
                     "name": "sig_card_compare_ToQml",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 6,
+                    "index": 7,
                     "name": "sig_coil_ready_ok_ToQml",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 7,
+                    "index": 8,
                     "name": "sig_coil234_off_check_ToQml",
                     "returnType": "void"
                 },
                 {
                     "access": "public",
-                    "index": 8,
+                    "index": 9,
                     "name": "sig_charging_stop_ToQml",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 10,
+                    "name": "sig_cancle_payment_ok_ToQml",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 11,
+                    "name": "sig_charging_finished_ack_ToQml",
                     "returnType": "void"
                 }
             ],

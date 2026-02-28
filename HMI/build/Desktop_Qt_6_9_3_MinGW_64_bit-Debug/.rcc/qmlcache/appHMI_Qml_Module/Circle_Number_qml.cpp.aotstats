@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 13,
-                        "durationMicroseconds": 359,
+                        "durationMicroseconds": 372,
                         "errorMessage": "",
                         "functionName": "radius",
                         "line": 10
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 20,
-                        "durationMicroseconds": 253,
+                        "durationMicroseconds": 241,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 27
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 20,
-                        "durationMicroseconds": 88,
+                        "durationMicroseconds": 48,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 27
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 89,
+                        "durationMicroseconds": 59,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 26
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 17,
-                        "durationMicroseconds": 174,
+                        "durationMicroseconds": 105,
                         "errorMessage": "",
                         "functionName": "radius",
                         "line": 39
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 97,
+                        "durationMicroseconds": 54,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 42
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 17,
-                        "durationMicroseconds": 135,
+                        "durationMicroseconds": 90,
                         "errorMessage": "Cannot load property radius from (component in C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Circle_Number.qml)::parent with type QQuickItem.",
                         "functionName": "radius",
                         "line": 58
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 100,
+                        "durationMicroseconds": 71,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 59
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 16,
-                        "durationMicroseconds": 205,
+                        "durationMicroseconds": 115,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 78
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 43,
-                        "durationMicroseconds": 187,
+                        "durationMicroseconds": 108,
                         "errorMessage": "",
                         "functionName": "height",
                         "line": 78
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 17,
-                        "durationMicroseconds": 152,
+                        "durationMicroseconds": 107,
                         "errorMessage": "",
                         "functionName": "radius",
                         "line": 79
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 211,
+                        "durationMicroseconds": 241,
                         "errorMessage": "",
                         "functionName": "restart",
                         "line": 119
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 26,
-                        "durationMicroseconds": 109,
+                        "durationMicroseconds": 124,
                         "errorMessage": "",
                         "functionName": "orientation",
                         "line": 83
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 66,
+                        "durationMicroseconds": 72,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 98
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 114,
+                        "durationMicroseconds": 100,
                         "errorMessage": "",
                         "functionName": "target",
                         "line": 104
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 95,
+                        "durationMicroseconds": 77,
                         "errorMessage": "",
                         "functionName": "target",
                         "line": 111

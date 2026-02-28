@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 537,
+                        "durationMicroseconds": 466,
                         "errorMessage": "",
                         "functionName": "uiScale",
                         "line": 10
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 16,
-                        "durationMicroseconds": 206,
+                        "durationMicroseconds": 118,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "width",
                         "line": 19
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 39,
-                        "durationMicroseconds": 205,
+                        "durationMicroseconds": 100,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "height",
                         "line": 19
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 24,
-                        "durationMicroseconds": 137,
+                        "durationMicroseconds": 72,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "onSig_Clicked",
                         "line": 22
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 60,
+                        "durationMicroseconds": 35,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 22
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 122,
+                        "durationMicroseconds": 52,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 20
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 105,
+                        "durationMicroseconds": 49,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 30
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 83,
+                        "durationMicroseconds": 49,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 30

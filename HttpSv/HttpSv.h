@@ -20,6 +20,7 @@ public:
 public slots:
     QHttpServerResponse slot_compare(const QHttpServerRequest &req);
     QHttpServerResponse slot_pay_ack(int compare_role, const QJsonObject &jsObj);
+    QHttpServerResponse slot_cancle_ack(int compare_role, const QJsonObject &jsObj);
 
 signals:
 

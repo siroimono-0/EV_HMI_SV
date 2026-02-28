@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 829,
+                        "durationMicroseconds": 526,
                         "errorMessage": "",
                         "functionName": "uiScale",
                         "line": 12
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 119,
+                        "durationMicroseconds": 66,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 21
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 16,
-                        "durationMicroseconds": 236,
+                        "durationMicroseconds": 137,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "width",
                         "line": 51
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 39,
-                        "durationMicroseconds": 179,
+                        "durationMicroseconds": 122,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "height",
                         "line": 51
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 24,
-                        "durationMicroseconds": 129,
+                        "durationMicroseconds": 64,
                         "errorMessage": "Cannot retrieve a non-object type by ID: root_tf1",
                         "functionName": "onSig_Clicked",
                         "line": 67
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 59,
+                        "durationMicroseconds": 38,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 67
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 110,
+                        "durationMicroseconds": 90,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 54
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 33,
-                        "durationMicroseconds": 80,
+                        "durationMicroseconds": 81,
                         "errorMessage": "",
                         "functionName": "verticalCenter",
                         "line": 56

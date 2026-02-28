@@ -56,7 +56,19 @@ template <> constexpr inline auto DB_PostgreSQL::qt_create_metaobjectdata<qt_met
         "slot_query_find_hello_hmi",
         "slot_chargingLog_From_soc",
         "db_data",
-        "st_db_data"
+        "st_db_data",
+        "slot_heartbitData_From_soc",
+        "heartbit_data",
+        "st_hb_data",
+        "slot_membershipCard_authorized_From_soc",
+        "adv_pay",
+        "card_uid",
+        "request_id",
+        "slot_membershipCard_finished_From_soc",
+        "act_pay",
+        "can_pay",
+        "uint32_t",
+        "t_id"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -87,6 +99,19 @@ template <> constexpr inline auto DB_PostgreSQL::qt_create_metaobjectdata<qt_met
         // Slot 'slot_chargingLog_From_soc'
         QtMocHelpers::SlotData<void(db_data)>(16, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 17, 18 },
+        }}),
+        // Slot 'slot_heartbitData_From_soc'
+        QtMocHelpers::SlotData<void(heartbit_data)>(19, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 20, 21 },
+        }}),
+        // Slot 'slot_membershipCard_authorized_From_soc'
+        QtMocHelpers::SlotData<void(int, QString, QString)>(22, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 23 }, { QMetaType::QString, 24 }, { QMetaType::QString, 25 },
+        }}),
+        // Slot 'slot_membershipCard_finished_From_soc'
+        QtMocHelpers::SlotData<void(int, int, int, QString, uint32_t)>(26, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 23 }, { QMetaType::Int, 27 }, { QMetaType::Int, 28 }, { QMetaType::QString, 24 },
+            { 0x80000000 | 29, 30 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -123,7 +148,22 @@ void DB_PostgreSQL::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 6: { bool _r = _t->slot_query_find_hello_hmi((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 7: _t->slot_chargingLog_From_soc((*reinterpret_cast< std::add_pointer_t<db_data>>(_a[1]))); break;
+        case 8: _t->slot_heartbitData_From_soc((*reinterpret_cast< std::add_pointer_t<heartbit_data>>(_a[1]))); break;
+        case 9: _t->slot_membershipCard_authorized_From_soc((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
+        case 10: _t->slot_membershipCard_finished_From_soc((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[5]))); break;
         default: ;
+        }
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 8:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< heartbit_data >(); break;
+            }
+            break;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
@@ -151,14 +191,14 @@ int DB_PostgreSQL::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 11;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        if (_id < 11)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 11;
     }
     return _id;
 }

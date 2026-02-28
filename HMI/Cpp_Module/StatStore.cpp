@@ -1,5 +1,7 @@
 #include "StatStore.h"
+#include "Cpp_Module.h"
 #include "WK_Serial.h"
+#include "WK_WebSocket.h"
 
 StatStore::StatStore(QObject *parent)
     : QObject{parent}
@@ -14,6 +16,17 @@ void StatStore::set_First_stat(stat_data st_stat)
 void StatStore::slot_set_p_serial(WK_Serial *serial)
 {
     this->p_serial = serial;
+    return;
+}
+
+void StatStore::set_p_module(Cpp_Module *set)
+{
+    this->p_module = set;
+}
+
+void StatStore::set_p_soc(WK_WebSocket *set)
+{
+    this->p_soc = set;
     return;
 }
 
@@ -58,6 +71,17 @@ stat_data StatStore::slot_get_stat()
     return this->st_stat;
 }
 */
+
+int StatStore::get_i_can_pay()
+{
+    return this->i_can_pay;
+}
+
+QPair<int, QString> StatStore::slot_get_advPay_hmiId()
+{
+    QPair<int, QString> qp({this->i_adv_pay, this->mac_addr});
+    return qp;
+}
 
 void StatStore::slot_set_charging_type(CHARGING_TYPE charging_type, int val)
 {
@@ -121,6 +145,26 @@ void StatStore::slot_set_payment()
         qs_can.insert(qs_can.size() - 3, ",");
     }
     this->set_cancle_payment(qs_can + " 원");
+
+    if (this->st_db_data.card_type == "creditCard")
+    {
+        // 환불 금액 있으면 환불해줌
+        this->cancle_pay_check();
+    }
+    else if (this->st_db_data.card_type == "membershipCard")
+    {
+        QString request_id = this->mac_addr + QTime::currentTime().toString();
+
+        QMetaObject::invokeMethod(this->p_soc,
+                                  "slot_send_membership_finished_textData",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(int, this->i_adv_pay),
+                                  Q_ARG(int, this->i_act_pay),
+                                  Q_ARG(int, this->i_can_pay),
+                                  Q_ARG(QString, this->st_db_data.card_uid),
+                                  Q_ARG(uint32_t, this->st_mb_log.transaction_id),
+                                  Q_ARG(QString, request_id));
+    }
 }
 
 void StatStore::slot_update_chargingStat(charging_stat c_stat)
@@ -137,11 +181,25 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
     float charging_speed = f_charging_speed;
     float charging_capacity = (f_charging_speed / 3600) * elapsed_time;
 
-    uint32_t charging_amount = charging_capacity * 100;
+    if (this->battery_start_persent.isEmpty())
+    {
+        this->battery_start = battery_current;
+    }
+    // 초당 과금액
+    // float charging_amount_second = (f_charging_speed * this->charge_price_kWh) / 3600;
 
-    float remaining_battery = (battery_full - battery_current);
+    // 과금액으로 충전 가능한 배터리
+    float tmp = (float) this->i_adv_pay / (float) this->charge_price_kWh;
+
+    // 목표 배터리
+    float charging_end_battery = this->battery_start + (tmp * 1000);
+
+    uint32_t charging_amount = charging_capacity * this->charge_price_kWh;
+
+    float remaining_battery = (charging_end_battery - battery_current);
     float power_wh = voltage * current;
     uint32_t remaining_time = (remaining_battery / power_wh) * 3600;
+    // uint32_t remaining_time = this->i_adv_pay / charging_amount_second;
 
     this->set_elapsed_time(this->cnv_time(elapsed_time));
     qDebug() << elapsed_time << " :: 경과시간";
@@ -195,8 +253,21 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
     {
         if (remaining_time >= this->charging_val)
         {
+            if (this->i_adv_pay < this->i_act_pay)
+            {
+                // 충전금액 over시 보정 필요
+                QString qs_amount = QString::number(this->i_adv_pay);
+                if (qs_amount.size() > 3)
+                {
+                    qs_amount.insert(qs_amount.size() - 3, ",");
+                }
+
+                this->set_charging_amount(qs_amount + " 원");
+                this->i_act_pay = this->i_adv_pay;
+            }
+
             this->slot_clear_charging_type();
-            this->slot_charging_end_stat_clear();
+            // this->slot_charging_end_stat_clear();
             uint16_t reg_pos = 0x01;
             uint16_t reg_val = 0x01;
             // 시리얼 통신으로 종료 요청
@@ -212,8 +283,21 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
     {
         if (charging_amount >= this->charging_val)
         {
+            if (this->i_adv_pay < this->i_act_pay)
+            {
+                // 충전금액 over시 보정 필요
+                QString qs_amount = QString::number(this->i_adv_pay);
+                if (qs_amount.size() > 3)
+                {
+                    qs_amount.insert(qs_amount.size() - 3, ",");
+                }
+
+                this->set_charging_amount(qs_amount + " 원");
+                this->i_act_pay = this->i_adv_pay;
+            }
+
             this->slot_clear_charging_type();
-            this->slot_charging_end_stat_clear();
+            // this->slot_charging_end_stat_clear();
             uint16_t reg_pos = 0x01;
             uint16_t reg_val = 0x01;
             // 시리얼 통신으로 종료 요청
@@ -229,8 +313,21 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
     {
         if (charging_capacity >= this->charging_val)
         {
+            if (this->i_adv_pay < this->i_act_pay)
+            {
+                // 충전금액 over시 보정 필요
+                QString qs_amount = QString::number(this->i_adv_pay);
+                if (qs_amount.size() > 3)
+                {
+                    qs_amount.insert(qs_amount.size() - 3, ",");
+                }
+
+                this->set_charging_amount(qs_amount + " 원");
+                this->i_act_pay = this->i_adv_pay;
+            }
+
             this->slot_clear_charging_type();
-            this->slot_charging_end_stat_clear();
+            // this->slot_charging_end_stat_clear();
             uint16_t reg_pos = 0x01;
             uint16_t reg_val = 0x01;
             // 시리얼 통신으로 종료 요청
@@ -246,8 +343,21 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
     {
         if (battery_current_persent >= this->charging_val)
         {
+            if (this->i_adv_pay < this->i_act_pay)
+            {
+                // 충전금액 over시 보정 필요
+                QString qs_amount = QString::number(this->i_adv_pay);
+                if (qs_amount.size() > 3)
+                {
+                    qs_amount.insert(qs_amount.size() - 3, ",");
+                }
+
+                this->set_charging_amount(qs_amount + " 원");
+                this->i_act_pay = this->i_adv_pay;
+            }
+
             this->slot_clear_charging_type();
-            this->slot_charging_end_stat_clear();
+            // this->slot_charging_end_stat_clear();
             uint16_t reg_pos = 0x01;
             uint16_t reg_val = 0x01;
             // 시리얼 통신으로 종료 요청
@@ -571,5 +681,58 @@ void StatStore::charging_finished_db_update()
     qDebug() << this->st_db_data.average_kWh << " ave";
 
     emit this->sig_stat_db_update(this->st_db_data);
+    return;
+}
+
+void StatStore::cancle_pay_check()
+{
+    if (this->i_can_pay > 0)
+    {
+        QMetaObject::invokeMethod(this->p_soc,
+                                  "slot_netAccess_post_cancle",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(QString, this->card_uid));
+    }
+    else
+    {
+        emit this->p_module->sig_cancle_payment_ok_ToQml();
+    }
+    return;
+}
+
+void StatStore::set_screen_name(QString set)
+{
+    this->st_hb_data.screen_name = set;
+    return;
+}
+
+void StatStore::slot_heartbit_ping()
+{
+    emit this->sig_heartbit_pong(this->st_hb_data);
+    return;
+}
+
+void StatStore::set_heartbit_storeId_hmiId()
+{
+    this->st_hb_data.store_id = this->store_id;
+    this->st_hb_data.hmi_id = this->mac_addr;
+    return;
+}
+
+int StatStore::slot_get_i_adv_pay()
+{
+    return this->i_adv_pay;
+}
+
+void StatStore::set_card_type(QString set)
+{
+    this->st_db_data.card_type = set;
+    return;
+}
+
+void StatStore::slot_set_membership_t_id(uint32_t set)
+{
+    this->st_mb_log.transaction_id = set;
+    qDebug() << this->st_mb_log.transaction_id << " t_id";
     return;
 }
