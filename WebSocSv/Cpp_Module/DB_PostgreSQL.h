@@ -6,7 +6,13 @@
 #include <QtSql>
 #include "../../Common/StatData.h"
 
-enum RECURSIVE_ERR { MB_AUTHORIZED = 0, MB_FINISHED = 1 };
+enum RECURSIVE_ERR {
+    MB_AUTHORIZED = 0,
+    MB_FINISHED = 1,
+    CHARGING_AUTHORIZED = 2,
+    CHARGING_START = 3,
+    CHARGING_FINISHED = 4
+};
 
 class Cpp_Module;
 class WK_Soc;
@@ -30,6 +36,19 @@ public:
     QPair<bool, QString> membershipCard_log_insert_authorized(const membership_log &m_log);
     bool membershipCard_log_insert_finished(const membership_log &m_log);
 
+    void membershipCard_finished_sqlite_backUp(const membership_backUp_sqlite back_data);
+    void chargingLog_sqlite_backUp(const db_data back_data);
+
+    // 걍 닫힘? -> 열음
+    // 닫혀있는대 착시임? -> 트랜잭션때 실패함
+    // 다시 닫힘? -> 열음 반복시킴 어자피 실제 제품도 아니고 걍 단순하게
+    bool db_openCheck();
+
+    void membershipCard_authorized_false_msg();
+    void membershipCard_finished_stat(bool stat);
+    void chargingLog_authorized_invok();
+    void chargingLog_start_invok();
+    void chargingLog_finished_invok();
 public slots:
     void slot_end();
     void slot_set_p_soc(WK_Soc *soc);
@@ -58,6 +77,9 @@ signals:
 
 private:
     QSqlDatabase db;
+    QSqlDatabase db_lite;
+    QTimer *p_timer_lite;
+
     Cpp_Module *p_Module;
     WK_Soc *p_soc;
 };

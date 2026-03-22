@@ -59,8 +59,6 @@ template <> constexpr inline auto WK_Soc::qt_create_metaobjectdata<qt_meta_tag_Z
         "slot_registerReq_hmi",
         "slot_registerAck_hmi",
         "slot_chargingLog_authorized_ack_To_hmi",
-        "uint64_t",
-        "session_id",
         "slot_chargingLog_charging_start_ack_To_hmi",
         "uint32_t",
         "ocpp_tx_id",
@@ -111,26 +109,24 @@ template <> constexpr inline auto WK_Soc::qt_create_metaobjectdata<qt_meta_tag_Z
             { QMetaType::Bool, 14 },
         }}),
         // Slot 'slot_chargingLog_authorized_ack_To_hmi'
-        QtMocHelpers::SlotData<void(uint64_t)>(20, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 21, 22 },
-        }}),
+        QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_chargingLog_charging_start_ack_To_hmi'
-        QtMocHelpers::SlotData<void(uint32_t)>(23, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 24, 25 },
+        QtMocHelpers::SlotData<void(uint32_t)>(21, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 22, 23 },
         }}),
         // Slot 'slot_chargingLog_charging_finished_ack_To_hmi'
-        QtMocHelpers::SlotData<void()>(26, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_membershipCard_authorized_ack_To_hmi'
-        QtMocHelpers::SlotData<void(bool, QString)>(27, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 28 }, { QMetaType::QString, 29 },
+        QtMocHelpers::SlotData<void(bool, QString)>(25, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 26 }, { QMetaType::QString, 27 },
         }}),
         // Slot 'slot_membershipCard_authorized_ack_To_hmi'
-        QtMocHelpers::SlotData<void(bool)>(27, 2, QMC::AccessPublic | QMC::MethodCloned, QMetaType::Void, {{
-            { QMetaType::Bool, 28 },
+        QtMocHelpers::SlotData<void(bool)>(25, 2, QMC::AccessPublic | QMC::MethodCloned, QMetaType::Void, {{
+            { QMetaType::Bool, 26 },
         }}),
         // Slot 'slot_membershipCard_finished_ack_To_hmi'
-        QtMocHelpers::SlotData<void(bool)>(30, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 28 },
+        QtMocHelpers::SlotData<void(bool)>(28, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 26 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -167,7 +163,7 @@ void WK_Soc::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 8: { bool _r = _t->slot_registerReq_hmi((*reinterpret_cast< std::add_pointer_t<QJsonObject>>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 9: _t->slot_registerAck_hmi((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        case 10: _t->slot_chargingLog_authorized_ack_To_hmi((*reinterpret_cast< std::add_pointer_t<uint64_t>>(_a[1]))); break;
+        case 10: _t->slot_chargingLog_authorized_ack_To_hmi(); break;
         case 11: _t->slot_chargingLog_charging_start_ack_To_hmi((*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[1]))); break;
         case 12: _t->slot_chargingLog_charging_finished_ack_To_hmi(); break;
         case 13: _t->slot_membershipCard_authorized_ack_To_hmi((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;

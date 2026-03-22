@@ -128,11 +128,12 @@ QHttpServerResponse HttpSv::slot_cancle_ack(int compare_role, const QJsonObject 
     QJsonDocument jsDoc(send_jsObj);
     QString send_qs = jsDoc.toJson(QJsonDocument::Compact);
 
-    /*ack 미전송 테스트
     // 생성자에서 자동으로 Content-Type 으로 헤더 생성
     QHttpServerResponse rep("application/json", send_qs.toUtf8());
-    return rep;*/
+    return rep;
 
+    /*ack 미전송 테스트
     QHttpServerResponse test("application/json", "tesy");
     return test;
+*/
 }

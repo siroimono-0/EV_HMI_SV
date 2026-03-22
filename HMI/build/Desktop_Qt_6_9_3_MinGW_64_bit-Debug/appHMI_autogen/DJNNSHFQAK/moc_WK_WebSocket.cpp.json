@@ -182,10 +182,20 @@
                         {
                             "name": "t_id",
                             "type": "uint32_t"
+                        },
+                        {
+                            "name": "request_id",
+                            "type": "QString"
                         }
                     ],
                     "index": 16,
                     "name": "slot_send_membership_finished_textData",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 17,
+                    "name": "slot_timeOut_membership_finished_ack",
                     "returnType": "void"
                 },
                 {
@@ -196,7 +206,7 @@
                             "type": "heartbit_data"
                         }
                     ],
-                    "index": 17,
+                    "index": 18,
                     "name": "slot_send_heartbit_pong",
                     "returnType": "void"
                 }

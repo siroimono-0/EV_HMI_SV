@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 876,
+                        "durationMicroseconds": 819,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_prev",
                         "line": 14
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 184,
+                        "durationMicroseconds": 180,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 24
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 154,
+                        "durationMicroseconds": 142,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 73
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 62,
+                        "durationMicroseconds": 46,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 73
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 22,
-                        "durationMicroseconds": 46,
+                        "durationMicroseconds": 36,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb",
                         "functionName": "top",
                         "line": 69
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 149,
+                        "durationMicroseconds": 151,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 71

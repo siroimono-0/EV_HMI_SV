@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 338,
+                        "durationMicroseconds": 326,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_next",
                         "line": 13
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 185,
+                        "durationMicroseconds": 192,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 20
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 19,
-                        "durationMicroseconds": 113,
+                        "durationMicroseconds": 133,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 26
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 138,
+                        "durationMicroseconds": 119,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 28
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 117,
+                        "durationMicroseconds": 105,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 30
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 143,
+                        "durationMicroseconds": 150,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 80
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 45,
+                        "durationMicroseconds": 43,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 80
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 137,
+                        "durationMicroseconds": 115,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 76
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 143,
+                        "durationMicroseconds": 131,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 78

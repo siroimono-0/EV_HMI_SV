@@ -109,9 +109,9 @@ template <> constexpr inline auto DB_PostgreSQL::qt_create_metaobjectdata<qt_met
             { QMetaType::Int, 23 }, { QMetaType::QString, 24 }, { QMetaType::QString, 25 },
         }}),
         // Slot 'slot_membershipCard_finished_From_soc'
-        QtMocHelpers::SlotData<void(int, int, int, QString, uint32_t)>(26, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::SlotData<void(int, int, int, QString, uint32_t, QString)>(26, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::Int, 23 }, { QMetaType::Int, 27 }, { QMetaType::Int, 28 }, { QMetaType::QString, 24 },
-            { 0x80000000 | 29, 30 },
+            { 0x80000000 | 29, 30 }, { QMetaType::QString, 25 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -150,7 +150,7 @@ void DB_PostgreSQL::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 7: _t->slot_chargingLog_From_soc((*reinterpret_cast< std::add_pointer_t<db_data>>(_a[1]))); break;
         case 8: _t->slot_heartbitData_From_soc((*reinterpret_cast< std::add_pointer_t<heartbit_data>>(_a[1]))); break;
         case 9: _t->slot_membershipCard_authorized_From_soc((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
-        case 10: _t->slot_membershipCard_finished_From_soc((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[5]))); break;
+        case 10: _t->slot_membershipCard_finished_From_soc((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6]))); break;
         default: ;
         }
     }

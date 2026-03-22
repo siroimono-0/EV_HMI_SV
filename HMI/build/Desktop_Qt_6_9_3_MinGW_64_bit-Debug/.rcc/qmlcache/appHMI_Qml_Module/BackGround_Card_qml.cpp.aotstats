@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 189,
+                        "durationMicroseconds": 184,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 11
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 19,
-                        "durationMicroseconds": 71,
+                        "durationMicroseconds": 69,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 23
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 63,
+                        "durationMicroseconds": 55,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 21

@@ -433,7 +433,8 @@ void WK_Soc::req_chargingLog_To_DB(const QJsonObject &jsObj)
     struct db_data st_db_data = {0};
 
     // session_id는 보내는 쪽에서 문자열로 보냄
-    st_db_data.session_id = jsObj["session_id"].toString().toULongLong();
+    // session_id 안씀 수정
+    // st_db_data.session_id = jsObj["session_id"].toString().toULongLong();
 
     // uint32_t들은 unsigned로 받는 게 안전
     st_db_data.store_id = jsObj["store_id"].toVariant().toUInt();
@@ -458,21 +459,20 @@ void WK_Soc::req_chargingLog_To_DB(const QJsonObject &jsObj)
     st_db_data.session_status = jsObj["session_status"].toString();
     st_db_data.stop_reason = jsObj["stop_reason"].toString();
 
+    st_db_data.local_tx_id = jsObj["local_tx_id"].toString();
+
     emit this->sig_chargingLog_To_DB(st_db_data);
     qDebug() << Q_FUNC_INFO;
     return;
 }
 
-void WK_Soc::slot_chargingLog_authorized_ack_To_hmi(uint64_t session_id)
+void WK_Soc::slot_chargingLog_authorized_ack_To_hmi()
 {
-    QString qs_session_id = QString::number(session_id);
-    qDebug() << session_id << "session val";
     QJsonObject jsObj;
     jsObj.insert("type", "chargingLog_ack");
     jsObj.insert("session_status", "authorized");
-    jsObj.insert("session_id", qs_session_id);
+    // jsObj.insert("session_id", qs_session_id);
 
-    qDebug() << jsObj["session_id"].toString() << "session jsobj";
     QJsonDocument jsDoc(jsObj);
     this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
 
@@ -567,7 +567,7 @@ void WK_Soc::slot_membershipCard_authorized_ack_To_hmi(bool ok, QString msg)
 
     QJsonDocument jsDoc(jsObj);
     // ack 미전송 테스트 완료
-    // this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
     return;
 }
 
@@ -596,6 +596,7 @@ void WK_Soc::slot_membershipCard_finished_ack_To_hmi(bool ok)
 {
     // finished는 이미 홀드 잡은거 처리하는거라서
     // 전송에러 말고 다른거 없음
+    // ok false 이면 나중에 처리댈거임 알려주면댐
     QJsonObject jsObj;
     jsObj.insert("type", "membershipCard_finished_ack");
     jsObj.insert("ok", ok);

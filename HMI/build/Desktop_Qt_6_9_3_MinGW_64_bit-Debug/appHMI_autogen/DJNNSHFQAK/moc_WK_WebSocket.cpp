@@ -74,6 +74,8 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         "can_pay",
         "uint32_t",
         "t_id",
+        "request_id",
+        "slot_timeOut_membership_finished_ack",
         "slot_send_heartbit_pong",
         "heartbit_data",
         "st_hb_data"
@@ -129,13 +131,15 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         // Slot 'slot_timeOut_membership_authorized_ack'
         QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_send_membership_finished_textData'
-        QtMocHelpers::SlotData<void(int, int, int, QString, uint32_t)>(30, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::SlotData<void(int, int, int, QString, uint32_t, QString)>(30, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::Int, 27 }, { QMetaType::Int, 31 }, { QMetaType::Int, 32 }, { QMetaType::QString, 24 },
-            { 0x80000000 | 33, 34 },
+            { 0x80000000 | 33, 34 }, { QMetaType::QString, 35 },
         }}),
+        // Slot 'slot_timeOut_membership_finished_ack'
+        QtMocHelpers::SlotData<void()>(36, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_send_heartbit_pong'
-        QtMocHelpers::SlotData<void(heartbit_data)>(35, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 36, 37 },
+        QtMocHelpers::SlotData<void(heartbit_data)>(37, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 38, 39 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -176,8 +180,9 @@ void WK_WebSocket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 13: _t->slot_timeOut_cancle_ack(); break;
         case 14: _t->slot_send_membership_authorized_textData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
         case 15: _t->slot_timeOut_membership_authorized_ack(); break;
-        case 16: _t->slot_send_membership_finished_textData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[5]))); break;
-        case 17: _t->slot_send_heartbit_pong((*reinterpret_cast< std::add_pointer_t<heartbit_data>>(_a[1]))); break;
+        case 16: _t->slot_send_membership_finished_textData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6]))); break;
+        case 17: _t->slot_timeOut_membership_finished_ack(); break;
+        case 18: _t->slot_send_heartbit_pong((*reinterpret_cast< std::add_pointer_t<heartbit_data>>(_a[1]))); break;
         default: ;
         }
     }
@@ -198,7 +203,7 @@ void WK_WebSocket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QNetworkReply* >(); break;
             }
             break;
-        case 17:
+        case 18:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -234,14 +239,14 @@ int WK_WebSocket::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 19;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 19;
     }
     return _id;
 }

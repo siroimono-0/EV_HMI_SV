@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 244,
+                        "durationMicroseconds": 177,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 13
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 19,
-                        "durationMicroseconds": 112,
+                        "durationMicroseconds": 76,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 25
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 118,
+                        "durationMicroseconds": 80,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 21
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 91,
+                        "durationMicroseconds": 68,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 23
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 102,
+                        "durationMicroseconds": 74,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 82
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 41,
+                        "durationMicroseconds": 31,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 82
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 106,
+                        "durationMicroseconds": 69,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 41
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 109,
+                        "durationMicroseconds": 62,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 43
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 91,
+                        "durationMicroseconds": 61,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 130
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 33,
+                        "durationMicroseconds": 21,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 130
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 112,
+                        "durationMicroseconds": 76,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 91
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 101,
+                        "durationMicroseconds": 55,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 93

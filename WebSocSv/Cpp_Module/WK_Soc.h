@@ -48,7 +48,7 @@ public slots:
     bool slot_registerReq_hmi(const QJsonObject &jsObj);
     void slot_registerAck_hmi(bool ret);
 
-    void slot_chargingLog_authorized_ack_To_hmi(uint64_t session_id);
+    void slot_chargingLog_authorized_ack_To_hmi();
     void slot_chargingLog_charging_start_ack_To_hmi(uint32_t ocpp_tx_id);
     void slot_chargingLog_charging_finished_ack_To_hmi();
     // void slot_chargingLog_charging_fist_ack_To_hmi(bool ret);

@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 184,
+                        "durationMicroseconds": 193,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 18
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 73,
+                        "durationMicroseconds": 75,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 26
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 53,
+                        "durationMicroseconds": 52,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 28
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 47,
+                        "durationMicroseconds": 60,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 47
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 49,
+                        "durationMicroseconds": 48,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 49
@@ -198,7 +198,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 24,
-                        "durationMicroseconds": 120,
+                        "durationMicroseconds": 116,
                         "errorMessage": "Cannot retrieve a non-object type by ID: tf",
                         "functionName": "onSig_Cilcked",
                         "line": 142
@@ -206,42 +206,10 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 43,
+                        "durationMicroseconds": 36,
                         "errorMessage": "",
                         "functionName": "onSig_Cilcked",
                         "line": 142
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 24,
-                        "durationMicroseconds": 68,
-                        "errorMessage": "",
-                        "functionName": "right",
-                        "line": 138
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 33,
-                        "durationMicroseconds": 58,
-                        "errorMessage": "",
-                        "functionName": "verticalCenter",
-                        "line": 140
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 24,
-                        "durationMicroseconds": 45,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: tf",
-                        "functionName": "onSig_Clicked",
-                        "line": 202
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 24,
-                        "durationMicroseconds": 27,
-                        "errorMessage": "",
-                        "functionName": "onSig_Clicked",
-                        "line": 202
                     },
                     {
                         "codegenSuccessful": true,
@@ -249,12 +217,44 @@
                         "durationMicroseconds": 52,
                         "errorMessage": "",
                         "functionName": "right",
+                        "line": 138
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 33,
+                        "durationMicroseconds": 47,
+                        "errorMessage": "",
+                        "functionName": "verticalCenter",
+                        "line": 140
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 24,
+                        "durationMicroseconds": 44,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: tf",
+                        "functionName": "onSig_Clicked",
+                        "line": 202
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 28,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 202
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 54,
+                        "errorMessage": "",
+                        "functionName": "right",
                         "line": 162
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 57,
+                        "durationMicroseconds": 54,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 164
@@ -310,7 +310,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 58,
+                        "durationMicroseconds": 53,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 254
@@ -318,7 +318,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 19,
+                        "durationMicroseconds": 17,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 254
@@ -326,7 +326,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 61,
+                        "durationMicroseconds": 49,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 213
@@ -334,7 +334,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 47,
+                        "durationMicroseconds": 45,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 215
@@ -390,23 +390,23 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 50,
-                        "errorMessage": "",
-                        "functionName": "onSig_Clicked",
-                        "line": 302
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 24,
-                        "durationMicroseconds": 17,
-                        "errorMessage": "",
-                        "functionName": "onSig_Clicked",
-                        "line": 302
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 24,
                         "durationMicroseconds": 49,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 302
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 16,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 302
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 46,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 263
@@ -414,7 +414,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 62,
+                        "durationMicroseconds": 63,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 265

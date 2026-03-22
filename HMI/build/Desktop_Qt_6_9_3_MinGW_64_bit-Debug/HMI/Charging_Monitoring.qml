@@ -5,6 +5,7 @@ import HMI 1.0
 
 Item {
     id: root
+    property bool cancle_payment_stat: true;
 
     BackGround_Card{
         id: back
@@ -35,13 +36,13 @@ Item {
 
     function stk_next()
     {
-        StackView.view.push("Charging_Complet.qml");
+        StackView.view.push("Charging_Complet.qml", {cancle_payment_stat : cancle_payment_stat });
     }
 
     Connections{
         target: cpp_module
 
-        // serial 에서 충지 요청 ack 확인했으면
+        // serial 에서 중지 요청 ack 확인했으면
         function onSig_charging_stop_ToQml()
         {
             // 릴레이 모듈 234코일 중지
@@ -51,14 +52,24 @@ Item {
         // 234코일 중지 확인 모드버스 받았으면
         function onSig_coil234_off_check_ToQml()
         {
-
             // 충전금액 정산
             // http sv 차액 결제 취소 요청
             cpp_module.set_payment_To_statStore();
         }
 
-        function onSig_cancle_payment_ok_ToQml()
+        // 신용 카드의 경우
+        function onSig_cancle_payment_ok_ToQml(stat)
         {
+            cpp_module.charging_finished_To_statStore();
+        }
+
+        // 멤버쉽 카드의 경우
+        function onSig_cancle_payment_ok_member_ToQml(stat)
+        {
+            // 멤버쉽 카드 db 업데이트 결과
+            // 다음 스택뷰에 넘겨줌
+            root.cancle_payment_stat = stat;
+
             // charging_finished으로 세션 상태 업데이트
             // module -> statStore -> soc -> sv
             // -> http sv 승인취소 요청 -> 응답 확인 -> soc -> db

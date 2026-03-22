@@ -89,7 +89,7 @@ void StatStore::slot_set_charging_type(CHARGING_TYPE charging_type, int val)
     this->charging_val = val;
 
     // enum CHARGING_TYPE { NOT_SET = 0, TIME = 1, WON = 2, KWH = 3, PERSENT = 4 };
-
+    // 충전 종류에 따라서 ~원으로 변환
     if (charging_type == TIME)
     {
         this->i_adv_pay = val * this->charge_price_min;
@@ -153,7 +153,10 @@ void StatStore::slot_set_payment()
     }
     else if (this->st_db_data.card_type == "membershipCard")
     {
-        QString request_id = this->mac_addr + QTime::currentTime().toString();
+        QString hmi_id = this->mac_addr;
+        QString request_id;
+        QDateTime dt_utc = QDateTime::currentDateTimeUtc();
+        request_id = hmi_id + dt_utc.toString();
 
         QMetaObject::invokeMethod(this->p_soc,
                                   "slot_send_membership_finished_textData",
@@ -251,7 +254,8 @@ void StatStore::slot_update_chargingStat(charging_stat c_stat)
     }
     else if (this->charging_type == TIME)
     {
-        if (remaining_time >= this->charging_val)
+        // second로 변환 안해서그럼
+        if (elapsed_time >= (this->charging_val * 60))
         {
             if (this->i_adv_pay < this->i_act_pay)
             {
@@ -583,6 +587,12 @@ void StatStore::slot_card_ok_db_update()
     this->st_db_data.card_uid = this->card_uid;
     this->st_db_data.advance_payment = this->i_adv_pay;
     this->st_db_data.unit_price = this->charge_price_kWh;
+
+    QString local_tx_id;
+    QDateTime dt_utc = QDateTime::currentDateTimeUtc();
+    local_tx_id = this->mac_addr + dt_utc.toString();
+    this->st_db_data.local_tx_id = local_tx_id;
+
     if (this->charging_type == TIME)
     {
         this->st_db_data.tariff_type = "TIME";

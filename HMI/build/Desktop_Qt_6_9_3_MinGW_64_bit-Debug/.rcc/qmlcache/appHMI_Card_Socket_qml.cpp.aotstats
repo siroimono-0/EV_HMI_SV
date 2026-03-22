@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 650,
+                        "durationMicroseconds": 621,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "stk_back",
                         "line": 13
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 317,
+                        "durationMicroseconds": 301,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "card_authorized_success",
                         "line": 21
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 154,
+                        "durationMicroseconds": 151,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_next",
                         "line": 31
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 17,
-                        "durationMicroseconds": 73,
+                        "durationMicroseconds": 65,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "target",
                         "line": 43
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 230,
+                        "durationMicroseconds": 197,
                         "errorMessage": "",
                         "functionName": "onSig_card_success_ToQml",
                         "line": 45
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 107,
+                        "durationMicroseconds": 84,
                         "errorMessage": "",
                         "functionName": "onSig_card_authorized_db_update_ack_ToQml",
                         "line": 50
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 9,
-                        "durationMicroseconds": 52,
+                        "durationMicroseconds": 61,
                         "errorMessage": "Cannot retrieve a non-object type by ID: root_indicator",
                         "functionName": "onSig_card_compare_ToQml",
                         "line": 60
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 91,
+                        "durationMicroseconds": 82,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 70
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 19,
-                        "durationMicroseconds": 123,
+                        "durationMicroseconds": 115,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 76
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 126,
+                        "durationMicroseconds": 120,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 78
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 117,
+                        "durationMicroseconds": 160,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 80
@@ -174,7 +174,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 128,
+                        "durationMicroseconds": 143,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 130
@@ -182,7 +182,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 44,
+                        "durationMicroseconds": 46,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 130
@@ -190,7 +190,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 131,
+                        "durationMicroseconds": 127,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 126
@@ -198,7 +198,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 131,
+                        "durationMicroseconds": 148,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 128

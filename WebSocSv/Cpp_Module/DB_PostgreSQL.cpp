@@ -27,7 +27,7 @@ void DB_PostgreSQL::createDB()
     qDebug() << QSqlDatabase::drivers();
     qDebug() << QLibraryInfo::path(QLibraryInfo::PluginsPath);
 
-    this->db = QSqlDatabase::addDatabase("QPSQL", "DB_THREAD_CONN");
+    this->db = QSqlDatabase::addDatabase("QPSQL", "DB_THREAD_CONN_PG");
     this->db.setHostName("localhost");
     this->db.setDatabaseName("HMI_Users");
     this->db.setUserName("postgres");
@@ -42,6 +42,19 @@ void DB_PostgreSQL::createDB()
     {
         // qDebug() << "db false";
         qDebug() << this->db.lastError().text();
+    }
+
+    this->db_lite = QSqlDatabase::addDatabase("QSQLITE", "DB_THREAD_CONN_SQLITE");
+    this->db_lite.setDatabaseName("HMI_Users_lite");
+
+    if (this->db_lite.open())
+    {
+        qDebug() << "db_light open";
+    }
+    else
+    {
+        // qDebug() << "db false";
+        qDebug() << this->db_lite.lastError().text();
     }
     return;
 }
@@ -153,8 +166,20 @@ bool DB_PostgreSQL::slot_query_register_hmi(const QString storeId, const QString
     return true;
 }
 
+// 백업 X
 bool DB_PostgreSQL::slot_query_find_hello_hmi(const QString storeId, const QString hmiId)
 {
+    if (!this->db_openCheck())
+    {
+        return false;
+    }
+
+    bool ret_t = this->db.transaction();
+    if (ret_t == false)
+    {
+        return false;
+    }
+
     QSqlQuery query(this->db);
     // SELECT id FROM 테이블명 WHERE id = 값;
     bool b_ok_prepare = query.prepare("SELECT * FROM hmi_device WHERE hmi_id = :hmi_id");
@@ -200,8 +225,28 @@ bool DB_PostgreSQL::slot_query_find_hello_hmi(const QString storeId, const QStri
     return false;
 }
 
+// 백업 O // HMI 메시지 전달 없음
 void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
 {
+    if (!this->db_openCheck())
+    {
+        // db 에러 났어도 qml일단 진행
+        if (st_db_data.session_status == "authorized")
+        {
+            this->chargingLog_authorized_invok();
+        }
+        else if (st_db_data.session_status == "charging_start")
+        {
+            this->chargingLog_start_invok();
+        }
+        else if (st_db_data.session_status == "charging_finished")
+        {
+            this->chargingLog_finished_invok();
+        }
+
+        return;
+    }
+
     QSqlQuery query(this->db);
     qDebug() << st_db_data.store_id << " store_id";
     qDebug() << st_db_data.hmi_id << " hmi_id";
@@ -215,20 +260,25 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
     qDebug() << Q_FUNC_INFO;
     if (st_db_data.session_status == "authorized")
     {
+        qDebug() << "충전로그 인증 업데이트 ::::::::::::::::::::";
         bool ok_prepare = query.prepare(
             "INSERT INTO charging_log (store_id, hmi_id, ocpp_tx_id, card_uid, start_time, "
             "end_time, "
             "duration_time, average_kWh, soc_start, soc_end, advance_payment, cancel_payment, "
-            "actual_payment, unit_price, tariff_type, session_status, stop_reason) VALUES "
+            "actual_payment, unit_price, tariff_type, session_status, stop_reason, local_tx_id) "
+            "VALUES "
             "(:store_id, "
             ":hmi_id, :ocpp_tx_id, :card_uid, :start_time, :end_time, "
             ":duration_time, :average_kWh, :soc_start, :soc_end, :advance_payment, "
             ":cancel_payment, "
-            ":actual_payment, :unit_price, :tariff_type, :session_status, :stop_reason)"
-            "RETURNING session_id");
+            ":actual_payment, :unit_price, :tariff_type, :session_status, :stop_reason, "
+            ":local_tx_id)");
 
+        // 디버깅
         if (!this->check_query_prepare(ok_prepare, query))
         {
+            this->chargingLog_sqlite_backUp(st_db_data);
+            this->chargingLog_authorized_invok();
             return;
         }
 
@@ -249,74 +299,77 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         query.bindValue(":tariff_type", st_db_data.tariff_type);
         query.bindValue(":session_status", st_db_data.session_status);
         // query.bindValue(":stop_reason", st_db_data.stop_reason);
+        query.bindValue(":local_tx_id", st_db_data.local_tx_id);
 
         bool ok_exec = query.exec();
 
         if (!this->check_query_exec(ok_exec, query))
         {
+            this->chargingLog_sqlite_backUp(st_db_data);
+            this->chargingLog_authorized_invok();
             return;
         }
 
-        // session_id 리턴값 포함해서 hmi에게 ack 리턴
-        query.next();
-        uint64_t session_id = query.value(0).toULongLong();
-        bool ret = QMetaObject::invokeMethod(this->p_soc,
-                                             "slot_chargingLog_authorized_ack_To_hmi",
-                                             Qt::QueuedConnection,
-                                             Q_ARG(uint64_t, session_id));
-        if (!ret)
-        {
-            qDebug() << "invok err";
-        }
-        else
-        {
-            qDebug() << "invok ok";
-        }
 
-        qDebug() << session_id << " :: session_id";
         qDebug() << Q_FUNC_INFO;
     }
     else if (st_db_data.session_status == "charging_start")
     {
-        bool ok_prepare = query.prepare("UPDATE charging_log "
-                                        "SET ocpp_tx_id = nextval('public.ocpp_tx_id_seq'), "
-                                        "start_time = :start_time, "
-                                        "soc_start = :soc_start, "
-                                        "session_status = :session_status "
-                                        "WHERE session_id = :session_id "
-                                        "RETURNING ocpp_tx_id");
-
-        qDebug() << st_db_data.session_id << " :: session_id";
-        qDebug() << Q_FUNC_INFO;
+        qDebug() << "충전로그 시작 업데이트 ::::::::::::::::::::";
+        bool ok_prepare = query.prepare(
+            "INSERT INTO charging_log (store_id, hmi_id, ocpp_tx_id, card_uid, start_time, "
+            "end_time, "
+            "duration_time, average_kWh, soc_start, soc_end, advance_payment, cancel_payment, "
+            "actual_payment, unit_price, tariff_type, session_status, stop_reason, local_tx_id) "
+            "VALUES "
+            "(:store_id, "
+            ":hmi_id, nextval('public.ocpp_tx_id_seq'), :card_uid, :start_time, :end_time, "
+            ":duration_time, :average_kWh, :soc_start, :soc_end, :advance_payment, "
+            ":cancel_payment, "
+            ":actual_payment, :unit_price, :tariff_type, :session_status, :stop_reason, "
+            ":local_tx_id) "
+            "RETURNING ocpp_tx_id");
 
         if (!this->check_query_prepare(ok_prepare, query))
         {
+            this->chargingLog_sqlite_backUp(st_db_data);
+            // 아직 ocpp_tx 못받음 그런대 에러나도 일단 qml 진행 시켜야댐
+            // 어자피 노답임
+            // 일관성 있게 null
+            /*
+             -1 처리 -> HMI에서 받고 -1이면 set 안함
+             해당 함수 백업 실행 인지 아닌지 매개변수 판별
+            백업 실행이면 ocpp << insert안시킴 -> null 통일
+             */
+            this->chargingLog_start_invok(uint32_t ocpp_tx_id);
             return;
         }
 
-        query.bindValue(":session_id", st_db_data.session_id);
-        // query.bindValue(":store_id", st_db_data.store_id);
-        // query.bindValue(":hmi_id", st_db_data.hmi_id);
+        query.bindValue(":store_id", st_db_data.store_id);
+        query.bindValue(":hmi_id", st_db_data.hmi_id);
         // query.bindValue(":ocpp_tx_id", st_db_data.ocpp_tx_id);
-        // query.bindValue(":card_uid", st_db_data.card_uid);
+        query.bindValue(":card_uid", st_db_data.card_uid);
         query.bindValue(":start_time", st_db_data.start_time);
         // query.bindValue(":end_time", st_db_data.end_time);
         // query.bindValue(":duration_time", st_db_data.duration_time);
         // query.bindValue(":average_kWh", st_db_data.average_kWh);
         query.bindValue(":soc_start", st_db_data.soc_start);
         // query.bindValue(":soc_end", st_db_data.soc_end);
-        // query.bindValue(":advance_payment", st_db_data.advance_payment);
+        query.bindValue(":advance_payment", st_db_data.advance_payment);
         // query.bindValue(":cancel_payment", st_db_data.cancel_payment);
         // query.bindValue(":actual_payment", st_db_data.actual_payment);
-        // query.bindValue(":unit_price", st_db_data.unit_price);
-        // query.bindValue(":tariff_type", st_db_data.tariff_type);
+        query.bindValue(":unit_price", st_db_data.unit_price);
+        query.bindValue(":tariff_type", st_db_data.tariff_type);
         query.bindValue(":session_status", st_db_data.session_status);
         // query.bindValue(":stop_reason", st_db_data.stop_reason);
+        query.bindValue(":local_tx_id", st_db_data.local_tx_id);
 
         bool ok_exec = query.exec();
 
         if (!this->check_query_exec(ok_exec, query))
         {
+            this->chargingLog_sqlite_backUp(st_db_data);
+            this->chargingLog_start_invok();
             return;
         }
 
@@ -331,6 +384,7 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
     }
     else if (st_db_data.session_status == "charging_finished")
     {
+        /* 수정
         bool ok_prepare = query.prepare("UPDATE charging_log "
                                         "SET end_time = :end_time, "
                                         "duration_time = :duration_time , "
@@ -367,11 +421,55 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         // query.bindValue(":tariff_type", st_db_data.tariff_type);
         query.bindValue(":session_status", st_db_data.session_status);
         // query.bindValue(":stop_reason", st_db_data.stop_reason);
+*/
+
+        qDebug() << "충전로그 끝 업데이트 ::::::::::::::::::::";
+        bool ok_prepare = query.prepare(
+            "INSERT INTO charging_log (store_id, hmi_id, ocpp_tx_id, card_uid, start_time, "
+            "end_time, "
+            "duration_time, average_kWh, soc_start, soc_end, advance_payment, cancel_payment, "
+            "actual_payment, unit_price, tariff_type, session_status, stop_reason, local_tx_id) "
+            "VALUES "
+            "(:store_id, "
+            ":hmi_id, :ocpp_tx_id, :card_uid, :start_time, :end_time, "
+            ":duration_time, :average_kWh, :soc_start, :soc_end, :advance_payment, "
+            ":cancel_payment, "
+            ":actual_payment, :unit_price, :tariff_type, :session_status, :stop_reason, "
+            ":local_tx_id) "
+            "RETURNING ocpp_tx_id");
+
+        if (!this->check_query_prepare(ok_prepare, query))
+        {
+            this->chargingLog_sqlite_backUp(st_db_data);
+            this->chargingLog_finished_invok();
+            return;
+        }
+
+        query.bindValue(":store_id", st_db_data.store_id);
+        query.bindValue(":hmi_id", st_db_data.hmi_id);
+        query.bindValue(":ocpp_tx_id", st_db_data.ocpp_tx_id);
+        query.bindValue(":card_uid", st_db_data.card_uid);
+        query.bindValue(":start_time", st_db_data.start_time);
+        query.bindValue(":end_time", st_db_data.end_time);
+        query.bindValue(":duration_time", st_db_data.duration_time);
+        query.bindValue(":average_kWh", st_db_data.average_kWh);
+        query.bindValue(":soc_start", st_db_data.soc_start);
+        query.bindValue(":soc_end", st_db_data.soc_end);
+        query.bindValue(":advance_payment", st_db_data.advance_payment);
+        query.bindValue(":cancel_payment", st_db_data.cancel_payment);
+        query.bindValue(":actual_payment", st_db_data.actual_payment);
+        query.bindValue(":unit_price", st_db_data.unit_price);
+        query.bindValue(":tariff_type", st_db_data.tariff_type);
+        query.bindValue(":session_status", st_db_data.session_status);
+        query.bindValue(":stop_reason", st_db_data.stop_reason);
+        query.bindValue(":local_tx_id", st_db_data.local_tx_id);
 
         bool ok_exec = query.exec();
 
         if (!this->check_query_exec(ok_exec, query))
         {
+            this->chargingLog_sqlite_backUp(st_db_data);
+            this->chargingLog_finished_invok();
             return;
         }
 
@@ -381,6 +479,7 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
     }
     else if (st_db_data.session_status == "failed")
     {
+        // ??
     }
     else if (st_db_data.session_status == "timeout")
     {
@@ -420,8 +519,14 @@ bool DB_PostgreSQL::check_query_exec(bool ok, QSqlQuery &query)
     return true;
 }
 
+// 백업 X
 void DB_PostgreSQL::slot_heartbitData_From_soc(heartbit_data st_hb_data)
 {
+    if (!this->db_openCheck())
+    {
+        return;
+    }
+
     QSqlQuery query(this->db);
     qDebug() << Q_FUNC_INFO;
     bool ok_prepare = query.prepare("INSERT INTO hmi_current_stat ("
@@ -458,12 +563,27 @@ void DB_PostgreSQL::slot_heartbitData_From_soc(heartbit_data st_hb_data)
     // session_id 리턴값 포함해서 hmi에게 ack 리턴
 }
 
+// 백업 X
 void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
                                                             QString card_uid,
                                                             QString request_id)
 {
+    if (!this->db_openCheck())
+    {
+        this->membershipCard_authorized_false_msg();
+        return;
+    }
+
     // 수동 트랜잭션 선언
-    this->db.transaction();
+    bool ok_tx = this->db.transaction();
+    if (ok_tx == false)
+    {
+        qDebug() << "transaction failed:" << this->db.lastError().text();
+        this->db.rollback();
+        this->membershipCard_authorized_false_msg();
+
+        return;
+    }
 
     QSqlQuery query(this->db);
     qDebug() << Q_FUNC_INFO;
@@ -474,8 +594,12 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
                                     "transaction_state "
                                     "FROM membership_card "
                                     "WHERE card_uid = :card_uid");
+
+    // 디버깅
     if (!this->check_query_prepare(ok_prepare, query))
     {
+        this->db.rollback();
+        this->membershipCard_authorized_false_msg();
         return;
     }
 
@@ -483,17 +607,18 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
     bool ok_exec = query.exec();
 
     // db 일시적 실패시 재전송
-    if (!this->query_exec_recursive(ok_exec, query))
+    if (!ok_exec)
     {
-        // 재전송 까지 실패했으면
         this->db.rollback();
-        this->query_exec_recursive_err(MB_AUTHORIZED);
+        this->membershipCard_authorized_false_msg();
         return;
     }
 
     // 디버깅용
     if (!this->check_query_exec(ok_exec, query))
     {
+        this->db.rollback();
+        this->membershipCard_authorized_false_msg();
         return;
     }
 
@@ -509,9 +634,21 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
         balance_available = query.value(1).toInt();
         hold_amount = query.value(2).toInt();
         transaction_state = query.value(3).toString();
+
+        if (transaction_state == "hold")
+        {
+            this->db.rollback();
+            QMetaObject::invokeMethod(this->p_soc,
+                                      "slot_membershipCard_authorized_ack_To_hmi",
+                                      Qt::QueuedConnection,
+                                      Q_ARG(bool, false),
+                                      Q_ARG(QString, "현재 충전중인 카드입니다."));
+            return;
+        }
     }
     else
     {
+        this->db.rollback();
         QMetaObject::invokeMethod(this->p_soc,
                                   "slot_membershipCard_authorized_ack_To_hmi",
                                   Qt::QueuedConnection,
@@ -546,6 +683,8 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
 
         if (!this->check_query_prepare(ok_prepare2, query))
         {
+            this->db.rollback();
+            this->membershipCard_authorized_false_msg();
             return;
         }
 
@@ -556,18 +695,20 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
 
         bool ok_exec2 = query.exec();
 
-        // db 일시적 실패시 재전송
-        if (!this->query_exec_recursive(ok_exec2, query))
-        {
-            // 재전송 까지 실패했으면
-            this->db.rollback();
-            this->query_exec_recursive_err(MB_AUTHORIZED);
-            return;
-        }
-
         // 디버깅
         if (!this->check_query_exec(ok_exec2, query))
         {
+            this->db.rollback();
+            this->membershipCard_authorized_false_msg();
+            return;
+        }
+
+        // db 일시적 실패시 재전송
+        if (!ok_exec2)
+        {
+            // 재전송 까지 실패했으면
+            this->db.rollback();
+            this->membershipCard_authorized_false_msg();
             return;
         }
 
@@ -579,7 +720,17 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
 
         if (ret.first == true)
         {
-            this->db.commit();
+            bool commit_ret = this->db.commit();
+            if (commit_ret == false)
+            {
+                this->db.rollback();
+                this->membershipCard_authorized_false_msg();
+                qDebug() << "commit failed:" << this->db.lastError().text();
+            }
+            else
+            {
+                qDebug() << "커밋 성공함 ....";
+            }
             QMetaObject::invokeMethod(this->p_soc,
                                       "slot_membershipCard_authorized_ack_To_hmi",
                                       Qt::QueuedConnection,
@@ -590,6 +741,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
         {
             // 실패 알림
             this->db.rollback();
+            this->membershipCard_authorized_false_msg();
             // 아래 함수에서 qml 실패 알림 보냄
             // this->membershipCard_log_insert_authorized(st_mb_log)
         }
@@ -608,150 +760,8 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
     // session_id 리턴값 포함해서 hmi에게 ack 리턴
     return;
 }
-void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
-    int adv_pay, int act_pay, int can_pay, QString card_uid, uint32_t t_id, QString request_id)
-{
-    // 수동 트랜잭션 선언
-    this->db.transaction();
 
-    QSqlQuery query(this->db);
-    qDebug() << Q_FUNC_INFO;
-    bool ok_prepare = query.prepare("SELECT "
-                                    "balance_total, "
-                                    "balance_available, "
-                                    "hold_amount, "
-                                    "transaction_state "
-                                    "FROM membership_card "
-                                    "WHERE card_uid = :card_uid");
-    if (!this->check_query_prepare(ok_prepare, query))
-    {
-        return;
-    }
-
-    query.bindValue(":card_uid", card_uid);
-
-    bool ok_exec = query.exec();
-
-    // db 일시적 실패시 재전송
-    if (!this->query_exec_recursive(ok_exec, query))
-    {
-        // 재전송 까지 실패했으면
-        this->db.rollback();
-        this->query_exec_recursive_err(MB_FINISHED);
-        return;
-    }
-
-    // 디버깅용
-    if (!this->check_query_exec(ok_exec, query))
-    {
-        return;
-    }
-
-    // 있는 카드인지도 확인
-    int balance_total = 0;
-    int balance_available = 0;
-    int hold_amount = 0;
-    QString transaction_state;
-
-    if (query.next())
-    {
-        balance_total = query.value(0).toInt();
-        balance_available = query.value(1).toInt();
-        hold_amount = query.value(2).toInt();
-        transaction_state = query.value(3).toString();
-    }
-    else
-    {
-        qDebug() << card_uid << " not find";
-        return;
-    }
-
-    if (transaction_state != "hold")
-    {
-        // 홀드가 아닌대 넘어올 수 가 없음
-        qDebug() << transaction_state << " != hold";
-        return;
-    }
-
-    struct membership_log st_mb_log = {0};
-    st_mb_log.card_uid = card_uid;
-    st_mb_log.transaction_id = t_id;
-    st_mb_log.event_type = "captured";
-    st_mb_log.amount = adv_pay;
-    st_mb_log.balance_available_before = balance_available;
-    st_mb_log.hold_amount_before = hold_amount;
-    st_mb_log.transaction_state_before = transaction_state;
-    st_mb_log.request_id = request_id;
-
-    // qDebug() << act_pay << " act pay";
-    // qDebug() << can_pay << " can pay";
-    balance_total -= act_pay;
-    balance_available += can_pay;
-    hold_amount -= (act_pay + can_pay);
-    transaction_state = "captured";
-
-    bool ok_prepare2 = query.prepare("UPDATE membership_card "
-                                     "SET "
-                                     "balance_total = :balance_total, "
-                                     "balance_available = :balance_available, "
-                                     "hold_amount = :hold_amount, "
-                                     "transaction_state = :transaction_state "
-                                     "WHERE card_uid = :card_uid");
-
-    if (!this->check_query_prepare(ok_prepare2, query))
-    {
-        return;
-    }
-
-    query.bindValue(":balance_total", balance_total);
-    query.bindValue(":balance_available", balance_available);
-    query.bindValue(":hold_amount", hold_amount);
-    query.bindValue(":transaction_state", transaction_state);
-    query.bindValue(":card_uid", card_uid);
-
-    bool ok_exec2 = query.exec();
-
-    // db 일시적 실패시 재전송
-    if (!this->query_exec_recursive(ok_exec2, query))
-    {
-        // 재전송 까지 실패했으면
-        this->db.rollback();
-        this->query_exec_recursive_err(MB_FINISHED);
-        return;
-    }
-
-    // 디버깅
-    if (!this->check_query_exec(ok_exec2, query))
-    {
-        return;
-    }
-
-    st_mb_log.balance_available_after = balance_available;
-    st_mb_log.hold_amount_after = hold_amount;
-    st_mb_log.transaction_state_after = transaction_state;
-    /*
-    query.bindValue(":balance_available", balance_available);
-    query.bindValue(":hold_amount", hold_amount);
-    query.bindValue(":transaction_state", transaction_state);
-    query.bindValue(":card_uid", card_uid);*/
-
-    bool ret = this->membershipCard_log_insert_finished(st_mb_log);
-
-    if (ret == true)
-    {
-        this->db.commit();
-        QMetaObject::invokeMethod(this->p_soc,
-                                  "slot_membershipCard_finished_ack_To_hmi",
-                                  Qt::QueuedConnection,
-                                  Q_ARG(bool, true));
-    }
-    else
-    {
-        this->db.rollback();
-    }
-    return;
-}
-
+// 백업 X
 QPair<bool, QString> DB_PostgreSQL::membershipCard_log_insert_authorized(const membership_log &m_log)
 {
     QSqlQuery query(this->db);
@@ -808,19 +818,19 @@ QPair<bool, QString> DB_PostgreSQL::membershipCard_log_insert_authorized(const m
         return QPair<bool, QString>({false, ""});
     }
 
+    // 디버깅
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        // rollback 상위 함수에서 진행
+        return QPair<bool, QString>({false, ""});
+    }
+
     // db 일시적 실패시 재전송
     if (!this->query_exec_recursive(ok_exec, query))
     {
         // 재전송 까지 실패했으면
         // rollback 상위 함수에서 진행
         this->query_exec_recursive_err(MB_AUTHORIZED);
-        return QPair<bool, QString>({false, ""});
-    }
-
-    // 디버깅
-    if (!this->check_query_exec(ok_exec, query))
-    {
-        // rollback 상위 함수에서 진행
         return QPair<bool, QString>({false, ""});
     }
 
@@ -836,6 +846,190 @@ QPair<bool, QString> DB_PostgreSQL::membershipCard_log_insert_authorized(const m
     return QPair<bool, QString>({false, ""});
 }
 
+// 백업 O
+void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
+    int adv_pay, int act_pay, int can_pay, QString card_uid, uint32_t t_id, QString request_id)
+{
+    // 전송 실패 대비용 struct 초기화
+    struct membership_backUp_sqlite st_back = {0};
+    st_back.card_uid = card_uid;
+    st_back.adv_pay = adv_pay;
+    st_back.act_pay = act_pay;
+    st_back.can_pay = can_pay;
+    st_back.t_id = t_id;
+    st_back.request_id = request_id;
+    this->membershipCard_finished_sqlite_backUp(st_back);
+
+    if (!this->db_openCheck())
+    {
+        this->membershipCard_finished_stat(false);
+        return;
+    }
+
+    // 수동 트랜잭션 선언
+    if (!this->db.transaction())
+    {
+        this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        return;
+    }
+
+    QSqlQuery query(this->db);
+    qDebug() << Q_FUNC_INFO;
+    bool ok_prepare = query.prepare("SELECT "
+                                    "balance_total, "
+                                    "balance_available, "
+                                    "hold_amount, "
+                                    "transaction_state "
+                                    "FROM membership_card "
+                                    "WHERE card_uid = :card_uid");
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        return;
+    }
+
+    query.bindValue(":card_uid", card_uid);
+
+    bool ok_exec = query.exec();
+
+    // db 일시적 실패시 재전송
+    if (!ok_exec)
+    {
+        this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        return;
+    }
+
+    // 디버깅용
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        return;
+    }
+
+    // 있는 카드인지도 확인
+    int balance_total = 0;
+    int balance_available = 0;
+    int hold_amount = 0;
+    QString transaction_state;
+
+    if (query.next())
+    {
+        balance_total = query.value(0).toInt();
+        balance_available = query.value(1).toInt();
+        hold_amount = query.value(2).toInt();
+        transaction_state = query.value(3).toString();
+    }
+    else
+    {
+        // this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        qDebug() << card_uid << " not find";
+        return;
+    }
+
+    if (transaction_state != "hold")
+    {
+        this->db.rollback();
+        // 홀드가 아닌대 넘어올 수 가 없음
+        qDebug() << transaction_state << " != hold";
+        return;
+    }
+
+    struct membership_log st_mb_log = {0};
+    st_mb_log.card_uid = card_uid;
+    st_mb_log.transaction_id = t_id;
+    st_mb_log.event_type = "captured";
+    st_mb_log.amount = adv_pay;
+    st_mb_log.balance_available_before = balance_available;
+    st_mb_log.hold_amount_before = hold_amount;
+    st_mb_log.transaction_state_before = transaction_state;
+    st_mb_log.request_id = request_id;
+
+    // qDebug() << act_pay << " act pay";
+    // qDebug() << can_pay << " can pay";
+    balance_total -= act_pay;
+    balance_available += can_pay;
+    hold_amount -= (act_pay + can_pay);
+    transaction_state = "captured";
+
+    bool ok_prepare2 = query.prepare("UPDATE membership_card "
+                                     "SET "
+                                     "balance_total = :balance_total, "
+                                     "balance_available = :balance_available, "
+                                     "hold_amount = :hold_amount, "
+                                     "transaction_state = :transaction_state "
+                                     "WHERE card_uid = :card_uid");
+
+    // 디버깅용
+    if (!this->check_query_prepare(ok_prepare2, query))
+    {
+        this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        return;
+    }
+
+    query.bindValue(":balance_total", balance_total);
+    query.bindValue(":balance_available", balance_available);
+    query.bindValue(":hold_amount", hold_amount);
+    query.bindValue(":transaction_state", transaction_state);
+    query.bindValue(":card_uid", card_uid);
+
+    bool ok_exec2 = query.exec();
+
+    // db 일시적 실패시 재전송
+    if (!ok_exec2)
+    {
+        // 재전송 까지 실패했으면
+        this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        return;
+    }
+
+    // 디버깅
+    if (!this->check_query_exec(ok_exec2, query))
+    {
+        this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        return;
+    }
+
+    st_mb_log.balance_available_after = balance_available;
+    st_mb_log.hold_amount_after = hold_amount;
+    st_mb_log.transaction_state_after = transaction_state;
+    /*
+    query.bindValue(":balance_available", balance_available);
+    query.bindValue(":hold_amount", hold_amount);
+    query.bindValue(":transaction_state", transaction_state);
+    query.bindValue(":card_uid", card_uid);*/
+
+    bool ret = this->membershipCard_log_insert_finished(st_mb_log);
+
+    if (ret == true)
+    {
+        bool ret_commit = this->db.commit();
+        if (!ret_commit)
+        {
+            this->membershipCard_finished_stat(false);
+        }
+        else
+        {
+            this->membershipCard_finished_stat(true);
+        }
+    }
+    else
+    {
+        this->membershipCard_finished_stat(false);
+        this->db.rollback();
+        // this->membershipCard_finished_sqlite_backUp(st_back);
+    }
+    return;
+}
+
+// 상단 함수에서 백업한거 기반으로 재실행댐
 bool DB_PostgreSQL::membershipCard_log_insert_finished(const membership_log &m_log)
 {
     QSqlQuery query(this->db);
@@ -884,23 +1078,6 @@ bool DB_PostgreSQL::membershipCard_log_insert_finished(const membership_log &m_l
 
     bool ok_exec = query.exec();
 
-    QSqlError e = query.lastError();
-    if (ok_exec == false && e.nativeErrorCode() == "23505")
-    {
-        qDebug() << "이미 존재하는 request_id";
-        // rollback 상위 함수에서 진행
-        return false;
-    }
-
-    // db 일시적 실패시 재전송
-    if (!this->query_exec_recursive(ok_exec, query))
-    {
-        // 재전송 까지 실패했으면
-        // rollback 상위 함수에서 진행
-        this->query_exec_recursive_err(MB_FINISHED);
-        return false;
-    }
-
     // 디버깅
     if (!this->check_query_exec(ok_exec, query))
     {
@@ -919,7 +1096,7 @@ bool DB_PostgreSQL::query_exec_recursive(bool ok_exec, QSqlQuery &query)
         QString err_code = e.nativeErrorCode();
         int query_cnt = 0;
 
-        while (query_cnt < 3)
+        while (query_cnt < 2)
         {
             if (e.type() == QSqlError::ConnectionError)
             {
@@ -932,7 +1109,9 @@ bool DB_PostgreSQL::query_exec_recursive(bool ok_exec, QSqlQuery &query)
             }
             else if (e.type() == QSqlError::TransactionError)
             {
-                if (err_code == "40001" || err_code == "40P01")
+                if (err_code == "40001" || err_code == "40P01" || err_code == "57P01"
+                    || err_code == "57P02" || err_code == "57P03" || (err_code.startsWith("08"))
+                    || (err_code.startsWith("53")))
                 {
                     // 재전송
                     ok_recursive = query.exec();
@@ -942,7 +1121,7 @@ bool DB_PostgreSQL::query_exec_recursive(bool ok_exec, QSqlQuery &query)
                     }
                 }
             }
-            QThread::msleep(3000);
+            QThread::msleep(200);
             query_cnt++;
         }
     }
@@ -971,10 +1150,148 @@ void DB_PostgreSQL::query_exec_recursive_err(RECURSIVE_ERR err)
         // finished는 이미 홀드 잡은거 처리하는거라서
         // 전송에러 말고 다른거 없음
 
+        // HMI쪽에서 오류메시지 작성함
         QMetaObject::invokeMethod(this->p_soc,
                                   "slot_membershipCard_finished_ack_To_hmi",
                                   Qt::QueuedConnection,
                                   Q_ARG(bool, false));
     }
+    return;
+}
+
+void DB_PostgreSQL::membershipCard_finished_sqlite_backUp(const membership_backUp_sqlite back_data)
+{
+    QSqlQuery query(this->db_lite);
+
+    bool ok_prepare = query.prepare("INSERT INTO membership_card "
+                                    "(card_uid, adv_pay, act_pay, can_pay, "
+                                    "t_id, request_id) "
+                                    "VALUES (:card_uid, :adv_pay, "
+                                    ":act_pay, :can_pay, "
+                                    ":t_id, :request_id)");
+
+    // 디버깅
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":card_uid", back_data.card_uid);
+    query.bindValue(":adv_pay", back_data.adv_pay);
+    query.bindValue(":act_pay", back_data.act_pay);
+    query.bindValue(":can_pay", back_data.can_pay);
+    query.bindValue(":t_id", back_data.t_id);
+    query.bindValue(":request_id", back_data.request_id);
+
+    bool ok_exec = query.exec();
+
+    // 디버깅
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+void DB_PostgreSQL::chargingLog_sqlite_backUp(const db_data back_data)
+{
+    QSqlQuery query(this->db_lite);
+
+    bool ok_prepare = query.prepare(
+        "INSERT INTO charging_log (store_id, hmi_id, ocpp_tx_id, card_uid, start_time, "
+        "end_time, "
+        "duration_time, average_kWh, soc_start, soc_end, advance_payment, cancel_payment, "
+        "actual_payment, unit_price, tariff_type, session_status, stop_reason, local_tx_id) "
+        "VALUES "
+        "(:store_id, "
+        ":hmi_id, :ocpp_tx_id, :card_uid, :start_time, :end_time, "
+        ":duration_time, :average_kWh, :soc_start, :soc_end, :advance_payment, "
+        ":cancel_payment, "
+        ":actual_payment, :unit_price, :tariff_type, :session_status, :stop_reason, "
+        ":local_tx_id) "
+        "RETURNING ocpp_tx_id");
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":store_id", back_data.store_id);
+    query.bindValue(":hmi_id", back_data.hmi_id);
+    query.bindValue(":ocpp_tx_id", back_data.ocpp_tx_id);
+    query.bindValue(":card_uid", back_data.card_uid);
+    query.bindValue(":start_time", back_data.start_time);
+    query.bindValue(":end_time", back_data.end_time);
+    query.bindValue(":duration_time", back_data.duration_time);
+    query.bindValue(":average_kWh", back_data.average_kWh);
+    query.bindValue(":soc_start", back_data.soc_start);
+    query.bindValue(":soc_end", back_data.soc_end);
+    query.bindValue(":advance_payment", back_data.advance_payment);
+    query.bindValue(":cancel_payment", back_data.cancel_payment);
+    query.bindValue(":actual_payment", back_data.actual_payment);
+    query.bindValue(":unit_price", back_data.unit_price);
+    query.bindValue(":tariff_type", back_data.tariff_type);
+    query.bindValue(":session_status", back_data.session_status);
+    query.bindValue(":stop_reason", back_data.stop_reason);
+    query.bindValue(":local_tx_id", back_data.local_tx_id);
+
+    bool ok_exec = query.exec();
+
+    // 디버깅
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+bool DB_PostgreSQL::db_openCheck()
+{
+    if (!this->db.isOpen())
+    {
+        if (!this->db.open())
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+void DB_PostgreSQL::membershipCard_authorized_false_msg()
+{
+    QMetaObject::invokeMethod(this->p_soc,
+                              "slot_membershipCard_authorized_ack_To_hmi",
+                              Qt::QueuedConnection,
+                              Q_ARG(bool, false),
+                              Q_ARG(QString, "잠시 후 재시도 해주세요"));
+    return;
+}
+
+void DB_PostgreSQL::membershipCard_finished_stat(bool stat)
+{
+    QMetaObject::invokeMethod(this->p_soc,
+                              "slot_membershipCard_finished_ack_To_hmi",
+                              Qt::QueuedConnection,
+                              Q_ARG(bool, stat));
+    return;
+}
+
+void DB_PostgreSQL::chargingLog_authorized_invok()
+{
+    QMetaObject::invokeMethod(this->p_soc,
+                              "slot_chargingLog_authorized_ack_To_hmi",
+                              Qt::QueuedConnection);
+    return;
+}
+
+void DB_PostgreSQL::chargingLog_start_invok()
+{
+    return;
+}
+
+void DB_PostgreSQL::chargingLog_finished_invok()
+{
     return;
 }

@@ -679,7 +679,9 @@ void WK_Serial::slot_serial_read()
 
                         int adv_pay = qp.first;
                         QString hmi_id = qp.second;
-                        QString request_id = hmi_id + "_" + QTime::currentTime().toString();
+                        QString request_id;
+                        QDateTime dt_utc = QDateTime::currentDateTimeUtc();
+                        request_id = hmi_id + dt_utc.toString();
 
                         QMetaObject::invokeMethod(this->p_stat,
                                                   "slot_set_card_uid",

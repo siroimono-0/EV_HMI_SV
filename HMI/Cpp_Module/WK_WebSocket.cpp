@@ -314,8 +314,9 @@ void WK_WebSocket::slot_send_db_update_textData(db_data st_db_data)
     jsObj.insert("type", "chargingLog");
     jsObj.insert("role", "hmi");
 
-    QString qs_session_id = QString::number(st_db_data.session_id);
-    jsObj.insert("session_id", qs_session_id);
+    // session_id 안씀 수정
+    // QString qs_session_id = QString::number(st_db_data.session_id);
+    // jsObj.insert("session_id", qs_session_id);
     jsObj.insert("store_id", static_cast<int>(st_db_data.store_id));
     jsObj.insert("hmi_id", st_db_data.hmi_id);
     jsObj.insert("ocpp_tx_id", static_cast<int>(st_db_data.ocpp_tx_id));
@@ -337,6 +338,7 @@ void WK_WebSocket::slot_send_db_update_textData(db_data st_db_data)
 
     jsObj.insert("session_status", st_db_data.session_status);
     jsObj.insert("stop_reason", st_db_data.stop_reason);
+    jsObj.insert("local_tx_id", st_db_data.local_tx_id);
 
     QJsonDocument jsDoc(jsObj);
     this->p_webSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
@@ -398,11 +400,13 @@ void WK_WebSocket::slot_Recv_TextData(QString recvData)
         {
             if (jsObj["session_status"] == "authorized")
             {
+                /* 세션 아이디 안씀 수정
                 uint64_t session_id = jsObj["session_id"].toString().toULongLong();
                 QMetaObject::invokeMethod(this->p_stat,
                                           "slot_set_session_id",
                                           Qt::QueuedConnection,
                                           Q_ARG(uint64_t, session_id));
+*/
 
                 QMetaObject::invokeMethod(this->p_Module,
                                           &Cpp_Module::sig_card_authorized_db_update_ack_ToQml,
@@ -455,16 +459,25 @@ void WK_WebSocket::slot_Recv_TextData(QString recvData)
         }
         else if (qs_type == "membershipCard_finished_ack")
         {
+            this->member_finished_ack = true;
             bool ok = jsObj["ok"].toBool();
             if (ok == true)
             {
+                bool stat = true;
                 QMetaObject::invokeMethod(this->p_Module,
-                                          &Cpp_Module::sig_cancle_payment_ok_ToQml,
-                                          Qt::QueuedConnection);
+                                          "sig_cancle_payment_ok_member_ToQml",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(bool, stat));
             }
             else
             {
-                // db 재요청?
+                // SQLITE에 백업하고 지속갱신
+                // QML에서는 결과 화면에 팝업 띄워줌
+                bool stat = false;
+                QMetaObject::invokeMethod(this->p_Module,
+                                          "sig_cancle_payment_ok_member_ToQml",
+                                          Qt::QueuedConnection,
+                                          Q_ARG(bool, stat));
             }
         }
     }
@@ -594,6 +607,7 @@ void WK_WebSocket::slot_send_membership_authorized_textData(int adv_pay,
 
     return;
 }
+
 void WK_WebSocket::slot_send_membership_finished_textData(
     int adv_pay, int act_pay, int can_pay, QString card_uid, uint32_t t_id, QString request_id)
 {

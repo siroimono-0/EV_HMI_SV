@@ -56,6 +56,20 @@ struct store_info
 
 Q_DECLARE_METATYPE(store_info)
 
+struct membership_backUp_sqlite
+{
+    // 인증시 hold 상태
+    // 인증 1회 시도 -> db 미응답 -> lite 저장
+    // 인증 2회 시도시 성공 -> captured 상태
+    // lite 재시도 -> 상태 hold일 때만 진행댐으로 무시댐
+    QString card_uid;
+    uint32_t adv_pay;
+    uint32_t act_pay;
+    uint32_t can_pay;
+    uint32_t t_id;
+    QString request_id;
+};
+
 struct membership_log
 {
     QString card_uid;
@@ -82,6 +96,7 @@ struct heartbit_data
 };
 Q_DECLARE_METATYPE(heartbit_data)
 
+// sqlite backUp 데이터 호환
 struct db_data
 {
     // 카드 인증시 insert
@@ -132,5 +147,7 @@ struct db_data
     FAULT
     TIMEOUT
      */
+
+    QString local_tx_id; // 거래 묶음용 hmi 생성
 };
 #endif // STATDATA_H

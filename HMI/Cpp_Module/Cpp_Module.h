@@ -82,6 +82,7 @@ signals:
     void sig_charging_stop_ToQml();
 
     void sig_cancle_payment_ok_ToQml();
+    void sig_cancle_payment_ok_member_ToQml(bool stat);
     void sig_charging_finished_ack_ToQml();
 
 private:
