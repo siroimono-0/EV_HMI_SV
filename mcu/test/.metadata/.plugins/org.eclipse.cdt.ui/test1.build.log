@@ -1,0 +1,70 @@
+14:13:44 **** Incremental Build of configuration Debug for project test1 ****
+make -j20 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:180:3: warning: implicit declaration of function 'HR_value_init' [-Wimplicit-function-declaration]
+  180 |   HR_value_init();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:193:38: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  193 |           HAL_UART_Transmit(&huart3, test, 10, 100);
+      |                                      ^~~~
+      |                                      |
+      |                                      char *
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:338,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:749:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+  749 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:209:7: warning: implicit declaration of function 'modbus_pasing' [-Wimplicit-function-declaration]
+  209 |       modbus_pasing();
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/main.c:507:5: warning: implicit declaration of function 'HR_value_update' [-Wimplicit-function-declaration]
+  507 |     HR_value_update();
+      |     ^~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:513:6: warning: conflicting types for 'HR_value_init'; have 'void()'
+  513 | void HR_value_init()
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:180:3: note: previous implicit declaration of 'HR_value_init' with type 'void()'
+  180 |   HR_value_init();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:533:6: warning: conflicting types for 'HR_value_update'; have 'void()'
+  533 | void HR_value_update()
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:507:5: note: previous implicit declaration of 'HR_value_update' with type 'void()'
+  507 |     HR_value_update();
+      |     ^~~~~~~~~~~~~~~
+../Core/Src/main.c:546:6: warning: conflicting types for 'modbus_pasing'; have 'void()'
+  546 | void modbus_pasing()
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:209:7: note: previous implicit declaration of 'modbus_pasing' with type 'void()'
+  209 |       modbus_pasing();
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'modbus_pasing':
+../Core/Src/main.c:587:28: warning: implicit declaration of function 'crc_modbus' [-Wimplicit-function-declaration]
+  587 |     uint16_t crc_compare = crc_modbus(tmp_buf, tmp_len - 2);
+      |                            ^~~~~~~~~~
+../Core/Src/main.c:613:16: warning: unused variable 'u32_err' [-Wunused-variable]
+  613 |       uint32_t u32_err = HAL_UART_GetError(&huart1);
+      |                ^~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:104:17: warning: 'prev_time' defined but not used [-Wunused-variable]
+  104 | static uint32_t prev_time = 0;
+      |                 ^~~~~~~~~
+arm-none-eabi-gcc -o "test1.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\siroi\STM32CubeIDE\test\test1\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="test1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: test1.elf
+ 
+arm-none-eabi-size  test1.elf 
+arm-none-eabi-objdump -h -S test1.elf  > "test1.list"
+   text	   data	    bss	    dec	    hex	filename
+  13664	     28	   2892	  16584	   40c8	test1.elf
+Finished building: default.size.stdout
+ 
+Finished building: test1.list
+ 
+
+14:13:45 Build Finished. 0 errors, 10 warnings. (took 1s.208ms)
+

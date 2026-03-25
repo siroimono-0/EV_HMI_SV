@@ -6,11 +6,19 @@ import HMI 1.0
 Rectangle{
     id: root
     color: "transparent"
+    property int font_size: 80;
 
     function open(s)
     {
         root.state = "open";
         pop_lb.text = s;
+        pop_lb_neon.text = s;
+    }
+
+    function set_font_size(set)
+    {
+        i_set = Math.ceil(set);
+        pop_lb.font.pixelSize = i_set;
         pop_lb_neon.text = s;
     }
 
@@ -100,10 +108,7 @@ Rectangle{
         width: 0; height: 0;
         color: "#1e1e1e"
         radius: 10
-
-
         layer.enabled: true;
-
         layer.effect: MultiEffect{
             shadowEnabled: true;
             shadowBlur: 1
@@ -112,7 +117,6 @@ Rectangle{
             shadowVerticalOffset: 0;
             shadowHorizontalOffset: 0;
         }
-
 
         Label{
             id: pop_lb
@@ -198,7 +202,6 @@ Rectangle{
             }
         }
     }
-
 }
 
 

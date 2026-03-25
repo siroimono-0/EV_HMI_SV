@@ -6,6 +6,8 @@ import HMI 1.0
 Item {
     id: root
     property bool cancle_payment_stat: true;
+    property string pageName: "Charging_Monitoring";
+    property var mainWin;
 
     BackGround_Card{
         id: back
@@ -14,6 +16,12 @@ Item {
 
     StackView.onActivated: {
         cpp_module.set_screen_name("충전 모니터링");
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+        mainWin.timer_reset("Charging_Monitoring");
+        });
+
     }
 
     Component.onCompleted: {
@@ -21,9 +29,6 @@ Item {
         // 값 지속적으로 받고 특정 값 도달하면
         // 이제 그만보내?
         cpp_module.charging_start_To_serial();
-
-        // 충전 시작 시간 업데이트
-
     }
 
     function stop_btn()
@@ -36,7 +41,7 @@ Item {
 
     function stk_next()
     {
-        StackView.view.push("Charging_Complet.qml", {cancle_payment_stat : cancle_payment_stat });
+        StackView.view.push("Charging_Complet.qml", {cancle_payment_stat : cancle_payment_stat }, {mainWin : mainWin});
     }
 
     Connections{

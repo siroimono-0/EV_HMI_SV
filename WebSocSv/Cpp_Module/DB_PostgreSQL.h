@@ -30,8 +30,6 @@ public:
 
     bool check_query_prepare(bool ok, QSqlQuery &query);
     bool check_query_exec(bool ok, QSqlQuery &query);
-    bool query_exec_recursive(bool ok_exec, QSqlQuery &query);
-    void query_exec_recursive_err(RECURSIVE_ERR err);
 
     QPair<bool, QString> membershipCard_log_insert_authorized(const membership_log &m_log);
     bool membershipCard_log_insert_finished(const membership_log &m_log);
@@ -47,8 +45,17 @@ public:
     void membershipCard_authorized_false_msg();
     void membershipCard_finished_stat(bool stat);
     void chargingLog_authorized_invok();
-    void chargingLog_start_invok();
+    void chargingLog_start_invok(uint32_t ocpp_tx);
     void chargingLog_finished_invok();
+
+    // SQLITE 백업큐 꺼내서 PQ등록하는거 만들어야댐
+    void backUp_register_chargingLog();
+    void backUp_register_membershipCard_finished();
+
+    int chargingLog_backUp_upDate_QPSQL(db_data st_db_data);
+    bool membershipCard_finished_backup_upDate_QPSQL(
+        int adv_pay, int act_pay, int can_pay, QString card_uid, uint32_t t_id, QString request_id);
+
 public slots:
     void slot_end();
     void slot_set_p_soc(WK_Soc *soc);

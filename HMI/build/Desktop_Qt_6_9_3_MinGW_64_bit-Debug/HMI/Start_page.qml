@@ -8,9 +8,20 @@ Item {
     // StackView 가 알아서 width height 채워넣음
     // anchors.fill: parent
     property string id: "";
+    property string pageName: "Start_page";
+    property var mainWin;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("관리자 로그인");
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+        mainWin.timer_reset("Start_page");
+        });
+    }
+
+    Component.onCompleted: {
+
     }
 
     BackGround{
@@ -462,7 +473,7 @@ Item {
 
         function stk_push()
         {
-            StackView.view.push("HMI_main.qml");
+            StackView.view.push("HMI_main.qml", {mainWin : mainWin});
             // StackView.view.push("./Qml_Module/Keypad_Number.qml");
         }
 

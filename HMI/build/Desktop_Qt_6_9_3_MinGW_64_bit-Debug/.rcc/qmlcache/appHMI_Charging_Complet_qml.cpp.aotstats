@@ -6,10 +6,10 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 1520,
+                        "durationMicroseconds": 1646,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "stk_home",
-                        "line": 25
+                        "line": 35
                     },
                     {
                         "codegenSuccessful": false,
@@ -17,23 +17,23 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find signal \"activated\".",
                         "functionName": "onActivated",
-                        "line": 10
+                        "line": 13
                     },
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 485,
+                        "durationMicroseconds": 628,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "onCompleted",
-                        "line": 14
+                        "line": 17
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 131,
+                        "durationMicroseconds": 101,
                         "errorMessage": "",
                         "functionName": "fill",
-                        "line": 41
+                        "line": 51
                     },
                     {
                         "codegenSuccessful": true,
@@ -41,7 +41,7 @@
                         "durationMicroseconds": 66,
                         "errorMessage": "",
                         "functionName": "fill",
-                        "line": 46
+                        "line": 56
                     },
                     {
                         "codegenSuccessful": false,
@@ -49,7 +49,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 58
+                        "line": 70
                     },
                     {
                         "codegenSuccessful": false,
@@ -57,7 +57,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 59
+                        "line": 71
                     },
                     {
                         "codegenSuccessful": false,
@@ -65,7 +65,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"top\".",
                         "functionName": "top",
-                        "line": 55
+                        "line": 67
                     },
                     {
                         "codegenSuccessful": false,
@@ -73,7 +73,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalCenter\".",
                         "functionName": "horizontalCenter",
-                        "line": 57
+                        "line": 69
                     },
                     {
                         "codegenSuccessful": false,
@@ -81,7 +81,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 72
+                        "line": 84
                     },
                     {
                         "codegenSuccessful": false,
@@ -89,7 +89,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 73
+                        "line": 85
                     },
                     {
                         "codegenSuccessful": false,
@@ -97,39 +97,39 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"fill\".",
                         "functionName": "fill",
-                        "line": 69
+                        "line": 81
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 128,
+                        "durationMicroseconds": 138,
                         "errorMessage": "",
                         "functionName": "left",
-                        "line": 90
+                        "line": 102
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 106,
+                        "durationMicroseconds": 111,
                         "errorMessage": "",
                         "functionName": "top",
-                        "line": 92
+                        "line": 104
                     },
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 40,
+                        "durationMicroseconds": 42,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col0",
                         "functionName": "width",
-                        "line": 98
+                        "line": 110
                     },
                     {
                         "codegenSuccessful": false,
                         "column": 43,
-                        "durationMicroseconds": 26,
+                        "durationMicroseconds": 27,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col0",
                         "functionName": "height",
-                        "line": 98
+                        "line": 110
                     },
                     {
                         "codegenSuccessful": false,
@@ -137,23 +137,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 107
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 35,
-                        "durationMicroseconds": 0,
-                        "errorMessage": "Could not find property \"centerIn\".",
-                        "functionName": "centerIn",
-                        "line": 105
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 36,
-                        "durationMicroseconds": 0,
-                        "errorMessage": "Could not find property \"verticalAlignment\".",
-                        "functionName": "verticalAlignment",
-                        "line": 122
+                        "line": 119
                     },
                     {
                         "codegenSuccessful": false,
@@ -164,36 +148,12 @@
                         "line": 117
                     },
                     {
-                        "codegenSuccessful": true,
-                        "column": 31,
-                        "durationMicroseconds": 134,
-                        "errorMessage": "",
-                        "functionName": "top",
-                        "line": 142
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 34,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col1",
-                        "functionName": "width",
-                        "line": 158
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 43,
-                        "durationMicroseconds": 25,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col1",
-                        "functionName": "height",
-                        "line": 158
-                    },
-                    {
                         "codegenSuccessful": false,
                         "column": 36,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 167
+                        "line": 134
                     },
                     {
                         "codegenSuccessful": false,
@@ -201,7 +161,31 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 165
+                        "line": 129
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 118,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 154
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 29,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col1",
+                        "functionName": "width",
+                        "line": 170
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 43,
+                        "durationMicroseconds": 27,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col1",
+                        "functionName": "height",
+                        "line": 170
                     },
                     {
                         "codegenSuccessful": false,
@@ -209,7 +193,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 182
+                        "line": 179
                     },
                     {
                         "codegenSuccessful": false,
@@ -220,36 +204,12 @@
                         "line": 177
                     },
                     {
-                        "codegenSuccessful": true,
-                        "column": 31,
-                        "durationMicroseconds": 156,
-                        "errorMessage": "",
-                        "functionName": "top",
-                        "line": 201
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 34,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col2",
-                        "functionName": "width",
-                        "line": 217
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 43,
-                        "durationMicroseconds": 24,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col2",
-                        "functionName": "height",
-                        "line": 217
-                    },
-                    {
                         "codegenSuccessful": false,
                         "column": 36,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 226
+                        "line": 194
                     },
                     {
                         "codegenSuccessful": false,
@@ -257,7 +217,31 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 224
+                        "line": 189
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 138,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 213
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 31,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col2",
+                        "functionName": "width",
+                        "line": 229
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 43,
+                        "durationMicroseconds": 43,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col2",
+                        "functionName": "height",
+                        "line": 229
                     },
                     {
                         "codegenSuccessful": false,
@@ -265,7 +249,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 241
+                        "line": 238
                     },
                     {
                         "codegenSuccessful": false,
@@ -276,36 +260,12 @@
                         "line": 236
                     },
                     {
-                        "codegenSuccessful": true,
-                        "column": 31,
-                        "durationMicroseconds": 127,
-                        "errorMessage": "",
-                        "functionName": "top",
-                        "line": 260
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 30,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col3",
-                        "functionName": "width",
-                        "line": 276
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 43,
-                        "durationMicroseconds": 24,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col3",
-                        "functionName": "height",
-                        "line": 276
-                    },
-                    {
                         "codegenSuccessful": false,
                         "column": 36,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 285
+                        "line": 253
                     },
                     {
                         "codegenSuccessful": false,
@@ -313,7 +273,31 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 283
+                        "line": 248
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 113,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 272
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 27,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col3",
+                        "functionName": "width",
+                        "line": 288
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 43,
+                        "durationMicroseconds": 24,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col3",
+                        "functionName": "height",
+                        "line": 288
                     },
                     {
                         "codegenSuccessful": false,
@@ -321,7 +305,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 300
+                        "line": 297
                     },
                     {
                         "codegenSuccessful": false,
@@ -332,36 +316,12 @@
                         "line": 295
                     },
                     {
-                        "codegenSuccessful": true,
-                        "column": 31,
-                        "durationMicroseconds": 127,
-                        "errorMessage": "",
-                        "functionName": "top",
-                        "line": 319
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 33,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col4",
-                        "functionName": "width",
-                        "line": 335
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 43,
-                        "durationMicroseconds": 26,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col4",
-                        "functionName": "height",
-                        "line": 335
-                    },
-                    {
                         "codegenSuccessful": false,
                         "column": 36,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 344
+                        "line": 312
                     },
                     {
                         "codegenSuccessful": false,
@@ -369,7 +329,31 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 342
+                        "line": 307
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 130,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 331
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 28,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col4",
+                        "functionName": "width",
+                        "line": 347
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 43,
+                        "durationMicroseconds": 25,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col4",
+                        "functionName": "height",
+                        "line": 347
                     },
                     {
                         "codegenSuccessful": false,
@@ -377,7 +361,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 359
+                        "line": 356
                     },
                     {
                         "codegenSuccessful": false,
@@ -388,36 +372,12 @@
                         "line": 354
                     },
                     {
-                        "codegenSuccessful": true,
-                        "column": 31,
-                        "durationMicroseconds": 110,
-                        "errorMessage": "",
-                        "functionName": "top",
-                        "line": 378
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 30,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col5",
-                        "functionName": "width",
-                        "line": 394
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 43,
-                        "durationMicroseconds": 45,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col5",
-                        "functionName": "height",
-                        "line": 394
-                    },
-                    {
                         "codegenSuccessful": false,
                         "column": 36,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 403
+                        "line": 371
                     },
                     {
                         "codegenSuccessful": false,
@@ -425,7 +385,31 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 401
+                        "line": 366
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 128,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 390
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 25,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col5",
+                        "functionName": "width",
+                        "line": 406
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 43,
+                        "durationMicroseconds": 21,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col5",
+                        "functionName": "height",
+                        "line": 406
                     },
                     {
                         "codegenSuccessful": false,
@@ -433,7 +417,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 418
+                        "line": 415
                     },
                     {
                         "codegenSuccessful": false,
@@ -444,60 +428,12 @@
                         "line": 413
                     },
                     {
-                        "codegenSuccessful": true,
-                        "column": 31,
-                        "durationMicroseconds": 122,
-                        "errorMessage": "",
-                        "functionName": "top",
-                        "line": 437
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 23,
-                        "durationMicroseconds": 113,
-                        "errorMessage": "",
-                        "functionName": "left",
-                        "line": 457
-                    },
-                    {
-                        "codegenSuccessful": true,
-                        "column": 22,
-                        "durationMicroseconds": 136,
-                        "errorMessage": "",
-                        "functionName": "top",
-                        "line": 459
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 35,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col00",
-                        "functionName": "width",
-                        "line": 465
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 44,
-                        "durationMicroseconds": 24,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col00",
-                        "functionName": "height",
-                        "line": 465
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 23,
-                        "durationMicroseconds": 0,
-                        "errorMessage": "Could not find property \"text\".",
-                        "functionName": "text",
-                        "line": 468
-                    },
-                    {
                         "codegenSuccessful": false,
                         "column": 36,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 475
+                        "line": 430
                     },
                     {
                         "codegenSuccessful": false,
@@ -505,7 +441,47 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 473
+                        "line": 425
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 111,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 449
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 142,
+                        "errorMessage": "",
+                        "functionName": "left",
+                        "line": 469
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 22,
+                        "durationMicroseconds": 107,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 471
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 52,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col00",
+                        "functionName": "width",
+                        "line": 477
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 44,
+                        "durationMicroseconds": 32,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col00",
+                        "functionName": "height",
+                        "line": 477
                     },
                     {
                         "codegenSuccessful": false,
@@ -521,7 +497,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 490
+                        "line": 487
                     },
                     {
                         "codegenSuccessful": false,
@@ -533,27 +509,11 @@
                     },
                     {
                         "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 32,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col11",
-                        "functionName": "width",
-                        "line": 505
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 44,
-                        "durationMicroseconds": 24,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col11",
-                        "functionName": "height",
-                        "line": 505
-                    },
-                    {
-                        "codegenSuccessful": false,
                         "column": 23,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"text\".",
                         "functionName": "text",
-                        "line": 508
+                        "line": 492
                     },
                     {
                         "codegenSuccessful": false,
@@ -561,7 +521,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 515
+                        "line": 502
                     },
                     {
                         "codegenSuccessful": false,
@@ -569,7 +529,23 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 513
+                        "line": 497
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 39,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col11",
+                        "functionName": "width",
+                        "line": 517
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 44,
+                        "durationMicroseconds": 23,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col11",
+                        "functionName": "height",
+                        "line": 517
                     },
                     {
                         "codegenSuccessful": false,
@@ -585,7 +561,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 530
+                        "line": 527
                     },
                     {
                         "codegenSuccessful": false,
@@ -597,27 +573,11 @@
                     },
                     {
                         "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 43,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col22",
-                        "functionName": "width",
-                        "line": 545
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 44,
-                        "durationMicroseconds": 26,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col22",
-                        "functionName": "height",
-                        "line": 545
-                    },
-                    {
-                        "codegenSuccessful": false,
                         "column": 23,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"text\".",
                         "functionName": "text",
-                        "line": 548
+                        "line": 532
                     },
                     {
                         "codegenSuccessful": false,
@@ -625,7 +585,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 555
+                        "line": 542
                     },
                     {
                         "codegenSuccessful": false,
@@ -633,7 +593,23 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 553
+                        "line": 537
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 33,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col22",
+                        "functionName": "width",
+                        "line": 557
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 44,
+                        "durationMicroseconds": 28,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col22",
+                        "functionName": "height",
+                        "line": 557
                     },
                     {
                         "codegenSuccessful": false,
@@ -649,7 +625,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 570
+                        "line": 567
                     },
                     {
                         "codegenSuccessful": false,
@@ -661,27 +637,11 @@
                     },
                     {
                         "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 26,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col33",
-                        "functionName": "width",
-                        "line": 585
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 44,
-                        "durationMicroseconds": 50,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col33",
-                        "functionName": "height",
-                        "line": 585
-                    },
-                    {
-                        "codegenSuccessful": false,
                         "column": 23,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"text\".",
                         "functionName": "text",
-                        "line": 588
+                        "line": 572
                     },
                     {
                         "codegenSuccessful": false,
@@ -689,7 +649,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 595
+                        "line": 582
                     },
                     {
                         "codegenSuccessful": false,
@@ -697,7 +657,23 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 593
+                        "line": 577
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 35,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col33",
+                        "functionName": "width",
+                        "line": 597
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 44,
+                        "durationMicroseconds": 25,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col33",
+                        "functionName": "height",
+                        "line": 597
                     },
                     {
                         "codegenSuccessful": false,
@@ -713,7 +689,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 610
+                        "line": 607
                     },
                     {
                         "codegenSuccessful": false,
@@ -725,27 +701,11 @@
                     },
                     {
                         "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 28,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col44",
-                        "functionName": "width",
-                        "line": 625
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 44,
-                        "durationMicroseconds": 23,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col44",
-                        "functionName": "height",
-                        "line": 625
-                    },
-                    {
-                        "codegenSuccessful": false,
                         "column": 23,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"text\".",
                         "functionName": "text",
-                        "line": 628
+                        "line": 612
                     },
                     {
                         "codegenSuccessful": false,
@@ -753,7 +713,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 634
+                        "line": 622
                     },
                     {
                         "codegenSuccessful": false,
@@ -761,7 +721,23 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 632
+                        "line": 617
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 35,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col44",
+                        "functionName": "width",
+                        "line": 637
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 44,
+                        "durationMicroseconds": 26,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col44",
+                        "functionName": "height",
+                        "line": 637
                     },
                     {
                         "codegenSuccessful": false,
@@ -769,7 +745,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"text\".",
                         "functionName": "text",
-                        "line": 639
+                        "line": 640
                     },
                     {
                         "codegenSuccessful": false,
@@ -777,7 +753,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 649
+                        "line": 646
                     },
                     {
                         "codegenSuccessful": false,
@@ -789,27 +765,11 @@
                     },
                     {
                         "codegenSuccessful": false,
-                        "column": 20,
-                        "durationMicroseconds": 26,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col55",
-                        "functionName": "width",
-                        "line": 664
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 44,
-                        "durationMicroseconds": 24,
-                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col55",
-                        "functionName": "height",
-                        "line": 664
-                    },
-                    {
-                        "codegenSuccessful": false,
-                        "column": 22,
+                        "column": 23,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"text\".",
                         "functionName": "text",
-                        "line": 667
+                        "line": 651
                     },
                     {
                         "codegenSuccessful": false,
@@ -817,7 +777,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 674
+                        "line": 661
                     },
                     {
                         "codegenSuccessful": false,
@@ -825,11 +785,27 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 672
+                        "line": 656
                     },
                     {
                         "codegenSuccessful": false,
-                        "column": 23,
+                        "column": 20,
+                        "durationMicroseconds": 30,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col55",
+                        "functionName": "width",
+                        "line": 676
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 44,
+                        "durationMicroseconds": 24,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: lb_col55",
+                        "functionName": "height",
+                        "line": 676
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 22,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"text\".",
                         "functionName": "text",
@@ -841,7 +817,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 689
+                        "line": 686
                     },
                     {
                         "codegenSuccessful": false,
@@ -852,36 +828,60 @@
                         "line": 684
                     },
                     {
-                        "codegenSuccessful": true,
-                        "column": 24,
-                        "durationMicroseconds": 440,
-                        "errorMessage": "",
-                        "functionName": "onSig_Clicked",
-                        "line": 713
+                        "codegenSuccessful": false,
+                        "column": 23,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"text\".",
+                        "functionName": "text",
+                        "line": 691
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 36,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"verticalAlignment\".",
+                        "functionName": "verticalAlignment",
+                        "line": 701
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 35,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"centerIn\".",
+                        "functionName": "centerIn",
+                        "line": 696
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 63,
+                        "durationMicroseconds": 139,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
-                        "line": 713
+                        "line": 725
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 75,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 725
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 174,
+                        "durationMicroseconds": 139,
                         "errorMessage": "",
                         "functionName": "bottom",
-                        "line": 709
+                        "line": 721
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 124,
+                        "durationMicroseconds": 120,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
-                        "line": 711
+                        "line": 723
                     },
                     {
                         "codegenSuccessful": false,
@@ -889,7 +889,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 725
+                        "line": 737
                     },
                     {
                         "codegenSuccessful": false,
@@ -897,7 +897,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 726
+                        "line": 738
                     },
                     {
                         "codegenSuccessful": false,
@@ -905,7 +905,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 724
+                        "line": 736
                     },
                     {
                         "codegenSuccessful": false,
@@ -913,7 +913,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 739
+                        "line": 751
                     },
                     {
                         "codegenSuccessful": false,
@@ -921,7 +921,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 740
+                        "line": 752
                     },
                     {
                         "codegenSuccessful": false,
@@ -929,7 +929,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"fill\".",
                         "functionName": "fill",
-                        "line": 736
+                        "line": 748
                     }
                 ],
                 "filePath": "C:/Users/siroi/siroimono/w_qt/EV/HMI/Charging_Complet.qml"

@@ -123,6 +123,18 @@
                     "index": 12,
                     "name": "slot_rs232_reqTimer_timeout",
                     "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 13,
+                    "name": "slot_uart_ems_read",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 14,
+                    "name": "slot_uart_ems_end",
+                    "returnType": "void"
                 }
             ],
             "superClasses": [

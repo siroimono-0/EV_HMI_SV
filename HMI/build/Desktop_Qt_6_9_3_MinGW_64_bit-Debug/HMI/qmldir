@@ -29,5 +29,6 @@ Rec_Number 1.0 ./Qml_Module/Rec_Number.qml
 BackGround_Card 1.0 ./Qml_Module/BackGround_Card.qml
 BackGround_Amount 1.0 ./Qml_Module/BackGround_Amount.qml
 BtnLed 1.0 ./Qml_Module/BtnLed.qml
+Popup_Text_card_err 1.0 ./Qml_Module/Popup_Text_card_err.qml
 depends QtQuick
 

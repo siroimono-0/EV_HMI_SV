@@ -371,6 +371,7 @@ void WK_WebSocket::slot_Send_TextData(stat_data st_stat)
 void WK_WebSocket::slot_Recv_TextData(QString recvData)
 {
     qDebug() << Q_FUNC_INFO;
+    qDebug() << recvData;
     QByteArray qba = recvData.toUtf8();
     QJsonParseError json_err;
     QJsonDocument json_doc = QJsonDocument::fromJson(qba, &json_err);

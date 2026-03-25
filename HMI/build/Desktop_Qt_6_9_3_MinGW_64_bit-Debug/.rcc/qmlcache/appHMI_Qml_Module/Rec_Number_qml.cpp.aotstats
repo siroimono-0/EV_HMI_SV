@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 20,
-                        "durationMicroseconds": 320,
+                        "durationMicroseconds": 374,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 28
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 20,
-                        "durationMicroseconds": 40,
+                        "durationMicroseconds": 57,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 28
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 52,
+                        "durationMicroseconds": 89,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 27
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 38,
+                        "durationMicroseconds": 67,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 43
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 17,
-                        "durationMicroseconds": 75,
+                        "durationMicroseconds": 105,
                         "errorMessage": "Cannot load property radius from (component in C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Rec_Number.qml)::parent with type QQuickItem.",
                         "functionName": "radius",
                         "line": 59
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 45,
+                        "durationMicroseconds": 78,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 60
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 16,
-                        "durationMicroseconds": 115,
+                        "durationMicroseconds": 196,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 79
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 43,
-                        "durationMicroseconds": 99,
+                        "durationMicroseconds": 194,
                         "errorMessage": "",
                         "functionName": "height",
                         "line": 79
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 124,
+                        "durationMicroseconds": 163,
                         "errorMessage": "",
                         "functionName": "restart",
                         "line": 120
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 26,
-                        "durationMicroseconds": 58,
+                        "durationMicroseconds": 69,
                         "errorMessage": "",
                         "functionName": "orientation",
                         "line": 84
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 40,
+                        "durationMicroseconds": 38,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 99
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 47,
+                        "durationMicroseconds": 59,
                         "errorMessage": "",
                         "functionName": "target",
                         "line": 105
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 54,
+                        "durationMicroseconds": 43,
                         "errorMessage": "",
                         "functionName": "target",
                         "line": 112

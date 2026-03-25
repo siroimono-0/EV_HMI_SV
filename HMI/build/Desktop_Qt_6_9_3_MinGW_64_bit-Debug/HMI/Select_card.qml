@@ -6,10 +6,16 @@ import HMI 1.0
 Item {
     id: root
     // property string charging_type: "";
-    // property string charging_val: "";
+    property string pageName: "Select_card";
+    property var mainWin;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("카드 종류 선택");
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+            mainWin.timer_reset("Select_card");
+        });
     }
 
     Component.onCompleted: {
@@ -23,13 +29,13 @@ Item {
         {
             cpp_module.set_card_type_To_statStore("membershipCard");
             cpp_module.set_card_type_To_serial("membershipCard");
-            StackView.view.push("Card_Socket.qml");
+            StackView.view.push("Card_Socket.qml", {mainWin : mainWin});
         }
         else if(s === "creditCard")
         {
             cpp_module.set_card_type_To_statStore("creditCard");
             cpp_module.set_card_type_To_serial("creditCard");
-            StackView.view.push("Card_Ready.qml");
+            StackView.view.push("Card_Ready.qml", {mainWin : mainWin});
         }
     }
 

@@ -123,7 +123,7 @@ struct db_data
     double soc_start; // 충전 시작시 생성
     double soc_end;   // 충전 완료시 생성
 
-    // 금액(정산용)
+    // 금액(정산용) DB upDate X
     QString card_type;
     uint32_t advance_payment; // (선결제 “가정” 금액) // 카드 인증시 생성
     uint32_t cancel_payment;  // (부분취소된 금액) // 충전 완료시 생성
@@ -149,5 +149,8 @@ struct db_data
      */
 
     QString local_tx_id; // 거래 묶음용 hmi 생성
+
+    // 백업 데이터 구분 용
+    QString back_state;
 };
 #endif // STATDATA_H

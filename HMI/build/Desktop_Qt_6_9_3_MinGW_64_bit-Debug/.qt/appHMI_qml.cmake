@@ -58,6 +58,8 @@ set(src_and_dest_list
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/BackGround_Amount.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BtnLed.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/BtnLed.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Popup_Text_card_err.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/Popup_Text_card_err.qml"
 
 )
 set(timestamp_file "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qt/appHMI_qml.txt")

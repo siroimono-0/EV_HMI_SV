@@ -44,6 +44,8 @@ public:
     uint16_t read16_BE(const QByteArray &qba, int pos);
     uint32_t read32_BE(const QByteArray &qba, int pos);
 
+    void uart_ems_open();
+
     void set_p_module(Cpp_Module *module);
     void set_p_stat(StatStore *stat);
 
@@ -65,6 +67,8 @@ public slots:
     void slot_rs232_modbus_end();
     void slot_rs232_reqTimer_timeout();
 
+    void slot_uart_ems_read();
+    void slot_uart_ems_end();
 signals:
 
 private:
@@ -86,6 +90,10 @@ private:
     QByteArray rs232_req;
     QByteArray rs232_readData;
     bool rs232_modbus_wait = false;
+
+    QSerialPort *p_ems = nullptr;
+    QByteArray ems_readData;
+    QTimer *p_ems_tm_silent = nullptr;
 
     Cpp_Module *p_module = nullptr;
     WK_WebSocket *p_soc = nullptr;

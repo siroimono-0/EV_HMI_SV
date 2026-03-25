@@ -4,6 +4,8 @@ import QtQuick.Controls
 
 Item {
     id: root
+    property string pageName: "HMI_main";
+    property var mainWin;
 
     Component.onCompleted: function()
     {
@@ -14,6 +16,11 @@ Item {
 
     StackView.onActivated: {
         cpp_module.set_screen_name("Home");
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+        mainWin.timer_reset("HMI_main");
+        });
     }
 
     BackGround{
@@ -43,7 +50,7 @@ Item {
 
     function stk_next()
     {
-        StackView.view.push("Select_amount.qml");
+        StackView.view.push("Select_amount.qml", {mainWin : mainWin});
 
     }
 }

@@ -5,7 +5,10 @@ import HMI 1.0
 
 Item {
     id: root
-    property bool cancle_payment_stat: true;
+    // property bool cancle_payment_stat: true;
+    property bool cancle_payment_stat: false;
+    property string pageName: "Charging_Complet";
+    property var mainWin;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("충전 완료");
@@ -14,12 +17,19 @@ Item {
     Component.onCompleted: {
         if(root.cancle_payment_stat === false)
         {
-            pop.open("정산이 지연되고 있습니다\n
+            console.log("root.cancle_payment_stat");
+            /*pop.open("정산이 지연되고 있습니다\n
                     자동으로 정산 완료될 예정이나\n
                     미정산 상태가 지속된다면\n
                     고객센터로 연락 부탁드립니다\n
-                    ");
+                    ");*/
+            pop.open();
         }
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+        mainWin.timer_reset("Charging_Complet");
+        });
     }
 
     function stk_home()
@@ -41,9 +51,11 @@ Item {
         anchors.fill: parent
     }
 
-    Popup_Text{
-        id: pop
+    Popup_Text_card_err{
+        id: pop;
         anchors.fill: parent
+        // anchors.centerIn: parent
+        z: 999;
     }
 
     Label{
@@ -466,7 +478,7 @@ Item {
             Label{
                 id: lb_col00
                 text: (cpp_module && cpp_module.statStore) ?
-                    String (cpp_module.statStore.battery_start_persent + " ▶ " + cpp_module.statStore.battery_current) : "-";
+                          String (cpp_module.statStore.battery_start_persent + " ▶ " + cpp_module.statStore.battery_current) : "-";
                 font.pixelSize: 45
                 font.family: "DIN"
                 font.bold: true
@@ -586,7 +598,7 @@ Item {
             Label{
                 id: lb_col33
                 text: (cpp_module && cpp_module.statStore) ?
-                    String(cpp_module.statStore.advance_payment) : "-";
+                          String(cpp_module.statStore.advance_payment) : "-";
                 font.pixelSize: 45
                 font.family: "DIN"
                 font.bold: true
@@ -665,7 +677,7 @@ Item {
             Label{
                 id: lb_col55
                 text:(cpp_module && cpp_module.statStore) ?
-                    String(cpp_module.statStore.actual_payment) : "-";
+                         String(cpp_module.statStore.actual_payment) : "-";
                 font.pixelSize: 45
                 font.family: "DIN"
                 font.bold: true

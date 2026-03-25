@@ -11,6 +11,8 @@ WK_Serial::WK_Serial(QObject *parent)
 {
     this->serial_open();
 
+    this->uart_ems_open();
+
     // timer 같이 초기화
     this->rs485_modbus_open();
 
@@ -729,5 +731,51 @@ void WK_Serial::slot_modbus_write()
 void WK_Serial::slot_set_card_type(QString set)
 {
     this->card_type = set;
+    return;
+}
+
+void WK_Serial::uart_ems_open()
+{
+    this->p_ems = new QSerialPort(this);
+    this->p_ems->setPortName("COM5"); // 장치관리자에서 본 COM 번호
+    this->p_ems->setBaudRate(QSerialPort::Baud9600);
+    this->p_ems->setDataBits(QSerialPort::Data8);
+    this->p_ems->setParity(QSerialPort::NoParity);
+    this->p_ems->setStopBits(QSerialPort::OneStop);
+    this->p_ems->setFlowControl(QSerialPort::NoFlowControl);
+
+    connect(this->p_ems, &QSerialPort::readyRead, this, &WK_Serial::slot_uart_ems_read);
+
+    if (this->p_ems->open(QIODevice::ReadWrite))
+    {
+        qDebug() << "ems open OK";
+    }
+    else
+    {
+        qDebug() << "ems open FAIL:" << this->p_ems->errorString();
+    }
+
+    this->p_ems_tm_silent = new QTimer(this);
+    // 타이머 싱글샷으로 설정하고 read시 재설정 반복
+    this->p_ems_tm_silent->setSingleShot(true);
+    connect(this->p_ems_tm_silent, &QTimer::timeout, this, &WK_Serial::slot_uart_ems_end);
+
+    // this->slot_rs232_cmd(0, 1);
+    return;
+}
+
+void WK_Serial::slot_uart_ems_read()
+{
+    QByteArray qba = this->p_ems->readAll();
+    qDebug() << qba;
+    this->ems_readData.append(qba);
+    this->p_ems_tm_silent->start(30);
+    return;
+}
+
+void WK_Serial::slot_uart_ems_end()
+{
+    qDebug() << this->ems_readData;
+    this->ems_readData.clear();
     return;
 }

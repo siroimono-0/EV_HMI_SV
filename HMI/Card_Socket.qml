@@ -5,9 +5,20 @@ import HMI 1.0
 
 Item {
     id: root
+    property string pageName: "Card_Socket";
+    property var mainWin;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("카드 삽입 및 인증");
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+            mainWin.timer_reset("Card_Socket");
+        });
+
+    }
+
+    Component.onCompleted: {
     }
 
     function stk_back()
@@ -20,6 +31,7 @@ Item {
 
     function card_authorized_success()
     {
+        console.log("card_authorized_success()");
         // 카드 인증 시리얼 통신 막음
         cpp_module.set_card_stat_To_serial(false);
 
@@ -30,13 +42,13 @@ Item {
 
     function stk_next()
     {
-        StackView.view.push("Charging_Ready.qml");
+        StackView.view.push("Charging_Ready.qml", {mainWin : mainWin});
     }
 
     function stk_next_failed(msg)
     {
         cpp_module.set_card_stat_To_serial(false);
-        StackView.view.push("Card_Failed.qml", {err: msg});
+        StackView.view.push("Card_Failed.qml", {err: msg}, {mainWin : mainWin});
     }
 
     Connections{

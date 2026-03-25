@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feColorMatrix in="blur1" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 1 0" result="glow1"/>
+      <feGaussianBlur stdDeviation="14" result="blur2"/>
+      <feColorMatrix in="blur2" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.75 0" result="glow2"/>
+      <feMerge>
+        <feMergeNode in="glow2"/>
+        <feMergeNode in="glow1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- <rect width="100%" height="100%" fill="#000000"/> -->
+
+  <g stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#neonGlow)">
+    <circle cx="220" cy="270" r="150" stroke-width="12"/>
+    <line x1="220" y1="170" x2="220" y2="275" stroke-width="14"/>
+    <line x1="220" y1="275" x2="150" y2="275" stroke-width="14"/>
+
+    <circle cx="375" cy="140" r="80" stroke-width="12"/>
+    <line x1="375" y1="100" x2="375" y2="155" stroke-width="14"/>
+    <circle cx="375" cy="190" r="7" fill="#ffffff" stroke="none"/>
+  </g>
+</svg>

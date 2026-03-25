@@ -5,9 +5,20 @@ import HMI 1.0
 
 Item {
     id: root
+    property string pageName: "Input_Time";
+    property var mainWin;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("시간 입력");
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+            mainWin.timer_reset("Input_Time");
+        });
+
+    }
+
+    Component.onCompleted: {
     }
 
     function stk_home()
@@ -26,7 +37,7 @@ Item {
     function stk_next(s_int)
     {
         cpp_module.charging_type_To_statStore("time", s_int);
-        StackView.view.push("Select_card.qml");
+        StackView.view.push("Select_card.qml", {mainWin : mainWin});
         // StackView.view.push("Select_card.qml", {charging_tpye: "time"}, {charging_val: s_int});
     }
 
@@ -58,7 +69,7 @@ Item {
                 pop.open("10분 이상 \n충전 가능합니다")
             }
             else{
-            root.stk_next(s_int);
+                root.stk_next(s_int);
             }
         }
     }

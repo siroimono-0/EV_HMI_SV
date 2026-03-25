@@ -1,0 +1,33 @@
+2026-02-11 00:17:49,963 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 716583856 Bytes (1073741824)
+2026-02-11 00:17:53,075 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 734409648 Bytes (1073741824)
+2026-02-11 00:17:53,202 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 751186864 Bytes (1073741824)
+2026-02-11 00:17:53,373 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2026-02-11 00:17:53,373 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USART
+2026-02-11 00:17:53,374 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2026-02-11 00:17:53,374 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2026-02-11 00:17:53,374 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2026-02-11 00:17:53,379 [INFO] CodeGenerator:896 - code generatio: config db path: C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.13.0.202411220809\\db\
+2026-02-11 00:17:53,482 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\MXTmpFiles\license.tmp_save
+2026-02-11 00:17:53,774 [INFO] CodeEngine:279 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\MXTmpFiles\license.tmp
+2026-02-11 00:17:53,809 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\MXTmpFiles\gpio.tmp_save
+2026-02-11 00:17:53,968 [INFO] CodeEngine:279 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\MXTmpFiles\gpio.tmp
+2026-02-11 00:17:54,040 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\Core\Src\stm32f1xx_it.c_save
+2026-02-11 00:17:54,305 [INFO] CodeEngine:279 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\Core\Src\stm32f1xx_it.c
+2026-02-11 00:17:54,320 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\Core\Inc\stm32f1xx_it.h_save
+2026-02-11 00:17:54,389 [INFO] CodeEngine:279 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\Core\Inc\stm32f1xx_it.h
+2026-02-11 00:17:54,462 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\Core\Src\stm32f1xx_hal_msp.c_save
+2026-02-11 00:17:54,616 [INFO] CodeEngine:279 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\Core\Src\stm32f1xx_hal_msp.c
+2026-02-11 00:17:54,626 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\MXTmpFiles\system.tmp_save
+2026-02-11 00:17:54,684 [INFO] CodeEngine:279 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\MXTmpFiles\system.tmp
+2026-02-11 00:17:54,708 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\Core\Inc\stm32f1xx_hal_conf.h_save
+2026-02-11 00:17:54,812 [INFO] CodeEngine:335 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\Core\Inc\stm32f1xx_hal_conf.h
+2026-02-11 00:17:54,857 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\Core\Inc\main.h_save
+2026-02-11 00:17:54,966 [INFO] CodeEngine:279 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\Core\Inc\main.h
+2026-02-11 00:17:55,001 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\siroi\STM32CubeIDE\test\test1\Core\Src\main.c_save
+2026-02-11 00:17:55,116 [INFO] CodeEngine:279 - Generated code: C:\Users\siroi\STM32CubeIDE\test\test1\Core\Src\main.c
+2026-02-11 00:17:55,506 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 253mS.
+2026-02-11 00:17:55,509 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2026-02-11 00:17:55,564 [INFO] ConfigFileManager:1579 - The Die is : DIE410
+2026-02-11 00:17:56,416 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 907mS.
+2026-02-11 00:17:56,417 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 1mS.
+2026-02-11 00:17:56,421 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.

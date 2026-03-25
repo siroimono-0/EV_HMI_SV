@@ -6,9 +6,21 @@ import HMI 1.0
 Item {
     id: root;
     property string err: ""
+    property int font_size: 40
+    property string pageName: "Card_Failed";
+    property var mainWin;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("카드 인증 실패");
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+        mainWin.timer_reset("Card_Failed");
+        });
+
+    }
+
+    Component.onCompleted: {
     }
 
     function stk_prev()
@@ -27,7 +39,7 @@ Item {
     Label{
         id: lb
         text: root.err
-        font.pixelSize: 40
+        font.pixelSize: root.font_size
         font.family: "DIN"
         font.bold: true
         anchors.centerIn: parent
@@ -39,7 +51,7 @@ Item {
     Label{
         id: lb_neon
         text: root.err
-        font.pixelSize: 40
+        font.pixelSize: root.font_size
         font.family: "DIN"
         font.bold: true
 
@@ -66,8 +78,8 @@ Item {
     BtnGreen{
         id: btn
         width: 300; height: 120;
-        anchors.top: lb.bottom
-        anchors.topMargin: 50
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 100
         anchors.horizontalCenter: parent.horizontalCenter
 
         onSig_Clicked: function()

@@ -28,6 +28,7 @@
     <file alias="./Qml_Module/BackGround_Card.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BackGround_Card.qml</file>
     <file alias="./Qml_Module/BackGround_Amount.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BackGround_Amount.qml</file>
     <file alias="./Qml_Module/BtnLed.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BtnLed.qml</file>
+    <file alias="./Qml_Module/Popup_Text_card_err.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Popup_Text_card_err.qml</file>
     <file alias="./images/combo.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/combo.svg</file>
     <file alias="./images/memberCard.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/memberCard.svg</file>
     <file alias="./images/creditCard.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/creditCard.svg</file>
@@ -39,6 +40,7 @@
     <file alias="./images/cardInsert.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/cardInsert.svg</file>
     <file alias="./images/charging_ready.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/charging_ready.svg</file>
     <file alias="./images/voltage_green.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/voltage_green.svg</file>
+    <file alias="./images/settlement_delay.svg">C:/Users/siroi/siroimono/w_qt/EV/HMI/./images/settlement_delay.svg</file>
   </qresource>
 </RCC>
 

@@ -5,6 +5,8 @@ import HMI 1.0
 
 Item {
     id: root
+    property string pageName: "Select_amount";
+    property var mainWin;
 
     Component.onCompleted: function()
     {
@@ -13,6 +15,11 @@ Item {
 
     StackView.onActivated: {
         cpp_module.set_screen_name("충전 방식 선택");
+
+        // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+            mainWin.timer_reset("Select_amount");
+        });
     }
 
     function stk_home()
@@ -32,24 +39,22 @@ Item {
     {
         if(s === "time")
         {
-            StackView.view.push("Input_Time.qml");
+            StackView.view.push("Input_Time.qml", {mainWin : mainWin});
         }
         else if(s === "won")
         {
-            StackView.view.push("Input_Won.qml");
+            StackView.view.push("Input_Won.qml", {mainWin : mainWin});
         }
         else if(s === "kWh")
         {
-            StackView.view.push("Input_Kwh.qml");
+            StackView.view.push("Input_Kwh.qml", {mainWin : mainWin});
         }
         else if(s === "persent")
         {
             cpp_module.charging_type_To_statStore(s, 80);
-        StackView.view.push("Select_card.qml");
-        // StackView.view.push("Select_card.qml", {charging_tpye: "persent"}, {charging_val: "80"});
+            StackView.view.push("Select_card.qml", {mainWin : mainWin});
+            // StackView.view.push("Select_card.qml", {charging_tpye: "persent"}, {charging_val: "80"});
         }
-
-
     }
 
     BackGround_Plus{

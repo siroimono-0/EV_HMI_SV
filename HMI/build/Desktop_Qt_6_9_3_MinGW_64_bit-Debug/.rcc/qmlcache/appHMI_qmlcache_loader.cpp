@@ -201,6 +201,13 @@ namespace _qt_qml_HMI__0x2e__Qml_Module_BtnLed_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
+namespace _qt_qml_HMI__0x2e__Qml_Module_Popup_Text_card_err_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
 
 }
 namespace {
@@ -243,6 +250,7 @@ Registry::Registry() {
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/BackGround_Card.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_BackGround_Card_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/BackGround_Amount.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_BackGround_Amount_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/BtnLed.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_BtnLed_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/HMI/./Qml_Module/Popup_Text_card_err.qml"), &QmlCacheGeneratedCode::_qt_qml_HMI__0x2e__Qml_Module_Popup_Text_card_err_qml::unit);
     QQmlPrivate::RegisterQmlUnitCacheHook registration;
     registration.structVersion = 0;
     registration.lookupCachedQmlUnit = &lookupCachedUnit;

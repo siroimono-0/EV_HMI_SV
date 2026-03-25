@@ -61,6 +61,7 @@ qt_add_qml_module(appHMI
         ./Qml_Module/BackGround_Card.qml
         ./Qml_Module/BackGround_Amount.qml
         ./Qml_Module/BtnLed.qml
+        ./Qml_Module/Popup_Text_card_err.qml
 
     SOURCES
         ./Cpp_Module/Cpp_Module.h ./Cpp_Module/Cpp_Module.cpp
@@ -82,6 +83,7 @@ qt_add_qml_module(appHMI
         ./images/cardInsert.svg
         ./images/charging_ready.svg
         ./images/voltage_green.svg
+        ./images/settlement_delay.svg
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

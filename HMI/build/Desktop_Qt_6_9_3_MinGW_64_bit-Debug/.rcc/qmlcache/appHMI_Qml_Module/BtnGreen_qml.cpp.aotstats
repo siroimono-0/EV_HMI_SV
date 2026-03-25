@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 20,
-                        "durationMicroseconds": 333,
+                        "durationMicroseconds": 402,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 26
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 20,
-                        "durationMicroseconds": 59,
+                        "durationMicroseconds": 69,
                         "errorMessage": "",
                         "functionName": "onClicked",
                         "line": 26
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 73,
+                        "durationMicroseconds": 82,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 25
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 17,
-                        "durationMicroseconds": 74,
+                        "durationMicroseconds": 117,
                         "errorMessage": "Cannot load property radius from (component in C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BtnGreen.qml)::parent with type QQuickItem.",
                         "functionName": "radius",
                         "line": 36
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 44,
+                        "durationMicroseconds": 83,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 37
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 16,
-                        "durationMicroseconds": 124,
+                        "durationMicroseconds": 182,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 58
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 43,
-                        "durationMicroseconds": 84,
+                        "durationMicroseconds": 130,
                         "errorMessage": "",
                         "functionName": "height",
                         "line": 58
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 17,
-                        "durationMicroseconds": 47,
+                        "durationMicroseconds": 84,
                         "errorMessage": "Cannot load property radius from (component in C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/BtnGreen.qml)::parent with type QQuickItem.",
                         "functionName": "radius",
                         "line": 59
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 117,
+                        "durationMicroseconds": 147,
                         "errorMessage": "",
                         "functionName": "restart",
                         "line": 100
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 26,
-                        "durationMicroseconds": 72,
+                        "durationMicroseconds": 74,
                         "errorMessage": "",
                         "functionName": "orientation",
                         "line": 63
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 53,
+                        "durationMicroseconds": 52,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 79
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 46,
+                        "durationMicroseconds": 53,
                         "errorMessage": "",
                         "functionName": "target",
                         "line": 85
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 38,
+                        "durationMicroseconds": 48,
                         "errorMessage": "",
                         "functionName": "target",
                         "line": 92

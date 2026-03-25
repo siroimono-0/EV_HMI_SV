@@ -5,9 +5,16 @@ import HMI 1.0
 
 Item {
     id: root
+    property string pageName: "Charging_Ready";
+    property var mainWin;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("커넥터 연결 준비");
+
+         // home화면 이동 타이머 초기화
+        Qt.callLater(function() {
+        mainWin.timer_reset("Charging_Ready");
+        });
     }
 
     Component.onCompleted: {
@@ -21,7 +28,7 @@ Item {
         // 확인버튼 눌렀으면 케넉터 연결했다고 가정함
         // 그럼 rs485릴레이 2..3..4 코일 on 실행
         // 코일 다 켜졌으면 cpp -> qml signal 발생해서 다음페이지
-        StackView.view.push("Charging_Monitoring.qml");
+        StackView.view.push("Charging_Monitoring.qml", {mainWin : mainWin});
     }
 
     function coli_set()
