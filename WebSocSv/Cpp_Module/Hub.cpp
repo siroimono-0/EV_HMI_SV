@@ -1,4 +1,5 @@
 #include "Hub.h"
+#include "DB_PostgreSQL.h"
 #include "StatModel.h"
 #include "WK_Soc.h"
 
@@ -19,6 +20,10 @@ void Hub::set_p_md(StatModel *set_md)
 void Hub::set_p_db(DB_PostgreSQL *set_db)
 {
     this->p_obj_db = set_db;
+    QMetaObject::invokeMethod(this->p_obj_db,
+                              "slot_set_p_soc",
+                              Qt::QueuedConnection,
+                              Q_ARG(Hub *, this));
     return;
 }
 
@@ -140,19 +145,110 @@ void Hub::slot_timeOut_heartbit()
     return;
 }
 
-void Hub::mp_hmi_insert(const QPair<int, QString> key, WK_Soc *val)
+void Hub::mp_wk_insert(const QPair<int, QString> key, WK_Soc *val)
 {
     this->mp_hmi[key] = val;
     return;
 }
 
-void Hub::mp_hmi_remove(const QPair<int, QString> key)
+void Hub::mp_wk_remove(const QPair<int, QString> key)
 {
     this->mp_hmi.remove(key);
     return;
 }
 
-WK_Soc *Hub::mp_hmi_find(const QPair<int, QString> key)
+WK_Soc *Hub::mp_wk_find(const QPair<int, QString> key)
 {
     return this->mp_hmi[key];
+}
+
+void Hub::slot_charging_log_select_ret_From_DB__To_admin(const mp_wk_key key,
+                                                         QVector<charging_log_admin> ret)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_charging_log_select_ret_From_DB__To_admin(ret);
+    return;
+}
+
+void Hub::slot_hmi_current_stat_select_ret_From_DB__To_admin(const mp_wk_key key,
+                                                             QVector<hmi_current_stat_admin> ret)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_hmi_current_stat_select_ret_From_DB__To_admin(ret);
+    return;
+}
+
+void Hub::slot_hmi_device_select_ret_From_DB__To_admin(const mp_wk_key key,
+                                                       QVector<hmi_device_admin> ret)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_hmi_device_select_ret_From_DB__To_admin(ret);
+    return;
+}
+
+void Hub::slot_membership_card_select_ret_From_DB__To_admin(const mp_wk_key key,
+                                                            QVector<membership_card_admin> ret)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_membership_card_select_ret_From_DB__To_admin(ret);
+    return;
+}
+
+void Hub::slot_membership_log_select_ret_From_DB__To_admin(const mp_wk_key key,
+                                                           QVector<membership_log_admin> ret)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_membership_log_select_ret_From_DB__To_admin(ret);
+    return;
+}
+
+void Hub::slot_store_user_select_ret_From_DB__To_admin(const mp_wk_key key,
+                                                       QVector<store_user_admin> ret)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_store_user_select_ret_From_DB__To_admin(ret);
+    return;
+}
+
+void Hub::slot_membershipCard_authorized_ack_To_hmi(const mp_wk_key key, bool ok, QString msg)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_membershipCard_authorized_ack_To_hmi(ok, msg);
+    return;
+}
+
+void Hub::slot_membershipCard_finished_ack_To_hmi(const mp_wk_key key, bool ok)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_membershipCard_finished_ack_To_hmi(ok);
+    return;
+}
+
+void Hub::slot_chargingLog_authorized_ack_To_hmi(const mp_wk_key key)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_chargingLog_authorized_ack_To_hmi();
+    return;
+}
+
+void Hub::slot_chargingLog_charging_start_ack_To_hmi(const mp_wk_key key, uint32_t ocpp_tx_id)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_chargingLog_charging_start_ack_To_hmi(ocpp_tx_id);
+    return;
+}
+
+void Hub::slot_chargingLog_charging_finished_ack_To_hmi(const mp_wk_key key)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_chargingLog_charging_finished_ack_To_hmi();
+    return;
+}
+
+void Hub::slot_mCard_status_ret_From_DB__To_admin(const mp_wk_key key,
+                                                  QVector<membership_card_admin> ret)
+{
+    auto wk = this->mp_wk_find({key.id, key.s_id});
+    wk->slot_mCard_status_ret_From_DB__To_admin(ret);
+    return;
 }

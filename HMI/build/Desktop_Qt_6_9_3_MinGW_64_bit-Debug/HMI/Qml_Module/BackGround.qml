@@ -1,7 +1,18 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Effects
 
 Item {
+    id: root;
+    property string price;
+    property bool bottom_text_visible : true
+
+    function set_bottom_text_visible(set)
+    {
+        root.bottom_text_visible = set;
+    }
+
+
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
@@ -58,6 +69,90 @@ Item {
         source: bottomGlow
         blurEnabled: true
         blur: 0.9
+    }
+
+    Label{
+        id: lb
+        visible: root.bottom_text_visible;
+        text: "1kWh 금액: " + cpp_module.statStore.charge_price_kWh;
+        font.pixelSize: 30
+        font.family: "DIN"
+        font.bold: true
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottom: lb2.top
+        // anchors.bottomMargin: 10
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+    }
+
+    Label{
+        id: lb_neon
+        visible: root.bottom_text_visible;
+        text: "1kWh 금액: " + cpp_module.statStore.charge_price_kWh;
+        font.pixelSize: 30
+        font.family: "DIN"
+        font.bold: true
+
+        anchors.fill: lb
+        anchors.margins: -20
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+
+        layer.enabled: true;
+
+        layer.effect: MultiEffect{
+            shadowEnabled: true;
+            shadowBlur: 1
+            shadowColor: "#FFFFFF"
+            shadowOpacity: 1
+            shadowVerticalOffset: 0;
+            shadowHorizontalOffset: 0;
+        }
+    }
+
+        Label{
+        id: lb2
+        visible: root.bottom_text_visible;
+        text: "고객센터: 000-0000-0000"
+        font.pixelSize: 30
+        font.family: "DIN"
+        font.bold: true
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+    }
+
+    Label{
+        id: lb2_neon
+        visible: root.bottom_text_visible;
+        text: "고객센터: 000-0000-0000"
+        font.pixelSize: 30
+        font.family: "DIN"
+        font.bold: true
+
+        anchors.fill: lb2
+        anchors.margins: -20
+
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+
+        layer.enabled: true;
+
+        layer.effect: MultiEffect{
+            shadowEnabled: true;
+            shadowBlur: 1
+            shadowColor: "#FFFFFF"
+            shadowOpacity: 1
+            shadowVerticalOffset: 0;
+            shadowHorizontalOffset: 0;
+        }
     }
 
 }

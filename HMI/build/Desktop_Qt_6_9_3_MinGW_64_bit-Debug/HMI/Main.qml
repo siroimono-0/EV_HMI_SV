@@ -57,7 +57,6 @@ Window {
                 // 차징로그 ems 하나 남겨놓음
                 cpp_module.ems_Charging_Ready_To_StatStore();
 
-
                 // 정지 사유 초기화
                 cpp_module.set_stop_reason("EMS");
                 // 충전 바로 마무리 한걸로 DB 업데이트
@@ -88,6 +87,38 @@ Window {
             {
                 root.stk_home();
                 root_stkView.push("Maintenance.qml", {"mainWin": root});
+            }
+        }
+
+        function onSig_screen_move_home_ToQml()
+        {
+            let page_name = root_stkView.currentItem.pageName;
+            console.log(page_name);
+
+            if(page_name === "Charging_Ready")
+            {
+                // 선승인 금액 처리해야댐 강제로 0원
+                // 차징로그 ems 하나 남겨놓음
+                cpp_module.ems_Charging_Ready_To_StatStore();
+
+                // 정지 사유 초기화
+                cpp_module.set_stop_reason("Admin");
+                // 충전 바로 마무리 한걸로 DB 업데이트
+                cpp_module.charging_finished_To_statStore();
+
+                root.stk_home();
+                root_stkView.push("HMI_main.qml", {"mainWin": root});
+            }
+            else if(page_name === "Charging_Monitoring")
+            {
+                // 정지 사유 초기화
+                cpp_module.set_stop_reason("Admin");
+                root_stkView.currentItem.admin_stop();
+            }
+            else
+            {
+                root.stk_home();
+                root_stkView.push("HMI_main.qml", {"mainWin": root});
             }
         }
     }
@@ -147,10 +178,10 @@ Window {
 
 
         Component.onCompleted: {
-            // root_stkView.push("Start_page.qml", {"mainWin": root});
+            root_stkView.push("Start_page.qml", {"mainWin": root});
             // root_stkView.push("Ems_Nomal.qml", {"mainWin": root});
             // root_stkView.push("Ems_Charging.qml", {"mainWin": root});
-            root_stkView.push("Maintenance.qml", {"mainWin": root});
+            // root_stkView.push("Maintenance.qml", {"mainWin": root});
         }
     }
     /*

@@ -48,6 +48,9 @@ class StatStore : public QObject
     Q_PROPERTY(QString cancle_payment READ get_cancle_payment WRITE set_cancle_payment NOTIFY
                    sig_cancle_payment_change FINAL)
 
+    Q_PROPERTY(int charge_price_kWh READ get_charge_price_kWh WRITE set_charge_price_kWh NOTIFY
+                   sig_charge_price_kWh FINAL)
+
 public:
     explicit StatStore(QObject *parent = nullptr);
     void set_First_stat(stat_data st_stat);
@@ -67,6 +70,9 @@ public:
     QString get_advance_payment();
     QString get_actual_payment();
     QString get_cancle_payment();
+    //===========================================
+    int get_charge_price_kWh();
+    //===========================================
 
     int get_i_can_pay();
     QString get_card_type();
@@ -96,6 +102,9 @@ public:
     void set_store_id(int set);
     //=============================================
     void set_stop_reason(QString set);
+    //=============================================
+    void set_charge_price_kWh(int set);
+    void set_charge_price_min();
 
     void charging_start_db_update(double start_persent);
     void charging_finished_db_update();
@@ -164,6 +173,7 @@ signals:
     void sig_actual_payment_change();
     void sig_cancle_payment_change();
     //====================================================
+    void sig_charge_price_kWh();
 
     // set_p_stat 에서 커넥트
     // connect(this->p_stat, &StatStore::sig_hartbit_pong, this, &WK_WebSocket::slot_send_hartbit_pong);
@@ -197,8 +207,8 @@ private:
 
     CHARGING_TYPE charging_type = NOT_SET;
     int charging_val = 0;       // 차징 타입에 따른 값
-    int charge_price_kWh = 350; // voltage 150 current 400 기준
-    int charge_price_min = 350; // voltage 150 current 400 기준
+    int charge_price_kWh = 350; // Qml연동
+    int charge_price_min;       // 1분당 요금 = (1kWh당 요금 × 전력kW) / 60
     //===================================================
 
     int store_id;                // hmi 로그인시 입력 승인된 id

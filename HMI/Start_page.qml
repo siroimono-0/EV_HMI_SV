@@ -40,6 +40,7 @@ Item {
 
         BackGround{
             id: keypad_back
+            bottom_text_visible: false
             anchors.fill: parent
         }
 

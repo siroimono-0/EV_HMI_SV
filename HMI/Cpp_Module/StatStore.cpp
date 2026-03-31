@@ -7,6 +7,12 @@ StatStore::StatStore(QObject *parent)
     : QObject{parent}
 {}
 
+void StatStore::set_charge_price_min()
+{
+    this->charge_price_min = (this->charge_price_kWh * 400 * 150) / 60;
+    return;
+}
+
 void StatStore::set_First_stat(stat_data st_stat)
 {
     this->st_stat = st_stat;
@@ -29,48 +35,6 @@ void StatStore::set_p_soc(WK_WebSocket *set)
     this->p_soc = set;
     return;
 }
-
-/*
-void StatStore::slot_update_FromSoc(stat_data st_stat)
-{
-    this->st_stat = st_stat;
-    emit this->sig_Stat_changed(this->st_stat);
-
-    qDebug() << Q_FUNC_INFO;
-    return;
-}
-
-void StatStore::slot_update_FromSerial(stat_data st_stat)
-{
-    this->st_stat = st_stat;
-    emit this->sig_Stat_changed(this->st_stat);
-
-    qDebug() << Q_FUNC_INFO;
-    return;
-}
-
-void StatStore::slot_update_FromModule(stat_data st_stat)
-{
-    this->st_stat = st_stat;
-    emit this->sig_Stat_changed(this->st_stat);
-
-    qDebug() << Q_FUNC_INFO;
-    return;
-}
-
-void StatStore::slot_update_current()
-{
-    emit this->sig_Stat_changed(this->st_stat);
-
-    qDebug() << Q_FUNC_INFO;
-    return;
-}
-
-stat_data StatStore::slot_get_stat()
-{
-    return this->st_stat;
-}
-*/
 
 int StatStore::get_i_can_pay()
 {
@@ -484,6 +448,11 @@ QString StatStore::get_cancle_payment()
     return this->cancle_payment;
 }
 
+int StatStore::get_charge_price_kWh()
+{
+    return this->charge_price_kWh;
+}
+
 void StatStore::set_elapsed_time(const QString set)
 {
     this->elapsed_time = set;
@@ -555,6 +524,14 @@ void StatStore::set_cancle_payment(QString set)
 void StatStore::set_store_id(int set)
 {
     this->store_id = set;
+    return;
+}
+
+void StatStore::set_charge_price_kWh(int set)
+{
+    this->charge_price_kWh = set;
+    this->set_charge_price_min();
+    emit this->sig_charge_price_kWh();
     return;
 }
 

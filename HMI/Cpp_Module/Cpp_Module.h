@@ -94,6 +94,7 @@ signals:
     void sig_ems_ToQml();
 
     void sig_screen_move_maintenance_ToQml();
+    void sig_screen_move_home_ToQml();
 
 private:
     StatStore *p_stat = nullptr;

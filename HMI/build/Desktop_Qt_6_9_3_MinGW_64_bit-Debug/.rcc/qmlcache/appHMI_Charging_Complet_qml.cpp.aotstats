@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 934,
+                        "durationMicroseconds": 992,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "stk_home",
                         "line": 35
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 553,
+                        "durationMicroseconds": 514,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "onCompleted",
                         "line": 18
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 87,
+                        "durationMicroseconds": 91,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 52
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 63,
+                        "durationMicroseconds": 98,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 57
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 113,
+                        "durationMicroseconds": 152,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 103
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 93,
+                        "durationMicroseconds": 134,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 105
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 32,
+                        "durationMicroseconds": 47,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col0",
                         "functionName": "width",
                         "line": 111
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 43,
-                        "durationMicroseconds": 21,
+                        "durationMicroseconds": 26,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col0",
                         "functionName": "height",
                         "line": 111
@@ -166,7 +166,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 102,
+                        "durationMicroseconds": 110,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 155
@@ -174,7 +174,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 32,
+                        "durationMicroseconds": 36,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col1",
                         "functionName": "width",
                         "line": 171
@@ -182,7 +182,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 43,
-                        "durationMicroseconds": 24,
+                        "durationMicroseconds": 49,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col1",
                         "functionName": "height",
                         "line": 171
@@ -222,7 +222,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 147,
+                        "durationMicroseconds": 110,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 214
@@ -230,7 +230,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 32,
+                        "durationMicroseconds": 33,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col2",
                         "functionName": "width",
                         "line": 230
@@ -238,7 +238,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 43,
-                        "durationMicroseconds": 23,
+                        "durationMicroseconds": 24,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col2",
                         "functionName": "height",
                         "line": 230
@@ -278,7 +278,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 121,
+                        "durationMicroseconds": 135,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 273
@@ -286,7 +286,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 64,
+                        "durationMicroseconds": 32,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col3",
                         "functionName": "width",
                         "line": 289
@@ -294,7 +294,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 43,
-                        "durationMicroseconds": 21,
+                        "durationMicroseconds": 23,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col3",
                         "functionName": "height",
                         "line": 289
@@ -334,7 +334,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 115,
+                        "durationMicroseconds": 150,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 332
@@ -342,7 +342,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 29,
+                        "durationMicroseconds": 33,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col4",
                         "functionName": "width",
                         "line": 348
@@ -350,7 +350,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 43,
-                        "durationMicroseconds": 21,
+                        "durationMicroseconds": 22,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col4",
                         "functionName": "height",
                         "line": 348
@@ -390,7 +390,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 117,
+                        "durationMicroseconds": 112,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 391
@@ -398,7 +398,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 29,
+                        "durationMicroseconds": 33,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col5",
                         "functionName": "width",
                         "line": 407
@@ -406,7 +406,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 43,
-                        "durationMicroseconds": 21,
+                        "durationMicroseconds": 26,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col5",
                         "functionName": "height",
                         "line": 407
@@ -446,7 +446,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 31,
-                        "durationMicroseconds": 117,
+                        "durationMicroseconds": 138,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 450
@@ -454,7 +454,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 105,
+                        "durationMicroseconds": 116,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 470
@@ -462,7 +462,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 129,
+                        "durationMicroseconds": 101,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 472
@@ -470,7 +470,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 41,
+                        "durationMicroseconds": 40,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col00",
                         "functionName": "width",
                         "line": 478
@@ -478,7 +478,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 44,
-                        "durationMicroseconds": 22,
+                        "durationMicroseconds": 27,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col00",
                         "functionName": "height",
                         "line": 478
@@ -534,7 +534,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 35,
+                        "durationMicroseconds": 61,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col11",
                         "functionName": "width",
                         "line": 518
@@ -542,7 +542,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 44,
-                        "durationMicroseconds": 22,
+                        "durationMicroseconds": 24,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col11",
                         "functionName": "height",
                         "line": 518
@@ -598,7 +598,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 49,
+                        "durationMicroseconds": 31,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col22",
                         "functionName": "width",
                         "line": 558
@@ -606,7 +606,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 44,
-                        "durationMicroseconds": 22,
+                        "durationMicroseconds": 25,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col22",
                         "functionName": "height",
                         "line": 558
@@ -662,7 +662,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 31,
+                        "durationMicroseconds": 32,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col33",
                         "functionName": "width",
                         "line": 598
@@ -670,7 +670,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 44,
-                        "durationMicroseconds": 20,
+                        "durationMicroseconds": 24,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col33",
                         "functionName": "height",
                         "line": 598
@@ -726,7 +726,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 27,
+                        "durationMicroseconds": 91,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col44",
                         "functionName": "width",
                         "line": 638
@@ -734,7 +734,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 44,
-                        "durationMicroseconds": 21,
+                        "durationMicroseconds": 31,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col44",
                         "functionName": "height",
                         "line": 638
@@ -790,7 +790,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 20,
-                        "durationMicroseconds": 39,
+                        "durationMicroseconds": 40,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col55",
                         "functionName": "width",
                         "line": 677
@@ -798,7 +798,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 44,
-                        "durationMicroseconds": 29,
+                        "durationMicroseconds": 25,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb_col55",
                         "functionName": "height",
                         "line": 677
@@ -854,7 +854,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 149,
+                        "durationMicroseconds": 135,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 726
@@ -862,7 +862,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 47,
+                        "durationMicroseconds": 43,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 726
@@ -870,7 +870,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 129,
+                        "durationMicroseconds": 115,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 722
@@ -878,7 +878,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 155,
+                        "durationMicroseconds": 103,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 724

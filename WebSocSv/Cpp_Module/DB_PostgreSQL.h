@@ -16,6 +16,7 @@ enum RECURSIVE_ERR {
 
 class Cpp_Module;
 class WK_Soc;
+class Hub;
 
 class DB_PostgreSQL : public QObject
 {
@@ -42,11 +43,11 @@ public:
     // 다시 닫힘? -> 열음 반복시킴 어자피 실제 제품도 아니고 걍 단순하게
     bool db_openCheck();
 
-    void membershipCard_authorized_false_msg();
-    void membershipCard_finished_stat(bool stat);
-    void chargingLog_authorized_invok();
-    void chargingLog_start_invok(uint32_t ocpp_tx);
-    void chargingLog_finished_invok();
+    void membershipCard_authorized_false_msg(const mp_wk_key key);
+    void membershipCard_finished_stat(const mp_wk_key key, bool stat);
+    void chargingLog_authorized_invok(const mp_wk_key key);
+    void chargingLog_start_invok(const mp_wk_key key, uint32_t ocpp_tx);
+    void chargingLog_finished_invok(const mp_wk_key key);
 
     // SQLITE 백업큐 꺼내서 PQ등록하는거 만들어야댐
     void backUp_register_chargingLog();
@@ -58,7 +59,7 @@ public:
 
 public slots:
     void slot_end();
-    void slot_set_p_soc(WK_Soc *soc);
+    void slot_set_p_soc(Hub *soc);
 
     bool slot_createStore(int id, QString name, QString location);
     // 수정
@@ -71,16 +72,25 @@ public slots:
     bool slot_query_find_hello_hmi(const QString storeId, const QString hmiId);
 
     // soc -> set_p_db에서 커넥트
-    void slot_chargingLog_From_soc(db_data st_db_data);
+    void slot_chargingLog_From_soc(const mp_wk_key key, db_data st_db_data);
 
     // soc -> set_p_db에서 커넥트
     void slot_heartbitData_From_soc(heartbit_data st_hb_data);
-    void slot_membershipCard_authorized_From_soc(int adv_pay, QString card_uid, QString request_id);
-    void slot_membershipCard_finished_From_soc(
-        int adv_pay, int act_pay, int can_pay, QString card_uid, uint32_t t_id, QString request_id);
+    void slot_membershipCard_authorized_From_soc(const mp_wk_key key,
+                                                 int adv_pay,
+                                                 QString card_uid,
+                                                 QString request_id);
+    void slot_membershipCard_finished_From_soc(const mp_wk_key key,
+                                               int adv_pay,
+                                               int act_pay,
+                                               int can_pay,
+                                               QString card_uid,
+                                               uint32_t t_id,
+                                               QString request_id);
 
     // soc -> set_p_db에서 커넥트
-    void slot_select_From_soc(QString table,
+    void slot_select_From_soc(const mp_wk_key key,
+                              QString table,
                               int total,
                               QString col1 = "",
                               QString val1 = "",
@@ -89,7 +99,7 @@ public slots:
                               QString col3 = "",
                               QString val3 = "");
 
-    void slot_select_mCard_status_From_soc(QString table, QString card_uid);
+    void slot_select_mCard_status_From_soc(const mp_wk_key key, QString table, QString card_uid);
     void slot_revision_mCard_status_From_soc(
         QString card_uid, int total, int remain, int hold, QString stat);
 
@@ -97,22 +107,22 @@ signals:
     void sig_end();
 
     // slot_set_p_soc에서 커넥트
-    void sig_charging_log_select_ret(QVector<charging_log_admin> ret);
+    void sig_charging_log_select_ret(const mp_wk_key key, QVector<charging_log_admin> ret);
 
     // slot_set_p_soc에서 커넥트
-    void sig_hmi_current_stat_select_ret(QVector<hmi_current_stat_admin> ret);
+    void sig_hmi_current_stat_select_ret(const mp_wk_key key, QVector<hmi_current_stat_admin> ret);
 
     // slot_set_p_soc에서 커넥트
-    void sig_hmi_device_select_ret(QVector<hmi_device_admin> ret);
+    void sig_hmi_device_select_ret(const mp_wk_key key, QVector<hmi_device_admin> ret);
 
     // slot_set_p_soc에서 커넥트
-    void sig_membership_card_select_ret(QVector<membership_card_admin> ret);
+    void sig_membership_card_select_ret(const mp_wk_key key, QVector<membership_card_admin> ret);
 
     // slot_set_p_soc에서 커넥트
-    void sig_membership_log_select_ret(QVector<membership_log_admin> ret);
+    void sig_membership_log_select_ret(const mp_wk_key key, QVector<membership_log_admin> ret);
 
     // slot_set_p_soc에서 커넥트
-    void sig_store_user_select_ret(QVector<store_user_admin> ret);
+    void sig_store_user_select_ret(const mp_wk_key key, QVector<store_user_admin> ret);
 
 private:
     QSqlDatabase db;
@@ -120,7 +130,8 @@ private:
     QTimer *p_timer_lite;
 
     Cpp_Module *p_Module;
-    WK_Soc *p_soc;
+    // WK_Soc *p_soc; Hub로 변경...
+    Hub *p_soc;
 };
 
 #endif // DB_POSTGRESQL_H

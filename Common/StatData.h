@@ -238,4 +238,11 @@ struct revision_hmi_admin
     QString val;
 };
 
+struct mp_wk_key
+{
+    int id;
+    QString s_id;
+};
+Q_DECLARE_METATYPE(mp_wk_key)
+
 #endif // STATDATA_H

@@ -22,6 +22,7 @@ public:
 public slots:
     void slot_Btn_search();
     void slot_Btn_move_maintenance();
+    void slot_Btn_move_home();
 
     void slot_update_hmi_current_stat_From_Soc(const QVector<hmi_current_stat_admin> ret);
 

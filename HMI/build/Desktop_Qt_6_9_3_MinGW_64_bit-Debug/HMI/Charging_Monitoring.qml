@@ -10,6 +10,7 @@ Item {
     property var mainWin;
     property int stk_depth;
     property bool ems_stat: false;
+    property bool admin_stat: false;
 
     BackGround_Card{
         id: back
@@ -45,6 +46,12 @@ Item {
         cpp_module.charging_stop_To_serial();
     }
 
+    function admin_stop()
+    {
+        root.admin_stat = true;
+        cpp_module.charging_stop_To_serial();
+    }
+
     function ems_btn()
     {
         root.ems_stat = true;
@@ -58,6 +65,11 @@ Item {
             mainWin.stk_home();
             mainWin.stk_push_emsPage();
             return;
+        }
+        else if(root.admin_stat === true)
+        {
+            console.log("admin home");
+            mainWin.stk_home();
         }
         else
         {

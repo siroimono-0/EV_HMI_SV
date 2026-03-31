@@ -14,6 +14,8 @@ Dia_HMI::Dia_HMI(QWidget *parent)
             &QPushButton::clicked,
             this,
             &Dia_HMI::slot_Btn_move_maintenance);
+
+    connect(this->ui->pushButton, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_move_home);
 }
 
 Dia_HMI::~Dia_HMI()
@@ -90,6 +92,22 @@ void Dia_HMI::slot_Btn_move_maintenance()
     st_data.hmi_id = this->ui->label_4->text();
     st_data.cmd = "screen_move";
     st_data.val = "maintenance";
+
+    emit this->sig_revision_hmi_To_Soc(st_data);
+    return;
+}
+
+void Dia_HMI::slot_Btn_move_home()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "screen_move";
+    st_data.val = "home";
 
     emit this->sig_revision_hmi_To_Soc(st_data);
     return;

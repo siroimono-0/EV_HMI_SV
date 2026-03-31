@@ -43,7 +43,6 @@ Item {
     {
         cpp_module.charging_type_To_statStore("kWh", s_int);
         StackView.view.push("Select_card.qml", {mainWin : mainWin});
-        // StackView.view.push("Select_card.qml", {charging_tpye: "kWh"}, {charging_val: s_int});
     }
 
     BackGround_Amount{

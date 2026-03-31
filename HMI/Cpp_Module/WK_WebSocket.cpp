@@ -751,6 +751,9 @@ void WK_WebSocket::parsing_revision_HMI(const QJsonObject jo)
     {
         if (val == "home")
         {
+            QMetaObject::invokeMethod(this->p_Module,
+                                      &Cpp_Module::sig_screen_move_home_ToQml,
+                                      Qt::QueuedConnection);
         }
         else if (val == "maintenance")
         {

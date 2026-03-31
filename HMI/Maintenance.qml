@@ -59,7 +59,7 @@ Item {
                 property: "border.width";
                 from: 1;
                 to: 4;
-                duration: 500;
+                duration: 700;
                 easing.type: Easing.InOutSine
             }
 
@@ -69,7 +69,7 @@ Item {
                 property: "border.width";
                 from: 4;
                 to: 1;
-                duration: 500;
+                duration: 700;
                 easing.type: Easing.InOutSine
             }
         }
@@ -86,10 +86,10 @@ Item {
         Image {
             id: img
             source: "./images/maintenance.svg"
-            width: 500; height: 500;
+            width: 400; height: 400;
 
             anchors.top: parent.top
-            // anchors.topMargin: 30
+            anchors.topMargin: 50
             anchors.horizontalCenter: parent.horizontalCenter
             fillMode: Image.PreserveAspectFit;
 
@@ -110,6 +110,7 @@ Item {
                 loops: Animation.Infinite
                 from: 0;
                 to: 360;
+                duration: 5000;
             }
         }
 

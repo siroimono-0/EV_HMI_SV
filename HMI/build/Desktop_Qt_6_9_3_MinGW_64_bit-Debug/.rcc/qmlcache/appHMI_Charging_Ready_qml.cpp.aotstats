@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 336,
+                        "durationMicroseconds": 395,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_next",
                         "line": 34
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 166,
+                        "durationMicroseconds": 175,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "coli_set",
                         "line": 42
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 347,
+                        "durationMicroseconds": 365,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "onCompleted",
                         "line": 21
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 17,
-                        "durationMicroseconds": 54,
+                        "durationMicroseconds": 64,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "target",
                         "line": 51
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 192,
+                        "durationMicroseconds": 232,
                         "errorMessage": "",
                         "functionName": "onSig_coil_ready_ok_ToQml",
                         "line": 54
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 78,
+                        "durationMicroseconds": 104,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 62
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 19,
-                        "durationMicroseconds": 88,
+                        "durationMicroseconds": 127,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 68
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 164,
+                        "durationMicroseconds": 143,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 70
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 132,
+                        "durationMicroseconds": 125,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 72
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 121,
+                        "durationMicroseconds": 136,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 132
@@ -150,7 +150,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 41,
+                        "durationMicroseconds": 45,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 132
@@ -158,7 +158,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 22,
-                        "durationMicroseconds": 40,
+                        "durationMicroseconds": 53,
                         "errorMessage": "Cannot retrieve a non-object type by ID: lb",
                         "functionName": "top",
                         "line": 128
@@ -166,7 +166,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 128,
+                        "durationMicroseconds": 139,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 130

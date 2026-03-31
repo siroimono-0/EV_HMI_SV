@@ -58,10 +58,11 @@ void WK_Soc::set_p_db(DB_PostgreSQL *set_db)
     this->p_obj_db = set_db;
     // db에 wk 주소 전달
 
+    /*
     QMetaObject::invokeMethod(this->p_obj_db,
                               "slot_set_p_soc",
                               Qt::QueuedConnection,
-                              Q_ARG(WK_Soc *, this));
+                              Q_ARG(WK_Soc *, this));*/
 
     connect(this,
             &WK_Soc::sig_chargingLog_To_DB,
@@ -90,9 +91,18 @@ void WK_Soc::slot_Disconnect_Soc()
     // 소켓 연결 끊어지면 Hub qvec에서 wk* 삭제
     this->p_Hub->slot_del_mpWk(this->id_Mp);
 
-    // 소켓 연결 끊어지면 mp_hmi에서 삭제
-    QPair<int, QString> p = {this->storeId, this->roleId};
-    this->p_Hub->mp_hmi_remove(p);
+    if (this->connectRole == "admin")
+    {
+        // 소켓 연결 끊어지면 mp_hmi에서 삭제
+        QPair<int, QString> p = {this->adminId, this->connectRole};
+        this->p_Hub->mp_wk_remove(p);
+    }
+    else
+    {
+        // 소켓 연결 끊어지면 mp_hmi에서 삭제
+        QPair<int, QString> p = {this->storeId, this->roleId};
+        this->p_Hub->mp_wk_remove(p);
+    }
 
     // 소켓 연결 끊어지면 Model 에서 st_stat 삭제
     QMetaObject::invokeMethod(this->p_Md,
@@ -141,6 +151,12 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
             {
                 this->connectRole = "admin";
                 this->roleId = jsObj["adminId"].toString();
+
+                this->adminId = this->roleId.toInt();
+                this->key.id = this->adminId;
+                this->key.s_id = "admin";
+
+                this->p_Hub->mp_wk_insert({this->key.id, this->key.s_id}, this);
                 this->slot_helloAck(true);
             }
             // 연결대상 확정
@@ -171,8 +187,10 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
                     this->roleId = hmiId;
                     this->storeId = storeId.toInt();
 
-                    QPair<int, QString> p = {this->storeId, this->roleId};
-                    this->p_Hub->mp_hmi_insert(p, this);
+                    this->key.id = this->storeId;
+                    this->key.s_id = this->roleId;
+
+                    this->p_Hub->mp_wk_insert({this->key.id, this->key.s_id}, this);
                     this->slot_helloAck(true);
                 }
                 else
@@ -254,7 +272,7 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
             }
             else if (this->connectRole == "admin")
             {
-                this->parsing_revision_HMI(jsObj);
+                this->find_revision_HMI(jsObj);
             }
         }
         else if (qs_type == "chargingLog") // hmi
@@ -458,7 +476,7 @@ void WK_Soc::req_chargingLog_To_DB(const QJsonObject &jsObj)
 
     st_db_data.local_tx_id = jsObj["local_tx_id"].toString();
 
-    emit this->sig_chargingLog_To_DB(st_db_data);
+    emit this->sig_chargingLog_To_DB(this->key, st_db_data);
     qDebug() << Q_FUNC_INFO;
     return;
 }
@@ -540,6 +558,7 @@ void WK_Soc::req_membershipCard_authorized_To_DB(const QJsonObject &jsObj)
     QMetaObject::invokeMethod(this->p_obj_db,
                               "slot_membershipCard_authorized_From_soc",
                               Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, this->key),
                               Q_ARG(int, adv_pay),
                               Q_ARG(QString, card_uid),
                               Q_ARG(QString, request_id));
@@ -580,6 +599,7 @@ void WK_Soc::req_membershipCard_finished_To_DB(const QJsonObject &jsObj)
     QMetaObject::invokeMethod(this->p_obj_db,
                               "slot_membershipCard_finished_From_soc",
                               Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, this->key),
                               Q_ARG(int, adv_pay),
                               Q_ARG(int, act_pay),
                               Q_ARG(int, can_pay),
@@ -625,15 +645,16 @@ void WK_Soc::req_select_To_DB(const QJsonObject &jsObj)
 
     if (filter_num == 0)
     {
-        emit this->sig_select_To_DB(table, filter_num);
+        emit this->sig_select_To_DB(this->key, table, filter_num);
     }
     else if (filter_num == 1 && vp.size() == 1)
     {
-        emit this->sig_select_To_DB(table, filter_num, vp[0].first, vp[0].second);
+        emit this->sig_select_To_DB(this->key, table, filter_num, vp[0].first, vp[0].second);
     }
     else if (filter_num == 2 && vp.size() == 2)
     {
-        emit this->sig_select_To_DB(table,
+        emit this->sig_select_To_DB(this->key,
+                                    table,
                                     filter_num,
                                     vp[0].first,
                                     vp[0].second,
@@ -642,7 +663,8 @@ void WK_Soc::req_select_To_DB(const QJsonObject &jsObj)
     }
     else if (filter_num == 3 && vp.size() == 3)
     {
-        emit this->sig_select_To_DB(table,
+        emit this->sig_select_To_DB(this->key,
+                                    table,
                                     filter_num,
                                     vp[0].first,
                                     vp[0].second,
@@ -655,7 +677,7 @@ void WK_Soc::req_select_To_DB(const QJsonObject &jsObj)
     return;
 }
 
-void WK_Soc::slot_charging_log_select_ret_From_DB__To_hmi(QVector<charging_log_admin> ret)
+void WK_Soc::slot_charging_log_select_ret_From_DB__To_admin(QVector<charging_log_admin> ret)
 {
     QJsonObject jo_root;
     jo_root.insert("type", "select_ack");
@@ -704,7 +726,7 @@ void WK_Soc::slot_charging_log_select_ret_From_DB__To_hmi(QVector<charging_log_a
     return;
 }
 
-void WK_Soc::slot_hmi_current_stat_select_ret_From_DB__To_hmi(QVector<hmi_current_stat_admin> ret)
+void WK_Soc::slot_hmi_current_stat_select_ret_From_DB__To_admin(QVector<hmi_current_stat_admin> ret)
 {
     QJsonObject jo_root;
     jo_root.insert("type", "select_ack");
@@ -738,7 +760,7 @@ void WK_Soc::slot_hmi_current_stat_select_ret_From_DB__To_hmi(QVector<hmi_curren
     return;
 }
 
-void WK_Soc::slot_hmi_device_select_ret_From_DB__To_hmi(QVector<hmi_device_admin> ret)
+void WK_Soc::slot_hmi_device_select_ret_From_DB__To_admin(QVector<hmi_device_admin> ret)
 {
     QJsonObject jo_root;
     jo_root.insert("type", "select_ack");
@@ -768,7 +790,7 @@ void WK_Soc::slot_hmi_device_select_ret_From_DB__To_hmi(QVector<hmi_device_admin
     return;
 }
 
-void WK_Soc::slot_membership_card_select_ret_From_DB__To_hmi(QVector<membership_card_admin> ret)
+void WK_Soc::slot_membership_card_select_ret_From_DB__To_admin(QVector<membership_card_admin> ret)
 {
     QJsonObject jo_root;
     jo_root.insert("type", "select_ack");
@@ -801,7 +823,7 @@ void WK_Soc::slot_membership_card_select_ret_From_DB__To_hmi(QVector<membership_
     return;
 }
 
-void WK_Soc::slot_membership_log_select_ret_From_DB__To_hmi(QVector<membership_log_admin> ret)
+void WK_Soc::slot_membership_log_select_ret_From_DB__To_admin(QVector<membership_log_admin> ret)
 {
     QJsonObject jo_root;
     jo_root.insert("type", "select_ack");
@@ -842,7 +864,7 @@ void WK_Soc::slot_membership_log_select_ret_From_DB__To_hmi(QVector<membership_l
     return;
 }
 
-void WK_Soc::slot_store_user_select_ret_From_DB__To_hmi(QVector<store_user_admin> ret)
+void WK_Soc::slot_store_user_select_ret_From_DB__To_admin(QVector<store_user_admin> ret)
 {
     QJsonObject jo_root;
     jo_root.insert("type", "select_ack");
@@ -879,12 +901,13 @@ void WK_Soc::req_select_mCard_status_To_DB(const QJsonObject &jsObj)
     QMetaObject::invokeMethod(this->p_obj_db,
                               "slot_select_mCard_status_From_soc",
                               Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, this->key),
                               Q_ARG(QString, table),
                               Q_ARG(QString, jsObj["card_uid"].toString()));
     return;
 }
 
-void WK_Soc::slot_mCard_status_ret_From_DB__To_hmi(QVector<membership_card_admin> ret)
+void WK_Soc::slot_mCard_status_ret_From_DB__To_admin(QVector<membership_card_admin> ret)
 {
     QJsonObject jo_root;
     jo_root.insert("type", "select_mCard_status_ack");
@@ -939,7 +962,7 @@ void WK_Soc::find_revision_HMI(const QJsonObject &jsObj)
     QString hmi_id = jsObj["hmi_id"].toString();
     QPair<int, QString> key = {store_id, hmi_id};
 
-    auto p_target = this->p_Hub->mp_hmi_find(key);
+    auto p_target = this->p_Hub->mp_wk_find(key);
     p_target->echo_revision_HMI_To_hmi(jsObj);
 
     /*

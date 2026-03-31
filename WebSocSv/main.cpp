@@ -3,6 +3,7 @@
 // #include <QQmlContext>
 // #include <QQuickStyle>
 #include "./Cpp_Module/Cpp_Module.h"
+#include "./Cpp_Module/Hub.h"
 #include "./Cpp_Module/WK_Soc.h"
 
 int main(int argc, char *argv[])
@@ -21,6 +22,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<charging_log_admin>("charging_log_admin");
     qRegisterMetaType<QVector<charging_log_admin>>("QVector<charging_log_admin>");
     qRegisterMetaType<QVector<membership_card_admin>>("QVector<membership_card_admin>");
+    qRegisterMetaType<Hub *>("Hub*");
+    qRegisterMetaType<mp_wk_key>("mp_wk_key");
     /*
     engine.rootContext()->setContextProperty("cppSv", &cpp_Module);
 

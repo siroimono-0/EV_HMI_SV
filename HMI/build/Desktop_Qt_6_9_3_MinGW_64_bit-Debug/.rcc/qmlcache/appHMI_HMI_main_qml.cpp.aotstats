@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 323,
+                        "durationMicroseconds": 372,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_next",
                         "line": 51
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 386,
+                        "durationMicroseconds": 311,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "onCompleted",
                         "line": 10
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 131,
+                        "durationMicroseconds": 103,
                         "errorMessage": "",
                         "functionName": "onCompleted",
                         "line": 10
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 326,
+                        "durationMicroseconds": 115,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 28
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 147,
+                        "durationMicroseconds": 142,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 45
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 42,
+                        "durationMicroseconds": 48,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 45
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 68,
+                        "durationMicroseconds": 71,
                         "errorMessage": "",
                         "functionName": "centerIn",
                         "line": 34

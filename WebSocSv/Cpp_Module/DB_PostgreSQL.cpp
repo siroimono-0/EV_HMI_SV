@@ -1,4 +1,5 @@
 #include "DB_PostgreSQL.h"
+#include "Hub.h"
 #include "WK_Soc.h"
 
 DB_PostgreSQL::DB_PostgreSQL(QObject *parent)
@@ -24,38 +25,38 @@ void DB_PostgreSQL::set_p_Module(Cpp_Module *module)
     return;
 }
 
-void DB_PostgreSQL::slot_set_p_soc(WK_Soc *soc)
+void DB_PostgreSQL::slot_set_p_soc(Hub *soc)
 {
     this->p_soc = soc;
     connect(this,
             &DB_PostgreSQL::sig_charging_log_select_ret,
             this->p_soc,
-            &WK_Soc::slot_charging_log_select_ret_From_DB__To_hmi);
+            &Hub::slot_charging_log_select_ret_From_DB__To_admin);
 
     connect(this,
             &DB_PostgreSQL::sig_hmi_current_stat_select_ret,
             this->p_soc,
-            &WK_Soc::slot_hmi_current_stat_select_ret_From_DB__To_hmi);
+            &Hub::slot_hmi_current_stat_select_ret_From_DB__To_admin);
 
     connect(this,
             &DB_PostgreSQL::sig_hmi_device_select_ret,
             this->p_soc,
-            &WK_Soc::slot_hmi_device_select_ret_From_DB__To_hmi);
+            &Hub::slot_hmi_device_select_ret_From_DB__To_admin);
 
     connect(this,
             &DB_PostgreSQL::sig_membership_card_select_ret,
             this->p_soc,
-            &WK_Soc::slot_membership_card_select_ret_From_DB__To_hmi);
+            &Hub::slot_membership_card_select_ret_From_DB__To_admin);
 
     connect(this,
             &DB_PostgreSQL::sig_membership_log_select_ret,
             this->p_soc,
-            &WK_Soc::slot_membership_log_select_ret_From_DB__To_hmi);
+            &Hub::slot_membership_log_select_ret_From_DB__To_admin);
 
     connect(this,
             &DB_PostgreSQL::sig_store_user_select_ret,
             this->p_soc,
-            &WK_Soc::slot_store_user_select_ret_From_DB__To_hmi);
+            &Hub::slot_store_user_select_ret_From_DB__To_admin);
     return;
 }
 
@@ -233,7 +234,7 @@ bool DB_PostgreSQL::slot_query_find_hello_hmi(const QString storeId, const QStri
 }
 
 // 백업 O // HMI 메시지 전달 없음
-void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
+void DB_PostgreSQL::slot_chargingLog_From_soc(const mp_wk_key key, db_data st_db_data)
 {
     if (!this->db_openCheck())
     {
@@ -241,17 +242,17 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         if (st_db_data.session_status == "authorized")
         {
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_authorized_invok();
+            this->chargingLog_authorized_invok(key);
         }
         else if (st_db_data.session_status == "charging_start")
         {
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_start_invok(-1);
+            this->chargingLog_start_invok(key, -1);
         }
         else if (st_db_data.session_status == "charging_finished")
         {
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_finished_invok();
+            this->chargingLog_finished_invok(key);
         }
 
         return;
@@ -288,7 +289,7 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         if (!this->check_query_prepare(ok_prepare, query))
         {
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_authorized_invok();
+            this->chargingLog_authorized_invok(key);
             return;
         }
 
@@ -316,11 +317,11 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         if (!this->check_query_exec(ok_exec, query))
         {
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_authorized_invok();
+            this->chargingLog_authorized_invok(key);
             return;
         }
 
-        this->chargingLog_authorized_invok();
+        this->chargingLog_authorized_invok(key);
         qDebug() << Q_FUNC_INFO;
     }
     else if (st_db_data.session_status == "charging_start")
@@ -352,7 +353,7 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
              */
 
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_start_invok(-1);
+            this->chargingLog_start_invok(key, -1);
 
             return;
         }
@@ -381,7 +382,7 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         if (!this->check_query_exec(ok_exec, query))
         {
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_start_invok(-1);
+            this->chargingLog_start_invok(key, -1);
             return;
         }
 
@@ -389,7 +390,7 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         query.next();
         uint32_t ocpp_tx_id = query.value(0).toUInt();
 
-        this->chargingLog_start_invok(ocpp_tx_id);
+        this->chargingLog_start_invok(key, ocpp_tx_id);
     }
     else if (st_db_data.session_status == "charging_finished")
     {
@@ -411,7 +412,7 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         if (!this->check_query_prepare(ok_prepare, query))
         {
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_finished_invok();
+            this->chargingLog_finished_invok(key);
             return;
         }
 
@@ -439,11 +440,11 @@ void DB_PostgreSQL::slot_chargingLog_From_soc(db_data st_db_data)
         if (!this->check_query_exec(ok_exec, query))
         {
             this->chargingLog_sqlite_backUp(st_db_data);
-            this->chargingLog_finished_invok();
+            this->chargingLog_finished_invok(key);
             return;
         }
 
-        this->chargingLog_finished_invok();
+        this->chargingLog_finished_invok(key);
     }
     else if (st_db_data.session_status == "failed")
     {
@@ -533,14 +534,15 @@ void DB_PostgreSQL::slot_heartbitData_From_soc(heartbit_data st_hb_data)
 
 // 백업 X
 // 이게 처음 시작하는 트랜젝션인대 어떻게 다른게 먼져 동작?
-void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
+void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(const mp_wk_key key,
+                                                            int adv_pay,
                                                             QString card_uid,
                                                             QString request_id)
 {
     // qDebug() << " 1_____ ";
     if (!this->db_openCheck())
     {
-        this->membershipCard_authorized_false_msg();
+        this->membershipCard_authorized_false_msg(key);
         return;
     }
 
@@ -554,7 +556,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
     {
         qDebug() << "transaction failed:" << this->db.lastError().text();
         this->db.rollback();
-        this->membershipCard_authorized_false_msg();
+        this->membershipCard_authorized_false_msg(key);
 
         return;
     }
@@ -573,7 +575,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
     if (!this->check_query_prepare(ok_prepare, query))
     {
         this->db.rollback();
-        this->membershipCard_authorized_false_msg();
+        this->membershipCard_authorized_false_msg(key);
         return;
     }
 
@@ -584,7 +586,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
     if (!ok_exec)
     {
         this->db.rollback();
-        this->membershipCard_authorized_false_msg();
+        this->membershipCard_authorized_false_msg(key);
         return;
     }
 
@@ -592,7 +594,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
     if (!this->check_query_exec(ok_exec, query))
     {
         this->db.rollback();
-        this->membershipCard_authorized_false_msg();
+        this->membershipCard_authorized_false_msg(key);
         return;
     }
 
@@ -615,6 +617,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
             QMetaObject::invokeMethod(this->p_soc,
                                       "slot_membershipCard_authorized_ack_To_hmi",
                                       Qt::QueuedConnection,
+                                      Q_ARG(mp_wk_key, key),
                                       Q_ARG(bool, false),
                                       Q_ARG(QString, "현재 충전중인 카드입니다."));
             return;
@@ -626,6 +629,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
         QMetaObject::invokeMethod(this->p_soc,
                                   "slot_membershipCard_authorized_ack_To_hmi",
                                   Qt::QueuedConnection,
+                                  Q_ARG(mp_wk_key, key),
                                   Q_ARG(bool, false),
                                   Q_ARG(QString, "미등록 카드"));
 
@@ -658,7 +662,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
         if (!this->check_query_prepare(ok_prepare2, query))
         {
             this->db.rollback();
-            this->membershipCard_authorized_false_msg();
+            this->membershipCard_authorized_false_msg(key);
             return;
         }
 
@@ -673,7 +677,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
         if (!this->check_query_exec(ok_exec2, query))
         {
             this->db.rollback();
-            this->membershipCard_authorized_false_msg();
+            this->membershipCard_authorized_false_msg(key);
             return;
         }
 
@@ -682,7 +686,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
         {
             // 재전송 까지 실패했으면
             this->db.rollback();
-            this->membershipCard_authorized_false_msg();
+            this->membershipCard_authorized_false_msg(key);
             return;
         }
 
@@ -698,7 +702,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
             if (commit_ret == false)
             {
                 this->db.rollback();
-                this->membershipCard_authorized_false_msg();
+                this->membershipCard_authorized_false_msg(key);
                 qDebug() << "commit failed:" << this->db.lastError().text();
             }
             else
@@ -708,6 +712,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
             QMetaObject::invokeMethod(this->p_soc,
                                       "slot_membershipCard_authorized_ack_To_hmi",
                                       Qt::QueuedConnection,
+                                      Q_ARG(mp_wk_key, key),
                                       Q_ARG(bool, ret.first),
                                       Q_ARG(QString, ret.second));
         }
@@ -715,7 +720,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
         {
             // 실패 알림
             this->db.rollback();
-            this->membershipCard_authorized_false_msg();
+            this->membershipCard_authorized_false_msg(key);
             // 아래 함수에서 qml 실패 알림 보냄
             // this->membershipCard_log_insert_authorized(st_mb_log)
         }
@@ -726,6 +731,7 @@ void DB_PostgreSQL::slot_membershipCard_authorized_From_soc(int adv_pay,
         QMetaObject::invokeMethod(this->p_soc,
                                   "slot_membershipCard_authorized_ack_To_hmi",
                                   Qt::QueuedConnection,
+                                  Q_ARG(mp_wk_key, key),
                                   Q_ARG(bool, false),
                                   Q_ARG(QString, "사용 가능 금액 부족"));
 
@@ -812,8 +818,13 @@ QPair<bool, QString> DB_PostgreSQL::membershipCard_log_insert_authorized(const m
 }
 
 // 백업 O
-void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
-    int adv_pay, int act_pay, int can_pay, QString card_uid, uint32_t t_id, QString request_id)
+void DB_PostgreSQL::slot_membershipCard_finished_From_soc(const mp_wk_key key,
+                                                          int adv_pay,
+                                                          int act_pay,
+                                                          int can_pay,
+                                                          QString card_uid,
+                                                          uint32_t t_id,
+                                                          QString request_id)
 {
     // 전송 실패 대비용 struct 초기화
     struct membership_backUp_sqlite st_back = {0};
@@ -827,7 +838,7 @@ void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
     if (!this->db_openCheck())
     {
         this->membershipCard_finished_sqlite_backUp(st_back);
-        this->membershipCard_finished_stat(false);
+        this->membershipCard_finished_stat(key, false);
         return;
     }
 
@@ -835,7 +846,7 @@ void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
     if (!this->db.transaction())
     {
         this->membershipCard_finished_sqlite_backUp(st_back);
-        this->membershipCard_finished_stat(false);
+        this->membershipCard_finished_stat(key, false);
         this->db.rollback();
         return;
     }
@@ -852,7 +863,7 @@ void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
     if (!this->check_query_prepare(ok_prepare, query))
     {
         this->membershipCard_finished_sqlite_backUp(st_back);
-        this->membershipCard_finished_stat(false);
+        this->membershipCard_finished_stat(key, false);
         this->db.rollback();
         return;
     }
@@ -865,7 +876,7 @@ void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
     if (!this->check_query_exec(ok_exec, query))
     {
         this->membershipCard_finished_sqlite_backUp(st_back);
-        this->membershipCard_finished_stat(false);
+        this->membershipCard_finished_stat(key, false);
         this->db.rollback();
         return;
     }
@@ -928,7 +939,7 @@ void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
     if (!this->check_query_prepare(ok_prepare2, query))
     {
         this->membershipCard_finished_sqlite_backUp(st_back);
-        this->membershipCard_finished_stat(false);
+        this->membershipCard_finished_stat(key, false);
         this->db.rollback();
         return;
     }
@@ -945,7 +956,7 @@ void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
     if (!this->check_query_exec(ok_exec2, query))
     {
         this->membershipCard_finished_sqlite_backUp(st_back);
-        this->membershipCard_finished_stat(false);
+        this->membershipCard_finished_stat(key, false);
         this->db.rollback();
         return;
     }
@@ -967,17 +978,17 @@ void DB_PostgreSQL::slot_membershipCard_finished_From_soc(
         if (!ret_commit)
         {
             this->membershipCard_finished_sqlite_backUp(st_back);
-            this->membershipCard_finished_stat(false);
+            this->membershipCard_finished_stat(key, false);
         }
         else
         {
-            this->membershipCard_finished_stat(true);
+            this->membershipCard_finished_stat(key, true);
         }
     }
     else
     {
         this->membershipCard_finished_sqlite_backUp(st_back);
-        this->membershipCard_finished_stat(false);
+        this->membershipCard_finished_stat(key, false);
         this->db.rollback();
         // this->membershipCard_finished_sqlite_backUp(st_back);
     }
@@ -1146,47 +1157,52 @@ bool DB_PostgreSQL::db_openCheck()
     return true;
 }
 
-void DB_PostgreSQL::membershipCard_authorized_false_msg()
+void DB_PostgreSQL::membershipCard_authorized_false_msg(const mp_wk_key key)
 {
     QMetaObject::invokeMethod(this->p_soc,
                               "slot_membershipCard_authorized_ack_To_hmi",
                               Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, key),
                               Q_ARG(bool, false),
                               Q_ARG(QString, "잠시 후 재시도 해주세요"));
     return;
 }
 
-void DB_PostgreSQL::membershipCard_finished_stat(bool stat)
+void DB_PostgreSQL::membershipCard_finished_stat(const mp_wk_key key, bool stat)
 {
     QMetaObject::invokeMethod(this->p_soc,
                               "slot_membershipCard_finished_ack_To_hmi",
                               Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, key),
                               Q_ARG(bool, stat));
     return;
 }
 
-void DB_PostgreSQL::chargingLog_authorized_invok()
+void DB_PostgreSQL::chargingLog_authorized_invok(const mp_wk_key key)
 {
     QMetaObject::invokeMethod(this->p_soc,
                               "slot_chargingLog_authorized_ack_To_hmi",
-                              Qt::QueuedConnection);
+                              Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, key));
     return;
 }
 
-void DB_PostgreSQL::chargingLog_start_invok(uint32_t ocpp_tx)
+void DB_PostgreSQL::chargingLog_start_invok(const mp_wk_key key, uint32_t ocpp_tx)
 {
     QMetaObject::invokeMethod(this->p_soc,
                               "slot_chargingLog_charging_start_ack_To_hmi",
                               Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, key),
                               Q_ARG(uint32_t, ocpp_tx));
     return;
 }
 
-void DB_PostgreSQL::chargingLog_finished_invok()
+void DB_PostgreSQL::chargingLog_finished_invok(const mp_wk_key key)
 {
     QMetaObject::invokeMethod(this->p_soc,
-                              &WK_Soc::slot_chargingLog_charging_finished_ack_To_hmi,
-                              Qt::QueuedConnection);
+                              "slot_chargingLog_charging_finished_ack_To_hmi",
+                              Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, key));
     return;
 }
 
@@ -1654,7 +1670,8 @@ void DB_PostgreSQL::backUp_register_membershipCard_finished()
     return;
 }
 
-void DB_PostgreSQL::slot_select_From_soc(QString table,
+void DB_PostgreSQL::slot_select_From_soc(const mp_wk_key key,
+                                         QString table,
                                          int total,
                                          QString col1,
                                          QString val1,
@@ -1799,7 +1816,7 @@ void DB_PostgreSQL::slot_select_From_soc(QString table,
             vec.push_back(st_log);
         }
 
-        emit this->sig_charging_log_select_ret(vec);
+        emit this->sig_charging_log_select_ret(key, vec);
         return;
     }
     else if (table == "hmi_current_stat")
@@ -1819,7 +1836,7 @@ void DB_PostgreSQL::slot_select_From_soc(QString table,
             vec.push_back(st_log);
         }
 
-        emit this->sig_hmi_current_stat_select_ret(vec);
+        emit this->sig_hmi_current_stat_select_ret(key, vec);
         return;
     }
     else if (table == "hmi_device")
@@ -1835,7 +1852,7 @@ void DB_PostgreSQL::slot_select_From_soc(QString table,
             vec.push_back(st_log);
         }
 
-        emit this->sig_hmi_device_select_ret(vec);
+        emit this->sig_hmi_device_select_ret(key, vec);
         return;
     }
     else if (table == "membership_card")
@@ -1854,7 +1871,7 @@ void DB_PostgreSQL::slot_select_From_soc(QString table,
             vec.push_back(st_log);
         }
 
-        emit this->sig_membership_card_select_ret(vec);
+        emit this->sig_membership_card_select_ret(key, vec);
         return;
     }
     else if (table == "membership_log")
@@ -1880,7 +1897,7 @@ void DB_PostgreSQL::slot_select_From_soc(QString table,
             vec.push_back(st_log);
         }
 
-        emit this->sig_membership_log_select_ret(vec);
+        emit this->sig_membership_log_select_ret(key, vec);
         return;
     }
     else if (table == "store_user")
@@ -1896,14 +1913,16 @@ void DB_PostgreSQL::slot_select_From_soc(QString table,
             vec.push_back(st_log);
         }
 
-        emit this->sig_store_user_select_ret(vec);
+        emit this->sig_store_user_select_ret(key, vec);
         return;
     }
 
     return;
 }
 
-void DB_PostgreSQL::slot_select_mCard_status_From_soc(QString table, QString card_uid)
+void DB_PostgreSQL::slot_select_mCard_status_From_soc(const mp_wk_key key,
+                                                      QString table,
+                                                      QString card_uid)
 {
     if (!this->db_openCheck())
     {
@@ -1948,8 +1967,9 @@ void DB_PostgreSQL::slot_select_mCard_status_From_soc(QString table, QString car
     }
 
     QMetaObject::invokeMethod(this->p_soc,
-                              "slot_mCard_status_ret_From_DB__To_hmi",
+                              "slot_mCard_status_ret_From_DB__To_admin",
                               Qt::QueuedConnection,
+                              Q_ARG(mp_wk_key, key),
                               Q_ARG(QVector<membership_card_admin>, vec));
 
     return;

@@ -59,7 +59,6 @@ Item {
         {
             cpp_module.charging_type_To_statStore(s, 80);
             StackView.view.push("Select_card.qml", {mainWin : mainWin});
-            // StackView.view.push("Select_card.qml", {charging_tpye: "persent"}, {charging_val: "80"});
         }
     }
 
