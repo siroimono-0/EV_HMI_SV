@@ -69,6 +69,7 @@ public:
     QString get_cancle_payment();
 
     int get_i_can_pay();
+    QString get_card_type();
 
     void set_card_type(QString set);
     // QString advance_payment; // 카드 승인시 초기화
@@ -94,9 +95,13 @@ public:
     //=============================================
     void set_store_id(int set);
     //=============================================
+    void set_stop_reason(QString set);
+
     void charging_start_db_update(double start_persent);
     void charging_finished_db_update();
     void cancle_pay_check();
+
+    void ems_Charging_Ready();
 
 public slots:
     /*

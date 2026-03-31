@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <filter id="neonRed" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur1"/>
+      <feColorMatrix in="blur1" type="matrix"
+        values="1 0 0 0 0
+                0 0.15 0 0 0
+                0 0 0.15 0 0
+                0 0 0 1 0" result="glow1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="22" result="blur2"/>
+      <feColorMatrix in="blur2" type="matrix"
+        values="1 0 0 0 0
+                0 0.1 0 0 0
+                0 0 0.1 0 0
+                0 0 0 0.85 0" result="glow2"/>
+      <feMerge>
+        <feMergeNode in="glow2"/>
+        <feMergeNode in="glow1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="transparent"/>
+
+  <!-- Warning triangle -->
+  <path
+    d="M 530 110
+       L 905 805
+       Q 920 830 895 850
+       L 129 850
+       Q 104 830 119 805
+       L 494 110 Z"
+    fill="none"
+    stroke="#ff1a1a"
+    stroke-width="28"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    filter="url(#neonRed)"/>
+
+  <!-- Exclamation body -->
+  <path
+    d="M 512 320
+       C 475 320, 455 340, 460 380
+       L 487 620
+       C 490 650, 534 650, 537 620
+       L 564 380
+       C 569 340, 549 320, 512 320 Z"
+    fill="#ff1a1a"
+    filter="url(#neonRed)"/>
+
+  <!-- Exclamation dot -->
+  <circle cx="512" cy="735" r="38" fill="#ff1a1a" filter="url(#neonRed)"/>
+</svg>

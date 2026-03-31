@@ -7,10 +7,15 @@ Item {
     id: root
     property string pageName: "Select_amount";
     property var mainWin;
+    property int stk_depth;
 
     Component.onCompleted: function()
     {
         cpp_module.charging_type_clear_To_statStore();
+
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });
     }
 
     StackView.onActivated: {
@@ -24,9 +29,10 @@ Item {
 
     function stk_home()
     {
-        while(StackView.view.depth > 2)
+        while(root.stk_depth > 2)
         {
-            StackView.view.pop();
+            mainWin.stk_pop();
+            root.stk_depth--;
         }
     }
 

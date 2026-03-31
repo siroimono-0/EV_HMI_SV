@@ -347,27 +347,6 @@ void WK_WebSocket::slot_send_db_update_textData(db_data st_db_data)
     return;
 }
 
-/*
- 수정부분 안씀
-void WK_WebSocket::slot_Send_TextData(stat_data st_stat)
-{
-    QJsonObject json_obj;
-    json_obj.insert("number", st_stat.number);
-    json_obj.insert("date", st_stat.date);
-    json_obj.insert("location", st_stat.location);
-    json_obj.insert("id", st_stat.id);
-    json_obj.insert("stat", st_stat.stat);
-
-    QJsonDocument json_doc(json_obj);
-    QString send_qs = json_doc.toJson(QJsonDocument::Compact);
-
-    this->p_webSoc->sendTextMessage(send_qs);
-
-    qDebug() << Q_FUNC_INFO;
-    return;
-}
-*/
-
 void WK_WebSocket::slot_Recv_TextData(QString recvData)
 {
     qDebug() << Q_FUNC_INFO;
@@ -480,6 +459,10 @@ void WK_WebSocket::slot_Recv_TextData(QString recvData)
                                           Qt::QueuedConnection,
                                           Q_ARG(bool, stat));
             }
+        }
+        else if (qs_type == "revision_HMI")
+        {
+            this->parsing_revision_HMI(jsObj);
         }
     }
     else
@@ -754,5 +737,27 @@ void WK_WebSocket::slot_timeOut_membership_finished_ack()
                                                  this->t_id,
                                                  this->membership_finished_requestId_Data);
 
+    return;
+}
+
+void WK_WebSocket::parsing_revision_HMI(const QJsonObject jo)
+{
+    // int store_id = jo["store_id"].toInt();
+    // QString hmi_id = jo["hmi_id"].toString();
+    QString cmd = jo["cmd"].toString();
+    QString val = jo["val"].toString();
+
+    if (cmd == "screen_move")
+    {
+        if (val == "home")
+        {
+        }
+        else if (val == "maintenance")
+        {
+            QMetaObject::invokeMethod(this->p_Module,
+                                      &Cpp_Module::sig_screen_move_maintenance_ToQml,
+                                      Qt::QueuedConnection);
+        }
+    }
     return;
 }

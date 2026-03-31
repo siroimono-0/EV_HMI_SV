@@ -767,7 +767,7 @@ void WK_Serial::uart_ems_open()
 void WK_Serial::slot_uart_ems_read()
 {
     QByteArray qba = this->p_ems->readAll();
-    qDebug() << qba;
+    // qDebug() << qba;
     this->ems_readData.append(qba);
     this->p_ems_tm_silent->start(30);
     return;
@@ -775,7 +775,12 @@ void WK_Serial::slot_uart_ems_read()
 
 void WK_Serial::slot_uart_ems_end()
 {
-    qDebug() << this->ems_readData;
+    // main.qml 에서 커넥션하고
+    // ~page에 한해서는 정산 완료 처리하게 진행함
+    if (this->ems_readData.contains("ems"))
+    {
+        QMetaObject::invokeMethod(this->p_module, &Cpp_Module::sig_ems_ToQml, Qt::QueuedConnection);
+    }
     this->ems_readData.clear();
     return;
 }

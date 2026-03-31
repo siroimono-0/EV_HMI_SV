@@ -27,6 +27,8 @@ public:
 
     void create_netAccess();
 
+    void parsing_revision_HMI(const QJsonObject jo);
+
 public slots:
     void slot_stop();
     void slot_Connect_Sv();

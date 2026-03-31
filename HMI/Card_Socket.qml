@@ -7,6 +7,7 @@ Item {
     id: root
     property string pageName: "Card_Socket";
     property var mainWin;
+    property int stk_depth;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("카드 삽입 및 인증");
@@ -19,14 +20,27 @@ Item {
     }
 
     Component.onCompleted: {
+        // 카드 인증 시리얼 통신 열음
+        cpp_module.set_card_stat_To_serial(true);
+
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });
     }
 
     function stk_back()
     {
         cpp_module.set_card_stat_To_serial(false);
 
-        StackView.view.pop();
-        StackView.view.pop();
+        if(cpp_module.get_card_type() === "membershipCard")
+        {
+            mainWin.stk_pop();
+        }
+        else
+        {
+            mainWin.stk_pop();
+            mainWin.stk_pop();
+        }
     }
 
     function card_authorized_success()
@@ -48,7 +62,7 @@ Item {
     function stk_next_failed(msg)
     {
         cpp_module.set_card_stat_To_serial(false);
-        StackView.view.push("Card_Failed.qml", {err: msg}, {mainWin : mainWin});
+        StackView.view.push("Card_Failed.qml", {err: msg, mainWin : mainWin});
     }
 
     Connections{

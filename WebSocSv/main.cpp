@@ -18,6 +18,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType<stat_data>("stat_data");
     qRegisterMetaType<store_info>("store_info");
     qRegisterMetaType<WK_Soc *>("WK_Socc*");
+    qRegisterMetaType<charging_log_admin>("charging_log_admin");
+    qRegisterMetaType<QVector<charging_log_admin>>("QVector<charging_log_admin>");
+    qRegisterMetaType<QVector<membership_card_admin>>("QVector<membership_card_admin>");
     /*
     engine.rootContext()->setContextProperty("cppSv", &cpp_Module);
 

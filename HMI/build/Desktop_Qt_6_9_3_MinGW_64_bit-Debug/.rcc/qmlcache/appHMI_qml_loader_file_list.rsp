@@ -19,6 +19,9 @@ C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.
 /qt/qml/HMI/Input_Won.qml
 /qt/qml/HMI/Input_Kwh.qml
 /qt/qml/HMI/Charging_Complet.qml
+/qt/qml/HMI/Ems_Nomal.qml
+/qt/qml/HMI/Ems_Charging.qml
+/qt/qml/HMI/Maintenance.qml
 /qt/qml/HMI/./Qml_Module/Popup_Text.qml
 /qt/qml/HMI/./Qml_Module/Keypad_Number.qml
 /qt/qml/HMI/./Qml_Module/BackGround.qml

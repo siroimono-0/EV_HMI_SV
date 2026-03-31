@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/WebSocSv/">
-    <file alias="Qml_Module/qmldir">C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/build/Desktop_Qt_6_9_3_MSVC2022_64bit-Debug/WebSocSv/./Qml_Module/qmldir</file>
-  </qresource>
-</RCC>
-

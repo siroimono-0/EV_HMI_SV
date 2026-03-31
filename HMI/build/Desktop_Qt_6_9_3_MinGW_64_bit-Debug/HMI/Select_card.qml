@@ -8,6 +8,7 @@ Item {
     // property string charging_type: "";
     property string pageName: "Select_card";
     property var mainWin;
+    property int stk_depth;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("카드 종류 선택");
@@ -21,6 +22,9 @@ Item {
     Component.onCompleted: {
         // cppSv 카드리더기 상태 온
         cpp_module.set_card_stat_To_serial(true);
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });
     }
 
     function stk_next(s)
@@ -46,9 +50,10 @@ Item {
 
     function stk_home()
     {
-        while(StackView.view.depth > 2)
+        while(root.stk_depth > 2)
         {
-            StackView.view.pop();
+            mainWin.stk_pop();
+            root.stk_depth--;
         }
     }
 

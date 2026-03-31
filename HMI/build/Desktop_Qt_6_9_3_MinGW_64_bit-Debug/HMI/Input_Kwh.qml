@@ -7,6 +7,7 @@ Item {
     id: root
     property string pageName: "Input_Kwh";
     property var mainWin;
+    property int stk_depth;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("충전량 입력");
@@ -19,13 +20,17 @@ Item {
     }
 
     Component.onCompleted: {
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });
     }
 
     function stk_home()
     {
-        while(StackView.view.depth > 2)
+        while(root.stk_depth > 2)
         {
-            StackView.view.pop();
+            mainWin.stk_pop();
+            root.stk_depth--;
         }
     }
 

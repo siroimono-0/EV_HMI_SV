@@ -73,6 +73,8 @@ void WK_Soc::set_p_db(DB_PostgreSQL *set_db)
             this->p_obj_db,
             &DB_PostgreSQL::slot_heartbitData_From_soc);
 
+    connect(this, &WK_Soc::sig_select_To_DB, this->p_obj_db, &DB_PostgreSQL::slot_select_From_soc);
+
     return;
 }
 
@@ -87,6 +89,10 @@ void WK_Soc::slot_Disconnect_Soc()
 
     // 소켓 연결 끊어지면 Hub qvec에서 wk* 삭제
     this->p_Hub->slot_del_mpWk(this->id_Mp);
+
+    // 소켓 연결 끊어지면 mp_hmi에서 삭제
+    QPair<int, QString> p = {this->storeId, this->roleId};
+    this->p_Hub->mp_hmi_remove(p);
 
     // 소켓 연결 끊어지면 Model 에서 st_stat 삭제
     QMetaObject::invokeMethod(this->p_Md,
@@ -161,7 +167,12 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
 
                 if (ret_hello == true)
                 {
-                    this->roleId = jsObj["hmiId"].toString();
+                    // this->roleId = jsObj["hmiId"].toString();
+                    this->roleId = hmiId;
+                    this->storeId = storeId.toInt();
+
+                    QPair<int, QString> p = {this->storeId, this->roleId};
+                    this->p_Hub->mp_hmi_insert(p, this);
                     this->slot_helloAck(true);
                 }
                 else
@@ -200,6 +211,50 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
                 bool ret_query = this->slot_registerReq_hmi(jsObj);
                 // 등록 여부 반환
                 this->slot_registerAck_hmi(ret_query);
+            }
+        }
+        else if (qs_type == "select") // admin
+        {
+            if (this->connectRole != "admin")
+            {
+                return;
+            }
+            else if (this->connectRole == "admin")
+            {
+                this->req_select_To_DB(jsObj);
+            }
+        }
+        else if (qs_type == "select_mCard_status") // admin
+        {
+            if (this->connectRole != "admin")
+            {
+                return;
+            }
+            else if (this->connectRole == "admin")
+            {
+                this->req_select_mCard_status_To_DB(jsObj);
+            }
+        }
+        else if (qs_type == "revision_mCard_status") // admin
+        {
+            if (this->connectRole != "admin")
+            {
+                return;
+            }
+            else if (this->connectRole == "admin")
+            {
+                this->req_revision_mCard_status_To_DB(jsObj);
+            }
+        }
+        else if (qs_type == "revision_HMI") // admin
+        {
+            if (this->connectRole != "admin")
+            {
+                return;
+            }
+            else if (this->connectRole == "admin")
+            {
+                this->parsing_revision_HMI(jsObj);
             }
         }
         else if (qs_type == "chargingLog") // hmi
@@ -245,64 +300,6 @@ void WK_Soc::slot_Recv_TextData(QString recvData)
         }
     }
 
-    // ???
-    /*
-     수정 필요
-    if (jsObj.contains("id_Check"))
-    {
-        QString find_id = jsObj["id"].toString();
-        // db에서 id체크하고 답장함
-        struct store_info st_info = {0};
-
-        // 못찾았으면 id -1 반환함
-        QMetaObject::invokeMethod(this->p_obj_db,
-                                  "slot_query_find_id",
-                                  Qt::BlockingQueuedConnection,
-                                  Q_RETURN_ARG(store_info, st_info),
-                                  Q_ARG(QString, find_id));
-
-        if (st_info.id != -1)
-        {
-            QJsonObject json_obj_ID;
-            json_obj_ID.insert("id_Check", true);
-            json_obj_ID.insert("id", st_info.id);
-            json_obj_ID.insert("name", st_info.name);
-            json_obj_ID.insert("location", st_info.location);
-
-            QJsonDocument json_doc_ID(json_obj_ID);
-            QString send_qs = json_doc_ID.toJson(QJsonDocument::Compact);
-
-            this->p_WebSoc->sendTextMessage(send_qs);
-        }
-        else
-        {
-            QJsonObject json_obj_ID;
-            json_obj_ID.insert("id_Check", false);
-
-            QJsonDocument json_doc_ID(json_obj_ID);
-            QString send_qs = json_doc_ID.toJson(QJsonDocument::Compact);
-
-            this->p_WebSoc->sendTextMessage(send_qs);
-        }
-    }
-    else
-    {
-        struct stat_data st_stat;
-        st_stat.number = jsObj["number"].toInt();
-        st_stat.id = jsObj["id"].toInt();
-        st_stat.location = jsObj["location"].toString();
-        st_stat.date = jsObj["date"].toString();
-        st_stat.stat = jsObj["stat"].toInt();
-
-        qDebug() << st_stat.id;
-        qDebug() << st_stat.location;
-        qDebug() << st_stat.date;
-
-        // 구별자 id 설정
-        this->id_Common = st_stat.id;
-        emit sig_update_md(st_stat);
-    }
-*/
 
     qDebug() << Q_FUNC_INFO;
     return;
@@ -603,5 +600,361 @@ void WK_Soc::slot_membershipCard_finished_ack_To_hmi(bool ok)
 
     QJsonDocument jsDoc(jsObj);
     this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    return;
+}
+
+void WK_Soc::req_select_To_DB(const QJsonObject &jsObj)
+{
+    int filter_num = jsObj["filter_num"].toInt();
+    QString table = jsObj["table"].toString();
+    QVector<QPair<QString, QString>> vp;
+
+    QJsonArray jsArr = jsObj["filter_arr"].toArray();
+
+    for (int i = 0; i < jsArr.size(); i++)
+    {
+        QJsonObject tmp_jo = jsArr[i].toObject();
+        QStringList sl_key = tmp_jo.keys();
+
+        for (auto &v : sl_key)
+        {
+            QString val = tmp_jo[v].toString();
+            vp.push_back({v, val});
+        }
+    }
+
+    if (filter_num == 0)
+    {
+        emit this->sig_select_To_DB(table, filter_num);
+    }
+    else if (filter_num == 1 && vp.size() == 1)
+    {
+        emit this->sig_select_To_DB(table, filter_num, vp[0].first, vp[0].second);
+    }
+    else if (filter_num == 2 && vp.size() == 2)
+    {
+        emit this->sig_select_To_DB(table,
+                                    filter_num,
+                                    vp[0].first,
+                                    vp[0].second,
+                                    vp[1].first,
+                                    vp[1].second);
+    }
+    else if (filter_num == 3 && vp.size() == 3)
+    {
+        emit this->sig_select_To_DB(table,
+                                    filter_num,
+                                    vp[0].first,
+                                    vp[0].second,
+                                    vp[1].first,
+                                    vp[1].second,
+                                    vp[2].first,
+                                    vp[2].second);
+    }
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_charging_log_select_ret_From_DB__To_hmi(QVector<charging_log_admin> ret)
+{
+    QJsonObject jo_root;
+    jo_root.insert("type", "select_ack");
+    jo_root.insert("table", "charging_log");
+    jo_root.insert("cnt", ret.size());
+
+    QJsonArray jArry;
+
+    for (auto &v : ret)
+    {
+        QJsonObject jo_tmp;
+        jo_tmp.insert("created_at", v.created_at);
+        jo_tmp.insert("updated_at", v.updated_at);
+        jo_tmp.insert("row_id", v.row_id);
+        jo_tmp.insert("store_id", v.store_id);
+        jo_tmp.insert("hmi_id", v.hmi_id);
+        jo_tmp.insert("ocpp_tx_id", v.ocpp_tx_id);
+        jo_tmp.insert("card_uid", v.card_uid);
+        jo_tmp.insert("start_time", v.start_time);
+        jo_tmp.insert("end_time", v.end_time);
+        jo_tmp.insert("duration_time", v.duration_time);
+        jo_tmp.insert("average_kwh", v.average_kwh);
+        jo_tmp.insert("soc_start", v.soc_start);
+        jo_tmp.insert("soc_end", v.soc_end);
+        jo_tmp.insert("advance_payment", v.advance_payment);
+        jo_tmp.insert("cancel_payment", v.cancel_payment);
+        jo_tmp.insert("actual_payment", v.actual_payment);
+        jo_tmp.insert("unit_price", v.unit_price);
+        jo_tmp.insert("tariff_type", v.tariff_type);
+        jo_tmp.insert("session_status", v.session_status);
+        jo_tmp.insert("stop_reason", v.stop_reason);
+        jo_tmp.insert("local_tx_id", v.local_tx_id);
+
+        jArry.append(jo_tmp);
+    }
+
+    if (!jArry.empty())
+    {
+        jo_root.insert("select_arr", jArry);
+    }
+
+    QJsonDocument jsDoc(jo_root);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    qDebug() << jsDoc.toJson(QJsonDocument::Compact);
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_hmi_current_stat_select_ret_From_DB__To_hmi(QVector<hmi_current_stat_admin> ret)
+{
+    QJsonObject jo_root;
+    jo_root.insert("type", "select_ack");
+    jo_root.insert("table", "hmi_current_stat");
+    jo_root.insert("cnt", ret.size());
+
+    QJsonArray jArry;
+
+    for (auto &v : ret)
+    {
+        QJsonObject jo_tmp;
+        jo_tmp.insert("hmi_id", v.hmi_id);
+        jo_tmp.insert("store_id", v.store_id);
+        jo_tmp.insert("ws_connected", v.ws_connected);
+        jo_tmp.insert("last_heartbeat_at", v.last_heartbeat_at);
+        jo_tmp.insert("screen_name", v.screen_name);
+        jo_tmp.insert("updated_at", v.updated_at);
+
+        jArry.append(jo_tmp);
+    }
+
+    if (!jArry.empty())
+    {
+        jo_root.insert("select_arr", jArry);
+    }
+
+    QJsonDocument jsDoc(jo_root);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    qDebug() << jsDoc.toJson(QJsonDocument::Compact);
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_hmi_device_select_ret_From_DB__To_hmi(QVector<hmi_device_admin> ret)
+{
+    QJsonObject jo_root;
+    jo_root.insert("type", "select_ack");
+    jo_root.insert("table", "hmi_device");
+    jo_root.insert("cnt", ret.size());
+
+    QJsonArray jArry;
+
+    for (auto &v : ret)
+    {
+        QJsonObject jo_tmp;
+        jo_tmp.insert("hmi_id", v.hmi_id);
+        jo_tmp.insert("store_id", v.store_id);
+
+        jArry.append(jo_tmp);
+    }
+
+    if (!jArry.empty())
+    {
+        jo_root.insert("select_arr", jArry);
+    }
+
+    QJsonDocument jsDoc(jo_root);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    qDebug() << jsDoc.toJson(QJsonDocument::Compact);
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_membership_card_select_ret_From_DB__To_hmi(QVector<membership_card_admin> ret)
+{
+    QJsonObject jo_root;
+    jo_root.insert("type", "select_ack");
+    jo_root.insert("table", "membership_card");
+    jo_root.insert("cnt", ret.size());
+
+    QJsonArray jArry;
+
+    for (auto &v : ret)
+    {
+        QJsonObject jo_tmp;
+        jo_tmp.insert("card_uid", v.card_uid);
+        jo_tmp.insert("balance_total", v.balance_total);
+        jo_tmp.insert("balance_available", v.balance_available);
+        jo_tmp.insert("hold_amount", v.hold_amount);
+        jo_tmp.insert("transaction_state", v.transaction_state);
+
+        jArry.append(jo_tmp);
+    }
+
+    if (!jArry.empty())
+    {
+        jo_root.insert("select_arr", jArry);
+    }
+
+    QJsonDocument jsDoc(jo_root);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    qDebug() << jsDoc.toJson(QJsonDocument::Compact);
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_membership_log_select_ret_From_DB__To_hmi(QVector<membership_log_admin> ret)
+{
+    QJsonObject jo_root;
+    jo_root.insert("type", "select_ack");
+    jo_root.insert("table", "membership_log");
+    jo_root.insert("cnt", ret.size());
+
+    QJsonArray jArry;
+
+    for (auto &v : ret)
+    {
+        QJsonObject jo_tmp;
+
+        jo_tmp.insert("card_uid", v.card_uid);
+        jo_tmp.insert("transaction_id", v.transaction_id);
+        jo_tmp.insert("event_type", v.event_type);
+        jo_tmp.insert("amount", v.amount);
+        jo_tmp.insert("balance_available_before", v.balance_available_before);
+        jo_tmp.insert("balance_available_after", v.balance_available_after);
+        jo_tmp.insert("hold_amount_before", v.hold_amount_before);
+        jo_tmp.insert("hold_amount_after", v.hold_amount_after);
+        jo_tmp.insert("transaction_state_before", v.transaction_state_before);
+        jo_tmp.insert("transaction_state_after", v.transaction_state_after);
+        jo_tmp.insert("created_at", v.created_at);
+        jo_tmp.insert("request_id", v.request_id);
+
+        jArry.append(jo_tmp);
+    }
+
+    if (!jArry.empty())
+    {
+        jo_root.insert("select_arr", jArry);
+    }
+
+    QJsonDocument jsDoc(jo_root);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    qDebug() << jsDoc.toJson(QJsonDocument::Compact);
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::slot_store_user_select_ret_From_DB__To_hmi(QVector<store_user_admin> ret)
+{
+    QJsonObject jo_root;
+    jo_root.insert("type", "select_ack");
+    jo_root.insert("table", "store_user");
+    jo_root.insert("cnt", ret.size());
+
+    QJsonArray jArry;
+
+    for (auto &v : ret)
+    {
+        QJsonObject jo_tmp;
+
+        jo_tmp.insert("id", v.id);
+        jo_tmp.insert("name", v.name);
+        jo_tmp.insert("location", v.location);
+        jArry.append(jo_tmp);
+    }
+
+    if (!jArry.empty())
+    {
+        jo_root.insert("select_arr", jArry);
+    }
+
+    QJsonDocument jsDoc(jo_root);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    qDebug() << jsDoc.toJson(QJsonDocument::Compact);
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::req_select_mCard_status_To_DB(const QJsonObject &jsObj)
+{
+    QString table = "membership_card";
+    QMetaObject::invokeMethod(this->p_obj_db,
+                              "slot_select_mCard_status_From_soc",
+                              Qt::QueuedConnection,
+                              Q_ARG(QString, table),
+                              Q_ARG(QString, jsObj["card_uid"].toString()));
+    return;
+}
+
+void WK_Soc::slot_mCard_status_ret_From_DB__To_hmi(QVector<membership_card_admin> ret)
+{
+    QJsonObject jo_root;
+    jo_root.insert("type", "select_mCard_status_ack");
+    jo_root.insert("table", "membership_card");
+    jo_root.insert("cnt", ret.size());
+
+    QJsonArray jArry;
+
+    for (auto &v : ret)
+    {
+        QJsonObject jo_tmp;
+        jo_tmp.insert("card_uid", v.card_uid);
+        jo_tmp.insert("balance_total", v.balance_total);
+        jo_tmp.insert("balance_available", v.balance_available);
+        jo_tmp.insert("hold_amount", v.hold_amount);
+        jo_tmp.insert("transaction_state", v.transaction_state);
+
+        jArry.append(jo_tmp);
+    }
+
+    if (!jArry.empty())
+    {
+        jo_root.insert("select_arr", jArry);
+    }
+
+    QJsonDocument jsDoc(jo_root);
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    qDebug() << jsDoc.toJson(QJsonDocument::Compact);
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+void WK_Soc::req_revision_mCard_status_To_DB(const QJsonObject &jsObj)
+{
+    qDebug() << Q_FUNC_INFO;
+    // QString table = "membership_card";
+    QMetaObject::invokeMethod(this->p_obj_db,
+                              "slot_revision_mCard_status_From_soc",
+                              Qt::QueuedConnection,
+                              Q_ARG(QString, jsObj["card_uid"].toString()),
+                              Q_ARG(int, jsObj["balance_total"].toInt()),
+                              Q_ARG(int, jsObj["balance_available"].toInt()),
+                              Q_ARG(int, jsObj["hold_amount"].toInt()),
+                              Q_ARG(QString, jsObj["transaction_state"].toString()));
+    return;
+}
+
+void WK_Soc::find_revision_HMI(const QJsonObject &jsObj)
+{
+    qDebug() << Q_FUNC_INFO;
+    int store_id = jsObj["store_id"].toInt();
+    QString hmi_id = jsObj["hmi_id"].toString();
+    QPair<int, QString> key = {store_id, hmi_id};
+
+    auto p_target = this->p_Hub->mp_hmi_find(key);
+    p_target->echo_revision_HMI_To_hmi(jsObj);
+
+    /*
+        일단 이게 어떤 HMI한태? 부터 알아야댐
+        서버는 걍 전달만 하면댐 마지막에 파싱하면댐
+    */
+    return;
+}
+
+void WK_Soc::echo_revision_HMI_To_hmi(const QJsonObject &jsObj)
+{
+    QJsonDocument jsDoc(jsObj);
+
+    this->p_WebSoc->sendTextMessage(jsDoc.toJson(QJsonDocument::Compact));
+    qDebug() << jsDoc.toJson(QJsonDocument::Compact);
+    qDebug() << Q_FUNC_INFO;
     return;
 }

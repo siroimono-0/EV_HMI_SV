@@ -7,6 +7,7 @@ Item {
     id: root
     property string pageName: "Charging_Ready";
     property var mainWin;
+    property int stk_depth;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("커넥터 연결 준비");
@@ -21,6 +22,13 @@ Item {
         // cpp에 rs485릴레이 모듈 1번코일 on 실행
         // ... 전기차 커넥터 보관함 문 열리는거임 ... ㅋㅋ..
         cpp_module.chargingConnecter_open_To_serial();
+
+        // 정지 사유 초기화
+        cpp_module.set_stop_reason("Local");
+
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });
     }
 
     function stk_next()

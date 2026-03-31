@@ -153,4 +153,89 @@ struct db_data
     // 백업 데이터 구분 용
     QString back_state;
 };
+
+struct charging_log_admin
+{
+    QString created_at;
+    QString updated_at;
+    int row_id;
+    int store_id;
+    QString hmi_id;
+    int ocpp_tx_id;
+    QString card_uid;
+    QString start_time;
+    QString end_time;
+    QString duration_time;
+    double average_kwh;
+    double soc_start;
+    double soc_end;
+    int advance_payment;
+    int cancel_payment;
+    int actual_payment;
+    int unit_price;
+    QString tariff_type;
+    QString session_status;
+    QString stop_reason;
+    QString local_tx_id;
+};
+Q_DECLARE_METATYPE(charging_log_admin)
+
+struct hmi_current_stat_admin
+{
+    QString hmi_id;
+    int store_id;
+    bool ws_connected;
+    QString last_heartbeat_at;
+    QString screen_name;
+    QString updated_at;
+};
+Q_DECLARE_METATYPE(hmi_current_stat_admin)
+
+struct hmi_device_admin
+{
+    QString hmi_id;
+    int store_id;
+};
+Q_DECLARE_METATYPE(hmi_device_admin)
+
+struct membership_card_admin
+{
+    QString card_uid;
+    int balance_total;
+    int balance_available;
+    int hold_amount;
+    QString transaction_state;
+};
+
+struct membership_log_admin
+{
+    QString card_uid;
+    int transaction_id;
+    QString event_type;
+    int amount;
+    int balance_available_before;
+    int balance_available_after;
+    int hold_amount_before;
+    int hold_amount_after;
+    QString transaction_state_before;
+    QString transaction_state_after;
+    QString created_at;
+    QString request_id;
+};
+
+struct store_user_admin
+{
+    int id;
+    QString name;
+    QString location;
+};
+
+struct revision_hmi_admin
+{
+    int store_id;
+    QString hmi_id;
+    QString cmd;
+    QString val;
+};
+
 #endif // STATDATA_H

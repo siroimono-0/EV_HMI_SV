@@ -9,6 +9,7 @@ Item {
     property int font_size: 40
     property string pageName: "Card_Failed";
     property var mainWin;
+    property int stk_depth;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("카드 인증 실패");
@@ -21,13 +22,17 @@ Item {
     }
 
     Component.onCompleted: {
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });
     }
 
     function stk_prev()
     {
-        while(StackView.view.depth > 2)
+        while(root.stk_depth > 2)
         {
-            StackView.view.pop();
+            mainWin.stk_pop();
+            root.stk_depth--;
         }
     }
 

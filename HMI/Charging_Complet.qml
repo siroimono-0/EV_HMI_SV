@@ -9,6 +9,7 @@ Item {
     property bool cancle_payment_stat: false;
     property string pageName: "Charging_Complet";
     property var mainWin;
+    property int stk_depth;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("충전 완료");
@@ -26,9 +27,8 @@ Item {
             pop.open();
         }
 
-        // home화면 이동 타이머 초기화
-        Qt.callLater(function() {
-        mainWin.timer_reset("Charging_Complet");
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
         });
     }
 
@@ -39,9 +39,10 @@ Item {
         cpp_module.chargingConnecter_close_To_serial();
         cpp_module.charging_end_stat_clear_To_statStore();
 
-        while(StackView.view.depth > 2)
+        while(root.stk_depth > 2)
         {
-            StackView.view.pop();
+            mainWin.stk_pop();
+            root.stk_depth--;
         }
     }
 

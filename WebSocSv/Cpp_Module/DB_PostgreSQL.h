@@ -79,8 +79,40 @@ public slots:
     void slot_membershipCard_finished_From_soc(
         int adv_pay, int act_pay, int can_pay, QString card_uid, uint32_t t_id, QString request_id);
 
+    // soc -> set_p_db에서 커넥트
+    void slot_select_From_soc(QString table,
+                              int total,
+                              QString col1 = "",
+                              QString val1 = "",
+                              QString col2 = "",
+                              QString val2 = "",
+                              QString col3 = "",
+                              QString val3 = "");
+
+    void slot_select_mCard_status_From_soc(QString table, QString card_uid);
+    void slot_revision_mCard_status_From_soc(
+        QString card_uid, int total, int remain, int hold, QString stat);
+
 signals:
     void sig_end();
+
+    // slot_set_p_soc에서 커넥트
+    void sig_charging_log_select_ret(QVector<charging_log_admin> ret);
+
+    // slot_set_p_soc에서 커넥트
+    void sig_hmi_current_stat_select_ret(QVector<hmi_current_stat_admin> ret);
+
+    // slot_set_p_soc에서 커넥트
+    void sig_hmi_device_select_ret(QVector<hmi_device_admin> ret);
+
+    // slot_set_p_soc에서 커넥트
+    void sig_membership_card_select_ret(QVector<membership_card_admin> ret);
+
+    // slot_set_p_soc에서 커넥트
+    void sig_membership_log_select_ret(QVector<membership_log_admin> ret);
+
+    // slot_set_p_soc에서 커넥트
+    void sig_store_user_select_ret(QVector<store_user_admin> ret);
 
 private:
     QSqlDatabase db;

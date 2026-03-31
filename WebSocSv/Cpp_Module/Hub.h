@@ -25,6 +25,10 @@ public:
     void set_p_md(StatModel *set_md);
     void set_p_db(DB_PostgreSQL *set_db);
 
+    void mp_hmi_insert(const QPair<int, QString> key, WK_Soc *val);
+    void mp_hmi_remove(const QPair<int, QString> key);
+    WK_Soc *mp_hmi_find(const QPair<int, QString> key);
+
 public slots:
     void slot_start_sv();
     void slot_end();
@@ -45,6 +49,10 @@ private:
     StatModel *p_md;
     DB_PostgreSQL *p_obj_db;
     int id_mp = 0;
+
+    // WK_Soc -> hello 에서 insert
+    // store_id + hmi_id 순서임
+    QMap<QPair<int, QString>, WK_Soc *> mp_hmi;
 
     // 생성자에서 초기화
     QTimer *p_timer = nullptr;

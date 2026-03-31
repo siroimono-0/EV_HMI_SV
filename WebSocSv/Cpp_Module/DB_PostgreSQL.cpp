@@ -27,6 +27,35 @@ void DB_PostgreSQL::set_p_Module(Cpp_Module *module)
 void DB_PostgreSQL::slot_set_p_soc(WK_Soc *soc)
 {
     this->p_soc = soc;
+    connect(this,
+            &DB_PostgreSQL::sig_charging_log_select_ret,
+            this->p_soc,
+            &WK_Soc::slot_charging_log_select_ret_From_DB__To_hmi);
+
+    connect(this,
+            &DB_PostgreSQL::sig_hmi_current_stat_select_ret,
+            this->p_soc,
+            &WK_Soc::slot_hmi_current_stat_select_ret_From_DB__To_hmi);
+
+    connect(this,
+            &DB_PostgreSQL::sig_hmi_device_select_ret,
+            this->p_soc,
+            &WK_Soc::slot_hmi_device_select_ret_From_DB__To_hmi);
+
+    connect(this,
+            &DB_PostgreSQL::sig_membership_card_select_ret,
+            this->p_soc,
+            &WK_Soc::slot_membership_card_select_ret_From_DB__To_hmi);
+
+    connect(this,
+            &DB_PostgreSQL::sig_membership_log_select_ret,
+            this->p_soc,
+            &WK_Soc::slot_membership_log_select_ret_From_DB__To_hmi);
+
+    connect(this,
+            &DB_PostgreSQL::sig_store_user_select_ret,
+            this->p_soc,
+            &WK_Soc::slot_store_user_select_ret_From_DB__To_hmi);
     return;
 }
 
@@ -1620,6 +1649,348 @@ void DB_PostgreSQL::backUp_register_membershipCard_finished()
         {
             qDebug() << "+_______________________";
         }
+    }
+
+    return;
+}
+
+void DB_PostgreSQL::slot_select_From_soc(QString table,
+                                         int total,
+                                         QString col1,
+                                         QString val1,
+                                         QString col2,
+                                         QString val2,
+                                         QString col3,
+                                         QString val3)
+{
+    if (!this->db_openCheck())
+    {
+        return;
+    }
+
+    QSqlQuery query(this->db);
+    QString qs_pre;
+
+    if (total == 0)
+    {
+        qs_pre = QString("SELECT * FROM %1").arg(table);
+        bool ok_prepare = query.prepare(qs_pre);
+
+        if (!this->check_query_prepare(ok_prepare, query))
+        {
+            return;
+        }
+
+        bool ok_exec = query.exec();
+
+        if (!this->check_query_exec(ok_exec, query))
+        {
+            return;
+        }
+    }
+    else if (total == 1)
+    {
+        qs_pre = QString("SELECT * FROM %1 "
+                         "WHERE "
+                         "%2 = :val1")
+                     .arg(table)
+                     .arg(col1);
+        bool ok_prepare = query.prepare(qs_pre);
+
+        if (!this->check_query_prepare(ok_prepare, query))
+        {
+            return;
+        }
+
+        query.bindValue(":val1", val1);
+
+        bool ok_exec = query.exec();
+
+        if (!this->check_query_exec(ok_exec, query))
+        {
+            return;
+        }
+    }
+    else if (total == 2)
+    {
+        qs_pre = QString("SELECT * FROM %1 "
+                         "WHERE "
+                         "%2 = :val1 AND "
+                         "%3 = :val2")
+                     .arg(table)
+                     .arg(col1)
+                     .arg(col2);
+        bool ok_prepare = query.prepare(qs_pre);
+
+        if (!this->check_query_prepare(ok_prepare, query))
+        {
+            return;
+        }
+
+        query.bindValue(":val1", val1);
+        query.bindValue(":val2", val2);
+
+        bool ok_exec = query.exec();
+
+        if (!this->check_query_exec(ok_exec, query))
+        {
+            return;
+        }
+    }
+    else if (total == 3)
+    {
+        qs_pre = QString("SELECT * FROM %1 "
+                         "WHERE "
+                         "%2 = :val1 AND "
+                         "%3 = :val2 AND "
+                         "%4 = :val3")
+                     .arg(table)
+                     .arg(col1)
+                     .arg(col2)
+                     .arg(col3);
+        bool ok_prepare = query.prepare(qs_pre);
+
+        if (!this->check_query_prepare(ok_prepare, query))
+        {
+            return;
+        }
+
+        query.bindValue(":val1", val1);
+        query.bindValue(":val2", val2);
+        query.bindValue(":val3", val3);
+
+        bool ok_exec = query.exec();
+
+        if (!this->check_query_exec(ok_exec, query))
+        {
+            return;
+        }
+    }
+
+    if (table == "charging_log")
+    {
+        QVector<charging_log_admin> vec;
+        while (query.next())
+        {
+            struct charging_log_admin st_log = {0};
+
+            st_log.created_at = query.value(0).toString();
+            st_log.updated_at = query.value(1).toString();
+            st_log.row_id = query.value(2).toInt();
+            st_log.store_id = query.value(3).toInt();
+            st_log.hmi_id = query.value(4).toString();
+            st_log.ocpp_tx_id = query.value(5).toInt();
+            st_log.card_uid = query.value(6).toString();
+            st_log.start_time = query.value(7).toString();
+            st_log.end_time = query.value(8).toString();
+            st_log.duration_time = query.value(9).toString();
+            st_log.average_kwh = query.value(10).toDouble();
+            st_log.soc_start = query.value(11).toDouble();
+            st_log.soc_end = query.value(12).toDouble();
+            st_log.advance_payment = query.value(13).toInt();
+            st_log.cancel_payment = query.value(14).toInt();
+            st_log.actual_payment = query.value(15).toInt();
+            st_log.unit_price = query.value(16).toInt();
+            st_log.tariff_type = query.value(17).toString();
+            st_log.session_status = query.value(18).toString();
+            st_log.stop_reason = query.value(19).toString();
+            st_log.local_tx_id = query.value(20).toString();
+
+            vec.push_back(st_log);
+        }
+
+        emit this->sig_charging_log_select_ret(vec);
+        return;
+    }
+    else if (table == "hmi_current_stat")
+    {
+        QVector<hmi_current_stat_admin> vec;
+        while (query.next())
+        {
+            struct hmi_current_stat_admin st_log = {0};
+
+            st_log.hmi_id = query.value(0).toString();
+            st_log.store_id = query.value(1).toInt();
+            st_log.ws_connected = query.value(2).toBool();
+            st_log.last_heartbeat_at = query.value(3).toString();
+            st_log.screen_name = query.value(4).toString();
+            st_log.updated_at = query.value(5).toString();
+
+            vec.push_back(st_log);
+        }
+
+        emit this->sig_hmi_current_stat_select_ret(vec);
+        return;
+    }
+    else if (table == "hmi_device")
+    {
+        QVector<hmi_device_admin> vec;
+        while (query.next())
+        {
+            struct hmi_device_admin st_log = {0};
+
+            st_log.hmi_id = query.value(0).toString();
+            st_log.store_id = query.value(1).toInt();
+
+            vec.push_back(st_log);
+        }
+
+        emit this->sig_hmi_device_select_ret(vec);
+        return;
+    }
+    else if (table == "membership_card")
+    {
+        QVector<membership_card_admin> vec;
+        while (query.next())
+        {
+            struct membership_card_admin st_log = {0};
+
+            st_log.card_uid = query.value(0).toString();
+            st_log.balance_total = query.value(1).toInt();
+            st_log.balance_available = query.value(2).toInt();
+            st_log.hold_amount = query.value(3).toInt();
+            st_log.transaction_state = query.value(4).toString();
+
+            vec.push_back(st_log);
+        }
+
+        emit this->sig_membership_card_select_ret(vec);
+        return;
+    }
+    else if (table == "membership_log")
+    {
+        QVector<membership_log_admin> vec;
+        while (query.next())
+        {
+            struct membership_log_admin st_log = {0};
+
+            st_log.card_uid = query.value(0).toString();
+            st_log.transaction_id = query.value(1).toInt();
+            st_log.event_type = query.value(2).toString();
+            st_log.amount = query.value(3).toInt();
+            st_log.balance_available_before = query.value(4).toInt();
+            st_log.balance_available_after = query.value(5).toInt();
+            st_log.hold_amount_before = query.value(6).toInt();
+            st_log.hold_amount_after = query.value(7).toInt();
+            st_log.transaction_state_before = query.value(8).toString();
+            st_log.transaction_state_after = query.value(9).toString();
+            st_log.created_at = query.value(10).toString();
+            st_log.request_id = query.value(11).toString();
+
+            vec.push_back(st_log);
+        }
+
+        emit this->sig_membership_log_select_ret(vec);
+        return;
+    }
+    else if (table == "store_user")
+    {
+        QVector<store_user_admin> vec;
+        while (query.next())
+        {
+            struct store_user_admin st_log = {0};
+
+            st_log.id = query.value(0).toInt();
+            st_log.name = query.value(1).toString();
+            st_log.location = query.value(2).toString();
+            vec.push_back(st_log);
+        }
+
+        emit this->sig_store_user_select_ret(vec);
+        return;
+    }
+
+    return;
+}
+
+void DB_PostgreSQL::slot_select_mCard_status_From_soc(QString table, QString card_uid)
+{
+    if (!this->db_openCheck())
+    {
+        return;
+    }
+
+    QSqlQuery query(this->db);
+    QString qs_pre;
+
+    qs_pre = QString("SELECT * FROM %1 "
+                     "WHERE "
+                     "card_uid = :val1")
+                 .arg(table);
+    bool ok_prepare = query.prepare(qs_pre);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":val1", card_uid);
+
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    QVector<membership_card_admin> vec;
+    while (query.next())
+    {
+        struct membership_card_admin st_log = {0};
+
+        st_log.card_uid = query.value(0).toString();
+        st_log.balance_total = query.value(1).toInt();
+        st_log.balance_available = query.value(2).toInt();
+        st_log.hold_amount = query.value(3).toInt();
+        st_log.transaction_state = query.value(4).toString();
+
+        vec.push_back(st_log);
+    }
+
+    QMetaObject::invokeMethod(this->p_soc,
+                              "slot_mCard_status_ret_From_DB__To_hmi",
+                              Qt::QueuedConnection,
+                              Q_ARG(QVector<membership_card_admin>, vec));
+
+    return;
+}
+
+void DB_PostgreSQL::slot_revision_mCard_status_From_soc(
+    QString card_uid, int total, int remain, int hold, QString stat)
+{
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << card_uid;
+    if (!this->db_openCheck())
+    {
+        return;
+    }
+
+    QSqlQuery query(this->db);
+
+    bool ok_prepare = query.prepare("UPDATE membership_card "
+                                    "SET "
+                                    "balance_total = :balance_total, "
+                                    "balance_available = :balance_available, "
+                                    "hold_amount = :hold_amount, "
+                                    "transaction_state = :transaction_state "
+                                    "WHERE card_uid = :card_uid");
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":balance_total", total);
+    query.bindValue(":balance_available", remain);
+    query.bindValue(":hold_amount", hold);
+    query.bindValue(":transaction_state", stat);
+    query.bindValue(":card_uid", card_uid);
+
+    bool b_ok_exec = query.exec();
+
+    if (!this->check_query_exec(b_ok_exec, query))
+    {
+        return;
     }
 
     return;

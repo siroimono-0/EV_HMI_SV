@@ -7,23 +7,33 @@ Item {
     id: root
     property string pageName: "Card_Ready";
     property var mainWin;
+    property int stk_depth;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("카드 준비");
 
         // home화면 이동 타이머 초기화
         Qt.callLater(function() {
-        mainWin.timer_reset("Card_Ready");
+            mainWin.timer_reset("Card_Ready");
         });
     }
 
     Component.onCompleted: {
-        }
+
+        // 카드 인증 시리얼 통신 막음
+        cpp_module.set_card_stat_To_serial(false);
+
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });
+    }
 
 
     function stk_next()
     {
-        StackView.view.push("Card_Socket.qml", {mainWin : mainWin});
+        StackView.view.push("Card_Socket.qml",
+                            {mainWin : mainWin},
+                            {card_type : "credit"});
     }
 
     BackGround_Card{

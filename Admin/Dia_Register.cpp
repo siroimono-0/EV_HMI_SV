@@ -29,7 +29,7 @@ void Dia_Register::slot_btnClicked()
     QString qs_location = ui->le_location->text();
 
     QMetaObject::invokeMethod(this->p_soc,
-                              "slot_register",
+                              "slot_register_store",
                               Qt::QueuedConnection,
                               Q_ARG(QString, qs_id),
                               Q_ARG(QString, qs_name),

@@ -1,6 +1,0 @@
-module Test_cli
-typeinfo appTest_cli.qmltypes
-prefer :/qt/qml/Test_cli/
-Main 1.0 Main.qml
-depends QtQuick
-

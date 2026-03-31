@@ -746,3 +746,43 @@ void StatStore::slot_set_membership_t_id(uint32_t set)
     qDebug() << this->st_mb_log.transaction_id << " t_id";
     return;
 }
+
+QString StatStore::get_card_type()
+{
+    return this->st_db_data.card_type;
+}
+
+void StatStore::ems_Charging_Ready()
+{
+    this->i_act_pay = 0;
+    this->i_can_pay = this->i_adv_pay;
+
+    if (this->st_db_data.card_type == "creditCard")
+    {
+        // 환불 금액 있으면 환불해줌
+        this->cancle_pay_check();
+    }
+    else if (this->st_db_data.card_type == "membershipCard")
+    {
+        QString hmi_id = this->mac_addr;
+        QString request_id;
+        QDateTime dt_utc = QDateTime::currentDateTimeUtc();
+        request_id = hmi_id + dt_utc.toString();
+
+        QMetaObject::invokeMethod(this->p_soc,
+                                  "slot_send_membership_finished_textData",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(int, this->i_adv_pay),
+                                  Q_ARG(int, this->i_act_pay),
+                                  Q_ARG(int, this->i_can_pay),
+                                  Q_ARG(QString, this->st_db_data.card_uid),
+                                  Q_ARG(uint32_t, this->st_mb_log.transaction_id),
+                                  Q_ARG(QString, request_id));
+    }
+}
+
+void StatStore::set_stop_reason(QString set)
+{
+    this->st_db_data.stop_reason = set;
+    return;
+}

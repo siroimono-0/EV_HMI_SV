@@ -34,6 +34,14 @@ public:
     void req_membershipCard_authorized_To_DB(const QJsonObject &jsObj);
     void req_membershipCard_finished_To_DB(const QJsonObject &jsObj);
 
+    void req_select_To_DB(const QJsonObject &jsObj);
+
+    void req_select_mCard_status_To_DB(const QJsonObject &jsObj);
+    void req_revision_mCard_status_To_DB(const QJsonObject &jsObj);
+
+    void find_revision_HMI(const QJsonObject &jsObj);
+    void echo_revision_HMI_To_hmi(const QJsonObject &jsObj);
+
     //===============================================
     void occur_heartbit();
 public slots:
@@ -60,6 +68,26 @@ public slots:
     void slot_membershipCard_authorized_ack_To_hmi(bool ok, QString msg = "");
     void slot_membershipCard_finished_ack_To_hmi(bool ok);
 
+    // DB -> slot_set_p_soc에서 커넥트
+    void slot_charging_log_select_ret_From_DB__To_hmi(QVector<charging_log_admin> ret);
+
+    // DB -> slot_set_p_soc에서 커넥트
+    void slot_hmi_current_stat_select_ret_From_DB__To_hmi(QVector<hmi_current_stat_admin> ret);
+
+    // DB -> slot_set_p_soc에서 커넥트
+    void slot_hmi_device_select_ret_From_DB__To_hmi(QVector<hmi_device_admin> ret);
+
+    // DB -> slot_set_p_soc에서 커넥트
+    void slot_membership_card_select_ret_From_DB__To_hmi(QVector<membership_card_admin> ret);
+
+    // DB -> slot_set_p_soc에서 커넥트
+    void slot_membership_log_select_ret_From_DB__To_hmi(QVector<membership_log_admin> ret);
+
+    // DB -> slot_set_p_soc에서 커넥트
+    void slot_store_user_select_ret_From_DB__To_hmi(QVector<store_user_admin> ret);
+
+    void slot_mCard_status_ret_From_DB__To_hmi(QVector<membership_card_admin> ret);
+
 signals:
     void sig_update_md(stat_data st_stat);
 
@@ -74,6 +102,16 @@ signals:
     // &DB_PostgreSQL::slot_hartbitData_From_soc);
     void sig_heartbitData_To_DB(heartbit_data st_db_data);
 
+    // set_p_db에서 커넥트
+    void sig_select_To_DB(QString table,
+                          int total,
+                          QString col1 = "",
+                          QString val1 = "",
+                          QString col2 = "",
+                          QString val2 = "",
+                          QString col3 = "",
+                          QString val3 = "");
+
 private:
     QWebSocket *p_WebSoc;
     StatModel *p_Md;
@@ -83,6 +121,7 @@ private:
     QString connectRole = "";
     QString token = "";
     QString roleId = "";
+    int storeId;
 
     int id_Common = 0;
     int id_Mp = 0;
@@ -90,5 +129,6 @@ private:
 };
 
 Q_DECLARE_METATYPE(WK_Soc *)
+// Q_DECLARE_METATYPE(QVector<membership_card_admin>)
 
 #endif // WK_SOC_H

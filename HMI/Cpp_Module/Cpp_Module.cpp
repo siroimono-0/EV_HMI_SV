@@ -304,3 +304,20 @@ Q_INVOKABLE void Cpp_Module::set_card_type_To_statStore(QString set)
     this->p_stat->set_card_type(set);
     return;
 }
+
+Q_INVOKABLE QString Cpp_Module::get_card_type()
+{
+    return this->p_stat->get_card_type();
+}
+
+Q_INVOKABLE void Cpp_Module::ems_Charging_Ready_To_StatStore()
+{
+    this->p_stat->ems_Charging_Ready();
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::set_stop_reason(QString set)
+{
+    this->p_stat->set_stop_reason(set);
+    return;
+}

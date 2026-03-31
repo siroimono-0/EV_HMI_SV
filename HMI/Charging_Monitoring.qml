@@ -8,6 +8,8 @@ Item {
     property bool cancle_payment_stat: true;
     property string pageName: "Charging_Monitoring";
     property var mainWin;
+    property int stk_depth;
+    property bool ems_stat: false;
 
     BackGround_Card{
         id: back
@@ -29,6 +31,10 @@ Item {
         // 값 지속적으로 받고 특정 값 도달하면
         // 이제 그만보내?
         cpp_module.charging_start_To_serial();
+
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });
     }
 
     function stop_btn()
@@ -39,9 +45,24 @@ Item {
         cpp_module.charging_stop_To_serial();
     }
 
+    function ems_btn()
+    {
+        root.ems_stat = true;
+        cpp_module.charging_stop_To_serial();
+    }
+
     function stk_next()
     {
-        StackView.view.push("Charging_Complet.qml", {cancle_payment_stat : cancle_payment_stat }, {mainWin : mainWin});
+        if(root.ems_stat === true)
+        {
+            mainWin.stk_home();
+            mainWin.stk_push_emsPage();
+            return;
+        }
+        else
+        {
+            StackView.view.push("Charging_Complet.qml", {cancle_payment_stat : cancle_payment_stat ,mainWin : mainWin});
+        }
     }
 
     Connections{
@@ -51,7 +72,7 @@ Item {
         function onSig_charging_stop_ToQml()
         {
             // 릴레이 모듈 234코일 중지
-             cpp_module.chargingConnecter_off_To_serial();
+            cpp_module.chargingConnecter_off_To_serial();
         }
 
         // 234코일 중지 확인 모드버스 받았으면

@@ -137,6 +137,22 @@ void Hub::slot_timeOut_heartbit()
     {
         it.value()->occur_heartbit();
     }
-
     return;
+}
+
+void Hub::mp_hmi_insert(const QPair<int, QString> key, WK_Soc *val)
+{
+    this->mp_hmi[key] = val;
+    return;
+}
+
+void Hub::mp_hmi_remove(const QPair<int, QString> key)
+{
+    this->mp_hmi.remove(key);
+    return;
+}
+
+WK_Soc *Hub::mp_hmi_find(const QPair<int, QString> key)
+{
+    return this->mp_hmi[key];
 }

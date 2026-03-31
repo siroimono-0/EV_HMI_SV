@@ -61,6 +61,12 @@ public:
     // 충전 종료시 요청 db업데이트 요청
     Q_INVOKABLE void charging_finished_To_statStore();
 
+    Q_INVOKABLE QString get_card_type();
+
+    Q_INVOKABLE void ems_Charging_Ready_To_StatStore();
+
+    Q_INVOKABLE void set_stop_reason(QString set);
+
 public slots:
 
 signals:
@@ -84,6 +90,10 @@ signals:
     void sig_cancle_payment_ok_ToQml();
     void sig_cancle_payment_ok_member_ToQml(bool stat);
     void sig_charging_finished_ack_ToQml();
+
+    void sig_ems_ToQml();
+
+    void sig_screen_move_maintenance_ToQml();
 
 private:
     StatStore *p_stat = nullptr;
