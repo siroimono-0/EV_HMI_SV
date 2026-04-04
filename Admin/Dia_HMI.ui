@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>493</width>
-    <height>224</height>
+    <width>491</width>
+    <height>307</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -224,7 +224,7 @@ padding: 1px;</string>
      <item>
       <widget class="QPushButton" name="pushButton_5">
        <property name="text">
-        <string>커넥터함 잠금 해제</string>
+        <string>커넥터 보관함 잠금 해제</string>
        </property>
       </widget>
      </item>
@@ -232,6 +232,42 @@ padding: 1px;</string>
       <widget class="QPushButton" name="pushButton_6">
        <property name="text">
         <string>커넥터 잠금 해제</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLineEdit" name="lineEdit_4">
+       <property name="placeholderText">
+        <string>파일명</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_9">
+       <property name="text">
+        <string>설비 광고 목록 추가</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <item>
+      <widget class="QLineEdit" name="lineEdit_5">
+       <property name="placeholderText">
+        <string>파일명</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_10">
+       <property name="text">
+        <string>설비 광고 목록 삭제</string>
        </property>
       </widget>
      </item>

@@ -18,6 +18,7 @@
     <file alias="Ems_Nomal.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Ems_Nomal.qml</file>
     <file alias="Ems_Charging.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Ems_Charging.qml</file>
     <file alias="Maintenance.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Maintenance.qml</file>
+    <file alias="Test.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/Test.qml</file>
     <file alias="./Qml_Module/Popup_Text.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Popup_Text.qml</file>
     <file alias="./Qml_Module/Keypad_Number.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/Keypad_Number.qml</file>
     <file alias="./Qml_Module/BackGround.qml">C:/Users/siroi/siroimono/w_qt/EV/HMI/./Qml_Module/BackGround.qml</file>

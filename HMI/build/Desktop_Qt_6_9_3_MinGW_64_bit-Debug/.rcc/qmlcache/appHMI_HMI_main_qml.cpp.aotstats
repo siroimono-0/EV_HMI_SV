@@ -4,28 +4,36 @@
             {
                 "entries": [
                     {
+                        "codegenSuccessful": true,
+                        "column": 5,
+                        "durationMicroseconds": 378,
+                        "errorMessage": "",
+                        "functionName": "screen_stop",
+                        "line": 48
+                    },
+                    {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 372,
+                        "durationMicroseconds": 341,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_next",
-                        "line": 51
+                        "line": 187
                     },
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 311,
+                        "durationMicroseconds": 446,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "onCompleted",
-                        "line": 10
+                        "line": 13
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 28,
-                        "durationMicroseconds": 103,
+                        "durationMicroseconds": 62,
                         "errorMessage": "",
                         "functionName": "onCompleted",
-                        "line": 10
+                        "line": 13
                     },
                     {
                         "codegenSuccessful": false,
@@ -33,39 +41,143 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find signal \"activated\".",
                         "functionName": "onActivated",
-                        "line": 17
+                        "line": 28
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 17,
+                        "durationMicroseconds": 68,
+                        "errorMessage": "Cannot access value for name cpp_module",
+                        "functionName": "target",
+                        "line": 39
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 9,
+                        "durationMicroseconds": 130,
+                        "errorMessage": "",
+                        "functionName": "onSig_ad_play_ToQml",
+                        "line": 41
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 115,
+                        "durationMicroseconds": 98,
                         "errorMessage": "",
                         "functionName": "fill",
-                        "line": 28
+                        "line": 55
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 137,
+                        "errorMessage": "",
+                        "functionName": "left",
+                        "line": 61
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 142,
+                        "durationMicroseconds": 131,
                         "errorMessage": "",
-                        "functionName": "onSig_Clicked",
-                        "line": 45
+                        "functionName": "right",
+                        "line": 63
                     },
                     {
                         "codegenSuccessful": true,
-                        "column": 24,
-                        "durationMicroseconds": 48,
+                        "column": 22,
+                        "durationMicroseconds": 116,
                         "errorMessage": "",
-                        "functionName": "onSig_Clicked",
-                        "line": 45
+                        "functionName": "top",
+                        "line": 65
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 136,
+                        "errorMessage": "",
+                        "functionName": "bottom",
+                        "line": 67
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 21,
+                        "durationMicroseconds": 512,
+                        "errorMessage": "Cannot access value for name cpp_module",
+                        "functionName": "source",
+                        "line": 110
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 26,
+                        "durationMicroseconds": 117,
+                        "errorMessage": "",
+                        "functionName": "videoOutput",
+                        "line": 113
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 35,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Functions without type annotations won't be compiled",
+                        "functionName": "onMediaStatusChanged",
+                        "line": 116
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 35,
+                        "durationMicroseconds": 47,
+                        "errorMessage": "",
+                        "functionName": "onMediaStatusChanged",
+                        "line": 116
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 122,
+                        "errorMessage": "",
+                        "functionName": "fillMode",
+                        "line": 129
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 27,
-                        "durationMicroseconds": 71,
+                        "durationMicroseconds": 75,
                         "errorMessage": "",
-                        "functionName": "centerIn",
-                        "line": 34
+                        "functionName": "fill",
+                        "line": 130
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 124,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 181
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 47,
+                        "errorMessage": "",
+                        "functionName": "onSig_Clicked",
+                        "line": 181
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 141,
+                        "errorMessage": "",
+                        "functionName": "bottom",
+                        "line": 139
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 35,
+                        "durationMicroseconds": 219,
+                        "errorMessage": "",
+                        "functionName": "horizontalCenter",
+                        "line": 141
                     },
                     {
                         "codegenSuccessful": false,
@@ -73,7 +185,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 41
+                        "line": 152
                     },
                     {
                         "codegenSuccessful": false,
@@ -81,15 +193,39 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 42
+                        "line": 153
                     },
                     {
                         "codegenSuccessful": false,
-                        "column": 27,
+                        "column": 31,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"centerIn\".",
+                        "functionName": "centerIn",
+                        "line": 150
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 34,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"horizontalAlignment\".",
+                        "functionName": "horizontalAlignment",
+                        "line": 166
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 32,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"verticalAlignment\".",
+                        "functionName": "verticalAlignment",
+                        "line": 167
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 30,
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"fill\".",
                         "functionName": "fill",
-                        "line": 40
+                        "line": 163
                     }
                 ],
                 "filePath": "C:/Users/siroi/siroimono/w_qt/EV/HMI/HMI_main.qml"

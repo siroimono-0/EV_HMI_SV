@@ -2,6 +2,7 @@
 #define HTTPSV_H
 
 #include <QDebug>
+#include <QFile>
 #include <QHttpServer>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -17,11 +18,14 @@ class HttpSv : public QObject
 public:
     explicit HttpSv(QObject *parent = nullptr);
 
+    void upload_mp4();
+
 public slots:
     QHttpServerResponse slot_compare(const QHttpServerRequest &req);
     QHttpServerResponse slot_pay_ack(int compare_role, const QJsonObject &jsObj);
     QHttpServerResponse slot_cancle_ack(int compare_role, const QJsonObject &jsObj);
 
+    QHttpServerResponse slot_compare_get(const QHttpServerRequest &req);
 signals:
 
 private:

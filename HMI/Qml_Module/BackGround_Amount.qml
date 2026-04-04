@@ -24,9 +24,9 @@ Item {
         width: 180; height: 162;
 
         anchors.left: parent.left
-        anchors.leftMargin: 30
+        // anchors.leftMargin: 30
         anchors.top: parent.top
-        anchors.topMargin: 15
+        // anchors.topMargin: 15
         fillMode: Image.PreserveAspectFit;
 
         layer.enabled: true;

@@ -67,6 +67,10 @@ public:
 
     Q_INVOKABLE void set_stop_reason(QString set);
 
+    Q_INVOKABLE void next_ad_To_statStore();
+
+    Q_INVOKABLE void first_ad_To_Soc();
+
 public slots:
 
 signals:
@@ -95,6 +99,8 @@ signals:
 
     void sig_screen_move_maintenance_ToQml();
     void sig_screen_move_home_ToQml();
+
+    void sig_ad_play_ToQml();
 
 private:
     StatStore *p_stat = nullptr;

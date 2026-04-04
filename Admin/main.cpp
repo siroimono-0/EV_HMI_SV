@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<MD_store_user *>("MD_store_user*");
     qRegisterMetaType<Dia_membership_card *>("Dia_membership_card*");
     qRegisterMetaType<Dia_HMI *>("Dia_HMI*");
+    qRegisterMetaType<Dia_ad *>("Dia_ad*");
 
     Admin w;
     w.show();

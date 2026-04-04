@@ -17,6 +17,8 @@ Admin::Admin(QWidget *parent)
 
     connect(ui->pushButton_3, &QPushButton::clicked, this, &Admin::slot_btn_HMI_revision_clicked);
 
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &Admin::slot_btn_ad_upload);
+
     this->create_wk();
 
     this->create_qml_charging_log();
@@ -560,6 +562,16 @@ void Admin::search_btn_clicked()
 void Admin::slot_btn_HMI_revision_clicked()
 {
     Dia_HMI dia(this);
+    dia.set_p_soc(this->p_wk);
+    dia.exec();
+    qDebug() << Q_FUNC_INFO;
+
+    return;
+}
+
+void Admin::slot_btn_ad_upload()
+{
+    Dia_ad dia(this);
     dia.set_p_soc(this->p_wk);
     dia.exec();
     qDebug() << Q_FUNC_INFO;

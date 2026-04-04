@@ -5,11 +5,14 @@
 
 StatStore::StatStore(QObject *parent)
     : QObject{parent}
-{}
+{
+    this->set_charge_price_min();
+    this->create_db_lite();
+}
 
 void StatStore::set_charge_price_min()
 {
-    this->charge_price_min = (this->charge_price_kWh * 400 * 150) / 60;
+    this->charge_price_min = ((this->charge_price_kWh * 400 * 150) / 60) / 1000;
     return;
 }
 
@@ -404,6 +407,11 @@ float StatStore::reverse_cnv_time(QString s_time)
     return total_second;
 }
 
+int StatStore::get_m_type()
+{
+    return this->m_type;
+}
+
 QString StatStore::get_elapsed_time()
 {
     return this->elapsed_time;
@@ -451,6 +459,13 @@ QString StatStore::get_cancle_payment()
 int StatStore::get_charge_price_kWh()
 {
     return this->charge_price_kWh;
+}
+
+void StatStore::slot_set_m_type(int set)
+{
+    this->m_type = set;
+    emit this->sig_m_type();
+    return;
 }
 
 void StatStore::set_elapsed_time(const QString set)
@@ -527,7 +542,7 @@ void StatStore::set_store_id(int set)
     return;
 }
 
-void StatStore::set_charge_price_kWh(int set)
+void StatStore::slot_set_charge_price_kWh(int set)
 {
     this->charge_price_kWh = set;
     this->set_charge_price_min();
@@ -761,5 +776,320 @@ void StatStore::ems_Charging_Ready()
 void StatStore::set_stop_reason(QString set)
 {
     this->st_db_data.stop_reason = set;
+    return;
+}
+
+QString StatStore::get_cur_advertisement()
+{
+    return this->cur_advertisement;
+}
+
+void StatStore::set_cur_advertisement(QString set)
+{
+    qDebug() << set << "set_______________";
+    this->cur_advertisement = set;
+    emit this->sig_cur_advertisement();
+    emit this->p_module->sig_ad_play_ToQml();
+    return;
+}
+
+void StatStore::create_db_lite()
+{
+    QString s_data_dir;
+    QString s_db_path;
+    QDir qd_dir;
+
+    s_data_dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    s_db_path = s_data_dir + "/db_lite.sqlite3";
+    qd_dir.mkpath(s_data_dir);
+
+    this->db_lite = QSqlDatabase::addDatabase("QSQLITE", "DB_THREAD_CONN_SQLITE");
+    this->db_lite.setDatabaseName(s_db_path);
+
+    this->cur_path = s_data_dir;
+    if (this->db_lite.open())
+    {
+        qDebug() << "db_light open";
+    }
+    else
+    {
+        // qDebug() << "db false";
+        qDebug() << this->db_lite.lastError().text();
+    }
+
+    this->create_db_table();
+
+    return;
+}
+
+void StatStore::create_db_table()
+{
+    QSqlQuery query(this->db_lite);
+    QString sql = "CREATE TABLE ad_list ("
+                  "name TEXT PRIMARY KEY "
+                  "NOT NULL,"
+                  "path TEXT,"
+                  "stat BOOL);";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+    return;
+}
+
+void StatStore::insert_db_first_data()
+{
+    QSqlQuery query(this->db_lite);
+    QString sql = "INSERT INTO ad_list ("
+                  "name, path, stat) VALUES ("
+                  ":name, :path, :stat)";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":name", "first.mp4");
+    query.bindValue(":path", this->cur_path);
+    query.bindValue(":stat", true);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+void StatStore::update_ad()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "SELECT * FROM ad_list "
+                  "WHERE stat = :stat";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":stat", true);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    while (query.next())
+    {
+        QString name = query.value(0).toString();
+        QString path = query.value(1).toString();
+        QString val = path + '/' + name;
+        if (!vec_ad.contains(val))
+        {
+            this->vec_ad.push_back(val);
+        }
+    }
+
+    for (auto &v : vec_ad)
+    {
+        qDebug() << v << "  " << vec_ad.size();
+    }
+
+    this->next_ad();
+    return;
+}
+
+void StatStore::next_ad()
+{
+    std::rotate(this->vec_ad.begin(), this->vec_ad.begin() + 1, this->vec_ad.end());
+    this->set_cur_advertisement(vec_ad.front());
+    qDebug() << Q_FUNC_INFO;
+    return;
+}
+
+bool StatStore::check_query_prepare(bool ok, QSqlQuery &query)
+{
+    if (!ok)
+    {
+        QSqlError e = query.lastError();
+        qDebug() << "DB prepare failed";
+        qDebug() << "driverText =" << e.driverText();
+        qDebug() << "databaseText =" << e.databaseText();
+        qDebug() << "lastQuery =" << query.lastQuery();
+        return false;
+    }
+
+    return true;
+}
+
+bool StatStore::check_query_exec(bool ok, QSqlQuery &query)
+{
+    if (!ok)
+    {
+        QSqlError e = query.lastError();
+        qDebug() << "DB exec failed";
+        qDebug() << "driverText =" << e.driverText();
+        qDebug() << "databaseText =" << e.databaseText();
+        qDebug() << "type =" << e.type();
+        qDebug() << "lastQuery =" << query.lastQuery();
+        qDebug() << "boundValues =" << query.boundValues();
+        return false;
+    }
+    return true;
+}
+
+int StatStore::slot_find_ad(const QString name)
+{
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "SELECT * FROM ad_list "
+                  "WHERE name = :name";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return false;
+    }
+
+    query.bindValue(":name", name);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return false;
+    }
+
+    if (query.next())
+    {
+        QString ret_name = query.value(0).toString();
+        QString ret_path = query.value(1).toString();
+        bool ret_stat = query.value(2).toBool();
+        if (ret_stat == false)
+        {
+            this->marking_ad(ret_name, (!ret_stat));
+        }
+
+        this->update_ad();
+        return NEED_NOT;
+    }
+
+    return NEED_DOWNLOAD;
+}
+
+void StatStore::marking_ad(const QString name, const bool stat)
+{
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "UPDATE ad_list "
+                  "SET "
+                  "stat = :stat "
+                  "WHERE name = :name";
+
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":stat", stat);
+    query.bindValue(":name", name);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+void StatStore::slot_insert_ad(const QString name, const bool stat)
+{
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "INSERT INTO ad_list ("
+                  "name, path, stat) VALUES ("
+                  ":name, :path, :stat)";
+
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":name", name);
+    query.bindValue(":path", this->cur_path);
+    query.bindValue(":stat", stat);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+void StatStore::slot_remove_ad(const QString name)
+{
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "SELECT * FROM ad_list "
+                  "WHERE name = :name";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":name", name);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    if (query.next())
+    {
+        QString ret_name = query.value(0).toString();
+        QString ret_path = query.value(1).toString();
+        bool ret_stat = query.value(2).toBool();
+        if (ret_stat == true)
+        {
+            this->marking_ad(ret_name, (!ret_stat));
+        }
+    }
+
+    QString val = this->cur_path + "/" + name;
+    while (this->vec_ad.contains(val))
+    {
+        this->vec_ad.removeOne(val);
+    }
+
+    for (auto &v : this->vec_ad)
+    {
+        qDebug() << v << " after remove";
+    }
+
     return;
 }

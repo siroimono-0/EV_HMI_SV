@@ -9,6 +9,7 @@ Item {
     property string pageName: "Select_card";
     property var mainWin;
     property int stk_depth;
+    property int method;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("카드 종류 선택");
@@ -16,6 +17,13 @@ Item {
         // home화면 이동 타이머 초기화
         Qt.callLater(function() {
             mainWin.timer_reset("Select_card");
+        });
+
+        Qt.callLater(function() {
+            root.method = cpp_module.statStore.m_type;
+            console.log(root.method);
+
+            root.compare_method();
         });
     }
 
@@ -25,6 +33,25 @@ Item {
         Qt.callLater(function(){
             root.stk_depth =  StackView.view.depth;
         });
+    }
+
+    function compare_method()
+    {
+        if(root.method === 0)
+        {
+            root_left.visible = true;
+            root_right.visible = true;
+        }
+        else if(root.method === 1)
+        {
+            root_left.visible = true;
+            root_right.visible = false;
+        }
+        else if(root.method === 2)
+        {
+            root_left.visible = false;
+            root_right.visible = true;
+        }
     }
 
     function stk_next(s)

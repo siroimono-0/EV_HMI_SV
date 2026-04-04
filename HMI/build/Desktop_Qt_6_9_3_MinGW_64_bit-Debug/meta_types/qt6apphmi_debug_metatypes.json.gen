@@ -13,7 +13,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 16,
+                        "index": 17,
                         "name": "join_WebSv",
                         "returnType": "void"
                     },
@@ -25,7 +25,7 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 17,
+                        "index": 18,
                         "name": "set_card_stat_To_serial",
                         "returnType": "void"
                     },
@@ -37,7 +37,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 18,
+                        "index": 19,
                         "name": "set_card_type_To_serial",
                         "returnType": "void"
                     },
@@ -49,7 +49,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 19,
+                        "index": 20,
                         "name": "set_card_type_To_statStore",
                         "returnType": "void"
                     },
@@ -61,55 +61,55 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 20,
+                        "index": 21,
                         "name": "set_screen_name",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 21,
+                        "index": 22,
                         "name": "set_heartbit_storeId_hmiId",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 22,
+                        "index": 23,
                         "name": "chargingConnecter_open_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 23,
+                        "index": 24,
                         "name": "chargingConnecter_ready_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 24,
+                        "index": 25,
                         "name": "charging_start_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 25,
+                        "index": 26,
                         "name": "charging_stop_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 26,
+                        "index": 27,
                         "name": "chargingConnecter_close_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 27,
+                        "index": 28,
                         "name": "chargingConnecter_off_To_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 28,
+                        "index": 29,
                         "name": "charging_start_To_statStore",
                         "returnType": "void"
                     },
@@ -125,49 +125,49 @@
                                 "type": "qint32"
                             }
                         ],
-                        "index": 29,
+                        "index": 30,
                         "name": "charging_type_To_statStore",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 30,
+                        "index": 31,
                         "name": "charging_type_clear_To_statStore",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 31,
+                        "index": 32,
                         "name": "charging_end_stat_clear_To_statStore",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 32,
+                        "index": 33,
                         "name": "set_payment_To_statStore",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 33,
+                        "index": 34,
                         "name": "chard_ok_To_statStore",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 34,
+                        "index": 35,
                         "name": "charging_finished_To_statStore",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 35,
+                        "index": 36,
                         "name": "get_card_type",
                         "returnType": "QString"
                     },
                     {
                         "access": "public",
-                        "index": 36,
+                        "index": 37,
                         "name": "ems_Charging_Ready_To_StatStore",
                         "returnType": "void"
                     },
@@ -179,8 +179,20 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 37,
+                        "index": 38,
                         "name": "set_stop_reason",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 39,
+                        "name": "next_ad_To_statStore",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 40,
+                        "name": "first_ad_To_Soc",
                         "returnType": "void"
                     }
                 ],
@@ -321,6 +333,12 @@
                         "index": 15,
                         "name": "sig_screen_move_home_ToQml",
                         "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 16,
+                        "name": "sig_ad_play_ToQml",
+                        "returnType": "void"
                     }
                 ],
                 "superClasses": [
@@ -338,7 +356,7 @@
         "classes": [
             {
                 "className": "StatStore",
-                "lineNumber": 15,
+                "lineNumber": 22,
                 "object": true,
                 "properties": [
                     {
@@ -504,7 +522,37 @@
                         "stored": true,
                         "type": "int",
                         "user": false,
-                        "write": "set_charge_price_kWh"
+                        "write": "slot_set_charge_price_kWh"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": true,
+                        "index": 11,
+                        "name": "m_type",
+                        "notify": "sig_m_type",
+                        "read": "get_m_type",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "slot_set_m_type"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": true,
+                        "index": 12,
+                        "name": "cur_advertisement",
+                        "notify": "sig_cur_advertisement",
+                        "read": "get_cur_advertisement",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "write": "set_cur_advertisement"
                     }
                 ],
                 "qualifiedClassName": "StatStore",
@@ -589,13 +637,25 @@
                     },
                     {
                         "access": "public",
+                        "index": 12,
+                        "name": "sig_m_type",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 13,
+                        "name": "sig_cur_advertisement",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
                         "arguments": [
                             {
                                 "name": "st_hb_data",
                                 "type": "heartbit_data"
                             }
                         ],
-                        "index": 12,
+                        "index": 14,
                         "name": "sig_heartbit_pong",
                         "returnType": "void"
                     }
@@ -603,19 +663,19 @@
                 "slots": [
                     {
                         "access": "public",
-                        "index": 13,
+                        "index": 15,
                         "name": "slot_get_store_id",
                         "returnType": "int"
                     },
                     {
                         "access": "public",
-                        "index": 14,
+                        "index": 16,
                         "name": "slot_get_mac_addr",
                         "returnType": "QString"
                     },
                     {
                         "access": "public",
-                        "index": 15,
+                        "index": 17,
                         "name": "slot_get_advPay_hmiId",
                         "returnType": "std::pair<int,QString>"
                     },
@@ -627,13 +687,13 @@
                                 "type": "WK_Serial*"
                             }
                         ],
-                        "index": 16,
+                        "index": 18,
                         "name": "slot_set_p_serial",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 17,
+                        "index": 19,
                         "name": "slot_get_i_adv_pay",
                         "returnType": "int"
                     },
@@ -645,7 +705,7 @@
                                 "type": "charging_stat"
                             }
                         ],
-                        "index": 18,
+                        "index": 20,
                         "name": "slot_update_chargingStat",
                         "returnType": "void"
                     },
@@ -661,19 +721,19 @@
                                 "type": "int"
                             }
                         ],
-                        "index": 19,
+                        "index": 21,
                         "name": "slot_set_charging_type",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 20,
+                        "index": 22,
                         "name": "slot_clear_charging_type",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 21,
+                        "index": 23,
                         "name": "slot_set_payment",
                         "returnType": "void"
                     },
@@ -685,25 +745,25 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 22,
+                        "index": 24,
                         "name": "slot_set_card_uid",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 23,
+                        "index": 25,
                         "name": "slot_set_charging_start_time",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 24,
+                        "index": 26,
                         "name": "slot_charging_end_stat_clear",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 25,
+                        "index": 27,
                         "name": "slot_card_ok_db_update",
                         "returnType": "void"
                     },
@@ -715,7 +775,7 @@
                                 "type": "uint64_t"
                             }
                         ],
-                        "index": 26,
+                        "index": 28,
                         "name": "slot_set_session_id",
                         "returnType": "void"
                     },
@@ -727,13 +787,13 @@
                                 "type": "uint32_t"
                             }
                         ],
-                        "index": 27,
+                        "index": 29,
                         "name": "slot_set_ocpp_tx_id",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 28,
+                        "index": 30,
                         "name": "slot_heartbit_ping",
                         "returnType": "void"
                     },
@@ -745,8 +805,88 @@
                                 "type": "uint32_t"
                             }
                         ],
-                        "index": 29,
+                        "index": 31,
                         "name": "slot_set_membership_t_id",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "set",
+                                "type": "int"
+                            }
+                        ],
+                        "index": 32,
+                        "name": "slot_set_charge_price_kWh",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "set",
+                                "type": "int"
+                            }
+                        ],
+                        "index": 33,
+                        "name": "slot_set_m_type",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 34,
+                        "name": "slot_find_ad",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "stat",
+                                "type": "bool"
+                            }
+                        ],
+                        "index": 35,
+                        "name": "marking_ad",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "stat",
+                                "type": "bool"
+                            }
+                        ],
+                        "index": 36,
+                        "name": "slot_insert_ad",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 37,
+                        "name": "slot_remove_ad",
                         "returnType": "void"
                     }
                 ],
@@ -915,7 +1055,7 @@
         "classes": [
             {
                 "className": "WK_WebSocket",
-                "lineNumber": 20,
+                "lineNumber": 21,
                 "object": true,
                 "qualifiedClassName": "WK_WebSocket",
                 "signals": [
@@ -947,7 +1087,19 @@
                     },
                     {
                         "access": "public",
+                        "arguments": [
+                            {
+                                "name": "set",
+                                "type": "WK_Serial*"
+                            }
+                        ],
                         "index": 4,
+                        "name": "slot_set_p_serial",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 5,
                         "name": "slot_ID_Check",
                         "returnType": "void"
                     },
@@ -959,7 +1111,7 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 5,
+                        "index": 6,
                         "name": "slot_ID_Resert",
                         "returnType": "void"
                     },
@@ -971,7 +1123,7 @@
                                 "type": "QAbstractSocket::SocketError"
                             }
                         ],
-                        "index": 6,
+                        "index": 7,
                         "name": "slot_SocErr",
                         "returnType": "void"
                     },
@@ -983,7 +1135,7 @@
                                 "type": "db_data"
                             }
                         ],
-                        "index": 7,
+                        "index": 8,
                         "name": "slot_send_db_update_textData",
                         "returnType": "void"
                     },
@@ -995,7 +1147,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 8,
+                        "index": 9,
                         "name": "slot_Recv_TextData",
                         "returnType": "void"
                     },
@@ -1007,7 +1159,7 @@
                                 "type": "QNetworkReply*"
                             }
                         ],
-                        "index": 9,
+                        "index": 10,
                         "name": "slot_netAccess_reply",
                         "returnType": "void"
                     },
@@ -1019,13 +1171,13 @@
                                 "type": "QByteArray"
                             }
                         ],
-                        "index": 10,
+                        "index": 11,
                         "name": "slot_netAccess_post",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 11,
+                        "index": 12,
                         "name": "slot_timeOut_pay_ack",
                         "returnType": "void"
                     },
@@ -1037,13 +1189,13 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 12,
+                        "index": 13,
                         "name": "slot_netAccess_post_cancle",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 13,
+                        "index": 14,
                         "name": "slot_timeOut_cancle_ack",
                         "returnType": "void"
                     },
@@ -1063,13 +1215,13 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 14,
+                        "index": 15,
                         "name": "slot_send_membership_authorized_textData",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 15,
+                        "index": 16,
                         "name": "slot_timeOut_membership_authorized_ack",
                         "returnType": "void"
                     },
@@ -1101,13 +1253,13 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 16,
+                        "index": 17,
                         "name": "slot_send_membership_finished_textData",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 17,
+                        "index": 18,
                         "name": "slot_timeOut_membership_finished_ack",
                         "returnType": "void"
                     },
@@ -1119,8 +1271,20 @@
                                 "type": "heartbit_data"
                             }
                         ],
-                        "index": 18,
+                        "index": 19,
                         "name": "slot_send_heartbit_pong",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 20,
+                        "name": "slot_update_ad",
                         "returnType": "void"
                     }
                 ],

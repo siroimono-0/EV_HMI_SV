@@ -6,6 +6,11 @@ HttpSv::HttpSv(QObject *parent)
     this->p_httpSv = new QHttpServer(this);
     this->p_httpSv->route("/compare", QHttpServerRequest::Method::Post, this, &HttpSv::slot_compare);
 
+    this->p_httpSv->route("/compare",
+                          QHttpServerRequest::Method::Get,
+                          this,
+                          &HttpSv::slot_compare_get);
+
     this->p_tcpSv = new QTcpServer(this->p_httpSv);
     if (!this->p_tcpSv->listen(QHostAddress::Any, 8080))
     {
@@ -63,6 +68,53 @@ QHttpServerResponse HttpSv::slot_compare(const QHttpServerRequest &req)
         {
             return this->slot_cancle_ack(SUCCESS, jsObj);
         }
+    }
+    else if (req.value("Content-Type") == "application/mp4/upload")
+    {
+        QByteArray qba = req.body();
+        int find_idx = qba.indexOf("\r\n");
+        if (find_idx == -1)
+        {
+            qDebug() << "ERR";
+        }
+
+        QString name = QString::fromUtf8(qba.left(find_idx));
+        qDebug() << name;
+        QString path = "C:/Users/siroi/siroimono/w_qt/EV/HttpSv/mp4/" + name;
+        QFile up_file(path);
+        up_file.open(QIODevice::ReadWrite);
+        up_file.write(qba.right(qba.size() - (find_idx + 2)));
+        up_file.close();
+
+        QJsonObject jsObj;
+
+        jsObj.insert("type", "file_upload_ack");
+
+        QJsonDocument jsDoc(jsObj);
+        QString send_qs = jsDoc.toJson(QJsonDocument::Compact);
+
+        QHttpServerResponse rep("application/json", send_qs.toUtf8());
+        return rep;
+    }
+}
+
+QHttpServerResponse HttpSv::slot_compare_get(const QHttpServerRequest &req)
+{
+    if (req.value("Content-Type") == "application/mp4/download")
+    {
+        QString name = QString::fromUtf8(req.body());
+
+        QString path = "C:/Users/siroi/siroimono/w_qt/EV/HttpSv/mp4/" + name;
+        QFile down_file(path);
+        down_file.open(QIODevice::ReadWrite);
+        QByteArray qba;
+        qba += name.toUtf8();
+        qba += "\r\n";
+        qba += down_file.readAll();
+
+        QHttpServerResponse rep("application/mp4/download", qba);
+        down_file.close();
+        return rep;
     }
 }
 

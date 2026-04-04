@@ -63,6 +63,7 @@ Window {
                 cpp_module.charging_finished_To_statStore();
 
                 root.stk_home();
+                root_stkView.currentItem.screen_stop();
                 root_stkView.push("Ems_Nomal.qml", {"mainWin": root});
             }
             else if(page_name === "Charging_Monitoring")
@@ -74,6 +75,7 @@ Window {
             else
             {
                 root.stk_home();
+                root_stkView.currentItem.screen_stop();
                 root_stkView.push("Ems_Nomal.qml", {"mainWin": root});
             }
         }
@@ -86,6 +88,7 @@ Window {
                 page_name !== "Charging_Monitoring")
             {
                 root.stk_home();
+                root_stkView.currentItem.screen_stop();
                 root_stkView.push("Maintenance.qml", {"mainWin": root});
             }
         }
@@ -107,6 +110,7 @@ Window {
                 cpp_module.charging_finished_To_statStore();
 
                 root.stk_home();
+                root_stkView.currentItem.screen_stop();
                 root_stkView.push("HMI_main.qml", {"mainWin": root});
             }
             else if(page_name === "Charging_Monitoring")
@@ -118,6 +122,7 @@ Window {
             else
             {
                 root.stk_home();
+                root_stkView.currentItem.screen_stop();
                 root_stkView.push("HMI_main.qml", {"mainWin": root});
             }
         }
@@ -178,9 +183,8 @@ Window {
 
 
         Component.onCompleted: {
-            root_stkView.push("Start_page.qml", {"mainWin": root});
-            // root_stkView.push("Ems_Nomal.qml", {"mainWin": root});
-            // root_stkView.push("Ems_Charging.qml", {"mainWin": root});
+            // root_stkView.push("Start_page.qml", {"mainWin": root});
+            root_stkView.push("Card_Ready.qml", {"mainWin": root});
             // root_stkView.push("Maintenance.qml", {"mainWin": root});
         }
     }

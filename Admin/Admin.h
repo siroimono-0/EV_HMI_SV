@@ -19,6 +19,7 @@
 #include "Dia_HMI.h"
 #include "Dia_Register.h"
 #include "Dia_Register_HMI.h"
+#include "Dia_ad.h"
 #include "Dia_membership_card.h"
 
 class WK_soc;
@@ -60,6 +61,8 @@ public slots:
     void slot_set_comboBox_3(QString select_text);
 
     void search_btn_clicked();
+
+    void slot_btn_ad_upload();
 
 signals:
 

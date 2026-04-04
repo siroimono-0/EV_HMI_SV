@@ -26,7 +26,6 @@ Rectangle{
         onClicked: function()
         {
             ripple.restart();
-            // 너 코드에 root_recBtn으로 되어있던데, id가 root_btnGreen이면 아래가 맞아
             root_btnGreen.sig_Clicked();
         }
     }

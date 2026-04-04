@@ -75,7 +75,7 @@ Item {
         layer.effect: MultiEffect{
             shadowEnabled: true;
             shadowBlur: 1
-            shadowColor: "#00FFD0"
+            shadowColor: "#FFFFFF"
             shadowVerticalOffset: 0;
             shadowHorizontalOffset: 0;
         }
@@ -89,7 +89,7 @@ Item {
         font.family: "DIN"
         font.bold: true
         anchors.top: img.bottom
-        anchors.topMargin: 10
+        anchors.topMargin: 40
         anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
@@ -125,8 +125,8 @@ Item {
     BtnGreen{
         id: btn
         width: 300; height: 120;
-        anchors.top: lb.bottom
-        anchors.topMargin: 50
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 50
         anchors.horizontalCenter: parent.horizontalCenter
 
         onSig_Clicked: function()

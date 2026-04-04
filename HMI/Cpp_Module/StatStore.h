@@ -1,13 +1,20 @@
 #ifndef STATSTORE_H
 #define STATSTORE_H
 
+#include <QCoreApplication>
 #include <QDebug>
+#include <QDir>
+#include <QFileInfo>
 #include <QNetworkInterface>
 #include <QObject>
 #include <QTime>
+#include <QtSql>
 #include "../Common/StatData.h"
+#include <algorithm>
 
 enum CHARGING_TYPE { NOT_SET = 0, TIME = 1, WON = 2, KWH = 3, PERSENT = 4 };
+
+enum METHOD_TYPE { ALL = 0, MEMBER = 1, NONMEMBER = 2 };
 
 class WK_Serial;
 class WK_WebSocket;
@@ -48,8 +55,13 @@ class StatStore : public QObject
     Q_PROPERTY(QString cancle_payment READ get_cancle_payment WRITE set_cancle_payment NOTIFY
                    sig_cancle_payment_change FINAL)
 
-    Q_PROPERTY(int charge_price_kWh READ get_charge_price_kWh WRITE set_charge_price_kWh NOTIFY
+    Q_PROPERTY(int charge_price_kWh READ get_charge_price_kWh WRITE slot_set_charge_price_kWh NOTIFY
                    sig_charge_price_kWh FINAL)
+
+    Q_PROPERTY(int m_type READ get_m_type WRITE slot_set_m_type NOTIFY sig_m_type FINAL)
+
+    Q_PROPERTY(QString cur_advertisement READ get_cur_advertisement WRITE set_cur_advertisement
+                   NOTIFY sig_cur_advertisement FINAL)
 
 public:
     explicit StatStore(QObject *parent = nullptr);
@@ -72,10 +84,13 @@ public:
     QString get_cancle_payment();
     //===========================================
     int get_charge_price_kWh();
+    int get_m_type();
     //===========================================
-
     int get_i_can_pay();
     QString get_card_type();
+
+    QString get_cur_advertisement();
+    //===========================================
 
     void set_card_type(QString set);
     // QString advance_payment; // 카드 승인시 초기화
@@ -103,14 +118,30 @@ public:
     //=============================================
     void set_stop_reason(QString set);
     //=============================================
-    void set_charge_price_kWh(int set);
     void set_charge_price_min();
+    void set_cur_advertisement(QString set);
+    //=============================================
 
     void charging_start_db_update(double start_persent);
     void charging_finished_db_update();
     void cancle_pay_check();
 
     void ems_Charging_Ready();
+
+    void next_ad();
+
+    //====================================================
+    //====================================================
+    //====================================================
+    void create_db_lite();
+    void create_db_table();
+    void insert_db_first_data();
+    bool check_query_prepare(bool ok, QSqlQuery &query);
+    bool check_query_exec(bool ok, QSqlQuery &query);
+    void update_ad();
+    //====================================================
+    //====================================================
+    //====================================================
 
 public slots:
     /*
@@ -154,6 +185,14 @@ public slots:
     //====================================================
     void slot_set_membership_t_id(uint32_t set);
 
+    void slot_set_charge_price_kWh(int set);
+    void slot_set_m_type(int set);
+
+    int slot_find_ad(const QString name);
+    void marking_ad(const QString name, const bool stat);
+    void slot_insert_ad(const QString name, const bool stat);
+    void slot_remove_ad(const QString name);
+
 signals:
     // 상태 값 변경시 발생
     // void sig_Stat_changed(stat_data st_stat);
@@ -174,6 +213,9 @@ signals:
     void sig_cancle_payment_change();
     //====================================================
     void sig_charge_price_kWh();
+    void sig_m_type();
+    //====================================================
+    void sig_cur_advertisement();
 
     // set_p_stat 에서 커넥트
     // connect(this->p_stat, &StatStore::sig_hartbit_pong, this, &WK_WebSocket::slot_send_hartbit_pong);
@@ -218,6 +260,15 @@ private:
 
     float accumulate_kWh = 0; // 누적 충전량 // 충전 중 지속 +=
     //===================================================
+
+    int m_type = ALL;
+
+    QString cur_advertisement;
+    int ad_tmp_cnt = 0;
+
+    QVector<QString> vec_ad;
+    QSqlDatabase db_lite;
+    QString cur_path;
 };
 
 Q_DECLARE_METATYPE(CHARGING_TYPE)

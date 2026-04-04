@@ -16,6 +16,24 @@ Dia_HMI::Dia_HMI(QWidget *parent)
             &Dia_HMI::slot_Btn_move_maintenance);
 
     connect(this->ui->pushButton, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_move_home);
+
+    connect(this->ui->pushButton_3, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_revision_price);
+
+    connect(this->ui->pushButton_4, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_revision_method);
+
+    connect(this->ui->pushButton_5,
+            &QPushButton::clicked,
+            this,
+            &Dia_HMI::slot_Btn_connector_case_unlock);
+
+    connect(this->ui->pushButton_6,
+            &QPushButton::clicked,
+            this,
+            &Dia_HMI::slot_Btn_connector_unlock);
+
+    connect(this->ui->pushButton_9, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_ad_add);
+
+    connect(this->ui->pushButton_10, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_ad_remove);
 }
 
 Dia_HMI::~Dia_HMI()
@@ -110,6 +128,109 @@ void Dia_HMI::slot_Btn_move_home()
     st_data.val = "home";
 
     emit this->sig_revision_hmi_To_Soc(st_data);
+    return;
+}
+
+void Dia_HMI::slot_Btn_revision_price()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "price";
+    st_data.val = this->ui->lineEdit->text();
+
+    this->ui->lineEdit->clear();
+
+    emit this->sig_revision_hmi_To_Soc(st_data);
+    return;
+}
+
+void Dia_HMI::slot_Btn_revision_method()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "method";
+    st_data.val = this->ui->comboBox->currentText();
+
+    emit this->sig_revision_hmi_To_Soc(st_data);
+    return;
+}
+
+void Dia_HMI::slot_Btn_connector_case_unlock()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "connector_case";
+    st_data.val = "unlock";
+
+    emit this->sig_revision_hmi_To_Soc(st_data);
+    return;
+}
+
+void Dia_HMI::slot_Btn_connector_unlock()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "connector";
+    st_data.val = "unlock";
+
+    emit this->sig_revision_hmi_To_Soc(st_data);
+    return;
+}
+
+void Dia_HMI::slot_Btn_ad_add()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "ad_add";
+    st_data.val = this->ui->lineEdit_4->text();
+
+    this->ui->lineEdit_4->clear();
+    emit this->sig_revision_hmi_To_Soc(st_data);
+
+    return;
+}
+
+void Dia_HMI::slot_Btn_ad_remove()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "ad_remove";
+    st_data.val = this->ui->lineEdit_5->text();
+
+    this->ui->lineEdit_5->clear();
+    emit this->sig_revision_hmi_To_Soc(st_data);
+
     return;
 }
 

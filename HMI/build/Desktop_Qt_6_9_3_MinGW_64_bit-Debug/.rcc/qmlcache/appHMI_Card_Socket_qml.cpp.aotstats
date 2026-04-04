@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 536,
+                        "durationMicroseconds": 752,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "stk_back",
                         "line": 31
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 288,
+                        "durationMicroseconds": 384,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "card_authorized_success",
                         "line": 46
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 154,
+                        "durationMicroseconds": 225,
                         "errorMessage": "Cannot access value for name StackView",
                         "functionName": "stk_next",
                         "line": 57
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 172,
+                        "durationMicroseconds": 220,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "onCompleted",
                         "line": 22
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 17,
-                        "durationMicroseconds": 56,
+                        "durationMicroseconds": 96,
                         "errorMessage": "Cannot access value for name cpp_module",
                         "functionName": "target",
                         "line": 69
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 226,
+                        "durationMicroseconds": 247,
                         "errorMessage": "",
                         "functionName": "onSig_card_success_ToQml",
                         "line": 71
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 9,
-                        "durationMicroseconds": 101,
+                        "durationMicroseconds": 113,
                         "errorMessage": "",
                         "functionName": "onSig_card_authorized_db_update_ack_ToQml",
                         "line": 76
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 9,
-                        "durationMicroseconds": 52,
+                        "durationMicroseconds": 58,
                         "errorMessage": "Cannot retrieve a non-object type by ID: root_indicator",
                         "functionName": "onSig_card_compare_ToQml",
                         "line": 86
@@ -94,34 +94,90 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 103,
+                        "durationMicroseconds": 123,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 96
                     },
                     {
                         "codegenSuccessful": true,
+                        "column": 22,
+                        "durationMicroseconds": 152,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 106
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 136,
+                        "errorMessage": "",
+                        "functionName": "bottom",
+                        "line": 108
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 128,
+                        "errorMessage": "",
+                        "functionName": "left",
+                        "line": 110
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 145,
+                        "errorMessage": "",
+                        "functionName": "right",
+                        "line": 112
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 20,
+                        "durationMicroseconds": 101,
+                        "errorMessage": "",
+                        "functionName": "loops",
+                        "line": 126
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 113,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 129
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 81,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 135
+                    },
+                    {
+                        "codegenSuccessful": true,
                         "column": 19,
-                        "durationMicroseconds": 110,
+                        "durationMicroseconds": 98,
                         "errorMessage": "",
                         "functionName": "fillMode",
-                        "line": 102
+                        "line": 148
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 22,
-                        "durationMicroseconds": 156,
+                        "durationMicroseconds": 118,
                         "errorMessage": "",
                         "functionName": "top",
-                        "line": 104
+                        "line": 150
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 110,
+                        "durationMicroseconds": 109,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
-                        "line": 106
+                        "line": 152
                     },
                     {
                         "codegenSuccessful": false,
@@ -129,7 +185,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 118
+                        "line": 164
                     },
                     {
                         "codegenSuccessful": false,
@@ -137,7 +193,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 119
+                        "line": 165
                     },
                     {
                         "codegenSuccessful": false,
@@ -145,7 +201,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"top\".",
                         "functionName": "top",
-                        "line": 115
+                        "line": 161
                     },
                     {
                         "codegenSuccessful": false,
@@ -153,7 +209,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalCenter\".",
                         "functionName": "horizontalCenter",
-                        "line": 117
+                        "line": 163
                     },
                     {
                         "codegenSuccessful": false,
@@ -161,7 +217,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 132
+                        "line": 178
                     },
                     {
                         "codegenSuccessful": false,
@@ -169,7 +225,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 133
+                        "line": 179
                     },
                     {
                         "codegenSuccessful": false,
@@ -177,39 +233,39 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"fill\".",
                         "functionName": "fill",
-                        "line": 129
+                        "line": 175
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 144,
+                        "durationMicroseconds": 126,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
-                        "line": 156
+                        "line": 202
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 40,
+                        "durationMicroseconds": 47,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
-                        "line": 156
+                        "line": 202
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 100,
+                        "durationMicroseconds": 214,
                         "errorMessage": "",
                         "functionName": "bottom",
-                        "line": 152
+                        "line": 198
                     },
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 91,
+                        "durationMicroseconds": 156,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
-                        "line": 154
+                        "line": 200
                     },
                     {
                         "codegenSuccessful": false,
@@ -217,7 +273,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 168
+                        "line": 214
                     },
                     {
                         "codegenSuccessful": false,
@@ -225,7 +281,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 169
+                        "line": 215
                     },
                     {
                         "codegenSuccessful": false,
@@ -233,7 +289,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 167
+                        "line": 213
                     },
                     {
                         "codegenSuccessful": false,
@@ -241,7 +297,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"horizontalAlignment\".",
                         "functionName": "horizontalAlignment",
-                        "line": 182
+                        "line": 228
                     },
                     {
                         "codegenSuccessful": false,
@@ -249,7 +305,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"verticalAlignment\".",
                         "functionName": "verticalAlignment",
-                        "line": 183
+                        "line": 229
                     },
                     {
                         "codegenSuccessful": false,
@@ -257,7 +313,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"fill\".",
                         "functionName": "fill",
-                        "line": 179
+                        "line": 225
                     },
                     {
                         "codegenSuccessful": false,
@@ -265,7 +321,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"centerIn\".",
                         "functionName": "centerIn",
-                        "line": 203
+                        "line": 249
                     }
                 ],
                 "filePath": "C:/Users/siroi/siroimono/w_qt/EV/HMI/Card_Socket.qml"

@@ -11,6 +11,8 @@ set_source_files_properties(
     PROPERTIES LANGUAGE C
 )
 
+
+
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
@@ -20,6 +22,8 @@ find_package(Qt6 REQUIRED COMPONENTS SerialPort)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS QuickEffects)
 find_package(Qt6 REQUIRED COMPONENTS QuickControls2)
+find_package(Qt6 COMPONENTS Sql REQUIRED)
+
 
 
 
@@ -52,6 +56,7 @@ qt_add_qml_module(appHMI
         Ems_Nomal.qml
         Ems_Charging.qml
         Maintenance.qml
+        Test.qml
         ./Qml_Module/Popup_Text.qml
         ./Qml_Module/Keypad_Number.qml
         ./Qml_Module/BackGround.qml
@@ -103,6 +108,7 @@ set_target_properties(appHMI PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+
 target_link_libraries(appHMI
     PRIVATE Qt6::Quick
 )
@@ -114,10 +120,19 @@ target_link_libraries(appHMI  PRIVATE Qt6::SerialPort)
 target_link_libraries(appHMI PRIVATE Qt6::Core)
 target_link_libraries(appHMI PRIVATE Qt6::QuickEffects)
 target_link_libraries(appHMI PRIVATE Qt6::QuickControls2)
+target_link_libraries(appHMI PRIVATE Qt6::Sql)
 
 include(GNUInstallDirs)
 install(TARGETS appHMI
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+set(PG_BIN_DIR "C:/Program Files/PostgreSQL/18/bin")
+
+add_custom_command(TARGET appHMI POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${PG_BIN_DIR}/libpq.dll"
+    $<TARGET_FILE_DIR:appHMI>
 )

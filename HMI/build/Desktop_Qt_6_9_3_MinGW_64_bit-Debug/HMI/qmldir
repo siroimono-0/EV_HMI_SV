@@ -19,6 +19,7 @@ Charging_Complet 1.0 Charging_Complet.qml
 Ems_Nomal 1.0 Ems_Nomal.qml
 Ems_Charging 1.0 Ems_Charging.qml
 Maintenance 1.0 Maintenance.qml
+Test 1.0 Test.qml
 Popup_Text 1.0 ./Qml_Module/Popup_Text.qml
 Keypad_Number 1.0 ./Qml_Module/Keypad_Number.qml
 BackGround 1.0 ./Qml_Module/BackGround.qml

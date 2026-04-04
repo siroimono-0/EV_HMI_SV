@@ -321,3 +321,18 @@ Q_INVOKABLE void Cpp_Module::set_stop_reason(QString set)
     this->p_stat->set_stop_reason(set);
     return;
 }
+
+Q_INVOKABLE void Cpp_Module::next_ad_To_statStore()
+{
+    this->p_stat->next_ad();
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::first_ad_To_Soc()
+{
+    QMetaObject::invokeMethod(this->p_wk_websoc,
+                              "slot_update_ad",
+                              Qt::QueuedConnection,
+                              Q_ARG(QString, "first.mp4"));
+    return;
+}

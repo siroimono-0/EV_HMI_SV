@@ -38,6 +38,8 @@ set(src_and_dest_list
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Ems_Charging.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/Maintenance.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Maintenance.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/Test.qml"
+    "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/Test.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Popup_Text.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/HMI/./Qml_Module/Popup_Text.qml"
     "C:/Users/siroi/siroimono/w_qt/EV/HMI/Qml_Module/Keypad_Number.qml"

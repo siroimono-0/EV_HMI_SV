@@ -21,7 +21,6 @@ Item {
     }
 
     Component.onCompleted: {
-
     }
 
     BackGround{

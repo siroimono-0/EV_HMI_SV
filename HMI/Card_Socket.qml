@@ -96,6 +96,52 @@ Item {
         anchors.fill: parent
     }
 
+    Rectangle{
+        id: back_border
+        color: "transparent"
+        radius: 10;
+        border.color: "#FFFFFF"
+        border.width: 2;
+
+        anchors.top: parent.top
+        anchors.topMargin: 70
+        anchors.bottom: btn.top
+        anchors.bottomMargin: 30
+        anchors.left: parent.left
+        anchors.leftMargin: 190
+        anchors.right: parent.right
+        anchors.rightMargin: 190
+
+
+        layer.enabled: true
+        layer.effect: MultiEffect {
+            shadowEnabled: true
+            shadowBlur: 1.0
+            shadowColor: "#FFFFFF"
+            shadowVerticalOffset: 0
+            shadowHorizontalOffset: 0
+        }
+
+        SequentialAnimation{
+            loops: Animation.Infinite
+            running: true;
+            NumberAnimation{
+                target: back_border
+                properties: "opacity"
+                from: 1; to: 0.1;
+                duration: 1000;
+            }
+            NumberAnimation{
+                target: back_border
+                properties: "opacity"
+                from: 0.1; to: 1;
+                duration: 1000;
+            }
+        }
+
+    }
+
+
     Image {
         id: card_img
         source: "./images/cardInsert.svg"
@@ -113,7 +159,7 @@ Item {
         font.family: "DIN"
         font.bold: true
         anchors.top: card_img.bottom
-        // anchors.topMargin: 10
+        anchors.topMargin: 30
         anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
@@ -146,11 +192,11 @@ Item {
 
 
 
-    BtnGreen{
+    BtnLed{
         id: btn
         width: 300; height: 120;
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 100
+        anchors.bottomMargin: 50
         anchors.horizontalCenter: parent.horizontalCenter
 
         onSig_Clicked: function()

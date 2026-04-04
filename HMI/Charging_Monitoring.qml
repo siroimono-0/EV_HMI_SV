@@ -121,7 +121,6 @@ Item {
         }
     }
 
-
     Label{
         id: lb_root
         text: "충전중"
@@ -130,7 +129,7 @@ Item {
         font.bold: true
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 50
+        anchors.topMargin: 30
 
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
@@ -162,6 +161,50 @@ Item {
         }
     }
 
+    Rectangle{
+        id: back_border
+        color: "transparent"
+        radius: 10;
+        border.color: "#FFFFFF"
+        border.width: 2;
+
+        anchors.top: lb_p0.top
+        anchors.topMargin: -30
+        anchors.bottom: btn.top
+        anchors.bottomMargin: 30
+        anchors.left: parent.left
+        anchors.leftMargin: 60
+        anchors.right: parent.right
+        anchors.rightMargin: 60
+
+
+        layer.enabled: true
+        layer.effect: MultiEffect {
+            shadowEnabled: true
+            shadowBlur: 1.0
+            shadowColor: "#FFFFFF"
+            shadowVerticalOffset: 0
+            shadowHorizontalOffset: 0
+        }
+
+        SequentialAnimation{
+            loops: Animation.Infinite
+            running: true;
+            NumberAnimation{
+                target: back_border
+                properties: "opacity"
+                from: 1; to: 0.1;
+                duration: 1000;
+            }
+            NumberAnimation{
+                target: back_border
+                properties: "opacity"
+                from: 0.1; to: 1;
+                duration: 1000;
+            }
+        }
+
+    }
 
     Label{
         id: lb_p0
@@ -516,7 +559,7 @@ Item {
         border.color: "#8FE8FF"
 
         anchors.top: parent.top
-        anchors.topMargin: 200
+        anchors.topMargin: 230
         anchors.left: parent.horizontalCenter
         anchors.leftMargin: -30
         anchors.right: parent.right
@@ -727,7 +770,7 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 100
         anchors.top: parent.top
-        anchors.topMargin: 200
+        anchors.topMargin: 230
 
         spacing: 30
 
@@ -946,7 +989,7 @@ Item {
         anchors.left: root_col1.right
         anchors.leftMargin: 100
         anchors.top: parent.top
-        anchors.topMargin: 200
+        anchors.topMargin: 230
 
         spacing: 30
 
@@ -1192,7 +1235,7 @@ Item {
         width: 300; height: 120;
 
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 70;
+        anchors.bottomMargin: 50;
         anchors.horizontalCenter: parent.horizontalCenter
 
         onSig_Clicked: function()

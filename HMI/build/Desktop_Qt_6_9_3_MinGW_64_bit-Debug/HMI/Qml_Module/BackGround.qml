@@ -74,12 +74,13 @@ Item {
     Label{
         id: lb
         visible: root.bottom_text_visible;
-        text: "1kWh 금액: " + cpp_module.statStore.charge_price_kWh;
+        text: (cpp_module && cpp_module.statStore) ?
+                  String("1kWh 금액: " + cpp_module.statStore.charge_price_kWh) : "-";
         font.pixelSize: 30
         font.family: "DIN"
         font.bold: true
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
         anchors.bottom: lb2.top
         // anchors.bottomMargin: 10
 
@@ -90,7 +91,8 @@ Item {
     Label{
         id: lb_neon
         visible: root.bottom_text_visible;
-        text: "1kWh 금액: " + cpp_module.statStore.charge_price_kWh;
+        text: (cpp_module && cpp_module.statStore) ?
+                  String("1kWh 금액: " + cpp_module.statStore.charge_price_kWh) : "-";
         font.pixelSize: 30
         font.family: "DIN"
         font.bold: true
@@ -120,8 +122,8 @@ Item {
         font.pixelSize: 30
         font.family: "DIN"
         font.bold: true
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
 

@@ -16,6 +16,7 @@
 
 class StatStore;
 class Cpp_Module;
+class WK_Serial;
 
 class WK_WebSocket : public QObject
 {
@@ -24,14 +25,22 @@ public:
     explicit WK_WebSocket(QObject *parent = nullptr);
     void set_p_stat(StatStore *set_p_stat);
     void set_p_Module(Cpp_Module *set_p_Module);
+    void set_httpSv_url(const QString set);
 
     void create_netAccess();
 
     void parsing_revision_HMI(const QJsonObject jo);
 
+    void update_ad(const QString name);
+    void remove_ad(const QString name);
+
+    void netAccess_get_download(const QString name);
+    // bool find_ad(const QString name);
+
 public slots:
     void slot_stop();
     void slot_Connect_Sv();
+    void slot_set_p_serial(WK_Serial *set);
 
     void slot_ID_Check();
     void slot_ID_Resert(bool resert);
@@ -65,6 +74,8 @@ public slots:
     // connect(this->p_stat, &StatStore::sig_hartbit_pong, this, &WK_WebSocket::slot_send_hartbit_pong);
     void slot_send_heartbit_pong(heartbit_data st_hb_data);
 
+    void slot_update_ad(const QString name);
+
 signals:
     void sig_end();
     // set_p_stat 에서 커넥트
@@ -75,6 +86,7 @@ private:
     QWebSocket *p_webSoc = nullptr;
     StatStore *p_stat = nullptr;
     Cpp_Module *p_Module = nullptr;
+    WK_Serial *p_serial = nullptr;
     QNetworkAccessManager *p_netAccess = nullptr;
     bool connect_stat = false;
 
@@ -104,6 +116,8 @@ private:
     uint32_t t_id;
     QString membership_finished_requestId_Data;
     // ack 안올 때 재전송 위한 데이터
+
+    QUrl httpSv_url;
 };
 
 Q_DECLARE_METATYPE(WK_WebSocket *)

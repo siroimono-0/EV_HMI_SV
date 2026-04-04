@@ -52,6 +52,11 @@ void WK_Serial::rs485_coil_all_off()
 void WK_Serial::slot_set_p_soc(WK_WebSocket *soc)
 {
     this->p_soc = soc;
+    QMetaObject::invokeMethod(this->p_soc,
+                              "slot_set_p_serial",
+                              Qt::QueuedConnection,
+                              Q_ARG(WK_Serial *, this));
+
     return;
 }
 
@@ -138,7 +143,7 @@ void WK_Serial::rs485_coil_on_off(char coil_num, bool onoff)
 
     // 모드버스 wait 상태로 전환
     this->rs485_modbus_wait = true;
-
+    // qDebug() << Q_FUNC_INFO;
     return;
 }
 

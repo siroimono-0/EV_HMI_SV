@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 5,
-                        "durationMicroseconds": 822,
+                        "durationMicroseconds": 999,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "stk_prev",
                         "line": 30
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessful": false,
                         "column": 28,
-                        "durationMicroseconds": 189,
+                        "durationMicroseconds": 208,
                         "errorMessage": "Cannot generate efficient code for LoadClosure",
                         "functionName": "onCompleted",
                         "line": 24
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 23,
-                        "durationMicroseconds": 101,
+                        "durationMicroseconds": 107,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 41
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 156,
+                        "durationMicroseconds": 153,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 90
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 24,
-                        "durationMicroseconds": 45,
+                        "durationMicroseconds": 165,
                         "errorMessage": "",
                         "functionName": "onSig_Clicked",
                         "line": 90
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 25,
-                        "durationMicroseconds": 121,
+                        "durationMicroseconds": 337,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 86
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessful": true,
                         "column": 35,
-                        "durationMicroseconds": 123,
+                        "durationMicroseconds": 154,
                         "errorMessage": "",
                         "functionName": "horizontalCenter",
                         "line": 88

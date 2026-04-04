@@ -4,6 +4,12 @@
 #include <QMetaType>
 #include <QObject>
 
+typedef enum AD_NEED {
+    NEED_DOWNLOAD = 0, // 다운
+    NEED_PLAY = 1,     // 다운이미 대있음 재생 마킹
+    NEED_NOT           // 마킹도 대있음 그냥 업뎃한번
+} AD_NEED;
+
 typedef enum CHARGER_STATE {
     STATE_CHARGING = 0, // 충전중
     STATE_IDLE = 1,     // 대기중
@@ -244,5 +250,4 @@ struct mp_wk_key
     QString s_id;
 };
 Q_DECLARE_METATYPE(mp_wk_key)
-
 #endif // STATDATA_H

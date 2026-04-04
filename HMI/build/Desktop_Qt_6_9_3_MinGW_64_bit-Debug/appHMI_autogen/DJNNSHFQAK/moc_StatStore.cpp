@@ -54,6 +54,8 @@ template <> constexpr inline auto StatStore::qt_create_metaobjectdata<qt_meta_ta
         "sig_actual_payment_change",
         "sig_cancle_payment_change",
         "sig_charge_price_kWh",
+        "sig_m_type",
+        "sig_cur_advertisement",
         "sig_heartbit_pong",
         "heartbit_data",
         "st_hb_data",
@@ -85,6 +87,14 @@ template <> constexpr inline auto StatStore::qt_create_metaobjectdata<qt_meta_ta
         "uint32_t",
         "slot_heartbit_ping",
         "slot_set_membership_t_id",
+        "slot_set_charge_price_kWh",
+        "slot_set_m_type",
+        "slot_find_ad",
+        "name",
+        "marking_ad",
+        "stat",
+        "slot_insert_ad",
+        "slot_remove_ad",
         "elapsed_time",
         "remaining_time",
         "charging_speed",
@@ -95,7 +105,9 @@ template <> constexpr inline auto StatStore::qt_create_metaobjectdata<qt_meta_ta
         "advance_payment",
         "actual_payment",
         "cancle_payment",
-        "charge_price_kWh"
+        "charge_price_kWh",
+        "m_type",
+        "cur_advertisement"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -125,82 +137,114 @@ template <> constexpr inline auto StatStore::qt_create_metaobjectdata<qt_meta_ta
         QtMocHelpers::SignalData<void()>(14, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'sig_charge_price_kWh'
         QtMocHelpers::SignalData<void()>(15, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'sig_m_type'
+        QtMocHelpers::SignalData<void()>(16, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'sig_cur_advertisement'
+        QtMocHelpers::SignalData<void()>(17, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'sig_heartbit_pong'
-        QtMocHelpers::SignalData<void(heartbit_data)>(16, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 17, 18 },
+        QtMocHelpers::SignalData<void(heartbit_data)>(18, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 19, 20 },
         }}),
         // Slot 'slot_get_store_id'
-        QtMocHelpers::SlotData<int()>(19, 2, QMC::AccessPublic, QMetaType::Int),
+        QtMocHelpers::SlotData<int()>(21, 2, QMC::AccessPublic, QMetaType::Int),
         // Slot 'slot_get_mac_addr'
-        QtMocHelpers::SlotData<QString()>(20, 2, QMC::AccessPublic, QMetaType::QString),
+        QtMocHelpers::SlotData<QString()>(22, 2, QMC::AccessPublic, QMetaType::QString),
         // Slot 'slot_get_advPay_hmiId'
-        QtMocHelpers::SlotData<QPair<int,QString>()>(21, 2, QMC::AccessPublic, 0x80000000 | 22),
+        QtMocHelpers::SlotData<QPair<int,QString>()>(23, 2, QMC::AccessPublic, 0x80000000 | 24),
         // Slot 'slot_set_p_serial'
-        QtMocHelpers::SlotData<void(WK_Serial *)>(23, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 24, 25 },
+        QtMocHelpers::SlotData<void(WK_Serial *)>(25, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 26, 27 },
         }}),
         // Slot 'slot_get_i_adv_pay'
-        QtMocHelpers::SlotData<int()>(26, 2, QMC::AccessPublic, QMetaType::Int),
+        QtMocHelpers::SlotData<int()>(28, 2, QMC::AccessPublic, QMetaType::Int),
         // Slot 'slot_update_chargingStat'
-        QtMocHelpers::SlotData<void(charging_stat)>(27, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 28, 29 },
+        QtMocHelpers::SlotData<void(charging_stat)>(29, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 30, 31 },
         }}),
         // Slot 'slot_set_charging_type'
-        QtMocHelpers::SlotData<void(CHARGING_TYPE, int)>(30, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 31, 32 }, { QMetaType::Int, 33 },
+        QtMocHelpers::SlotData<void(CHARGING_TYPE, int)>(32, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 33, 34 }, { QMetaType::Int, 35 },
         }}),
         // Slot 'slot_clear_charging_type'
-        QtMocHelpers::SlotData<void()>(34, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(36, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_set_payment'
-        QtMocHelpers::SlotData<void()>(35, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(37, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_set_card_uid'
-        QtMocHelpers::SlotData<void(QString)>(36, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 37 },
+        QtMocHelpers::SlotData<void(QString)>(38, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 39 },
         }}),
         // Slot 'slot_set_charging_start_time'
-        QtMocHelpers::SlotData<void()>(38, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'slot_charging_end_stat_clear'
-        QtMocHelpers::SlotData<void()>(39, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'slot_card_ok_db_update'
         QtMocHelpers::SlotData<void()>(40, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_charging_end_stat_clear'
+        QtMocHelpers::SlotData<void()>(41, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_card_ok_db_update'
+        QtMocHelpers::SlotData<void()>(42, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_set_session_id'
-        QtMocHelpers::SlotData<void(uint64_t)>(41, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 42, 37 },
+        QtMocHelpers::SlotData<void(uint64_t)>(43, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 44, 39 },
         }}),
         // Slot 'slot_set_ocpp_tx_id'
-        QtMocHelpers::SlotData<void(uint32_t)>(43, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 44, 37 },
+        QtMocHelpers::SlotData<void(uint32_t)>(45, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 46, 39 },
         }}),
         // Slot 'slot_heartbit_ping'
-        QtMocHelpers::SlotData<void()>(45, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(47, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_set_membership_t_id'
-        QtMocHelpers::SlotData<void(uint32_t)>(46, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 44, 37 },
+        QtMocHelpers::SlotData<void(uint32_t)>(48, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 46, 39 },
+        }}),
+        // Slot 'slot_set_charge_price_kWh'
+        QtMocHelpers::SlotData<void(int)>(49, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 39 },
+        }}),
+        // Slot 'slot_set_m_type'
+        QtMocHelpers::SlotData<void(int)>(50, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 39 },
+        }}),
+        // Slot 'slot_find_ad'
+        QtMocHelpers::SlotData<int(const QString)>(51, 2, QMC::AccessPublic, QMetaType::Int, {{
+            { QMetaType::QString, 52 },
+        }}),
+        // Slot 'marking_ad'
+        QtMocHelpers::SlotData<void(const QString, const bool)>(53, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 52 }, { QMetaType::Bool, 54 },
+        }}),
+        // Slot 'slot_insert_ad'
+        QtMocHelpers::SlotData<void(const QString, const bool)>(55, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 52 }, { QMetaType::Bool, 54 },
+        }}),
+        // Slot 'slot_remove_ad'
+        QtMocHelpers::SlotData<void(const QString)>(56, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 52 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
         // property 'elapsed_time'
-        QtMocHelpers::PropertyData<QString>(47, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 1),
+        QtMocHelpers::PropertyData<QString>(57, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 1),
         // property 'remaining_time'
-        QtMocHelpers::PropertyData<QString>(48, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 2),
+        QtMocHelpers::PropertyData<QString>(58, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 2),
         // property 'charging_speed'
-        QtMocHelpers::PropertyData<QString>(49, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 3),
+        QtMocHelpers::PropertyData<QString>(59, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 3),
         // property 'charging_capacity'
-        QtMocHelpers::PropertyData<QString>(50, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 4),
+        QtMocHelpers::PropertyData<QString>(60, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 4),
         // property 'charging_amount'
-        QtMocHelpers::PropertyData<QString>(51, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 5),
+        QtMocHelpers::PropertyData<QString>(61, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 5),
         // property 'battery_start_persent'
-        QtMocHelpers::PropertyData<QString>(52, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 6),
+        QtMocHelpers::PropertyData<QString>(62, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable, 6),
         // property 'battery_current'
-        QtMocHelpers::PropertyData<QString>(53, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 7),
+        QtMocHelpers::PropertyData<QString>(63, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 7),
         // property 'advance_payment'
-        QtMocHelpers::PropertyData<QString>(54, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 8),
+        QtMocHelpers::PropertyData<QString>(64, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 8),
         // property 'actual_payment'
-        QtMocHelpers::PropertyData<QString>(55, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 9),
+        QtMocHelpers::PropertyData<QString>(65, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 9),
         // property 'cancle_payment'
-        QtMocHelpers::PropertyData<QString>(56, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 10),
+        QtMocHelpers::PropertyData<QString>(66, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 10),
         // property 'charge_price_kWh'
-        QtMocHelpers::PropertyData<int>(57, QMetaType::Int, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 11),
+        QtMocHelpers::PropertyData<int>(67, QMetaType::Int, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 11),
+        // property 'm_type'
+        QtMocHelpers::PropertyData<int>(68, QMetaType::Int, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 12),
+        // property 'cur_advertisement'
+        QtMocHelpers::PropertyData<QString>(69, QMetaType::QString, QMC::DefaultPropertyFlags | QMC::Writable | QMC::Final, 13),
     };
     QtMocHelpers::UintData qt_enums {
     };
@@ -234,49 +278,58 @@ void StatStore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 9: _t->sig_actual_payment_change(); break;
         case 10: _t->sig_cancle_payment_change(); break;
         case 11: _t->sig_charge_price_kWh(); break;
-        case 12: _t->sig_heartbit_pong((*reinterpret_cast< std::add_pointer_t<heartbit_data>>(_a[1]))); break;
-        case 13: { int _r = _t->slot_get_store_id();
+        case 12: _t->sig_m_type(); break;
+        case 13: _t->sig_cur_advertisement(); break;
+        case 14: _t->sig_heartbit_pong((*reinterpret_cast< std::add_pointer_t<heartbit_data>>(_a[1]))); break;
+        case 15: { int _r = _t->slot_get_store_id();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 14: { QString _r = _t->slot_get_mac_addr();
+        case 16: { QString _r = _t->slot_get_mac_addr();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 15: { std::pair<int,QString> _r = _t->slot_get_advPay_hmiId();
+        case 17: { std::pair<int,QString> _r = _t->slot_get_advPay_hmiId();
             if (_a[0]) *reinterpret_cast< std::pair<int,QString>*>(_a[0]) = std::move(_r); }  break;
-        case 16: _t->slot_set_p_serial((*reinterpret_cast< std::add_pointer_t<WK_Serial*>>(_a[1]))); break;
-        case 17: { int _r = _t->slot_get_i_adv_pay();
+        case 18: _t->slot_set_p_serial((*reinterpret_cast< std::add_pointer_t<WK_Serial*>>(_a[1]))); break;
+        case 19: { int _r = _t->slot_get_i_adv_pay();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 18: _t->slot_update_chargingStat((*reinterpret_cast< std::add_pointer_t<charging_stat>>(_a[1]))); break;
-        case 19: _t->slot_set_charging_type((*reinterpret_cast< std::add_pointer_t<CHARGING_TYPE>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
-        case 20: _t->slot_clear_charging_type(); break;
-        case 21: _t->slot_set_payment(); break;
-        case 22: _t->slot_set_card_uid((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 23: _t->slot_set_charging_start_time(); break;
-        case 24: _t->slot_charging_end_stat_clear(); break;
-        case 25: _t->slot_card_ok_db_update(); break;
-        case 26: _t->slot_set_session_id((*reinterpret_cast< std::add_pointer_t<uint64_t>>(_a[1]))); break;
-        case 27: _t->slot_set_ocpp_tx_id((*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[1]))); break;
-        case 28: _t->slot_heartbit_ping(); break;
-        case 29: _t->slot_set_membership_t_id((*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[1]))); break;
+        case 20: _t->slot_update_chargingStat((*reinterpret_cast< std::add_pointer_t<charging_stat>>(_a[1]))); break;
+        case 21: _t->slot_set_charging_type((*reinterpret_cast< std::add_pointer_t<CHARGING_TYPE>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 22: _t->slot_clear_charging_type(); break;
+        case 23: _t->slot_set_payment(); break;
+        case 24: _t->slot_set_card_uid((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 25: _t->slot_set_charging_start_time(); break;
+        case 26: _t->slot_charging_end_stat_clear(); break;
+        case 27: _t->slot_card_ok_db_update(); break;
+        case 28: _t->slot_set_session_id((*reinterpret_cast< std::add_pointer_t<uint64_t>>(_a[1]))); break;
+        case 29: _t->slot_set_ocpp_tx_id((*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[1]))); break;
+        case 30: _t->slot_heartbit_ping(); break;
+        case 31: _t->slot_set_membership_t_id((*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[1]))); break;
+        case 32: _t->slot_set_charge_price_kWh((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 33: _t->slot_set_m_type((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 34: { int _r = _t->slot_find_ad((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 35: _t->marking_ad((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[2]))); break;
+        case 36: _t->slot_insert_ad((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[2]))); break;
+        case 37: _t->slot_remove_ad((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-        case 12:
+        case 14:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< heartbit_data >(); break;
             }
             break;
-        case 18:
+        case 20:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< charging_stat >(); break;
             }
             break;
-        case 19:
+        case 21:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -310,7 +363,11 @@ void StatStore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             return;
         if (QtMocHelpers::indexOfMethod<void (StatStore::*)()>(_a, &StatStore::sig_charge_price_kWh, 11))
             return;
-        if (QtMocHelpers::indexOfMethod<void (StatStore::*)(heartbit_data )>(_a, &StatStore::sig_heartbit_pong, 12))
+        if (QtMocHelpers::indexOfMethod<void (StatStore::*)()>(_a, &StatStore::sig_m_type, 12))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (StatStore::*)()>(_a, &StatStore::sig_cur_advertisement, 13))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (StatStore::*)(heartbit_data )>(_a, &StatStore::sig_heartbit_pong, 14))
             return;
     }
     if (_c == QMetaObject::ReadProperty) {
@@ -327,6 +384,8 @@ void StatStore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 8: *reinterpret_cast<QString*>(_v) = _t->get_actual_payment(); break;
         case 9: *reinterpret_cast<QString*>(_v) = _t->get_cancle_payment(); break;
         case 10: *reinterpret_cast<int*>(_v) = _t->get_charge_price_kWh(); break;
+        case 11: *reinterpret_cast<int*>(_v) = _t->get_m_type(); break;
+        case 12: *reinterpret_cast<QString*>(_v) = _t->get_cur_advertisement(); break;
         default: break;
         }
     }
@@ -343,7 +402,9 @@ void StatStore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 7: _t->set_advance_payment(*reinterpret_cast<QString*>(_v)); break;
         case 8: _t->set_actual_payment(*reinterpret_cast<QString*>(_v)); break;
         case 9: _t->set_cancle_payment(*reinterpret_cast<QString*>(_v)); break;
-        case 10: _t->set_charge_price_kWh(*reinterpret_cast<int*>(_v)); break;
+        case 10: _t->slot_set_charge_price_kWh(*reinterpret_cast<int*>(_v)); break;
+        case 11: _t->slot_set_m_type(*reinterpret_cast<int*>(_v)); break;
+        case 12: _t->set_cur_advertisement(*reinterpret_cast<QString*>(_v)); break;
         default: break;
         }
     }
@@ -368,20 +429,20 @@ int StatStore::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 30)
+        if (_id < 38)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 30;
+        _id -= 38;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 30)
+        if (_id < 38)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 30;
+        _id -= 38;
     }
     if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty
             || _c == QMetaObject::RegisterPropertyMetaType) {
         qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 13;
     }
     return _id;
 }
@@ -459,8 +520,20 @@ void StatStore::sig_charge_price_kWh()
 }
 
 // SIGNAL 12
+void StatStore::sig_m_type()
+{
+    QMetaObject::activate(this, &staticMetaObject, 12, nullptr);
+}
+
+// SIGNAL 13
+void StatStore::sig_cur_advertisement()
+{
+    QMetaObject::activate(this, &staticMetaObject, 13, nullptr);
+}
+
+// SIGNAL 14
 void StatStore::sig_heartbit_pong(heartbit_data _t1)
 {
-    QMetaObject::activate<void>(this, &staticMetaObject, 12, nullptr, _t1);
+    QMetaObject::activate<void>(this, &staticMetaObject, 14, nullptr, _t1);
 }
 QT_WARNING_POP

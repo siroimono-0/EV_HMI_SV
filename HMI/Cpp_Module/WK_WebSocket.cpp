@@ -1,17 +1,27 @@
 #include "WK_WebSocket.h"
 #include "Cpp_Module.h"
 #include "StatStore.h"
+#include "WK_Serial.h"
 
 WK_WebSocket::WK_WebSocket(QObject *parent)
     : QObject{parent}
 {
     this->create_netAccess();
+
+    QString url = "http://127.0.0.1:8080/compare";
+    this->set_httpSv_url(url);
 }
 
 void WK_WebSocket::slot_stop()
 {
     this->p_webSoc->close();
     emit sig_end();
+    return;
+}
+
+void WK_WebSocket::slot_set_p_serial(WK_Serial *set)
+{
+    this->p_serial = set;
     return;
 }
 
@@ -50,93 +60,125 @@ void WK_WebSocket::create_netAccess()
 void WK_WebSocket::slot_netAccess_reply(QNetworkReply *reply)
 {
     qDebug() << Q_FUNC_INFO;
-
-    if (reply->error() != QNetworkReply::NoError)
+    QString reply_header = reply->header(QNetworkRequest::ContentTypeHeader).toString();
+    if (reply_header == "application/mp4/download")
     {
-        qDebug() << "error =" << reply->errorString();
-    }
+        QString s_data_dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
-    int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-
-    qDebug() << "status =" << status;
-
-    QByteArray qba = reply->readAll();
-    // qDebug() << qba;
-    QJsonParseError json_err;
-    QJsonDocument json_doc = QJsonDocument::fromJson(qba, &json_err);
-
-    if (json_err.error != QJsonParseError::NoError)
-    {
-        qDebug() << "Json Err";
-    }
-
-    QJsonObject jsObj = json_doc.object();
-    QString qs_type = jsObj["type"].toString();
-
-    if (qs_type == "pay_ack")
-    {
-        if (jsObj["role"].toString() == "creditCard")
+        QByteArray qba = reply->readAll();
+        int find_idx = qba.indexOf("\r\n");
+        if (find_idx == -1)
         {
-            if (jsObj["ok"].toBool() == true)
+            qDebug() << "ERR";
+        }
+        QString name = QString::fromUtf8(qba.left(find_idx));
+
+        QFile down_file(s_data_dir + "/" + name);
+        down_file.open(QIODevice::ReadWrite);
+        down_file.write(qba.right(qba.size() - (find_idx + 2)));
+        down_file.close();
+
+        // 무조건 인설트 성공 이라고 가정함
+        QMetaObject::invokeMethod(this->p_stat,
+                                  "slot_insert_ad",
+                                  Qt::BlockingQueuedConnection,
+                                  Q_ARG(QString, name),
+                                  Q_ARG(bool, true));
+
+        QMetaObject::invokeMethod(this->p_stat,
+                                  "slot_find_ad",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(QString, name));
+    }
+    else if ("application/json")
+    {
+        if (reply->error() != QNetworkReply::NoError)
+        {
+            qDebug() << "error =" << reply->errorString();
+        }
+
+        int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+        qDebug() << "status =" << status;
+
+        QByteArray qba = reply->readAll();
+        // qDebug() << qba;
+        QJsonParseError json_err;
+        QJsonDocument json_doc = QJsonDocument::fromJson(qba, &json_err);
+
+        if (json_err.error != QJsonParseError::NoError)
+        {
+            qDebug() << "Json Err";
+        }
+
+        QJsonObject jsObj = json_doc.object();
+        QString qs_type = jsObj["type"].toString();
+
+        if (qs_type == "pay_ack")
+        {
+            if (jsObj["role"].toString() == "creditCard")
             {
-                // 카드 승인 statStore에 카드 uid 업데이트
-                QString qs_card_uid = jsObj["uid"].toString();
-                QMetaObject::invokeMethod(this->p_stat,
-                                          "slot_set_card_uid",
-                                          Qt::QueuedConnection,
-                                          Q_ARG(QString, qs_card_uid));
+                if (jsObj["ok"].toBool() == true)
+                {
+                    // 카드 승인 statStore에 카드 uid 업데이트
+                    QString qs_card_uid = jsObj["uid"].toString();
+                    QMetaObject::invokeMethod(this->p_stat,
+                                              "slot_set_card_uid",
+                                              Qt::QueuedConnection,
+                                              Q_ARG(QString, qs_card_uid));
 
-                this->pay_ack = true;
+                    this->pay_ack = true;
 
-                // qml에 결제완료 신호 보내야댐
-                QMetaObject::invokeMethod(this->p_Module,
-                                          &Cpp_Module::sig_card_success_ToQml,
-                                          Qt::QueuedConnection);
-                qDebug() << "결제 완료";
+                    // qml에 결제완료 신호 보내야댐
+                    QMetaObject::invokeMethod(this->p_Module,
+                                              &Cpp_Module::sig_card_success_ToQml,
+                                              Qt::QueuedConnection);
+                    qDebug() << "결제 완료";
+                }
+                else
+                {
+                    QMetaObject::invokeMethod(this->p_Module,
+                                              "sig_card_failed_ToQml",
+                                              Qt::QueuedConnection,
+                                              Q_ARG(QString, jsObj["err"].toString()));
+                    qDebug() << "결제 실패";
+                    qDebug() << "Err :: " << jsObj["err"].toString();
+                }
             }
             else
             {
-                QMetaObject::invokeMethod(this->p_Module,
-                                          "sig_card_failed_ToQml",
-                                          Qt::QueuedConnection,
-                                          Q_ARG(QString, jsObj["err"].toString()));
-                qDebug() << "결제 실패";
-                qDebug() << "Err :: " << jsObj["err"].toString();
+                // 멤버쉽 카드는 httpSv로 안보냄
             }
         }
-        else
+        else if (qs_type == "cancle_ack")
         {
-            // 멤버쉽 카드는 httpSv로 안보냄
-        }
-    }
-    else if (qs_type == "cancle_ack")
-    {
-        if (jsObj["role"].toString() == "creditCard")
-        {
-            if (jsObj["ok"].toBool() == true)
+            if (jsObj["role"].toString() == "creditCard")
             {
-                this->cancle_ack = true;
+                if (jsObj["ok"].toBool() == true)
+                {
+                    this->cancle_ack = true;
 
-                // qml에 결제 부분취소 신호 보내야댐
-                QMetaObject::invokeMethod(this->p_Module,
-                                          &Cpp_Module::sig_cancle_payment_ok_ToQml,
-                                          Qt::QueuedConnection);
-                qDebug() << "결제 취소 완료";
+                    // qml에 결제 부분취소 신호 보내야댐
+                    QMetaObject::invokeMethod(this->p_Module,
+                                              &Cpp_Module::sig_cancle_payment_ok_ToQml,
+                                              Qt::QueuedConnection);
+                    qDebug() << "결제 취소 완료";
+                }
+                else
+                {
+                    QMetaObject::invokeMethod(this->p_Module,
+                                              "sig_card_failed_ToQml",
+                                              Qt::QueuedConnection,
+                                              Q_ARG(QString, jsObj["err"].toString()));
+                    qDebug() << "승인취소 실패";
+                    qDebug() << "Err :: " << jsObj["err"].toString();
+                }
             }
-            else
-            {
-                QMetaObject::invokeMethod(this->p_Module,
-                                          "sig_card_failed_ToQml",
-                                          Qt::QueuedConnection,
-                                          Q_ARG(QString, jsObj["err"].toString()));
-                qDebug() << "승인취소 실패";
-                qDebug() << "Err :: " << jsObj["err"].toString();
-            }
+            // 다른 타입 아직 없음
         }
-        // 다른 타입 아직 없음
-    }
 
-    return;
+        return;
+    }
 }
 
 void WK_WebSocket::slot_netAccess_post(QByteArray qba)
@@ -151,8 +193,7 @@ void WK_WebSocket::slot_netAccess_post(QByteArray qba)
 
     QJsonDocument jsDoc(jsObj);
 
-    QUrl url("http://127.0.0.1:8080/compare");
-    QNetworkRequest req(url);
+    QNetworkRequest req(this->httpSv_url);
 
     //서버에서 어떻게 파싱할지 헤더 정의
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -179,8 +220,7 @@ void WK_WebSocket::slot_netAccess_post_cancle(QString card_uid)
 
     QJsonDocument jsDoc(jsObj);
 
-    QUrl url("http://127.0.0.1:8080/compare");
-    QNetworkRequest req(url);
+    QNetworkRequest req(this->httpSv_url);
 
     //서버에서 어떻게 파싱할지 헤더 정의
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -761,6 +801,145 @@ void WK_WebSocket::parsing_revision_HMI(const QJsonObject jo)
                                       &Cpp_Module::sig_screen_move_maintenance_ToQml,
                                       Qt::QueuedConnection);
         }
+    }
+    else if (cmd == "price")
+    {
+        QMetaObject::invokeMethod(this->p_stat,
+                                  "slot_set_charge_price_kWh",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(int, val.toInt()));
+    }
+    else if (cmd == "method")
+    {
+        qDebug() << val;
+        if (val == "회원 / 비회원")
+        {
+            qDebug() << val;
+            QMetaObject::invokeMethod(this->p_stat,
+                                      "slot_set_m_type",
+                                      Qt::QueuedConnection,
+                                      Q_ARG(int, ALL));
+        }
+        else if (val == "회원")
+        {
+            qDebug() << val;
+            QMetaObject::invokeMethod(this->p_stat,
+                                      "slot_set_m_type",
+                                      Qt::QueuedConnection,
+                                      Q_ARG(int, MEMBER));
+        }
+        else if (val == "비회원")
+        {
+            qDebug() << val;
+            QMetaObject::invokeMethod(this->p_stat,
+                                      "slot_set_m_type",
+                                      Qt::QueuedConnection,
+                                      Q_ARG(int, NONMEMBER));
+        }
+    }
+    else if (cmd == "connector_case")
+    {
+        if (val == "unlock")
+        {
+            bool b = QMetaObject::invokeMethod(this->p_serial,
+                                               "slot_rs485_coil1_on_off",
+                                               Qt::QueuedConnection,
+                                               Q_ARG(bool, true));
+            if (!b)
+            {
+                qDebug() << "invok Err";
+                if (this->p_serial == nullptr)
+                {
+                    qDebug() << "nullptr";
+                }
+            }
+        }
+    }
+    else if (cmd == "connector")
+    {
+        if (val == "unlock")
+        {
+            uint16_t reg_pos = 0x01;
+            uint16_t reg_val = 0x01;
+            // 시리얼 통신으로 종료 요청
+            QMetaObject::invokeMethod(this->p_serial,
+                                      "slot_rs232_cmd",
+                                      Qt::QueuedConnection,
+                                      Q_ARG(uint16_t, reg_pos),
+                                      Q_ARG(uint16_t, reg_val));
+        }
+    }
+    else if (cmd == "ad_add")
+    {
+        this->update_ad(val);
+    }
+    else if (cmd == "ad_remove")
+    {
+        this->remove_ad(val);
+    }
+
+    return;
+}
+
+void WK_WebSocket::remove_ad(const QString name)
+{
+    QMetaObject::invokeMethod(this->p_stat,
+                              "slot_remove_ad",
+                              Qt::QueuedConnection,
+                              Q_ARG(QString, name));
+    return;
+}
+
+void WK_WebSocket::update_ad(const QString name)
+{
+    qDebug() << Q_FUNC_INFO;
+    int need;
+    QMetaObject::invokeMethod(this->p_stat,
+                              "slot_find_ad",
+                              Qt::BlockingQueuedConnection,
+                              Q_RETURN_ARG(int, need),
+                              Q_ARG(QString, name));
+
+    if (need == NEED_DOWNLOAD)
+    {
+        qDebug() << Q_FUNC_INFO << " NEED_DOWNLOAD";
+        // 그냥 무조건 다운 성공
+        this->netAccess_get_download(name);
+    }
+    return;
+}
+
+void WK_WebSocket::netAccess_get_download(const QString name)
+{
+    QNetworkRequest req(this->httpSv_url);
+    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/mp4/download");
+
+    this->p_netAccess->get(req, name.toUtf8());
+
+    return;
+}
+
+void WK_WebSocket::set_httpSv_url(const QString set)
+{
+    this->httpSv_url = QUrl(set);
+    return;
+}
+
+void WK_WebSocket::slot_update_ad(const QString name)
+{
+    qDebug() << Q_FUNC_INFO;
+    int need;
+    QMetaObject::invokeMethod(this->p_stat,
+                              "slot_find_ad",
+                              Qt::BlockingQueuedConnection,
+                              Q_RETURN_ARG(int, need),
+                              Q_ARG(QString, name));
+
+    if (need == NEED_DOWNLOAD)
+    {
+        qDebug() << Q_FUNC_INFO << " NEED_DOWNLOAD";
+        // 그냥 무조건 다운 성공
+        this->netAccess_get_download(name);
     }
     return;
 }

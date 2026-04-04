@@ -66,7 +66,7 @@ Item {
         font.family: "DIN"
         font.bold: true
         anchors.top: parent.top
-        anchors.topMargin: 45
+        anchors.topMargin: 30
         anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
@@ -97,6 +97,50 @@ Item {
         }
     }
 
+    Rectangle{
+        id: back_border
+        color: "transparent"
+        radius: 10;
+        border.color: "#FFFFFF"
+        border.width: 2;
+
+        anchors.top: root_col1.top
+        anchors.topMargin: -20
+        anchors.bottom: btn.top
+        anchors.bottomMargin: 30
+        anchors.left: parent.left
+        anchors.leftMargin: 215
+        anchors.right: parent.right
+        anchors.rightMargin: 170
+
+
+        layer.enabled: true
+        layer.effect: MultiEffect {
+            shadowEnabled: true
+            shadowBlur: 1.0
+            shadowColor: "#FFFFFF"
+            shadowVerticalOffset: 0
+            shadowHorizontalOffset: 0
+        }
+
+        SequentialAnimation{
+            loops: Animation.Infinite
+            running: true;
+            NumberAnimation{
+                target: back_border
+                properties: "opacity"
+                from: 1; to: 0.1;
+                duration: 1000;
+            }
+            NumberAnimation{
+                target: back_border
+                properties: "opacity"
+                from: 0.1; to: 1;
+                duration: 1000;
+            }
+        }
+
+    }
 
     Column{
         id: root_col1
@@ -720,7 +764,7 @@ Item {
         width: 300; height: 120;
 
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 70
+        anchors.bottomMargin: 50
         anchors.horizontalCenter: parent.horizontalCenter
 
         onSig_Clicked: function()

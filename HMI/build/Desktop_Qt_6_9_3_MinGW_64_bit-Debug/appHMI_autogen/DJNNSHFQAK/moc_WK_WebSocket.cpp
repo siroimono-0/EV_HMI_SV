@@ -45,6 +45,9 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         "sig_heartbit_ping_To_statStore",
         "slot_stop",
         "slot_Connect_Sv",
+        "slot_set_p_serial",
+        "WK_Serial*",
+        "set",
         "slot_ID_Check",
         "slot_ID_Resert",
         "resert",
@@ -78,7 +81,9 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         "slot_timeOut_membership_finished_ack",
         "slot_send_heartbit_pong",
         "heartbit_data",
-        "st_hb_data"
+        "st_hb_data",
+        "slot_update_ad",
+        "name"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -90,56 +95,64 @@ template <> constexpr inline auto WK_WebSocket::qt_create_metaobjectdata<qt_meta
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_Connect_Sv'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'slot_set_p_serial'
+        QtMocHelpers::SlotData<void(WK_Serial *)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 7, 8 },
+        }}),
         // Slot 'slot_ID_Check'
-        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_ID_Resert'
-        QtMocHelpers::SlotData<void(bool)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 8 },
+        QtMocHelpers::SlotData<void(bool)>(10, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Bool, 11 },
         }}),
         // Slot 'slot_SocErr'
-        QtMocHelpers::SlotData<void(QAbstractSocket::SocketError)>(9, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 10, 11 },
-        }}),
-        // Slot 'slot_send_db_update_textData'
-        QtMocHelpers::SlotData<void(db_data)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::SlotData<void(QAbstractSocket::SocketError)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 13, 14 },
         }}),
+        // Slot 'slot_send_db_update_textData'
+        QtMocHelpers::SlotData<void(db_data)>(15, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 16, 17 },
+        }}),
         // Slot 'slot_Recv_TextData'
-        QtMocHelpers::SlotData<void(QString)>(15, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 16 },
+        QtMocHelpers::SlotData<void(QString)>(18, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 19 },
         }}),
         // Slot 'slot_netAccess_reply'
-        QtMocHelpers::SlotData<void(QNetworkReply *)>(17, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 18, 19 },
+        QtMocHelpers::SlotData<void(QNetworkReply *)>(20, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 21, 22 },
         }}),
         // Slot 'slot_netAccess_post'
-        QtMocHelpers::SlotData<void(QByteArray)>(20, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QByteArray, 21 },
+        QtMocHelpers::SlotData<void(QByteArray)>(23, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QByteArray, 24 },
         }}),
         // Slot 'slot_timeOut_pay_ack'
-        QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_netAccess_post_cancle'
-        QtMocHelpers::SlotData<void(QString)>(23, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 24 },
+        QtMocHelpers::SlotData<void(QString)>(26, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 27 },
         }}),
         // Slot 'slot_timeOut_cancle_ack'
-        QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(28, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_send_membership_authorized_textData'
-        QtMocHelpers::SlotData<void(int, QByteArray, QString)>(26, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Int, 27 }, { QMetaType::QByteArray, 24 }, { QMetaType::QString, 28 },
+        QtMocHelpers::SlotData<void(int, QByteArray, QString)>(29, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 30 }, { QMetaType::QByteArray, 27 }, { QMetaType::QString, 31 },
         }}),
         // Slot 'slot_timeOut_membership_authorized_ack'
-        QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(32, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_send_membership_finished_textData'
-        QtMocHelpers::SlotData<void(int, int, int, QString, uint32_t, QString)>(30, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Int, 27 }, { QMetaType::Int, 31 }, { QMetaType::Int, 32 }, { QMetaType::QString, 24 },
-            { 0x80000000 | 33, 34 }, { QMetaType::QString, 35 },
+        QtMocHelpers::SlotData<void(int, int, int, QString, uint32_t, QString)>(33, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 30 }, { QMetaType::Int, 34 }, { QMetaType::Int, 35 }, { QMetaType::QString, 27 },
+            { 0x80000000 | 36, 37 }, { QMetaType::QString, 38 },
         }}),
         // Slot 'slot_timeOut_membership_finished_ack'
-        QtMocHelpers::SlotData<void()>(36, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(39, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_send_heartbit_pong'
-        QtMocHelpers::SlotData<void(heartbit_data)>(37, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 38, 39 },
+        QtMocHelpers::SlotData<void(heartbit_data)>(40, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 41, 42 },
+        }}),
+        // Slot 'slot_update_ad'
+        QtMocHelpers::SlotData<void(const QString)>(43, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 44 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -168,42 +181,44 @@ void WK_WebSocket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 1: _t->sig_heartbit_ping_To_statStore(); break;
         case 2: _t->slot_stop(); break;
         case 3: _t->slot_Connect_Sv(); break;
-        case 4: _t->slot_ID_Check(); break;
-        case 5: _t->slot_ID_Resert((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        case 6: _t->slot_SocErr((*reinterpret_cast< std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
-        case 7: _t->slot_send_db_update_textData((*reinterpret_cast< std::add_pointer_t<db_data>>(_a[1]))); break;
-        case 8: _t->slot_Recv_TextData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 9: _t->slot_netAccess_reply((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
-        case 10: _t->slot_netAccess_post((*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[1]))); break;
-        case 11: _t->slot_timeOut_pay_ack(); break;
-        case 12: _t->slot_netAccess_post_cancle((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 13: _t->slot_timeOut_cancle_ack(); break;
-        case 14: _t->slot_send_membership_authorized_textData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
-        case 15: _t->slot_timeOut_membership_authorized_ack(); break;
-        case 16: _t->slot_send_membership_finished_textData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6]))); break;
-        case 17: _t->slot_timeOut_membership_finished_ack(); break;
-        case 18: _t->slot_send_heartbit_pong((*reinterpret_cast< std::add_pointer_t<heartbit_data>>(_a[1]))); break;
+        case 4: _t->slot_set_p_serial((*reinterpret_cast< std::add_pointer_t<WK_Serial*>>(_a[1]))); break;
+        case 5: _t->slot_ID_Check(); break;
+        case 6: _t->slot_ID_Resert((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 7: _t->slot_SocErr((*reinterpret_cast< std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
+        case 8: _t->slot_send_db_update_textData((*reinterpret_cast< std::add_pointer_t<db_data>>(_a[1]))); break;
+        case 9: _t->slot_Recv_TextData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 10: _t->slot_netAccess_reply((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
+        case 11: _t->slot_netAccess_post((*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[1]))); break;
+        case 12: _t->slot_timeOut_pay_ack(); break;
+        case 13: _t->slot_netAccess_post_cancle((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 14: _t->slot_timeOut_cancle_ack(); break;
+        case 15: _t->slot_send_membership_authorized_textData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
+        case 16: _t->slot_timeOut_membership_authorized_ack(); break;
+        case 17: _t->slot_send_membership_finished_textData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<uint32_t>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6]))); break;
+        case 18: _t->slot_timeOut_membership_finished_ack(); break;
+        case 19: _t->slot_send_heartbit_pong((*reinterpret_cast< std::add_pointer_t<heartbit_data>>(_a[1]))); break;
+        case 20: _t->slot_update_ad((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-        case 6:
+        case 7:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QAbstractSocket::SocketError >(); break;
             }
             break;
-        case 9:
+        case 10:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QNetworkReply* >(); break;
             }
             break;
-        case 18:
+        case 19:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -239,14 +254,14 @@ int WK_WebSocket::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 19)
+        if (_id < 21)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 21;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 19)
+        if (_id < 21)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 21;
     }
     return _id;
 }

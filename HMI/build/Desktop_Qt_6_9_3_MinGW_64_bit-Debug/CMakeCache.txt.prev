@@ -477,6 +477,12 @@ Qt6SerialPortPrivate_DIR:PATH=C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6SerialPortPrivat
 //The directory containing a CMake configuration file for Qt6SerialPort.
 Qt6SerialPort_DIR:PATH=C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6SerialPort
 
+//The directory containing a CMake configuration file for Qt6SqlPrivate.
+Qt6SqlPrivate_DIR:PATH=C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6SqlPrivate
+
+//The directory containing a CMake configuration file for Qt6Sql.
+Qt6Sql_DIR:PATH=C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Sql
+
 //The directory containing a CMake configuration file for Qt6WebSocketsPrivate.
 Qt6WebSocketsPrivate_DIR:PATH=C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6WebSocketsPrivate
 
@@ -1315,6 +1321,8 @@ QT_FEATURE_socks5:INTERNAL=ON
 QT_FEATURE_sortfilterproxymodel:INTERNAL=ON
 //Qt feature: sql (from target Qt6::Core)
 QT_FEATURE_sql:INTERNAL=ON
+//Qt feature: sqlmodel (from target Qt6::Sql)
+QT_FEATURE_sqlmodel:INTERNAL=ON
 //Qt feature: sse2 (from target Qt6::Core)
 QT_FEATURE_sse2:INTERNAL=ON
 //Qt feature: sse3 (from target Qt6::Core)

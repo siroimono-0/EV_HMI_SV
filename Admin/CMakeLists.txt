@@ -31,6 +31,7 @@ qt_add_executable(Admin
     Dia_membership_card.h Dia_membership_card.cpp
     Dia_membership_card.ui
     Dia_HMI.h Dia_HMI.cpp Dia_HMI.ui
+    Dia_ad.h Dia_ad.cpp Dia_ad.ui
 
     ./CppModule/WK_soc.h CppModule/WK_soc.cpp
     ../Common/StatData.h

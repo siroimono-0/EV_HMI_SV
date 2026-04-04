@@ -3,9 +3,14 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
+#include <QHttpMultiPart>
+#include <QHttpPart>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QObject>
 #include <QThread>
 #include <QTimer>
@@ -23,6 +28,7 @@ class MD_membership_log;
 class MD_store_user;
 class Dia_membership_card;
 class Dia_HMI;
+class Dia_ad;
 
 class WK_soc : public QObject
 {
@@ -62,6 +68,7 @@ public slots:
     void slot_set_p_md_store_user(MD_store_user *set);
     void slot_set_p_dia_mCard(Dia_membership_card *set);
     void slot_set_p_dia_hmi(Dia_HMI *set);
+    void slot_set_p_dia_ad(Dia_ad *set);
 
     void slot_req_mCard_status_db(QString card_uid);
     void slot_req_mCard_revision_db(membership_card_admin st_mCard);
@@ -69,6 +76,9 @@ public slots:
     // Dia_HMI -> sep_p_soc에서 커넥트
     void slot_revision_hmi_To_SV(const revision_hmi_admin st_revision);
     void slot_set_dia_hmi_reqStat(bool set);
+
+    // void slot_netAccess_reply(QNetworkReply *reply);
+    void slot_netAccess_post(QString file_path);
 
 signals:
     void sig_end();
@@ -96,6 +106,7 @@ signals:
 private:
     Admin *p_admin = nullptr;
     QWebSocket *p_soc = nullptr;
+    QNetworkAccessManager *p_netAccess = nullptr;
 
     // md 생성될 때 WK_soc slot으로 초기화
     MD_charging_log *p_md_charging_log = nullptr;
@@ -120,6 +131,9 @@ private:
     // Dia_HMI -> set_p_soc 에서 slot_으로 초기화
     Dia_HMI *p_dia_hmi = nullptr;
     bool dia_hmi_reqStat = false;
+
+    // Dia_ad -> set_p_soc 에서 slot_으로 초기화
+    Dia_ad *p_dia_ad = nullptr;
 };
 
 #endif // WK_SOC_H
