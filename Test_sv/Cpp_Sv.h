@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QObject>
+#include <QSerialPortInfo>
 #include <QWebSocket>
 #include <QWebSocketServer>
 
@@ -13,6 +14,7 @@ public:
     explicit Cpp_Sv(QObject *parent = nullptr);
     void connectSv();
 
+    void PrintPortInfo();
 signals:
 
 private:

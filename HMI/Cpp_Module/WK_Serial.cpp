@@ -9,14 +9,16 @@ extern "C" {
 WK_Serial::WK_Serial(QObject *parent)
     : QObject{parent}
 {
+    /*
     this->serial_open();
-
     this->uart_ems_open();
-
     // timer 같이 초기화
     this->rs485_modbus_open();
-
     this->rs232_modbus_open();
+    */
+
+    this->serial_init();
+    this->serial_compare();
 
     // 처음에 코일 전부다 off 상태로 만들어야댐
     this->rs485_coil_all_off();
@@ -42,6 +44,123 @@ WK_Serial::WK_Serial(QObject *parent)
     // this->rs485_coil_on_off(0x03, false);
 }
 
+void WK_Serial::serial_init()
+{
+    struct serial_info st_info_1 = {0};
+    st_info_1.role = MCU;
+    st_info_1.description = "USB-Serial Controller D";
+    st_info_1.manufacturer = "Prolific Technology Inc.";
+    st_info_1.vendorId = "0x067b";
+    st_info_1.productId = "0x2303";
+
+    struct serial_info st_info_2 = {0};
+    st_info_2.role = MODULE;
+    st_info_2.description = "USB Serial";
+    st_info_2.manufacturer = "1a86";
+    st_info_2.vendorId = "0x1a86";
+    st_info_2.productId = "0x7523";
+
+    struct serial_info st_info_3 = {0};
+    st_info_3.role = EMS;
+    st_info_3.description = "FT232R USB UART";
+    st_info_3.manufacturer = "FTDI";
+    st_info_3.vendorId = "0x0403";
+    st_info_3.productId = "0x6001";
+
+    struct serial_info st_info_4 = {0};
+    st_info_4.role = CARD;
+    st_info_4.description = "CP2102 USB to UART Bridge Controller";
+    st_info_4.manufacturer = "Silicon Labs";
+    st_info_4.vendorId = "0x10c4";
+    st_info_4.productId = "0xea60";
+
+    this->vec_init_serial_info.push_back(st_info_1);
+    this->vec_init_serial_info.push_back(st_info_2);
+    this->vec_init_serial_info.push_back(st_info_3);
+    this->vec_init_serial_info.push_back(st_info_4);
+    return;
+}
+
+void WK_Serial::serial_compare()
+{
+    QList<QSerialPortInfo> l_ports = QSerialPortInfo::availablePorts();
+
+    qDebug() << "port count =" << l_ports.size();
+
+    for (const QSerialPortInfo &sp_port : l_ports)
+    {
+        if (!sp_port.portName().contains("ttyUSB"))
+        {
+            continue;
+        }
+
+        // sp_port.systemLocation();
+
+        struct serial_info st_info = {0};
+        st_info.description = sp_port.description();
+        st_info.manufacturer = sp_port.manufacturer();
+        st_info.vendorId = QString("0x%1").arg(sp_port.vendorIdentifier(), 4, 16, QChar('0'));
+        st_info.productId = QString("0x%1").arg(sp_port.productIdentifier(), 4, 16, QChar('0'));
+
+        for (const auto v : this->vec_init_serial_info)
+        {
+            bool flag = true;
+            if (v.description != st_info.description)
+            {
+                flag = false;
+            }
+            if (v.manufacturer != st_info.manufacturer)
+            {
+                flag = false;
+            }
+            if (v.vendorId != st_info.vendorId)
+            {
+                flag = false;
+            }
+            if (v.productId != st_info.productId)
+            {
+                flag = false;
+            }
+
+            if (flag == true)
+            {
+                QString path = sp_port.systemLocation();
+                if (v.role == MCU)
+                {
+                    this->rs232_modbus_open(path);
+                }
+                else if (v.role == MODULE)
+                {
+                    this->rs485_modbus_open(path);
+                }
+                else if (v.role == EMS)
+                {
+                    this->uart_ems_open(path);
+                }
+                else if (v.role == CARD)
+                {
+                    this->serial_open(path);
+                }
+            }
+        }
+
+        qDebug() << "==============================";
+        qDebug() << "portName       =" << sp_port.portName();
+        qDebug() << "systemLocation =" << sp_port.systemLocation();
+        qDebug() << "description    =" << sp_port.description();
+        qDebug() << "manufacturer   =" << sp_port.manufacturer();
+        qDebug() << "serialNumber   =" << sp_port.serialNumber();
+
+        if (sp_port.hasVendorIdentifier())
+            qDebug() << "vendorId       ="
+                     << QString("0x%1").arg(sp_port.vendorIdentifier(), 4, 16, QChar('0'));
+
+        if (sp_port.hasProductIdentifier())
+            qDebug() << "productId      ="
+                     << QString("0x%1").arg(sp_port.productIdentifier(), 4, 16, QChar('0'));
+    }
+}
+
 void WK_Serial::rs485_coil_all_off()
 {
     this->coil_all_off_stat = true;
@@ -65,10 +184,10 @@ uint8_t WK_Serial::cnv_uint8_t(char c)
     return (uint8_t) (unsigned char) c;
 }
 
-void WK_Serial::rs485_modbus_open()
+void WK_Serial::rs485_modbus_open(const QString path)
 {
     this->p_rs485_modbus = new QSerialPort(this);
-    this->p_rs485_modbus->setPortName("COM8"); // 장치관리자에서 본 COM 번호
+    this->p_rs485_modbus->setPortName(path); // 장치관리자에서 본 COM 번호
     this->p_rs485_modbus->setBaudRate(QSerialPort::Baud9600);
     this->p_rs485_modbus->setDataBits(QSerialPort::Data8);
     this->p_rs485_modbus->setParity(QSerialPort::NoParity);
@@ -302,10 +421,10 @@ void WK_Serial::rs485_crc_compare()
     return;
 }
 
-void WK_Serial::rs232_modbus_open()
+void WK_Serial::rs232_modbus_open(const QString path)
 {
     this->p_rs232_modbus = new QSerialPort(this);
-    this->p_rs232_modbus->setPortName("COM9"); // 장치관리자에서 본 COM 번호
+    this->p_rs232_modbus->setPortName(path); // 장치관리자에서 본 COM 번호
     this->p_rs232_modbus->setBaudRate(QSerialPort::Baud9600);
     this->p_rs232_modbus->setDataBits(QSerialPort::Data8);
     this->p_rs232_modbus->setParity(QSerialPort::NoParity);
@@ -604,10 +723,10 @@ void WK_Serial::slot_rs232_reqTimer_timeout()
     return;
 }
 
-void WK_Serial::serial_open()
+void WK_Serial::serial_open(const QString path)
 {
     this->p_serial = new QSerialPort(this);
-    this->p_serial->setPortName("COM7"); // 장치관리자에서 본 COM 번호
+    this->p_serial->setPortName(path); // 장치관리자에서 본 COM 번호
     this->p_serial->setBaudRate(QSerialPort::Baud9600);
     this->p_serial->setDataBits(QSerialPort::Data8);
     this->p_serial->setParity(QSerialPort::NoParity);
@@ -739,10 +858,10 @@ void WK_Serial::slot_set_card_type(QString set)
     return;
 }
 
-void WK_Serial::uart_ems_open()
+void WK_Serial::uart_ems_open(const QString path)
 {
     this->p_ems = new QSerialPort(this);
-    this->p_ems->setPortName("COM5"); // 장치관리자에서 본 COM 번호
+    this->p_ems->setPortName(path); // 장치관리자에서 본 COM 번호
     this->p_ems->setBaudRate(QSerialPort::Baud9600);
     this->p_ems->setDataBits(QSerialPort::Data8);
     this->p_ems->setParity(QSerialPort::NoParity);

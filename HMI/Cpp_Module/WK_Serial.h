@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QObject>
 #include <QSerialPort>
+#include <QSerialPortInfo>
 #include <QTimer>
 #include "../Common/StatData.h"
 
@@ -20,6 +21,7 @@ struct test_st
 };
 
 enum RESPONSE_TYPE { START = 0, STOP = 1, READ = 2 };
+enum DEV_ROLE { MCU = 0, MODULE = 1, EMS = 2, CARD = 3 };
 
 class WK_Serial : public QObject
 {
@@ -27,16 +29,18 @@ class WK_Serial : public QObject
 public:
     explicit WK_Serial(QObject *parent = nullptr);
 
-    void serial_open();
+    void serial_init();
+    void serial_compare();
+    void serial_open(const QString path);
 
-    void rs485_modbus_open();
+    void rs485_modbus_open(const QString path);
     void rs485_crc_compare();
     static uint8_t cnv_uint8_t(char c);
 
     void rs485_coil_all_off();
     void rs485_coil_on_off(char coil_num, bool onoff);
 
-    void rs232_modbus_open();
+    void rs232_modbus_open(const QString path);
     bool rs232_crc_compare();
     void rs232_modbus_req();
     void rs232_modbus_response_parsing();
@@ -44,7 +48,7 @@ public:
     uint16_t read16_BE(const QByteArray &qba, int pos);
     uint32_t read32_BE(const QByteArray &qba, int pos);
 
-    void uart_ems_open();
+    void uart_ems_open(const QString path);
 
     void set_p_module(Cpp_Module *module);
     void set_p_stat(StatStore *stat);
@@ -101,7 +105,46 @@ private:
     bool card_stat = false;
 
     QVector<QPair<char, bool>> connecter234_stat;
+
+    QVector<serial_info> vec_init_serial_info;
 };
 
 Q_DECLARE_METATYPE(WK_Serial *)
+
+/*
+MCU(RS232)
+description    = "USB-Serial Controller D"
+manufacturer   = "Prolific Technology Inc."
+serialNumber   = ""
+vendorId       = "0x067b"
+productId      = "0x2303"
+
+=====================================================
+
+Module(RS485)
+description    = "USB Serial"
+manufacturer   = "1a86"
+serialNumber   = ""
+vendorId       = "0x1a86"
+productId      = "0x7523"
+
+=====================================================
+
+EMS(Uart)
+description    = "FT232R USB UART"
+manufacturer   = "FTDI"
+serialNumber   = "A5069RR4"
+vendorId       = "0x0403"
+productId      = "0x6001"
+
+=====================================================
+
+Card
+description    = "CP2102 USB to UART Bridge Controller"
+manufacturer   = "Silicon Labs"
+serialNumber   = "0001"
+vendorId       = "0x10c4"
+productId      = "0xea60"
+*/
+
 #endif // WK_SERIAL_H

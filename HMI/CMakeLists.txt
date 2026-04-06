@@ -129,10 +129,19 @@ install(TARGETS appHMI
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-set(PG_BIN_DIR "C:/Program Files/PostgreSQL/18/bin")
+if(WIN32)
+    set(PG_DLL_PATH "C:/Program Files/PostgreSQL/18/bin/libpq.dll")
 
-add_custom_command(TARGET appHMI POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "${PG_BIN_DIR}/libpq.dll"
-    $<TARGET_FILE_DIR:appHMI>
-)
+    if(EXISTS "${PG_DLL_PATH}")
+        add_custom_command(TARGET appHMI POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${PG_DLL_PATH}"
+            $<TARGET_FILE_DIR:appHMI>
+        )
+    endif()
+
+elseif(UNIX)
+    find_library(PQ_LIB pq REQUIRED)
+    message(STATUS "PQ_LIB = ${PQ_LIB}")
+    target_link_libraries(appHMI PRIVATE ${PQ_LIB})
+endif()

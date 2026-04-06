@@ -801,6 +801,7 @@ void StatStore::create_db_lite()
 
     s_data_dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     s_db_path = s_data_dir + "/db_lite.sqlite3";
+    qDebug() << s_db_path;
     qd_dir.mkpath(s_data_dir);
 
     this->db_lite = QSqlDatabase::addDatabase("QSQLITE", "DB_THREAD_CONN_SQLITE");

@@ -250,4 +250,14 @@ struct mp_wk_key
     QString s_id;
 };
 Q_DECLARE_METATYPE(mp_wk_key)
+
+struct serial_info
+{
+    int role;
+    QString path;
+    QString description;
+    QString manufacturer;
+    QString vendorId;
+    QString productId;
+};
 #endif // STATDATA_H

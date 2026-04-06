@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS WebSockets)
+find_package(Qt6 REQUIRED COMPONENTS SerialPort)
 
 
 qt_standard_project_setup(REQUIRES 6.8)
@@ -41,6 +42,7 @@ target_link_libraries(appTest_sv
 )
 target_link_libraries(appTest_sv PRIVATE Qt6::Core)
 target_link_libraries(appTest_sv PRIVATE Qt6::WebSockets)
+target_link_libraries(appTest_sv PRIVATE Qt6::SerialPort)
 
 include(GNUInstallDirs)
 install(TARGETS appTest_sv
