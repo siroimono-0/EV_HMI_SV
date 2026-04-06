@@ -8,6 +8,7 @@ Window {
     height: 800
     visible: true
     title: qsTr("Hello World")
+    flags: Qt.FramelessWindowHint
 
     property int cnt: 0;
 
@@ -183,8 +184,9 @@ Window {
 
 
         Component.onCompleted: {
-            // root_stkView.push("Start_page.qml", {"mainWin": root});
-            root_stkView.push("Card_Ready.qml", {"mainWin": root});
+            root_stkView.push("Start_page.qml", {"mainWin": root});
+            // root_stkView.push("Card_Ready.qml", {"mainWin": root});
+            // root_stkView.push("Test.qml", {"mainWin": root});
             // root_stkView.push("Maintenance.qml", {"mainWin": root});
         }
     }

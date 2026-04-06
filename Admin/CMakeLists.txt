@@ -49,6 +49,8 @@ qt_add_executable(Admin
 
 )
 
+set_target_properties(Admin PROPERTIES OUTPUT_NAME appAdmin)
+
 qt_add_qml_module(Admin
     URI Admin
     VERSION 1.0

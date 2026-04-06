@@ -246,43 +246,8 @@ void WK_WebSocket::slot_Connect_Sv()
     // 에러 뱉어냄
     // this->p_webSoc->setParent(this);
 
-    QFile cert_file("../../../ssl/server.crt");
-    // qDebug() << QDir::currentPath();
-    if (!cert_file.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "server.crt open fail";
-        return;
-    }
-
-    QSslCertificate cert(&cert_file, QSsl::Pem);
-    if (cert.isNull())
-    {
-        qDebug() << "invalid cert";
-        return;
-    }
-
-    QSslConfiguration ssl_cfg = QSslConfiguration::defaultConfiguration();
-    ssl_cfg.addCaCertificate(cert); // 이 인증서를 신뢰 목록에 추가
-    ssl_cfg.setProtocol(QSsl::TlsV1_2OrLater);
-
-    this->p_webSoc->setSslConfiguration(ssl_cfg); // open() 전에 설정
-
-    QObject::connect(this->p_webSoc, &QWebSocket::sslErrors, [](const QList<QSslError> &vl_err) {
-        qDebug() << "ssl error";
-        for (const QSslError &err : vl_err)
-        {
-            qDebug() << err.errorString();
-        }
-    });
-
     // 서버 연결 완료 시
     connect(this->p_webSoc, &QWebSocket::connected, this, &WK_WebSocket::slot_ID_Check);
-
-    /*
-     수정 부분 안씀
-    // 상태 클래스 상태값 변경시 SV 데이터 전송
-    connect(this->p_stat, &StatStore::sig_Stat_changed, this, &WK_WebSocket::slot_Send_TextData);
-    */
 
     // statStore db_data 전송
     connect(this->p_stat,
@@ -300,7 +265,7 @@ void WK_WebSocket::slot_Connect_Sv()
     connect(this->p_webSoc, &QWebSocket::disconnected, this->p_webSoc, &QWebSocket::deleteLater);
 
     // 커넥트 다 걸고  open
-    this->p_webSoc->open(QUrl("wss://192.168.123.100:12345"));
+    this->p_webSoc->open(QUrl("ws://192.168.123.102:12345"));
 
     qDebug() << Q_FUNC_INFO;
     return;
@@ -343,6 +308,7 @@ void WK_WebSocket::slot_SocErr(QAbstractSocket::SocketError error)
                                   &Cpp_Module::sig_SocErr_ToQml,
                                   QString("연결 시간 초과"));
     }
+
     qDebug() << "hello?";
     return;
 }

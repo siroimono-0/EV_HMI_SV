@@ -85,13 +85,32 @@ install(TARGETS appWebSocSv
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-set(PG_BIN_DIR "C:/Program Files/PostgreSQL/18/bin")
 
-add_custom_command(TARGET appWebSocSv POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "${PG_BIN_DIR}/libpq.dll"
-    $<TARGET_FILE_DIR:appWebSocSv>
-)
+
+# add_custom_command(TARGET appWebSocSv POST_BUILD
+    # COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    # "${PG_BIN_DIR}/libpq.dll"
+    # $<TARGET_FILE_DIR:appWebSocSv>
+# )
+
+if(WIN32)
+    # set(PG_BIN_DIR "C:/Program Files/PostgreSQL/18/bin")
+    set(PG_DLL_PATH "C:/Program Files/PostgreSQL/18/bin/libpq.dll")
+
+    if(EXISTS "${PG_DLL_PATH}")
+        add_custom_command(TARGET appWebSocSv POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${PG_DLL_PATH}"
+            $<TARGET_FILE_DIR:appWebSocSv>
+        )
+    endif()
+
+elseif(UNIX)
+    find_library(PQ_LIB pq REQUIRED)
+    message(STATUS "PQ_LIB = ${PQ_LIB}")
+    target_link_libraries(appWebSocSv  PRIVATE ${PQ_LIB})
+endif()
+
 
 
 

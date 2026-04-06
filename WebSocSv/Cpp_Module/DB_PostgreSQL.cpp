@@ -5,6 +5,8 @@
 DB_PostgreSQL::DB_PostgreSQL(QObject *parent)
     : QObject{parent}
 {
+    this->path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+
     this->p_timer_lite = new QTimer();
     this->p_timer_lite->start(60000);
     connect(this->p_timer_lite, &QTimer::timeout, this, &DB_PostgreSQL::backUp_register_chargingLog);
@@ -83,8 +85,7 @@ void DB_PostgreSQL::createDB()
     }
 
     this->db_lite = QSqlDatabase::addDatabase("QSQLITE", "DB_THREAD_CONN_SQLITE");
-    this->db_lite.setDatabaseName(
-        "C:/Users/siroi/siroimono/w_qt/EV/WebSocSv/SQLITE/db_lite_2.sqlite3");
+    this->db_lite.setDatabaseName(this->path + "/db_lite.sqlite3");
 
     qDebug() << "db path =" << db_lite.databaseName();
 

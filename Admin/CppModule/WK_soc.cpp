@@ -114,36 +114,7 @@ void WK_soc::slot_start()
 
     connect(this->p_soc, &QWebSocket::textMessageReceived, this, &WK_soc::slot_recvText);
 
-    QFile cert_file("../../../ssl/server.crt");
-    // qDebug() << QDir::currentPath();
-    if (!cert_file.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "server.crt open fail";
-        return;
-    }
-
-    QSslCertificate cert(&cert_file, QSsl::Pem);
-    if (cert.isNull())
-    {
-        qDebug() << "invalid cert";
-        return;
-    }
-
-    QSslConfiguration ssl_cfg = QSslConfiguration::defaultConfiguration();
-    ssl_cfg.addCaCertificate(cert); // 이 인증서를 신뢰 목록에 추가
-    ssl_cfg.setProtocol(QSsl::TlsV1_2OrLater);
-
-    this->p_soc->setSslConfiguration(ssl_cfg); // open() 전에 설정
-
-    QObject::connect(this->p_soc, &QWebSocket::sslErrors, [](const QList<QSslError> &vl_err) {
-        qDebug() << "ssl error";
-        for (const QSslError &err : vl_err)
-        {
-            qDebug() << err.errorString();
-        }
-    });
-
-    this->p_soc->open(QUrl("wss://192.168.123.100:12345/ws/admin"));
+    this->p_soc->open(QUrl("ws://192.168.123.102:12345/ws/admin"));
     qDebug() << Q_FUNC_INFO;
     return;
 }

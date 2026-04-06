@@ -29,43 +29,9 @@ void Hub::set_p_db(DB_PostgreSQL *set_db)
 
 void Hub::slot_start_sv()
 {
-    QFile cert_file("../../../ssl/server.crt");
-    QFile key_file("../../../ssl/server.key");
     QString sv_name = "WebSocSv";
 
-    if (!cert_file.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "cert open fail";
-        return;
-    }
-
-    if (!key_file.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "key open fail";
-        return;
-    }
-
-    QSslCertificate cert(&cert_file, QSsl::Pem);
-    QSslKey key(&key_file, QSsl::Rsa, QSsl::Pem);
-
-    QSslConfiguration ssl_cfg = QSslConfiguration::defaultConfiguration();
-    ssl_cfg.setLocalCertificate(cert);
-    ssl_cfg.setPrivateKey(key);
-    ssl_cfg.setProtocol(QSsl::TlsV1_2OrLater);
-
-    this->p_webSoc_Sv = new QWebSocketServer(sv_name, QWebSocketServer::SecureMode, this);
-
-    this->p_webSoc_Sv->setSslConfiguration(ssl_cfg);
-
-    QObject::connect(this->p_webSoc_Sv,
-                     &QWebSocketServer::sslErrors,
-                     [](const QList<QSslError> &vl_err) {
-                         qDebug() << "ssl error";
-                         for (const QSslError &err : vl_err)
-                         {
-                             qDebug() << err.errorString();
-                         }
-                     });
+    this->p_webSoc_Sv = new QWebSocketServer(sv_name, QWebSocketServer::NonSecureMode, this);
 
     bool ret_listen = this->p_webSoc_Sv->listen(QHostAddress::Any, 12345);
 

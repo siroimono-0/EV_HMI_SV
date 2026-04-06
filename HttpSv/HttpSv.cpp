@@ -3,6 +3,8 @@
 HttpSv::HttpSv(QObject *parent)
     : QObject{parent}
 {
+    this->mkdir();
+
     this->p_httpSv = new QHttpServer(this);
     this->p_httpSv->route("/compare", QHttpServerRequest::Method::Post, this, &HttpSv::slot_compare);
 
@@ -26,6 +28,19 @@ HttpSv::HttpSv(QObject *parent)
 
     // 태스트 카드 값 저장
     this->qmp.insert("45005A91B8", true);
+}
+
+void HttpSv::mkdir()
+{
+    QString tmp_dir_path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    tmp_dir_path += "/mp4";
+
+    QDir dir_path;
+    dir_path.mkpath(tmp_dir_path);
+    qDebug() << tmp_dir_path;
+
+    this->path_mp4 = tmp_dir_path;
+    return;
 }
 
 QHttpServerResponse HttpSv::slot_compare(const QHttpServerRequest &req)
@@ -80,7 +95,8 @@ QHttpServerResponse HttpSv::slot_compare(const QHttpServerRequest &req)
 
         QString name = QString::fromUtf8(qba.left(find_idx));
         qDebug() << name;
-        QString path = "C:/Users/siroi/siroimono/w_qt/EV/HttpSv/mp4/" + name;
+        // QString path = "C:/Users/siroi/siroimono/w_qt/EV/HttpSv/mp4/" + name;
+        QString path = this->path_mp4 + "/" + name;
         QFile up_file(path);
         up_file.open(QIODevice::ReadWrite);
         up_file.write(qba.right(qba.size() - (find_idx + 2)));
@@ -104,7 +120,8 @@ QHttpServerResponse HttpSv::slot_compare_get(const QHttpServerRequest &req)
     {
         QString name = QString::fromUtf8(req.body());
 
-        QString path = "C:/Users/siroi/siroimono/w_qt/EV/HttpSv/mp4/" + name;
+        // QString path = "C:/Users/siroi/siroimono/w_qt/EV/HttpSv/mp4/" + name;
+        QString path = this->path_mp4 + "/" + name;
         QFile down_file(path);
         down_file.open(QIODevice::ReadWrite);
         QByteArray qba;

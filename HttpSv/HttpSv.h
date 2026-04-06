@@ -2,12 +2,15 @@
 #define HTTPSV_H
 
 #include <QDebug>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QHttpServer>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMap>
 #include <QObject>
+#include <QStandardPaths>
 #include <QTcpServer>
 
 enum COMPARE_ROLE { SUCCESS = 0, NOT_FIND = 1, NOT_MONEY = 2 };
@@ -18,6 +21,7 @@ class HttpSv : public QObject
 public:
     explicit HttpSv(QObject *parent = nullptr);
 
+    void mkdir();
     void upload_mp4();
 
 public slots:
@@ -32,6 +36,7 @@ private:
     QHttpServer *p_httpSv = nullptr;
     QTcpServer *p_tcpSv = nullptr;
     QMap<QString, bool> qmp;
+    QString path_mp4;
 };
 
 #endif // HTTPSV_H

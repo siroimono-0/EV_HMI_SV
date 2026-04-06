@@ -17,11 +17,11 @@ WK_Serial::WK_Serial(QObject *parent)
     this->rs232_modbus_open();
     */
 
-    this->serial_init();
-    this->serial_compare();
+    // this->serial_init();
+    // this->serial_compare();
 
     // 처음에 코일 전부다 off 상태로 만들어야댐
-    this->rs485_coil_all_off();
+    // this->rs485_coil_all_off();
 
     // 초기 코일값 세팅
     // this->connecter234_stat.push_back({0x01, true});

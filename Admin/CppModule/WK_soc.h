@@ -14,8 +14,8 @@
 #include <QObject>
 #include <QThread>
 #include <QTimer>
+#include <QUrl>
 #include <QWebSocket>
-#include <Qurl>
 #include "../Common/StatData.h"
 #include <algorithm>
 

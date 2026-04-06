@@ -40,7 +40,10 @@ Item {
 
         function onSig_ad_play_ToQml()
         {
-            player.play();
+            Qt.callLater(function() {
+                // console.log("play??");
+                player.play();
+            });
         }
 
     }
@@ -107,7 +110,7 @@ Item {
 
         MediaPlayer{
             id: player
-            source: (cpp_module && cpp_module.statStore) ?  String (cpp_module.statStore.cur_advertisement) : "-";
+            source: (cpp_module && cpp_module.statStore) ? ("file://" + String (cpp_module.statStore.cur_advertisement)) : "-";
 
             loops: 1;
             videoOutput: videoOut
@@ -119,6 +122,13 @@ Item {
                 {
                     cpp_module.next_ad_To_statStore();
                 }
+            }
+
+            onErrorOccurred: function(err, errMsg)
+            {
+                console.log(("file://" + String (cpp_module.statStore.cur_advertisement)));
+                console.log(err);
+                console.log(errMsg);
             }
         }
 

@@ -8,10 +8,13 @@ Item {
 
     }
 
-    BtnGreen_2{
-        anchors.centerIn: parent
-        width: 300;
-        height: 140;
 
+    Component.onCompleted: {
+        console.log("width =", width)
+        console.log("height =", height)
+        console.log("Screen.width =", Screen.width)
+        console.log("Screen.height =", Screen.height)
+        console.log("Screen.devicePixelRatio =", Screen.devicePixelRatio)
+        console.log("Screen.pixelDensity =", Screen.pixelDensity)
     }
 }

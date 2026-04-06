@@ -128,6 +128,7 @@ private:
     QSqlDatabase db;
     QSqlDatabase db_lite;
     QTimer *p_timer_lite;
+    QString path;
 
     Cpp_Module *p_Module;
     // WK_Soc *p_soc; Hub로 변경...
