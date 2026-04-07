@@ -185,9 +185,10 @@ Window {
 
         Component.onCompleted: {
             root_stkView.push("Start_page.qml", {"mainWin": root});
-            // root_stkView.push("Card_Ready.qml", {"mainWin": root});
+            // root_stkView.push("Charging_Complet.qml", {"mainWin": root});
             // root_stkView.push("Test.qml", {"mainWin": root});
-            // root_stkView.push("Maintenance.qml", {"mainWin": root});
+            // root_stkView.push("Ems_Nomal.qml", {"mainWin": root});
+            // root_stkView.push("Ems_Charging.qml", {"mainWin": root});
         }
     }
     /*

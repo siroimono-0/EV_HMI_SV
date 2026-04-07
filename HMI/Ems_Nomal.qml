@@ -89,7 +89,7 @@ Item {
             width: 300; height: 300;
 
             anchors.top: parent.top
-            anchors.topMargin: 30
+            // anchors.topMargin: 30
             anchors.horizontalCenter: parent.horizontalCenter
             fillMode: Image.PreserveAspectFit;
 
@@ -101,6 +101,30 @@ Item {
                 shadowVerticalOffset: 0;
                 shadowHorizontalOffset: 0;
             }
+
+            SequentialAnimation{
+                running: true;
+                loops: Animation.Infinite
+                NumberAnimation{
+                    id: any3
+                    target:  warning;
+                    property: "opacity";
+                    from: 1;
+                    to: 0.1;
+                    duration: 700;
+                    easing.type: Easing.InOutSine
+                }
+
+                NumberAnimation{
+                    id: any4
+                    target:  warning;
+                    property: "opacity";
+                    from: 0.1;
+                    to: 1;
+                    duration: 700;
+                    easing.type: Easing.InOutSine
+                }
+            }
         }
 
         Label{
@@ -111,7 +135,7 @@ Item {
             font.bold: true
 
             anchors.top: warning.bottom
-            // anchors.topMargin: 10
+            anchors.topMargin: -10
             anchors.horizontalCenter: parent.horizontalCenter
 
             horizontalAlignment: Text.AlignHCenter;
@@ -145,13 +169,13 @@ Item {
 
         Label{
             id: lb_msg2
-            text: "설비 문제가 있다면";
+            text: "설비에 문제가 있다면";
             font.pixelSize: 45
             font.family: "DIN"
             font.bold: true
 
             anchors.top: lb_msg1.bottom
-            anchors.topMargin: 10
+            // anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
 
             horizontalAlignment: Text.AlignHCenter;
@@ -160,7 +184,7 @@ Item {
 
         Label{
             id: lb_msg2_neon
-            text: "설비 문제가 있다면";
+            text: "설비에 문제가 있다면";
             font.pixelSize: 45
             font.family: "DIN"
             font.bold: true
@@ -191,7 +215,7 @@ Item {
             font.bold: true
 
             anchors.top: lb_msg2.bottom
-            anchors.topMargin: 10
+            // anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
 
             horizontalAlignment: Text.AlignHCenter;
@@ -229,7 +253,7 @@ Item {
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 50
+            anchors.bottomMargin: 20
 
             onSig_Clicked: {
                 root.stk_pop();

@@ -8,6 +8,7 @@ Item {
     property string pageName: "Ems_Charging";
     property var mainWin;
     property int stk_depth;
+    property int font_size_0 : 30
 
     function stk_pop()
     {
@@ -101,6 +102,31 @@ Item {
                 shadowVerticalOffset: 0;
                 shadowHorizontalOffset: 0;
             }
+
+            SequentialAnimation{
+                running: true;
+                loops: Animation.Infinite
+                NumberAnimation{
+                    id: any3
+                    target:  warning;
+                    property: "opacity";
+                    from: 1;
+                    to: 0.1;
+                    duration: 700;
+                    easing.type: Easing.InOutSine
+                }
+
+                NumberAnimation{
+                    id: any4
+                    target:  warning;
+                    property: "opacity";
+                    from: 0.1;
+                    to: 1;
+                    duration: 700;
+                    easing.type: Easing.InOutSine
+                }
+            }
+
         }
 
         Label{
@@ -157,7 +183,7 @@ Item {
                 Label{
                     id: lb_col0
                     text: "충전률"
-                    font.pixelSize: 35
+                    font.pixelSize: root.font_size_0
                     font.family: "DIN"
                     font.bold: true
                     anchors.centerIn: parent
@@ -168,7 +194,7 @@ Item {
                 Label{
                     id: lb_col0_neon
                     text: "충전률"
-                    font.pixelSize: 35
+                    font.pixelSize: root.font_size_0
                     font.family: "DIN"
                     font.bold: true
 
@@ -217,7 +243,7 @@ Item {
                 Label{
                     id: lb_col3
                     text: "선결제 금액"
-                    font.pixelSize: 35
+                    font.pixelSize: root.font_size_0
                     font.family: "DIN"
                     font.bold: true
                     anchors.centerIn: parent
@@ -228,7 +254,7 @@ Item {
                 Label{
                     id: lb_col3_neon
                     text: "선결제 금액"
-                    font.pixelSize: 35
+                    font.pixelSize: root.font_size_0
                     font.family: "DIN"
                     font.bold: true
 
@@ -276,7 +302,7 @@ Item {
                 Label{
                     id: lb_col4
                     text: "결제취소 금액"
-                    font.pixelSize: 35
+                    font.pixelSize: root.font_size_0
                     font.family: "DIN"
                     font.bold: true
                     anchors.centerIn: parent
@@ -287,7 +313,7 @@ Item {
                 Label{
                     id: lb_col4_neon
                     text: "결제취소 금액"
-                    font.pixelSize: 35
+                    font.pixelSize: root.font_size_0
                     font.family: "DIN"
                     font.bold: true
 
@@ -335,7 +361,7 @@ Item {
                 Label{
                     id: lb_col5
                     text: "실제청구 금액"
-                    font.pixelSize: 35
+                    font.pixelSize: root.font_size_0
                     font.family: "DIN"
                     font.bold: true
                     anchors.centerIn: parent
@@ -346,7 +372,7 @@ Item {
                 Label{
                     id: lb_col5_neon
                     text: "실제청구 금액"
-                    font.pixelSize: 35
+                    font.pixelSize: root.font_size_0
                     font.family: "DIN"
                     font.bold: true
 
@@ -393,175 +419,175 @@ Item {
         }
 
         Column{
-        id: root_col2
-        anchors.left: root_col1.right
-        anchors.leftMargin: 100
-        anchors.top: lb_msg1.bottom
-        anchors.topMargin: 20
+            id: root_col2
+            anchors.left: root_col1.right
+            anchors.leftMargin: 100
+            anchors.top: lb_msg1.bottom
+            anchors.topMargin: 20
 
-        spacing: 10
+            spacing: 10
 
-        Item{
-            width: lb_col00.width; height: lb_col00.height;
-            Label{
-                id: lb_col00
-                text: (cpp_module && cpp_module.statStore) ?
-                          String (cpp_module.statStore.battery_start_persent + " ▶ " + cpp_module.statStore.battery_current) : "-";
-                font.pixelSize: 35
-                font.family: "DIN"
-                font.bold: true
-                anchors.centerIn: parent
+            Item{
+                width: lb_col00.width; height: lb_col00.height;
+                Label{
+                    id: lb_col00
+                    text: (cpp_module && cpp_module.statStore) ?
+                              String (cpp_module.statStore.battery_start_persent + " ▶ " + cpp_module.statStore.battery_current) : "-";
+                    font.pixelSize: root.font_size_0
+                    font.family: "DIN"
+                    font.bold: true
+                    anchors.centerIn: parent
 
-                verticalAlignment: Text.AlignVCenter;
-            }
+                    verticalAlignment: Text.AlignVCenter;
+                }
 
-            Label{
-                id: lb_col00_neon
-                text: lb_col00.text;
-                font.pixelSize: 35
-                font.family: "DIN"
-                font.bold: true
+                Label{
+                    id: lb_col00_neon
+                    text: lb_col00.text;
+                    font.pixelSize: root.font_size_0
+                    font.family: "DIN"
+                    font.bold: true
 
-                anchors.centerIn: parent
-                // anchors.fill: lb_col1
-                anchors.margins: -20
+                    anchors.centerIn: parent
+                    // anchors.fill: lb_col1
+                    anchors.margins: -20
 
-                // horizontalAlignment: Text.AlignHCenter;
-                verticalAlignment: Text.AlignVCenter;
+                    // horizontalAlignment: Text.AlignHCenter;
+                    verticalAlignment: Text.AlignVCenter;
 
-                layer.enabled: true;
+                    layer.enabled: true;
 
-                layer.effect: MultiEffect{
-                    shadowEnabled: true;
-                    shadowBlur: 1
-                    shadowColor: "#FFFFFF"
-                    shadowOpacity: 1
-                    shadowVerticalOffset: 0;
-                    shadowHorizontalOffset: 0;
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
                 }
             }
-        }
-        Item{
-            width: lb_col33.width; height: lb_col33.height;
-            Label{
-                id: lb_col33
-                text: (cpp_module && cpp_module.statStore) ?
-                          String(cpp_module.statStore.advance_payment) : "-";
-                font.pixelSize: 35
-                font.family: "DIN"
-                font.bold: true
-                anchors.centerIn: parent
+            Item{
+                width: lb_col33.width; height: lb_col33.height;
+                Label{
+                    id: lb_col33
+                    text: (cpp_module && cpp_module.statStore) ?
+                              String(cpp_module.statStore.advance_payment) : "-";
+                    font.pixelSize: root.font_size_0
+                    font.family: "DIN"
+                    font.bold: true
+                    anchors.centerIn: parent
 
-                verticalAlignment: Text.AlignVCenter;
-            }
+                    verticalAlignment: Text.AlignVCenter;
+                }
 
-            Label{
-                id: lb_col33_neon
-                text: lb_col33.text
-                font.pixelSize: 35
-                font.family: "DIN"
-                font.bold: true
+                Label{
+                    id: lb_col33_neon
+                    text: lb_col33.text
+                    font.pixelSize: root.font_size_0
+                    font.family: "DIN"
+                    font.bold: true
 
-                anchors.centerIn: parent
-                // anchors.fill: lb_col1
-                anchors.margins: -20
+                    anchors.centerIn: parent
+                    // anchors.fill: lb_col1
+                    anchors.margins: -20
 
-                // horizontalAlignment: Text.AlignHCenter;
-                verticalAlignment: Text.AlignVCenter;
+                    // horizontalAlignment: Text.AlignHCenter;
+                    verticalAlignment: Text.AlignVCenter;
 
-                layer.enabled: true;
+                    layer.enabled: true;
 
-                layer.effect: MultiEffect{
-                    shadowEnabled: true;
-                    shadowBlur: 1
-                    shadowColor: "#FFFFFF"
-                    shadowOpacity: 1
-                    shadowVerticalOffset: 0;
-                    shadowHorizontalOffset: 0;
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
                 }
             }
-        }
-        Item{
-            width: lb_col44.width; height: lb_col44.height;
-            Label{
-                id: lb_col44
-                text: (cpp_module && cpp_module.statStore) ?  String(cpp_module.statStore.cancle_payment) : "-";
-                font.pixelSize: 35
-                font.family: "DIN"
-                font.bold: true
-                anchors.centerIn: parent
+            Item{
+                width: lb_col44.width; height: lb_col44.height;
+                Label{
+                    id: lb_col44
+                    text: (cpp_module && cpp_module.statStore) ?  String(cpp_module.statStore.cancle_payment) : "-";
+                    font.pixelSize: root.font_size_0
+                    font.family: "DIN"
+                    font.bold: true
+                    anchors.centerIn: parent
 
-                verticalAlignment: Text.AlignVCenter;
-            }
+                    verticalAlignment: Text.AlignVCenter;
+                }
 
-            Label{
-                id: lb_col44_neon
-                text: lb_col44.text
-                font.pixelSize: 35
-                font.family: "DIN"
-                font.bold: true
+                Label{
+                    id: lb_col44_neon
+                    text: lb_col44.text
+                    font.pixelSize: root.font_size_0
+                    font.family: "DIN"
+                    font.bold: true
 
-                anchors.centerIn: parent
-                // anchors.fill: lb_col1
-                anchors.margins: -20
+                    anchors.centerIn: parent
+                    // anchors.fill: lb_col1
+                    anchors.margins: -20
 
-                // horizontalAlignment: Text.AlignHCenter;
-                verticalAlignment: Text.AlignVCenter;
+                    // horizontalAlignment: Text.AlignHCenter;
+                    verticalAlignment: Text.AlignVCenter;
 
-                layer.enabled: true;
+                    layer.enabled: true;
 
-                layer.effect: MultiEffect{
-                    shadowEnabled: true;
-                    shadowBlur: 1
-                    shadowColor: "#FFFFFF"
-                    shadowOpacity: 1
-                    shadowVerticalOffset: 0;
-                    shadowHorizontalOffset: 0;
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
                 }
             }
-        }
-        Item{
-            width: lb_col55.width; height: lb_col55.height;
-            Label{
-                id: lb_col55
-                text:(cpp_module && cpp_module.statStore) ?
-                         String(cpp_module.statStore.actual_payment) : "-";
-                font.pixelSize: 35
-                font.family: "DIN"
-                font.bold: true
-                anchors.centerIn: parent
+            Item{
+                width: lb_col55.width; height: lb_col55.height;
+                Label{
+                    id: lb_col55
+                    text:(cpp_module && cpp_module.statStore) ?
+                             String(cpp_module.statStore.actual_payment) : "-";
+                    font.pixelSize: root.font_size_0
+                    font.family: "DIN"
+                    font.bold: true
+                    anchors.centerIn: parent
 
-                verticalAlignment: Text.AlignVCenter;
-            }
+                    verticalAlignment: Text.AlignVCenter;
+                }
 
-            Label{
-                id: lb_col55_neon
-                text: lb_col55.text
-                font.pixelSize: 35
-                font.family: "DIN"
-                font.bold: true
+                Label{
+                    id: lb_col55_neon
+                    text: lb_col55.text
+                    font.pixelSize: root.font_size_0
+                    font.family: "DIN"
+                    font.bold: true
 
-                anchors.centerIn: parent
-                // anchors.fill: lb_col1
-                anchors.margins: -20
+                    anchors.centerIn: parent
+                    // anchors.fill: lb_col1
+                    anchors.margins: -20
 
-                // horizontalAlignment: Text.AlignHCenter;
-                verticalAlignment: Text.AlignVCenter;
+                    // horizontalAlignment: Text.AlignHCenter;
+                    verticalAlignment: Text.AlignVCenter;
 
-                layer.enabled: true;
+                    layer.enabled: true;
 
-                layer.effect: MultiEffect{
-                    shadowEnabled: true;
-                    shadowBlur: 1
-                    shadowColor: "#FFFFFF"
-                    shadowOpacity: 1
-                    shadowVerticalOffset: 0;
-                    shadowHorizontalOffset: 0;
+                    layer.effect: MultiEffect{
+                        shadowEnabled: true;
+                        shadowBlur: 1
+                        shadowColor: "#FFFFFF"
+                        shadowOpacity: 1
+                        shadowVerticalOffset: 0;
+                        shadowHorizontalOffset: 0;
+                    }
                 }
             }
-        }
 
-    }
+        }
 
         BtnLed{
             id: btn_ok

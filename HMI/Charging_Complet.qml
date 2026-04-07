@@ -10,6 +10,7 @@ Item {
     property string pageName: "Charging_Complet";
     property var mainWin;
     property int stk_depth;
+    property int font_size_0 : 40;
 
     StackView.onActivated: {
         cpp_module.set_screen_name("충전 완료");
@@ -66,7 +67,7 @@ Item {
         font.family: "DIN"
         font.bold: true
         anchors.top: parent.top
-        anchors.topMargin: 30
+        anchors.topMargin: 15
         anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
@@ -149,14 +150,14 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 150
 
-        spacing: 20
+        spacing: 15
 
         Item{
             width: lb_col0.width; height: lb_col0.height;
             Label{
                 id: lb_col0
                 text: "충전률"
-                font.pixelSize: 45
+                font.pixelSize: root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -167,7 +168,7 @@ Item {
             Label{
                 id: lb_col0_neon
                 text: "충전률"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -216,7 +217,7 @@ Item {
             Label{
                 id: lb_col1
                 text: "경과시간"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -227,7 +228,7 @@ Item {
             Label{
                 id: lb_col1_neon
                 text: "경과시간"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -275,7 +276,7 @@ Item {
             Label{
                 id: lb_col2
                 text: "충전량"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -286,7 +287,7 @@ Item {
             Label{
                 id: lb_col2_neon
                 text: "충전량"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -334,7 +335,7 @@ Item {
             Label{
                 id: lb_col3
                 text: "선결제 금액"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -345,7 +346,7 @@ Item {
             Label{
                 id: lb_col3_neon
                 text: "선결제 금액"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -393,7 +394,7 @@ Item {
             Label{
                 id: lb_col4
                 text: "결제취소 금액"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -404,7 +405,7 @@ Item {
             Label{
                 id: lb_col4_neon
                 text: "결제취소 금액"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -452,7 +453,7 @@ Item {
             Label{
                 id: lb_col5
                 text: "실제청구 금액"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -463,7 +464,7 @@ Item {
             Label{
                 id: lb_col5_neon
                 text: "실제청구 금액"
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -516,7 +517,7 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 150
 
-        spacing: 20
+        spacing: 15
 
         Item{
             width: lb_col00.width; height: lb_col00.height;
@@ -524,7 +525,7 @@ Item {
                 id: lb_col00
                 text: (cpp_module && cpp_module.statStore) ?
                           String (cpp_module.statStore.battery_start_persent + " ▶ " + cpp_module.statStore.battery_current) : "-";
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -535,7 +536,7 @@ Item {
             Label{
                 id: lb_col00_neon
                 text: lb_col00.text;
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -564,7 +565,7 @@ Item {
                 id: lb_col11
                 text: (cpp_module && cpp_module.statStore) ?
                           String(cpp_module.statStore.elapsed_time) : "-";
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -575,7 +576,7 @@ Item {
             Label{
                 id: lb_col11_neon
                 text: lb_col11.text
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -604,7 +605,7 @@ Item {
                 id: lb_col22
                 text: (cpp_module && cpp_module.statStore) ?
                           String (cpp_module.statStore.charging_capacity) : "-";
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -615,7 +616,7 @@ Item {
             Label{
                 id: lb_col22_neon
                 text: lb_col22.text
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -644,7 +645,7 @@ Item {
                 id: lb_col33
                 text: (cpp_module && cpp_module.statStore) ?
                           String(cpp_module.statStore.advance_payment) : "-";
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -655,7 +656,7 @@ Item {
             Label{
                 id: lb_col33_neon
                 text: lb_col33.text
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -683,7 +684,7 @@ Item {
             Label{
                 id: lb_col44
                 text: (cpp_module && cpp_module.statStore) ?  String(cpp_module.statStore.cancle_payment) : "-";
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -694,7 +695,7 @@ Item {
             Label{
                 id: lb_col44_neon
                 text: lb_col44.text
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
@@ -723,7 +724,7 @@ Item {
                 id: lb_col55
                 text:(cpp_module && cpp_module.statStore) ?
                          String(cpp_module.statStore.actual_payment) : "-";
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
                 anchors.centerIn: parent
@@ -734,7 +735,7 @@ Item {
             Label{
                 id: lb_col55_neon
                 text: lb_col55.text
-                font.pixelSize: 45
+                font.pixelSize:  root.font_size_0
                 font.family: "DIN"
                 font.bold: true
 
