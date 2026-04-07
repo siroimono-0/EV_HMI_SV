@@ -8,7 +8,7 @@ WK_WebSocket::WK_WebSocket(QObject *parent)
 {
     this->create_netAccess();
 
-    QString url = "http://127.0.0.1:8080/compare";
+    QString url = "http://192.168.123.102:8080/compare";
     this->set_httpSv_url(url);
 }
 
