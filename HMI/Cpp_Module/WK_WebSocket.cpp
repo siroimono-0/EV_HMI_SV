@@ -14,8 +14,13 @@ WK_WebSocket::WK_WebSocket(QObject *parent)
 
 void WK_WebSocket::slot_stop()
 {
-    this->p_webSoc->close();
-    emit sig_end();
+    if (this->p_webSoc != nullptr)
+    {
+        this->p_webSoc->close();
+    }
+    // emit sig_end();
+
+    QThread::currentThread()->quit();
     return;
 }
 
@@ -843,6 +848,17 @@ void WK_WebSocket::parsing_revision_HMI(const QJsonObject jo)
     {
         this->remove_ad(val);
     }
+    else if (cmd == "shutdown")
+    {
+        if (val == "nomal")
+        {
+            this->shutdown_nomal();
+        }
+        else if (val == "restart")
+        {
+            this->shutdown_restart();
+        }
+    }
 
     return;
 }
@@ -907,5 +923,17 @@ void WK_WebSocket::slot_update_ad(const QString name)
         // 그냥 무조건 다운 성공
         this->netAccess_get_download(name);
     }
+    return;
+}
+
+void WK_WebSocket::shutdown_nomal()
+{
+    QMetaObject::invokeMethod(this->p_Module, &Cpp_Module::slot_nomal_exit, Qt::QueuedConnection);
+    return;
+}
+
+void WK_WebSocket::shutdown_restart()
+{
+    QMetaObject::invokeMethod(this->p_Module, &Cpp_Module::slot_restart_exit, Qt::QueuedConnection);
     return;
 }

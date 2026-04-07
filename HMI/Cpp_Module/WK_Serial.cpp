@@ -908,3 +908,30 @@ void WK_Serial::slot_uart_ems_end()
     this->ems_readData.clear();
     return;
 }
+
+void WK_Serial::slot_stop()
+{
+    if (this->p_serial != nullptr)
+    {
+        this->p_serial->close();
+    }
+
+    if (this->p_rs485_modbus != nullptr)
+    {
+        this->p_rs485_modbus->close();
+    }
+
+    if (this->p_rs232_modbus != nullptr)
+    {
+        this->p_rs232_modbus->close();
+    }
+
+    if (this->p_ems != nullptr)
+    {
+        this->p_ems->close();
+    }
+    qDebug() << Q_FUNC_INFO;
+    // emit this->sig_end();
+    QThread::currentThread()->quit();
+    return;
+}

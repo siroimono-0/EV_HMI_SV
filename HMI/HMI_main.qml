@@ -126,7 +126,7 @@ Item {
 
             onErrorOccurred: function(err, errMsg)
             {
-                console.log(("file://" + String (cpp_module.statStore.cur_advertisement)));
+                // console.log(("file://" + String (cpp_module.statStore.cur_advertisement)));
                 console.log(err);
                 console.log(errMsg);
             }

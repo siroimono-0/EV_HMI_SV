@@ -32,6 +32,9 @@ public slots:
 
     void slot_Btn_ad_add();
     void slot_Btn_ad_remove();
+
+    void slot_Btn_shutdown_nomal();
+    void slot_Btn_shutdown_restart();
 signals:
     // set_p_soc에서 커넥트
     void sig_revision_hmi_To_Soc(revision_hmi_admin);
@@ -64,6 +67,9 @@ Q_DECLARE_METATYPE(Dia_HMI *)
 
     cmd: ad_remove
     val: string
+
+    cmd: shutdown
+    val: nomal // restart
 */
 
 #endif // DIA_HMI_H

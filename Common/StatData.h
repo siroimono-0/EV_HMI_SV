@@ -4,6 +4,8 @@
 #include <QMetaType>
 #include <QObject>
 
+typedef enum EXIT_CODE { EXIT_NOMAL = 0, EXIT_RESTART = 231 } EXIT_CODE;
+
 typedef enum AD_NEED {
     NEED_DOWNLOAD = 0, // 다운
     NEED_PLAY = 1,     // 다운이미 대있음 재생 마킹

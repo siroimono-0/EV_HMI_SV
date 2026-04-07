@@ -55,6 +55,8 @@ public:
     void set_p_stat(StatStore *stat);
 
 public slots:
+    void slot_stop();
+
     void slot_serial_read();
     void slot_modbus_write();
     void slot_set_p_soc(WK_WebSocket *soc);
@@ -75,6 +77,7 @@ public slots:
     void slot_uart_ems_read();
     void slot_uart_ems_end();
 signals:
+    void sig_end();
 
 private:
     QSerialPort *p_serial = nullptr;

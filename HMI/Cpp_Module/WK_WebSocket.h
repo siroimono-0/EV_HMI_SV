@@ -35,7 +35,9 @@ public:
     void remove_ad(const QString name);
 
     void netAccess_get_download(const QString name);
-    // bool find_ad(const QString name);
+
+    void shutdown_nomal();
+    void shutdown_restart();
 
 public slots:
     void slot_stop();

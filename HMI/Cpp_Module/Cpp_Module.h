@@ -73,6 +73,9 @@ public:
 
 public slots:
 
+    void slot_nomal_exit();
+    void slot_restart_exit();
+
 signals:
     void sig_SocErr_ToQml(QString msg);
     void sig_SocSuccess_ToQml();

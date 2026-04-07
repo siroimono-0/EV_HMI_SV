@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>491</width>
-    <height>307</height>
+    <height>338</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -274,11 +274,22 @@ padding: 1px;</string>
     </layout>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton_7">
-     <property name="text">
-      <string>재시작</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item>
+      <widget class="QPushButton" name="pushButton_11">
+       <property name="text">
+        <string>종료</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_7">
+       <property name="text">
+        <string>재시작</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

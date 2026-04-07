@@ -34,6 +34,13 @@ Dia_HMI::Dia_HMI(QWidget *parent)
     connect(this->ui->pushButton_9, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_ad_add);
 
     connect(this->ui->pushButton_10, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_ad_remove);
+
+    connect(this->ui->pushButton_11, &QPushButton::clicked, this, &Dia_HMI::slot_Btn_shutdown_nomal);
+
+    connect(this->ui->pushButton_7,
+            &QPushButton::clicked,
+            this,
+            &Dia_HMI::slot_Btn_shutdown_restart);
 }
 
 Dia_HMI::~Dia_HMI()
@@ -229,6 +236,38 @@ void Dia_HMI::slot_Btn_ad_remove()
     st_data.val = this->ui->lineEdit_5->text();
 
     this->ui->lineEdit_5->clear();
+    emit this->sig_revision_hmi_To_Soc(st_data);
+
+    return;
+}
+
+void Dia_HMI::slot_Btn_shutdown_nomal()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "shutdown";
+    st_data.val = "nomal";
+    emit this->sig_revision_hmi_To_Soc(st_data);
+
+    return;
+}
+
+void Dia_HMI::slot_Btn_shutdown_restart()
+{
+    if (this->ui->label_4->text().isEmpty())
+    {
+        return;
+    }
+    struct revision_hmi_admin st_data = {0};
+    st_data.store_id = this->ui->label_2->text().toInt();
+    st_data.hmi_id = this->ui->label_4->text();
+    st_data.cmd = "shutdown";
+    st_data.val = "restart";
     emit this->sig_revision_hmi_To_Soc(st_data);
 
     return;

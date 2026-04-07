@@ -84,7 +84,7 @@ void Cpp_Module::create_WebSoc()
 
     this->p_wk_websoc->moveToThread(this->p_th_websoc);
     connect(this->p_th_websoc, &QThread::started, this->p_wk_websoc, &WK_WebSocket::slot_Connect_Sv);
-    connect(this->p_wk_websoc, &WK_WebSocket::sig_end, this->p_th_websoc, &QThread::quit);
+    // connect(this->p_wk_websoc, &WK_WebSocket::sig_end, this->p_th_websoc, &QThread::quit);
     connect(this->p_th_websoc, &QThread::finished, this->p_wk_websoc, &WK_WebSocket::deleteLater);
     connect(this->p_th_websoc, &QThread::finished, this->p_th_websoc, &QThread::deleteLater);
 
@@ -117,6 +117,10 @@ void Cpp_Module::create_Serial()
                               Q_ARG(WK_Serial *, this->p_wk_serial));
 
     this->p_wk_serial->moveToThread(this->p_th_serial);
+
+    // connect(this->p_wk_serial, &WK_Serial::sig_end, this->p_th_serial, &QThread::quit);
+    connect(this->p_th_serial, &QThread::finished, this->p_wk_serial, &WK_Serial::deleteLater);
+    connect(this->p_th_serial, &QThread::finished, this->p_th_serial, &QThread::deleteLater);
 
     this->p_th_serial->start();
     return;
@@ -334,5 +338,37 @@ Q_INVOKABLE void Cpp_Module::first_ad_To_Soc()
                               "slot_update_ad",
                               Qt::QueuedConnection,
                               Q_ARG(QString, "first.mp4"));
+    return;
+}
+
+void Cpp_Module::slot_nomal_exit()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QMetaObject::invokeMethod(this->p_wk_serial, &WK_Serial::slot_stop, Qt::QueuedConnection);
+    this->p_th_serial->wait();
+    qDebug() << "this->p_th_serial->wait()";
+
+    QMetaObject::invokeMethod(this->p_wk_websoc, &WK_WebSocket::slot_stop, Qt::QueuedConnection);
+    this->p_th_websoc->wait();
+    qDebug() << "this->p_th_websoc->wait()";
+
+    QCoreApplication::exit(EXIT_NOMAL);
+    return;
+}
+
+void Cpp_Module::slot_restart_exit()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QMetaObject::invokeMethod(this->p_wk_serial, &WK_Serial::slot_stop, Qt::QueuedConnection);
+    this->p_th_serial->wait();
+    qDebug() << "this->p_th_serial->wait()";
+
+    QMetaObject::invokeMethod(this->p_wk_websoc, &WK_WebSocket::slot_stop, Qt::QueuedConnection);
+    this->p_th_websoc->wait();
+    qDebug() << "this->p_th_websoc->wait()";
+
+    QCoreApplication::exit(EXIT_RESTART);
     return;
 }
