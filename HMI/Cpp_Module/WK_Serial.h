@@ -2,6 +2,7 @@
 #define WK_SERIAL_H
 
 #include <QDebug>
+#include <QElapsedTimer>
 #include <QObject>
 #include <QSerialPort>
 #include <QSerialPortInfo>

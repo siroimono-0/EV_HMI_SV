@@ -13,47 +13,6 @@ WK_soc::WK_soc(QObject *parent)
 {
     this->p_netAccess = new QNetworkAccessManager(this);
 }
-/*
- void WK_soc::slot_netAccess_post(QString file_path)
-{
-    qDebug() << Q_FUNC_INFO;
-    QFile *p_file = new QFile(file_path);
-    if (!p_file->open(QIODevice::ReadOnly))
-    {
-        qDebug() << "file open fail";
-        delete p_file;
-        return;
-    }
-
-    QUrl url("http://127.0.0.1:8080/compare");
-    QNetworkRequest req(url);
-    QHttpMultiPart *p_multi = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-
-    QHttpPart filePart;
-    QString fileName = QFileInfo(*p_file).fileName();
-
-    filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/mp4/upload"));
-
-    filePart.setHeader(QNetworkRequest::ContentDispositionHeader,
-                       QVariant(QString("form-data; name=\"file\"; filename=\"%1\"").arg(fileName)));
-
-    filePart.setBodyDevice(p_file);
-    p_file->setParent(p_multi);
-    p_multi->append(filePart);
-
-    QNetworkReply *p_reply = this->p_netAccess->post(req, p_multi);
-
-    p_multi->setParent(p_reply);
-
-    connect(p_reply, &QNetworkReply::finished, this, [p_reply]() {
-        QByteArray ba_res = p_reply->readAll();
-        qDebug() << "파일 업로드 요청 완료됨";
-        p_reply->deleteLater();
-    });
-
-    return;
-}
- */
 
 void WK_soc::slot_netAccess_post(QString file_path)
 {
@@ -177,7 +136,7 @@ void WK_soc::slot_register_hmi(const QString storeId, const QString hmiId)
 
 void WK_soc::slot_recvText(QString recvMsg)
 {
-    qDebug() << recvMsg;
+    // qDebug() << recvMsg;
 
     QByteArray qba = recvMsg.toUtf8();
     QJsonParseError jsErr;

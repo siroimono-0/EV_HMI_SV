@@ -119,7 +119,12 @@ void Admin::create_qml_charging_log()
     this->p_qquick_charging_log->rootContext()->setContextProperty("cppModel",
                                                                    this->p_md_charging_log);
 
-    QString s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_ChargingLog.qml";
+    QString s_path;
+#ifdef Q_OS_WIN
+    s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_ChargingLog.qml";
+#elif defined(Q_OS_UNIX)
+    s_path = "/home/gray/gray/Qt_project/EV_HMI_SV/Admin/Qml_Module/View_ChargingLog.qml";
+#endif
     qDebug() << s_path;
     this->p_qquick_charging_log->setSource(QUrl::fromLocalFile(s_path));
 
@@ -144,7 +149,13 @@ void Admin::create_qml_hmi_current_stat()
     this->p_qquick_hmi_current_stat->rootContext()->setContextProperty("cppModel",
                                                                        this->p_md_hmi_current_stat);
 
-    QString s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_hmi_current_stat.qml";
+    QString s_path;
+#ifdef Q_OS_WIN
+    s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_hmi_current_stat.qml";
+#elif defined(Q_OS_UNIX)
+    s_path = "/home/gray/gray/Qt_project/EV_HMI_SV/Admin/Qml_Module/View_hmi_current_stat.qml";
+#endif
+
     qDebug() << s_path;
     this->p_qquick_hmi_current_stat->setSource(QUrl::fromLocalFile(s_path));
 
@@ -168,7 +179,13 @@ void Admin::create_qml_hmi_device()
 
     this->p_qquick_hmi_device->rootContext()->setContextProperty("cppModel", this->p_md_hmi_device);
 
-    QString s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_hmi_device.qml";
+    QString s_path;
+#ifdef Q_OS_WIN
+    s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_hmi_device.qml";
+#elif defined(Q_OS_UNIX)
+    s_path = "/home/gray/gray/Qt_project/EV_HMI_SV/Admin/Qml_Module/View_hmi_device.qml";
+#endif
+
     qDebug() << s_path;
     this->p_qquick_hmi_device->setSource(QUrl::fromLocalFile(s_path));
 
@@ -191,7 +208,13 @@ void Admin::create_qml_membership_card()
     this->p_qquick_membership_card->rootContext()->setContextProperty("cppModel",
                                                                       this->p_md_membership_card);
 
+    QString s_path;
+#ifdef Q_OS_WIN
     QString s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_membership_card.qml";
+#elif defined(Q_OS_UNIX)
+    s_path = "/home/gray/gray/Qt_project/EV_HMI_SV/Admin/Qml_Module/View_membership_card.qml";
+#endif
+
     qDebug() << s_path;
     this->p_qquick_membership_card->setSource(QUrl::fromLocalFile(s_path));
 
@@ -214,7 +237,13 @@ void Admin::create_qml_membership_log()
     this->p_qquick_membership_log->rootContext()->setContextProperty("cppModel",
                                                                      this->p_md_membership_log);
 
-    QString s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_membership_log.qml";
+    QString s_path;
+#ifdef Q_OS_WIN
+    s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_membership_log.qml";
+#elif defined(Q_OS_UNIX)
+    s_path = "/home/gray/gray/Qt_project/EV_HMI_SV/Admin/Qml_Module/View_membership_log.qml";
+#endif
+
     qDebug() << s_path;
     this->p_qquick_membership_log->setSource(QUrl::fromLocalFile(s_path));
 
@@ -236,7 +265,13 @@ void Admin::create_qml_store_user()
 
     this->p_qquick_store_user->rootContext()->setContextProperty("cppModel", this->p_md_store_user);
 
-    QString s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_store_user.qml";
+    QString s_path;
+#ifdef Q_OS_WIN
+    s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_store_user.qml";
+#elif defined(Q_OS_UNIX)
+    s_path = "/home/gray/gray/Qt_project/EV_HMI_SV/Admin/Qml_Module/View_store_user.qml";
+#endif
+
     qDebug() << s_path;
     this->p_qquick_store_user->setSource(QUrl::fromLocalFile(s_path));
 
