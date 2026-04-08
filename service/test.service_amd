@@ -4,8 +4,10 @@ After=graphical-session.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/gray/EV/EV_HMI_SV/Launcher
-ExecStart=/home/gray/EV/EV_HMI_SV/Launcher/launcher
+WorkingDirectory=/home/gray/gray/Qt_project/EV_HMI_SV/Launcher
+ExecStart=/home/gray/gray/Qt_project/EV_HMI_SV/Launcher/launcher
+Restart=always
+RestartSec=1
 
 Environment=QT_QPA_PLATFORM=wayland
 Environment=WAYLAND_DISPLAY=wayland-0

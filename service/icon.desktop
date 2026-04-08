@@ -4,6 +4,6 @@ Version=1.0
 Type=Application
 Name=Restart HMI Launcher service
 Comment=Restart HMI Launcher service
-Exec=pkexec systemctl start test.service
+Exec=systemctl --user start test.service
 Icon=system-reboot
 Terminal=false
