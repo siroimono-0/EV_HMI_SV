@@ -25,12 +25,13 @@ int main()
                 // 직접 비트 쉬프트 하면안댐 매크로써야댐
                 int exit_code = WEXITSTATUS(stat);
 
-                // 재시작 종료코드 231임
+                // 재시작 종료코드 85임
                 // 정상 종료시 상위 2바이트 값 확인 하면댐
-                if (exit_code == 231)
+                if (exit_code == 85)
                 {
                     // exec~~
                     cout << exit_code << " restart" << endl;
+                    sleep(2);
                 }
                 else
                 {
@@ -39,6 +40,11 @@ int main()
                     flag_rere = false;
                     cout << "end" << endl;
                 }
+            }
+            else
+            {
+                flag_rere = false;
+                cout << "sig end" << endl;
             }
         }
         else if (pid == 0)

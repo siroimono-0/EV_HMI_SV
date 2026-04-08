@@ -1,0 +1,17 @@
+[Unit]
+Description=HMI App
+After=network.target
+
+[Service]
+Type=simple
+User=gray
+WorkingDirectory=/home/gray/gray/Qt_project/EV_HMI_SV/Launcher
+ExecStart=/home/gray/gray/Qt_project/EV_HMI_SV/Launcher/launcher
+
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=WAYLAND_DISPLAY=wayland-0
+
+Environment=QT_QPA_PLATFORMTHEME=gtk3
+
+[Install]
+WantedBy=multi-user.target
