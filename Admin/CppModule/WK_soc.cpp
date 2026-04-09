@@ -33,7 +33,7 @@ void WK_soc::slot_netAccess_post(QString file_path)
     QByteArray name_qba = fileName.toUtf8();
     qba = name_qba + "\r\n" + qba;
 
-    QUrl url("http://127.0.0.1:8080/compare");
+    QUrl url("http://3.107.105.0:8080/compare");
     QNetworkRequest req(url);
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/mp4/upload");
 
@@ -73,7 +73,7 @@ void WK_soc::slot_start()
 
     connect(this->p_soc, &QWebSocket::textMessageReceived, this, &WK_soc::slot_recvText);
 
-    this->p_soc->open(QUrl("ws://192.168.123.102:12345/ws/admin"));
+    this->p_soc->open(QUrl("ws://3.107.105.0:12345/ws/admin"));
     qDebug() << Q_FUNC_INFO;
     return;
 }

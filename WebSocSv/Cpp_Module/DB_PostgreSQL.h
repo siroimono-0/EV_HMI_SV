@@ -2,6 +2,7 @@
 #define DB_POSTGRESQL_H
 
 #include <QDebug>
+#include <QDir>
 #include <QObject>
 #include <QtSql>
 #include "../../Common/StatData.h"
@@ -28,6 +29,7 @@ public:
     void set_p_Module(Cpp_Module *module);
 
     void createDB();
+    void create_sqlite_db_table();
 
     bool check_query_prepare(bool ok, QSqlQuery &query);
     bool check_query_exec(bool ok, QSqlQuery &query);
@@ -129,6 +131,7 @@ private:
     QSqlDatabase db_lite;
     QTimer *p_timer_lite;
     QString path;
+    QString aws_psql_endPoint;
 
     Cpp_Module *p_Module;
     // WK_Soc *p_soc; Hub로 변경...

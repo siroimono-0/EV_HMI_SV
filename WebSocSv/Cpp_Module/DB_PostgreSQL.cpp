@@ -7,6 +7,8 @@ DB_PostgreSQL::DB_PostgreSQL(QObject *parent)
 {
     this->path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
+    this->aws_psql_endPoint = "ev-postgres-db.cr66uie6ye06.ap-southeast-2.rds.amazonaws.com";
+
     this->p_timer_lite = new QTimer();
     this->p_timer_lite->start(60000);
     connect(this->p_timer_lite, &QTimer::timeout, this, &DB_PostgreSQL::backUp_register_chargingLog);
@@ -87,16 +89,43 @@ void DB_PostgreSQL::createDB()
     this->db_lite = QSqlDatabase::addDatabase("QSQLITE", "DB_THREAD_CONN_SQLITE");
     this->db_lite.setDatabaseName(this->path + "/db_lite.sqlite3");
 
+    QDir dir(this->path + "/db_lite.sqlite3");
+    dir.mkpath(this->path);
     qDebug() << "db path =" << db_lite.databaseName();
 
     if (this->db_lite.open())
     {
         qDebug() << "db_light open";
+        this->create_sqlite_db_table();
     }
     else
     {
         // qDebug() << "db false";
         qDebug() << this->db_lite.lastError().text();
+    }
+    return;
+}
+
+void DB_PostgreSQL::create_sqlite_db_table()
+{
+    QSqlQuery query(this->db_lite);
+    QString sql = "CREATE TABLE ad_list ("
+                  "name TEXT PRIMARY KEY "
+                  "NOT NULL,"
+                  "path TEXT,"
+                  "stat BOOL);";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
     }
     return;
 }

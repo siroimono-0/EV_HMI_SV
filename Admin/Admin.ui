@@ -17,6 +17,16 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <property name="spacing">
+       <number>15</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QPushButton" name="btn_Register">
         <property name="minimumSize">
@@ -67,6 +77,18 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_2">
+        <property name="minimumSize">
+         <size>
+          <width>150</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <pointsize>11</pointsize>
@@ -79,6 +101,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_3">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <pointsize>11</pointsize>
@@ -94,6 +122,12 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
           <height>30</height>
          </size>
         </property>
@@ -283,7 +317,7 @@
      <x>0</x>
      <y>0</y>
      <width>1600</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
