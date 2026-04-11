@@ -7,6 +7,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QTimer>
+#include <QtSystemDetection>
 #include "../Common/StatData.h"
 
 class WK_WebSocket;
@@ -151,4 +152,47 @@ vendorId       = "0x10c4"
 productId      = "0xea60"
 */
 
+/*
+EMS(Uart)
+portName       = "COM5"
+systemLocation = "\\\\.\\COM5"
+description    = "USB Serial Port"
+manufacturer   = "FTDI"
+serialNumber   = "A5069RR4A"
+vendorId       = "0x0403"
+productId      = "0x6001"
+
+=====================================================
+
+MCU(RS232)
+portName       = "COM12"
+systemLocation = "\\\\.\\COM12"
+description    = "Prolific USB-to-Serial Comm Port"
+manufacturer   = "Prolific"
+serialNumber   = ""
+vendorId       = "0x067b"
+productId      = "0x2303"
+
+=====================================================
+
+Module(RS485)
+portName       = "COM11"
+systemLocation = "\\\\.\\COM11"
+description    = "USB-SERIAL CH340"
+manufacturer   = "wch.cn"
+serialNumber   = ""
+vendorId       = "0x1a86"
+productId      = "0x7523"
+
+=====================================================
+
+Card
+portName       = "COM7"
+systemLocation = "\\\\.\\COM7"
+description    = "Silicon Labs CP210x USB to UART Bridge"
+manufacturer   = "Silicon Laboratories"
+serialNumber   = "0001"
+vendorId       = "0x10c4"
+productId      = "0xea60"
+ */
 #endif // WK_SERIAL_H

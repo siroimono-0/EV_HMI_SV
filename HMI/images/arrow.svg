@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="768" viewBox="0 0 512 768" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18" result="blur1"/>
+      <feColorMatrix in="blur1" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 1 0" result="glow1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="glow1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- outer glow -->
+  <path d="M128 224 L256 96 L384 224 M256 96 L256 672"
+        stroke="white"
+        stroke-width="52"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        opacity="0.35"
+        filter="url(#neonGlow)"/>
+
+  <!-- main arrow -->
+  <path d="M128 224 L256 96 L384 224 M256 96 L256 672"
+        stroke="white"
+        stroke-width="34"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- bright core -->
+  <path d="M128 224 L256 96 L384 224 M256 96 L256 672"
+        stroke="white"
+        stroke-width="14"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        opacity="0.95"/>
+</svg>

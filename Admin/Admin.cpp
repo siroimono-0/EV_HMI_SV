@@ -210,7 +210,7 @@ void Admin::create_qml_membership_card()
 
     QString s_path;
 #ifdef Q_OS_WIN
-    QString s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_membership_card.qml";
+    s_path = "C:/Users/siroi/siroimono/w_qt/EV/Admin/Qml_Module/View_membership_card.qml";
 #elif defined(Q_OS_UNIX)
     s_path = "/home/gray/gray/Qt_project/EV_HMI_SV/Admin/Qml_Module/View_membership_card.qml";
 #endif

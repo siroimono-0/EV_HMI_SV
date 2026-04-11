@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QUrl>
 #include <QWebSocket>
+#include <QtSystemDetection>
 #include "../Common/StatData.h"
 #include "StatStore.h"
 

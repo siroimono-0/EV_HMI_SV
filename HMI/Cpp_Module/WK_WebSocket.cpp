@@ -9,7 +9,11 @@ WK_WebSocket::WK_WebSocket(QObject *parent)
     this->create_netAccess();
 
     // QString url = "http://192.168.123.102:8080/compare";
+#if defined(Q_OS_WIN)
+    QString url = "http://127.0.0.1:8080/compare";
+#elif defined(Q_OS_LINUX)
     QString url = "http://3.107.105.0:8080/compare";
+#endif
     this->set_httpSv_url(url);
 }
 
@@ -271,8 +275,11 @@ void WK_WebSocket::slot_Connect_Sv()
     connect(this->p_webSoc, &QWebSocket::disconnected, this->p_webSoc, &QWebSocket::deleteLater);
 
     // 커넥트 다 걸고  open
+#if defined(Q_OS_WIN)
+    this->p_webSoc->open(QUrl("ws://127.0.0.1:12345"));
+#elif defined(Q_OS_LINUX)
     this->p_webSoc->open(QUrl("ws://3.107.105.0:12345"));
-
+#endif
     qDebug() << Q_FUNC_INFO;
     return;
 }

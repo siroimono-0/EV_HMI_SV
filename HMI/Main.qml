@@ -8,7 +8,7 @@ Window {
     height: 800
     visible: true
     title: qsTr("Hello World")
-    flags: Qt.FramelessWindowHint
+    // flags: Qt.FramelessWindowHint
 
     property int cnt: 0;
 

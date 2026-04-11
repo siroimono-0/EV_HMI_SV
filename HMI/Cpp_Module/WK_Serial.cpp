@@ -46,6 +46,40 @@ WK_Serial::WK_Serial(QObject *parent)
 
 void WK_Serial::serial_init()
 {
+#if defined(Q_OS_WIN)
+    struct serial_info st_info_1 = {0};
+    st_info_1.role = MCU;
+    st_info_1.description = "Prolific USB-to-Serial Comm Port";
+    st_info_1.manufacturer = "Prolific";
+    st_info_1.vendorId = "0x067b";
+    st_info_1.productId = "0x2303";
+
+    struct serial_info st_info_2 = {0};
+    st_info_2.role = MODULE;
+    st_info_2.description = "USB-SERIAL CH340";
+    st_info_2.manufacturer = "wch.cn";
+    st_info_2.vendorId = "0x1a86";
+    st_info_2.productId = "0x7523";
+
+    struct serial_info st_info_3 = {0};
+    st_info_3.role = EMS;
+    st_info_3.description = "USB Serial Port";
+    st_info_3.manufacturer = "FTDI";
+    st_info_3.vendorId = "0x0403";
+    st_info_3.productId = "0x6001";
+
+    struct serial_info st_info_4 = {0};
+    st_info_4.role = CARD;
+    st_info_4.description = "Silicon Labs CP210x USB to UART Bridge";
+    st_info_4.manufacturer = "Silicon Laboratories";
+    st_info_4.vendorId = "0x10c4";
+    st_info_4.productId = "0xea60";
+
+    this->vec_init_serial_info.push_back(st_info_1);
+    this->vec_init_serial_info.push_back(st_info_2);
+    this->vec_init_serial_info.push_back(st_info_3);
+    this->vec_init_serial_info.push_back(st_info_4);
+#elif defined(Q_OS_LINUX)
     struct serial_info st_info_1 = {0};
     st_info_1.role = MCU;
     st_info_1.description = "USB-Serial Controller D";
@@ -78,6 +112,7 @@ void WK_Serial::serial_init()
     this->vec_init_serial_info.push_back(st_info_2);
     this->vec_init_serial_info.push_back(st_info_3);
     this->vec_init_serial_info.push_back(st_info_4);
+#endif
     return;
 }
 
@@ -89,11 +124,13 @@ void WK_Serial::serial_compare()
 
     for (const QSerialPortInfo &sp_port : l_ports)
     {
+#if defined(Q_OS_WIN)
+#elif defined(Q_OS_LINUX)
         if (!sp_port.portName().contains("ttyUSB"))
         {
             continue;
         }
-
+#endif
         // sp_port.systemLocation();
 
         struct serial_info st_info = {0};
