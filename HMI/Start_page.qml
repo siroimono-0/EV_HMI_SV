@@ -23,6 +23,7 @@ Item {
     Component.onCompleted: {
 
         // console.log(root.pageName + " ____ " +  StackView.view.depth+ "  ___________");
+        root_Keypad.state = "open";
     }
 
     BackGround{
@@ -55,6 +56,8 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             activeFocusOnPress: false;
+
+            placeholderText: "ID 입력"
 
             background: Rectangle{
                 radius: 10
