@@ -25,14 +25,26 @@ Item {
 
             root.compare_method();
         });
-    }
 
-    Component.onCompleted: {
         // cppSv 카드리더기 상태 온
         cpp_module.set_card_stat_To_serial(true);
         Qt.callLater(function(){
-            root.stk_depth =  StackView.view.depth;
+            var tmp_type = cpp_module.get_charging_type_To_StatStore();
+            if(tmp_type === 4)
+            {
+                root.stk_depth =  4;
+            }
+            else
+            {
+                root.stk_depth =  5;
+            }
+            console.log(root.stk_depth + "  ________________ select_card");
+
         });
+
+    }
+
+    Component.onCompleted: {
     }
 
     function compare_method()

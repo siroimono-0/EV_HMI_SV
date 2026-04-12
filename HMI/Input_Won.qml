@@ -16,12 +16,17 @@ Item {
         Qt.callLater(function() {
             mainWin.timer_reset("Input_Won");
         });
+
+        /*
+        Qt.callLater(function(){
+            root.stk_depth =  StackView.view.depth;
+        });*/
+
+        back.tf_text = "";
     }
 
     Component.onCompleted: {
-        Qt.callLater(function(){
-            root.stk_depth =  StackView.view.depth;
-        });
+
     }
 
     function stk_home()
@@ -41,7 +46,8 @@ Item {
     function stk_next(s_int)
     {
         cpp_module.charging_type_To_statStore("won", s_int);
-        StackView.view.push("Select_card.qml", {mainWin : mainWin});
+        // StackView.view.push("Select_card.qml", {mainWin : mainWin});
+        StackView.view.push(mainWin.ld_select_card_item);
     }
 
     BackGround_Amount{

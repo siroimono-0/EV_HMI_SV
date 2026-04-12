@@ -63,6 +63,8 @@ public:
 
     Q_INVOKABLE QString get_card_type();
 
+    Q_INVOKABLE int get_charging_type_To_StatStore();
+
     Q_INVOKABLE void ems_Charging_Ready_To_StatStore();
 
     Q_INVOKABLE void set_stop_reason(QString set);

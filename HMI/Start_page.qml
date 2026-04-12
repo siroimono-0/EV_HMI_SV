@@ -21,6 +21,8 @@ Item {
     }
 
     Component.onCompleted: {
+
+        // console.log(root.pageName + " ____ " +  StackView.view.depth+ "  ___________");
     }
 
     BackGround{

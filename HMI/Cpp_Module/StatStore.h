@@ -91,6 +91,7 @@ public:
 
     QString get_cur_advertisement();
     //===========================================
+    int get_charging_type();
 
     void set_card_type(QString set);
     // QString advance_payment; // 카드 승인시 초기화

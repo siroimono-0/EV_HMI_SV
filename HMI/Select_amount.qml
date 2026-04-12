@@ -11,14 +11,17 @@ Item {
 
     Component.onCompleted: function()
     {
-        cpp_module.charging_type_clear_To_statStore();
 
-        Qt.callLater(function(){
-            root.stk_depth =  StackView.view.depth;
-        });
     }
 
     StackView.onActivated: {
+        cpp_module.charging_type_clear_To_statStore();
+
+        Qt.callLater(function(){
+            // root.stk_depth =  StackView.view.depth;
+            // root.stk_depth =  mainWin.;
+        });
+
         cpp_module.set_screen_name("충전 방식 선택");
 
         // home화면 이동 타이머 초기화
@@ -45,20 +48,24 @@ Item {
     {
         if(s === "time")
         {
-            StackView.view.push("Input_Time.qml", {mainWin : mainWin});
+            // StackView.view.push("Input_Time.qml", {mainWin : mainWin});
+            StackView.view.push(mainWin.ld_Input_Time_item);
         }
         else if(s === "won")
         {
-            StackView.view.push("Input_Won.qml", {mainWin : mainWin});
+            // StackView.view.push("Input_Won.qml", {mainWin : mainWin});
+            StackView.view.push(mainWin.ld_Input_Won_item);
         }
         else if(s === "kWh")
         {
-            StackView.view.push("Input_Kwh.qml", {mainWin : mainWin});
+            // StackView.view.push("Input_Kwh.qml", {mainWin : mainWin});
+            StackView.view.push(mainWin.ld_Input_Kwh_item);
         }
         else if(s === "persent")
         {
             cpp_module.charging_type_To_statStore(s, 80);
-            StackView.view.push("Select_card.qml", {mainWin : mainWin});
+            // StackView.view.push("Select_card.qml", {mainWin : mainWin});
+            StackView.view.push(mainWin.ld_select_card_item);
         }
     }
 

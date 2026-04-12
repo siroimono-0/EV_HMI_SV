@@ -372,3 +372,8 @@ void Cpp_Module::slot_restart_exit()
     QCoreApplication::exit(EXIT_RESTART);
     return;
 }
+
+Q_INVOKABLE int Cpp_Module::get_charging_type_To_StatStore()
+{
+    return this->p_stat->get_charging_type();
+}

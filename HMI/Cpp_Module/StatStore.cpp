@@ -1094,3 +1094,8 @@ void StatStore::slot_remove_ad(const QString name)
 
     return;
 }
+
+int StatStore::get_charging_type()
+{
+    return this->charging_type;
+}

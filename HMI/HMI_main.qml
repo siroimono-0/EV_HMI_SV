@@ -14,6 +14,7 @@ Item {
     {
         Qt.callLater(function(){
             root.stk_depth =  StackView.view.depth;
+        // console.log(root.pageName + " ____ " +  root.stk_depth + "  ___________");
         });
 
         cpp_module.charging_type_clear_To_statStore();
@@ -23,6 +24,7 @@ Item {
         Qt.callLater(function(){
             cpp_module.first_ad_To_Soc();
         });
+
     }
 
     StackView.onActivated: {
@@ -84,29 +86,6 @@ Item {
             shadowVerticalOffset: 0
             shadowHorizontalOffset: 0
         }
-
-        /*
-        SequentialAnimation{
-            running: true;
-            loops: Animation.Infinite
-            NumberAnimation{
-                target: screen
-                properties: "border.width"
-                from: 1;
-                to: 3;
-                duration: 500;
-                easing.type: Easing.InOutSine
-            }
-            NumberAnimation{
-                target: screen
-                properties: "border.width"
-                from: 3;
-                to: 1;
-                duration: 500;
-                easing.type: Easing.InOutSine
-            }
-        }*/
-
 
         MediaPlayer{
             id: player
@@ -197,6 +176,9 @@ Item {
     function stk_next()
     {
         player.stop();
-        StackView.view.push("Select_amount.qml", {mainWin : mainWin});
+        // StackView.view.push("Select_amount.qml", {mainWin : mainWin});
+
+        // StackView.view.push(mainWin.ld_select_amount.item , {mainWin : mainWin});
+        StackView.view.push(mainWin.ld_select_amount_item);
     }
 }

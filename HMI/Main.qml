@@ -8,8 +8,13 @@ Window {
     height: 800
     visible: true
     title: qsTr("Hello World")
-    // flags: Qt.FramelessWindowHint
+    flags: Qt.FramelessWindowHint
 
+    property var ld_select_amount_item;
+    property var ld_select_card_item;
+    property var ld_Input_Time_item;
+    property var ld_Input_Won_item;
+    property var ld_Input_Kwh_item;
     property int cnt: 0;
 
     function stk_pop()
@@ -129,6 +134,70 @@ Window {
         }
     }
 
+    Loader{
+        id: ld_select_amount
+        source: "Select_amount.qml"
+        active: true
+
+        onLoaded: {
+            item.mainWin = root;
+            item.stk_depth = 3
+            root.ld_select_amount_item = item;
+            console.log("Load __ Select_amount.qml");
+        }
+    }
+
+    Loader{
+        id: ld_select_card
+        source: "Select_card.qml"
+        active: true
+
+        onLoaded: {
+            item.mainWin = root;
+            ld_select_card_item = item;
+            console.log("Load __ Select_card.qml");
+        }
+    }
+
+    Loader{
+        id: ld_Input_Time
+        source: "Input_Time.qml"
+        active: true
+
+        onLoaded: {
+            item.mainWin = root;
+            item.stk_depth = 4
+            ld_Input_Time_item = item;
+            console.log("Load __ ld_Input_Time.qml");
+        }
+    }
+
+    Loader{
+        id: ld_Input_Won
+        source: "Input_Won.qml"
+        active: true
+
+        onLoaded: {
+            item.mainWin = root;
+            item.stk_depth = 4
+            ld_Input_Won_item = item;
+            console.log("Load __ ld_Input_Won.qml");
+        }
+    }
+
+    Loader{
+        id: ld_Input_Kwh
+        source: "Input_Kwh.qml"
+        active: true
+
+        onLoaded: {
+            item.mainWin = root;
+            item.stk_depth = 4
+            ld_Input_Kwh_item = item;
+            console.log("Load __ ld_Input_Kwh.qml");
+        }
+    }
+
     Timer{
         id: timer_clear
         interval: 5 * 60 * 1000
@@ -185,7 +254,7 @@ Window {
 
         Component.onCompleted: {
             root_stkView.push("Start_page.qml", {"mainWin": root});
-            // root_stkView.push("Charging_Complet.qml", {"mainWin": root});
+            // root_stkView.push(ld_select_amount.item , {"mainWin": root});
             // root_stkView.push("Test.qml", {"mainWin": root});
             // root_stkView.push("Ems_Nomal.qml", {"mainWin": root});
             // root_stkView.push("Ems_Charging.qml", {"mainWin": root});
