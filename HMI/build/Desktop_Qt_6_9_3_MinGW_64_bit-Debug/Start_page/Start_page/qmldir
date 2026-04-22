@@ -1,6 +1,0 @@
-module Start_page
-typeinfo appStart_page.qmltypes
-prefer :/qt/qml/Start_page/
-Main 1.0 Main.qml
-depends QtQuick
-

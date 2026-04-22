@@ -19,6 +19,8 @@ class StatStore;
 class Cpp_Module;
 class WK_Serial;
 
+enum class EN_CloseReason { AppQuit, Manual, None };
+
 class WK_WebSocket : public QObject
 {
     Q_OBJECT
@@ -40,9 +42,11 @@ public:
     void shutdown_nomal();
     void shutdown_restart();
 
+
 public slots:
     void slot_stop();
     void slot_Connect_Sv();
+    void slot_disconnected();
     void slot_set_p_serial(WK_Serial *set);
 
     void slot_ID_Check();
@@ -92,6 +96,7 @@ private:
     WK_Serial *p_serial = nullptr;
     QNetworkAccessManager *p_netAccess = nullptr;
     bool connect_stat = false;
+    EN_CloseReason close_reason = EN_CloseReason::None;
 
     // ack 안올 때 재전송 위한 데이터
     bool pay_ack = false;

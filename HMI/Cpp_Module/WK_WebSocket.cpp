@@ -21,6 +21,7 @@ void WK_WebSocket::slot_stop()
 {
     if (this->p_webSoc != nullptr)
     {
+        this->close_reason = EN_CloseReason::Manual;
         this->p_webSoc->close();
     }
     // emit sig_end();
@@ -272,7 +273,7 @@ void WK_WebSocket::slot_Connect_Sv()
             &WK_WebSocket::slot_Recv_TextData);
 
     connect(this->p_webSoc, &QWebSocket::errorOccurred, this, &WK_WebSocket::slot_SocErr);
-    connect(this->p_webSoc, &QWebSocket::disconnected, this->p_webSoc, &QWebSocket::deleteLater);
+    connect(this->p_webSoc, &QWebSocket::disconnected, this, &WK_WebSocket::slot_disconnected);
 
     // 커넥트 다 걸고  open
 #if defined(Q_OS_WIN)
@@ -286,40 +287,48 @@ void WK_WebSocket::slot_Connect_Sv()
 
 void WK_WebSocket::slot_SocErr(QAbstractSocket::SocketError error)
 {
-    if (error == QAbstractSocket::ConnectionRefusedError)
+    if (this->connect_stat == false)
     {
-        // 서버 IP는 살아 있음
-        // 포트에 리스닝 서버 없음
-        // 모듈 -> Qml 통신 시그널 발생
-        QMetaObject::invokeMethod(this->p_Module,
-                                  &Cpp_Module::sig_SocErr_ToQml,
-                                  QString("서버가 열려있지 않습니다."));
+        if (error == QAbstractSocket::ConnectionRefusedError)
+        {
+            // 서버 IP는 살아 있음
+            // 포트에 리스닝 서버 없음
+            // 모듈 -> Qml 통신 시그널 발생
+            QMetaObject::invokeMethod(this->p_Module,
+                                      &Cpp_Module::sig_SocErr_ToQml,
+                                      QString("서버가 열려있지 않습니다."));
+        }
+        else if (error == QAbstractSocket::HostNotFoundError)
+        {
+            // DNS 실패
+            // IP/도메인 잘못됨
+            // 모듈 -> Qml 통신 시그널 발생
+            QMetaObject::invokeMethod(this->p_Module,
+                                      &Cpp_Module::sig_SocErr_ToQml,
+                                      QString("서버 주소를 찾을 수 없습니다."));
+        }
+        else if (error == QAbstractSocket::NetworkError)
+        {
+            // 랜 뽑힘
+            // Wi-Fi 끊김
+            // 모듈 -> Qml 통신 시그널 발생
+            QMetaObject::invokeMethod(this->p_Module,
+                                      &Cpp_Module::sig_SocErr_ToQml,
+                                      QString("네트워크 연결 오류"));
+        }
+        else if (error == QAbstractSocket::SocketTimeoutError)
+        {
+            // 서버 응답 없음
+            // 모듈 -> Qml 통신 시그널 발생
+            QMetaObject::invokeMethod(this->p_Module,
+                                      &Cpp_Module::sig_SocErr_ToQml,
+                                      QString("연결 시간 초과"));
+        }
     }
-    else if (error == QAbstractSocket::HostNotFoundError)
+    else
     {
-        // DNS 실패
-        // IP/도메인 잘못됨
-        // 모듈 -> Qml 통신 시그널 발생
-        QMetaObject::invokeMethod(this->p_Module,
-                                  &Cpp_Module::sig_SocErr_ToQml,
-                                  QString("서버 주소를 찾을 수 없습니다."));
-    }
-    else if (error == QAbstractSocket::NetworkError)
-    {
-        // 랜 뽑힘
-        // Wi-Fi 끊김
-        // 모듈 -> Qml 통신 시그널 발생
-        QMetaObject::invokeMethod(this->p_Module,
-                                  &Cpp_Module::sig_SocErr_ToQml,
-                                  QString("네트워크 연결 오류"));
-    }
-    else if (error == QAbstractSocket::SocketTimeoutError)
-    {
-        // 서버 응답 없음
-        // 모듈 -> Qml 통신 시그널 발생
-        QMetaObject::invokeMethod(this->p_Module,
-                                  &Cpp_Module::sig_SocErr_ToQml,
-                                  QString("연결 시간 초과"));
+        this->close_reason = EN_CloseReason::None;
+        // this->slot_disconnected();
     }
 
     qDebug() << "hello?";
@@ -494,6 +503,7 @@ void WK_WebSocket::slot_Recv_TextData(QString recvData)
 void WK_WebSocket::slot_ID_Check()
 {
     qDebug() << Q_FUNC_INFO;
+    this->connect_stat = true;
 
     /* 수정필요 구현 삭제 예정
     struct stat_data st_stat = {0};
@@ -943,5 +953,27 @@ void WK_WebSocket::shutdown_nomal()
 void WK_WebSocket::shutdown_restart()
 {
     QMetaObject::invokeMethod(this->p_Module, &Cpp_Module::slot_restart_exit, Qt::QueuedConnection);
+    return;
+}
+
+void WK_WebSocket::slot_disconnected()
+{
+    if (this->close_reason == EN_CloseReason::AppQuit)
+    {
+        return;
+    }
+    else if (this->close_reason == EN_CloseReason::Manual)
+    {
+        this->p_webSoc->deleteLater();
+        this->p_webSoc = nullptr;
+        return;
+    }
+    else if (this->close_reason == EN_CloseReason::None)
+    {
+        this->p_webSoc->deleteLater();
+        this->p_webSoc = nullptr;
+        this->slot_Connect_Sv();
+        return;
+    }
     return;
 }
