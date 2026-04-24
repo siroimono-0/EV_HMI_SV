@@ -16,6 +16,7 @@ Window {
     property var ld_Input_Won_item;
     property var ld_Input_Kwh_item;
     property int cnt: 0;
+    property bool indicator_run: cpp_module.statStore.soc_connect_stat ? cpp_module.statStore.soc_connect_stat : false;
 
     function stk_pop()
     {
@@ -43,9 +44,90 @@ Window {
         console.log(debug);
         timer_clear.restart();
     }
+    function netErr_charging_monitoring()
+    {
+        root.stk_home();
+        root_stkView.currentItem.screen_stop();
+        root_stkView.push("Disconnect_nomal.qml", {"mainWin": root});
+    }
+
+    Component.onCompleted: {
+        // root.indicator_run = ;
+    }
 
     Connections{
         target: cpp_module
+
+        function onSig_Re_connect_Success_ToQml()
+        {
+            let page_name = root_stkView.currentItem.pageName;
+            if(page_name === "Disconnect_Nomal" || page_name === "Disconnect_Unique")
+            {
+                root_stkView.pop();
+            }
+        }
+
+        function onSig_Re_connect_UpTo_5_ToQml()
+        {
+            let page_name = root_stkView.currentItem.pageName;
+            console.log(page_name);
+
+            if(page_name === "Maintenance")
+            {
+                return;
+            }
+
+            if(page_name === "Charging_Ready")
+            {
+                // 선승인 금액 처리해야댐 강제로 0원
+                // 차징로그 ems 하나 남겨놓음
+
+                /*
+                typedef enum NET_ERR_CHARGING_TYPE {
+                    CHARGING_READY = 0,
+                    CHARGING_FINISHED = 1
+                } NET_ERR_CHARGING_TYPE;*/
+
+                cpp_module.netErr_Card_save_To_StatStore(0);
+                // cpp_module.ems_Charging_Ready_To_StatStore();
+
+                // 정지 사유 초기화
+                cpp_module.set_stop_reason("Network Err");
+                // 충전 바로 마무리 한걸로 DB 업데이트
+                // cpp_module.charging_finished_To_statStore();
+                cpp_module.netErr_Charging_ready_save_To_StatStore();
+
+
+                root.stk_home();
+                root_stkView.currentItem.screen_stop();
+                root_stkView.push("Disconnect_nomal.qml", {"mainWin": root});
+            }
+            else if(page_name === "Charging_Monitoring")
+            {
+                // 정지 사유 초기화
+                // cpp_module.set_stop_reason("EMS");
+                // root_stkView.currentItem.ems_btn();
+
+                cpp_module.netErr_Card_save_To_StatStore(1);
+                // cpp_module.ems_Charging_Ready_To_StatStore();
+
+                // 정지 사유 초기화
+                cpp_module.set_stop_reason("Network Err");
+                // 충전 바로 마무리 한걸로 DB 업데이트
+                // cpp_module.charging_finished_To_statStore();
+                cpp_module.netErr_Charging_monitoring_save_To_StatStore();
+
+                cpp_module.charging_stop_To_serial();
+
+                //
+            }
+            else
+            {
+                root.stk_home();
+                root_stkView.currentItem.screen_stop();
+                root_stkView.push("Disconnect_nomal.qml", {"mainWin": root});
+            }
+        }
 
         function onSig_ems_ToQml()
         {
@@ -219,6 +301,63 @@ Window {
                 root.stk_home();
             }
         }
+    }
+
+    Rectangle{
+        id: indi
+        anchors.fill: parent
+        z: -999;
+        color: "transparent"
+        visible: false
+
+        state: root.indicator_run ? "hide" : "nomal";
+
+        states: [
+            State {
+                name:"hide"
+                PropertyChanges {
+                    target: indi
+                    visible: false
+                    z: -999
+                }
+            },
+            State {
+                name:"nomal"
+                PropertyChanges {
+                    target: indi
+                    visible: true
+                    z: 999
+                }
+            }
+
+        ]
+
+
+        BusyIndicator{
+            id: common_indicator
+
+            anchors.centerIn: parent
+            width: 500; height: 500;
+            visible: indi.visible
+            running: indi.visible
+        }
+
+        MouseArea{
+            anchors.fill: parent
+            visible: indi.visible
+            onPressed: function(o_ev) {
+                o_ev.accepted = true;
+            }
+
+            onClicked: function(o_ev) {
+                o_ev.accepted = true;
+            }
+
+            onReleased: function(o_ev) {
+                o_ev.accepted = true;
+            }
+        }
+
     }
 
     StackView{

@@ -67,7 +67,7 @@ Q_INVOKABLE void Cpp_Module::join_WebSv(QString id)
     else
     {
         QMetaObject::invokeMethod(this->p_wk_websoc,
-                                  &WK_WebSocket::slot_ID_Check,
+                                  &WK_WebSocket::slot_Connect_Sv,
                                   Qt::QueuedConnection);
     }
 
@@ -376,4 +376,22 @@ void Cpp_Module::slot_restart_exit()
 Q_INVOKABLE int Cpp_Module::get_charging_type_To_StatStore()
 {
     return this->p_stat->get_charging_type();
+}
+
+Q_INVOKABLE void Cpp_Module::netErr_Card_save_To_StatStore(const NET_ERR_CHARGING_TYPE type)
+{
+    this->p_stat->netErr_Card_save(type);
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::netErr_Charging_ready_save_To_StatStore()
+{
+    this->p_stat->insert_db_charging(CHARGING_READY);
+    return;
+}
+
+Q_INVOKABLE void Cpp_Module::netErr_Charging_monitoring_save_To_StatStore()
+{
+    this->p_stat->insert_db_charging(CHARGING_FINISHED);
+    return;
 }

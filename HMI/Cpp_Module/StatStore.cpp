@@ -8,6 +8,10 @@ StatStore::StatStore(QObject *parent)
 {
     this->set_charge_price_min();
     this->create_db_lite();
+
+    this->p_tm_backUp = new QTimer(this);
+    this->p_tm_backUp->start(60000);
+    connect(this->p_tm_backUp, &QTimer::timeout, this, &StatStore::slot_check_netErr);
 }
 
 void StatStore::set_charge_price_min()
@@ -773,6 +777,93 @@ void StatStore::ems_Charging_Ready()
     }
 }
 
+void StatStore::netErr_Card_save(const NET_ERR_CHARGING_TYPE type)
+{
+    if (this->db_card_save_stat == true)
+    {
+        return;
+    }
+    this->db_card_save_stat = true;
+
+    if (type == CHARGING_READY)
+    {
+        this->i_act_pay = 0;
+        this->i_can_pay = this->i_adv_pay;
+
+        if (this->st_db_data.card_type == "creditCard")
+        {
+            // this->cancle_pay_check();
+
+            netErr_creditCard st_credit = {0};
+            st_credit.act_pay = 0;
+            st_credit.can_pay = this->i_can_pay;
+            st_credit.adv_pay = this->i_adv_pay;
+            st_credit.card_uid = this->card_uid;
+            this->insert_db_credit(st_credit);
+        }
+        else if (this->st_db_data.card_type == "membershipCard")
+        {
+            QString hmi_id = this->mac_addr;
+            QString request_id;
+            QDateTime dt_utc = QDateTime::currentDateTimeUtc();
+            request_id = hmi_id + dt_utc.toString();
+
+            netErr_membershipCard st_membership = {0};
+            st_membership.act_pay = 0;
+            st_membership.can_pay = this->i_can_pay;
+            st_membership.adv_pay = this->i_adv_pay;
+            st_membership.card_uid = this->st_db_data.card_uid;
+            st_membership.transaction_id = this->st_mb_log.transaction_id;
+            st_membership.request_id = request_id;
+            this->insert_db_membership(st_membership);
+            /*
+        QMetaObject::invokeMethod(this->p_soc,
+                                  "slot_send_membership_finished_textData",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(int, this->i_adv_pay),
+                                  Q_ARG(int, this->i_act_pay),
+                                  Q_ARG(int, this->i_can_pay),
+                                  Q_ARG(QString, this->st_db_data.card_uid),
+                                  Q_ARG(uint32_t, this->st_mb_log.transaction_id),
+                                  Q_ARG(QString, request_id));
+        */
+        }
+    }
+    else if (type == CHARGING_FINISHED)
+    {
+        this->i_can_pay = this->i_adv_pay - this->i_act_pay;
+
+        if (this->st_db_data.card_type == "creditCard")
+        {
+            netErr_creditCard st_credit = {0};
+            st_credit.act_pay = this->i_act_pay;
+            st_credit.can_pay = this->i_can_pay;
+            st_credit.adv_pay = this->i_adv_pay;
+            st_credit.card_uid = this->card_uid;
+            this->insert_db_credit(st_credit);
+        }
+        else if (this->st_db_data.card_type == "membershipCard")
+        {
+            QString hmi_id = this->mac_addr;
+            QString request_id;
+            QDateTime dt_utc = QDateTime::currentDateTimeUtc();
+            request_id = hmi_id + dt_utc.toString();
+
+            netErr_membershipCard st_membership = {0};
+            st_membership.act_pay = this->i_act_pay;
+            st_membership.can_pay = this->i_can_pay;
+            st_membership.adv_pay = this->i_adv_pay;
+            st_membership.card_uid = this->st_db_data.card_uid;
+            st_membership.transaction_id = this->st_mb_log.transaction_id;
+            st_membership.request_id = request_id;
+            this->insert_db_membership(st_membership);
+        }
+    }
+
+    // this->p_module->set_stop_reason("Network Err");
+    // this->insert_db_charging();
+}
+
 void StatStore::set_stop_reason(QString set)
 {
     this->st_db_data.stop_reason = set;
@@ -819,6 +910,9 @@ void StatStore::create_db_lite()
     }
 
     this->create_db_table();
+    this->create_db_table_credit();
+    this->create_db_table_membership();
+    this->create_db_table_charging();
 
     return;
 }
@@ -831,6 +925,112 @@ void StatStore::create_db_table()
                   "NOT NULL,"
                   "path TEXT,"
                   "stat BOOL);";
+    bool ok_prepare = query.prepare(sql);
+
+    /*
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }*/
+
+    bool ok_exec = query.exec();
+
+    /*
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }*/
+    return;
+}
+
+void StatStore::create_db_table_credit()
+{
+    QSqlQuery query(this->db_lite);
+    QString sql = "CREATE TABLE credit ("
+                  "row_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                  "card_uid TEXT NOT NULL,"
+                  "act_pay INTEGER,"
+                  "can_pay INTEGER,"
+                  "adv_pay INTEGER,"
+                  "stat BOOL"
+                  ");";
+    bool ok_prepare = query.prepare(sql);
+
+    /*
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }*/
+
+    bool ok_exec = query.exec();
+
+    /*
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }*/
+    return;
+}
+
+void StatStore::create_db_table_membership()
+{
+    QSqlQuery query(this->db_lite);
+    QString sql = "CREATE TABLE membership ("
+                  "row_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                  "card_uid TEXT NOT NULL,"
+                  "act_pay INTEGER,"
+                  "can_pay INTEGER,"
+                  "adv_pay INTEGER,"
+                  "transaction_id INTEGER,"
+                  "request_id TEXT,"
+                  "stat BOOL"
+                  ");";
+
+    bool ok_prepare = query.prepare(sql);
+
+    /*
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }*/
+
+    bool ok_exec = query.exec();
+
+    /*
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }*/
+    return;
+}
+
+void StatStore::create_db_table_charging()
+{
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "CREATE TABLE charging ("
+                  "row_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                  "store_id INTEGER, "
+                  "hmi_id TEXT, "
+                  "ocpp_tx_id INTEGER, "
+                  "card_uid TEXT, "
+                  "start_time TEXT, "
+                  "end_time TEXT, "
+                  "duration_time TEXT, "
+                  "average_kwh REAL, "
+                  "soc_start REAL, "
+                  "soc_end REAL, "
+                  "advance_payment INTEGER, "
+                  "cancel_payment INTEGER, "
+                  "actual_payment INTEGER, "
+                  "unit_price INTEGER, "
+                  "tariff_type TEXT, "
+                  "session_status TEXT, "
+                  "stop_reason TEXT, "
+                  "local_tx_id TEXT, "
+                  "stat BOOL"
+                  ");";
+
     bool ok_prepare = query.prepare(sql);
 
     if (!this->check_query_prepare(ok_prepare, query))
@@ -1098,4 +1298,418 @@ void StatStore::slot_remove_ad(const QString name)
 int StatStore::get_charging_type()
 {
     return this->charging_type;
+}
+
+bool StatStore::get_soc_connect_stat()
+{
+    return this->soc_connect_stat;
+}
+
+void StatStore::set_soc_connect_stat(bool set)
+{
+    this->soc_connect_stat = set;
+    emit this->sig_soc_connect_stat();
+    return;
+}
+
+void StatStore::slot_set_soc_connect_stat(const bool set)
+{
+    this->set_soc_connect_stat(set);
+}
+
+void StatStore::insert_db_credit(const netErr_creditCard st_data)
+{
+    QSqlQuery query(this->db_lite);
+    QString sql = "INSERT INTO credit ("
+                  "card_uid, act_pay, can_pay, adv_pay, stat) VALUES ("
+                  ":card_uid, :act_pay, :can_pay, :adv_pay, :stat)";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":card_uid", st_data.card_uid);
+    query.bindValue(":act_pay", st_data.act_pay);
+    query.bindValue(":can_pay", st_data.can_pay);
+    query.bindValue(":adv_pay", st_data.adv_pay);
+    query.bindValue(":stat", true);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+void StatStore::insert_db_membership(const netErr_membershipCard st_data)
+{
+    QSqlQuery query(this->db_lite);
+    QString sql = "INSERT INTO membership ("
+                  "card_uid, act_pay, can_pay, adv_pay, transaction_id, request_id, stat) VALUES ("
+                  ":card_uid, :act_pay, :can_pay, :adv_pay, :transaction_id, :request_id, :stat)";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":card_uid", st_data.card_uid);
+    query.bindValue(":act_pay", st_data.act_pay);
+    query.bindValue(":can_pay", st_data.can_pay);
+    query.bindValue(":adv_pay", st_data.adv_pay);
+    query.bindValue(":transaction_id", st_data.transaction_id);
+    query.bindValue(":request_id", st_data.request_id);
+    query.bindValue(":stat", true);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+void StatStore::insert_db_charging(const NET_ERR_CHARGING_TYPE type)
+{
+    if (this->db_charging_save_stat == true)
+    {
+        return;
+    }
+
+    this->db_charging_save_stat = true;
+
+    if (type == CHARGING_READY)
+    {
+        QString qs_time = QTime::currentTime().toString("hh:mm:ss");
+        this->st_db_data.end_time = qs_time;
+        this->st_db_data.duration_time = 0;
+
+        float total_kwh = 0;
+        float total_time_h = 0;
+        float ave_kwh = 0;
+        this->st_db_data.average_kWh = 0;
+
+        this->st_db_data.soc_end = this->st_db_data.soc_start;
+        this->st_db_data.cancel_payment = (uint32_t) this->i_can_pay;
+        this->st_db_data.actual_payment = (uint32_t) this->i_act_pay;
+        this->st_db_data.session_status = "charging_finished";
+
+        qDebug() << this->st_db_data.cancel_payment << " can";
+        qDebug() << this->st_db_data.actual_payment << " act";
+        qDebug() << this->st_db_data.average_kWh << " ave";
+    }
+    else if (type == CHARGING_FINISHED)
+    {
+        QString qs_time = QTime::currentTime().toString("hh:mm:ss");
+        this->st_db_data.end_time = qs_time;
+        this->st_db_data.duration_time = this->elapsed_time;
+
+        float total_kwh = this->accumulate_kWh / 3600;
+        float total_time_h = this->reverse_cnv_time(this->elapsed_time) / 3600;
+        float ave_kwh = total_kwh / total_time_h;
+        this->st_db_data.average_kWh = ave_kwh;
+
+        QString number_current;
+        for (auto &v : this->battery_current)
+        {
+            if (v >= '0' && v <= '9' || v == '.')
+            {
+                number_current += v;
+            }
+        }
+
+        this->st_db_data.soc_end = number_current.toDouble();
+        this->st_db_data.cancel_payment = (uint32_t) this->i_can_pay;
+        this->st_db_data.actual_payment = (uint32_t) this->i_act_pay;
+        this->st_db_data.session_status = "charging_finished";
+
+        qDebug() << this->st_db_data.cancel_payment << " can";
+        qDebug() << this->st_db_data.actual_payment << " act";
+        qDebug() << this->st_db_data.average_kWh << " ave";
+    }
+
+    QSqlQuery query(this->db_lite);
+
+    QString sql
+        = "INSERT INTO charging ("
+          "store_id, hmi_id, ocpp_tx_id, card_uid, start_time, end_time, duration_time, "
+          "average_kwh, soc_start, soc_end, advance_payment, cancel_payment, actual_payment, "
+          "unit_price, tariff_type, session_status, stop_reason, local_tx_id, stat) VALUES ("
+          ":store_id, :hmi_id, :ocpp_tx_id, :card_uid, :start_time, :end_time, :duration_time, "
+          ":average_kwh, :soc_start, :soc_end, :advance_payment, :cancel_payment, :actual_payment, "
+          ":unit_price, :tariff_type, :session_status, :stop_reason, :local_tx_id, :stat)";
+
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":store_id", this->st_db_data.store_id);
+    query.bindValue(":hmi_id", this->st_db_data.hmi_id);
+    query.bindValue(":ocpp_tx_id", this->st_db_data.ocpp_tx_id);
+    query.bindValue(":card_uid", this->st_db_data.card_uid);
+    query.bindValue(":start_time", this->st_db_data.start_time);
+    query.bindValue(":end_time", this->st_db_data.end_time);
+    query.bindValue(":duration_time", this->st_db_data.duration_time);
+    query.bindValue(":average_kwh", this->st_db_data.average_kWh);
+    query.bindValue(":soc_start", this->st_db_data.soc_start);
+    query.bindValue(":soc_end", this->st_db_data.soc_end);
+    query.bindValue(":advance_payment", this->st_db_data.advance_payment);
+    query.bindValue(":cancel_payment", this->st_db_data.cancel_payment);
+    query.bindValue(":actual_payment", this->st_db_data.actual_payment);
+    query.bindValue(":unit_price", this->st_db_data.unit_price);
+    query.bindValue(":tariff_type", this->st_db_data.tariff_type);
+    query.bindValue(":session_status", this->st_db_data.session_status);
+    query.bindValue(":stop_reason", this->st_db_data.stop_reason);
+    query.bindValue(":local_tx_id", this->st_db_data.local_tx_id);
+    query.bindValue(":stat", true);
+
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+void StatStore::slot_check_netErr()
+{
+    if (this->soc_connect_stat == false)
+    {
+        return;
+    }
+
+    qDebug() << Q_FUNC_INFO;
+    this->check_netErr_credit();
+    this->check_netErr_membership();
+    this->check_netErr_charging();
+    return;
+}
+
+void StatStore::check_netErr_credit()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "SELECT * FROM credit "
+                  "WHERE stat = :stat";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":stat", true);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    while (query.next())
+    {
+        struct netErr_creditCard st_data = {0};
+        int row_id = query.value(0).toInt();
+        st_data.card_uid = query.value(1).toString();
+        st_data.act_pay = query.value(2).toInt();
+        st_data.can_pay = query.value(3).toInt();
+        st_data.adv_pay = query.value(4).toInt();
+
+        if (st_data.can_pay > 0)
+        {
+            QMetaObject::invokeMethod(this->p_soc,
+                                      "slot_netAccess_post_cancle",
+                                      Qt::QueuedConnection,
+                                      Q_ARG(QString, this->card_uid));
+        }
+        else
+        {
+            // emit this->p_module->sig_cancle_payment_ok_ToQml();
+        }
+
+        this->marking_row(CREDIT, row_id);
+    }
+
+    return;
+}
+
+void StatStore::check_netErr_membership()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "SELECT * FROM membership "
+                  "WHERE stat = :stat";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":stat", true);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    while (query.next())
+    {
+        struct netErr_membershipCard st_data = {0};
+        int row_id = query.value(0).toInt();
+        st_data.card_uid = query.value(1).toString();
+        st_data.act_pay = query.value(2).toInt();
+        st_data.can_pay = query.value(3).toInt();
+        st_data.adv_pay = query.value(4).toInt();
+        st_data.transaction_id = query.value(5).toInt();
+        st_data.request_id = query.value(6).toString();
+
+        QMetaObject::invokeMethod(this->p_soc,
+                                  "slot_send_membership_finished_textData",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(int, st_data.adv_pay),
+                                  Q_ARG(int, st_data.act_pay),
+                                  Q_ARG(int, st_data.can_pay),
+                                  Q_ARG(QString, st_data.card_uid),
+                                  Q_ARG(uint32_t, st_data.transaction_id),
+                                  Q_ARG(QString, st_data.request_id));
+
+        this->marking_row(MEMBERSHIP, row_id);
+    }
+
+    return;
+}
+
+void StatStore::check_netErr_charging()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QSqlQuery query(this->db_lite);
+
+    QString sql = "SELECT * FROM charging "
+                  "WHERE stat = :stat";
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":stat", true);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    while (query.next())
+    {
+        qDebug() << "???????????__________";
+        struct db_data st_data = {0};
+        int row_id = query.value(0).toInt();
+        st_data.store_id = query.value(1).toInt();
+        st_data.hmi_id = query.value(2).toString();
+        st_data.ocpp_tx_id = query.value(3).toInt();
+        st_data.card_uid = query.value(4).toString();
+        QString start_time = query.value(5).toString();
+        if (start_time.isEmpty())
+        {
+            start_time = "00:00";
+        }
+        st_data.start_time = start_time;
+        st_data.end_time = query.value(6).toString();
+        QString duration_time = query.value(7).toString();
+        if (duration_time.isEmpty())
+        {
+            duration_time = "00:00";
+        }
+        st_data.duration_time = duration_time;
+        st_data.average_kWh = query.value(8).toDouble();
+        st_data.soc_start = query.value(9).toDouble();
+        st_data.soc_end = query.value(10).toDouble();
+        st_data.advance_payment = query.value(11).toInt();
+        st_data.cancel_payment = query.value(12).toInt();
+        st_data.actual_payment = query.value(13).toInt();
+        st_data.unit_price = query.value(14).toInt();
+        st_data.tariff_type = query.value(15).toString();
+        st_data.session_status = query.value(16).toString();
+        st_data.stop_reason = query.value(17).toString();
+        st_data.local_tx_id = query.value(18).toString();
+
+        emit this->sig_stat_db_update(st_data);
+        this->marking_row(CHARGING, row_id);
+    }
+
+    return;
+}
+
+void StatStore::marking_row(const TABLE_TYPE type, int row_id)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QSqlQuery query(this->db_lite);
+
+    QString sql;
+
+    if (type == CREDIT)
+    {
+        sql = "UPDATE credit "
+              "SET "
+              "stat = :stat "
+              "WHERE row_id = :row_id";
+    }
+    else if (type == MEMBERSHIP)
+    {
+        sql = "UPDATE membership "
+              "SET "
+              "stat = :stat "
+              "WHERE row_id = :row_id";
+    }
+    else if (type == CHARGING)
+    {
+        sql = "UPDATE charging "
+              "SET "
+              "stat = :stat "
+              "WHERE row_id = :row_id";
+    }
+
+    bool ok_prepare = query.prepare(sql);
+
+    if (!this->check_query_prepare(ok_prepare, query))
+    {
+        return;
+    }
+
+    query.bindValue(":stat", false);
+    query.bindValue(":row_id", row_id);
+    bool ok_exec = query.exec();
+
+    if (!this->check_query_exec(ok_exec, query))
+    {
+        return;
+    }
+
+    return;
+}
+
+bool StatStore::slot_get_soc_connect_stat()
+{
+    return this->soc_connect_stat;
 }

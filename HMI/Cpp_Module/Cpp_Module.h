@@ -73,6 +73,10 @@ public:
 
     Q_INVOKABLE void first_ad_To_Soc();
 
+    Q_INVOKABLE void netErr_Card_save_To_StatStore(const NET_ERR_CHARGING_TYPE type);
+    Q_INVOKABLE void netErr_Charging_ready_save_To_StatStore();
+    Q_INVOKABLE void netErr_Charging_monitoring_save_To_StatStore();
+
 public slots:
 
     void slot_nomal_exit();
@@ -106,6 +110,9 @@ signals:
     void sig_screen_move_home_ToQml();
 
     void sig_ad_play_ToQml();
+
+    void sig_Re_connect_UpTo_5_ToQml();
+    void sig_Re_connect_Success_ToQml();
 
 private:
     StatStore *p_stat = nullptr;

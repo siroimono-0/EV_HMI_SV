@@ -16,6 +16,8 @@ enum CHARGING_TYPE { NOT_SET = 0, TIME = 1, WON = 2, KWH = 3, PERSENT = 4 };
 
 enum METHOD_TYPE { ALL = 0, MEMBER = 1, NONMEMBER = 2 };
 
+enum TABLE_TYPE { CREDIT = 0, MEMBERSHIP = 1, CHARGING = 2 };
+
 class WK_Serial;
 class WK_WebSocket;
 class Cpp_Module;
@@ -63,6 +65,9 @@ class StatStore : public QObject
     Q_PROPERTY(QString cur_advertisement READ get_cur_advertisement WRITE set_cur_advertisement
                    NOTIFY sig_cur_advertisement FINAL)
 
+    Q_PROPERTY(bool soc_connect_stat READ get_soc_connect_stat WRITE set_soc_connect_stat NOTIFY
+                   sig_soc_connect_stat FINAL)
+
 public:
     explicit StatStore(QObject *parent = nullptr);
     void set_First_stat(stat_data st_stat);
@@ -93,6 +98,8 @@ public:
     //===========================================
     int get_charging_type();
 
+    bool get_soc_connect_stat();
+
     void set_card_type(QString set);
     // QString advance_payment; // 카드 승인시 초기화
     // QString actual_payment;  // 충전 완료시 초기화
@@ -122,12 +129,14 @@ public:
     void set_charge_price_min();
     void set_cur_advertisement(QString set);
     //=============================================
+    void set_soc_connect_stat(bool set);
 
     void charging_start_db_update(double start_persent);
     void charging_finished_db_update();
     void cancle_pay_check();
 
     void ems_Charging_Ready();
+    void netErr_Card_save(const NET_ERR_CHARGING_TYPE type);
 
     void next_ad();
 
@@ -136,10 +145,24 @@ public:
     //====================================================
     void create_db_lite();
     void create_db_table();
+    void create_db_table_credit();
+    void create_db_table_membership();
+    void create_db_table_charging();
+
     void insert_db_first_data();
     bool check_query_prepare(bool ok, QSqlQuery &query);
     bool check_query_exec(bool ok, QSqlQuery &query);
     void update_ad();
+
+    void insert_db_credit(const netErr_creditCard st_data);
+    void insert_db_membership(const netErr_membershipCard st_data);
+    void insert_db_charging(const NET_ERR_CHARGING_TYPE type);
+
+    void check_netErr_credit();
+    void check_netErr_membership();
+    void check_netErr_charging();
+
+    void marking_row(const TABLE_TYPE type, int row_id);
     //====================================================
     //====================================================
     //====================================================
@@ -194,6 +217,11 @@ public slots:
     void slot_insert_ad(const QString name, const bool stat);
     void slot_remove_ad(const QString name);
 
+    void slot_set_soc_connect_stat(const bool set);
+    bool slot_get_soc_connect_stat();
+
+    void slot_check_netErr();
+
 signals:
     // 상태 값 변경시 발생
     // void sig_Stat_changed(stat_data st_stat);
@@ -221,6 +249,8 @@ signals:
     // set_p_stat 에서 커넥트
     // connect(this->p_stat, &StatStore::sig_hartbit_pong, this, &WK_WebSocket::slot_send_hartbit_pong);
     void sig_heartbit_pong(heartbit_data st_hb_data);
+
+    void sig_soc_connect_stat();
 
 private:
     struct stat_data st_stat = {0};
@@ -268,8 +298,15 @@ private:
     int ad_tmp_cnt = 0;
 
     QVector<QString> vec_ad;
+
+    //===================================================
     QSqlDatabase db_lite;
+    bool db_card_save_stat = false;
+    bool db_charging_save_stat = false;
     QString cur_path;
+    QTimer *p_tm_backUp = nullptr;
+
+    bool soc_connect_stat = true;
 };
 
 Q_DECLARE_METATYPE(CHARGING_TYPE)

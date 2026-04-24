@@ -5,6 +5,10 @@
 #include <QObject>
 
 typedef enum EXIT_CODE { EXIT_NOMAL = 0, EXIT_RESTART = 85 } EXIT_CODE;
+typedef enum NET_ERR_CHARGING_TYPE {
+    CHARGING_READY = 0,
+    CHARGING_FINISHED = 1
+} NET_ERR_CHARGING_TYPE;
 
 typedef enum AD_NEED {
     NEED_DOWNLOAD = 0, // 다운
@@ -262,4 +266,25 @@ struct serial_info
     QString vendorId;
     QString productId;
 };
+
+struct netErr_creditCard
+{
+    int act_pay;
+    int can_pay;
+    int adv_pay;
+    QString card_uid;
+};
+Q_DECLARE_METATYPE(netErr_creditCard)
+
+struct netErr_membershipCard
+{
+    int act_pay;
+    int can_pay;
+    int adv_pay;
+    QString card_uid;
+    uint32_t transaction_id;
+    QString request_id;
+};
+Q_DECLARE_METATYPE(netErr_membershipCard)
+
 #endif // STATDATA_H

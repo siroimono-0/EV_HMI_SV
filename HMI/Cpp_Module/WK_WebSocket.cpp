@@ -250,6 +250,7 @@ void WK_WebSocket::slot_netAccess_post_cancle(QString card_uid)
 
 void WK_WebSocket::slot_Connect_Sv()
 {
+    this->close_reason = None;
     this->p_webSoc = new QWebSocket();
     //*** 맴버변수로 갖고있는 웹소켓 포인터에 부모 설정해주면
     // 종료버튼 눌러서 종료하면
@@ -264,7 +265,8 @@ void WK_WebSocket::slot_Connect_Sv()
     connect(this->p_stat,
             &StatStore::sig_stat_db_update,
             this,
-            &WK_WebSocket::slot_send_db_update_textData);
+            &WK_WebSocket::slot_send_db_update_textData,
+            Qt::UniqueConnection);
 
     // 텍스트 메시지 수신시 발생 슬롯
     connect(this->p_webSoc,
@@ -287,6 +289,7 @@ void WK_WebSocket::slot_Connect_Sv()
 
 void WK_WebSocket::slot_SocErr(QAbstractSocket::SocketError error)
 {
+    qDebug() << Q_FUNC_INFO;
     if (this->connect_stat == false)
     {
         if (error == QAbstractSocket::ConnectionRefusedError)
@@ -324,14 +327,31 @@ void WK_WebSocket::slot_SocErr(QAbstractSocket::SocketError error)
                                       &Cpp_Module::sig_SocErr_ToQml,
                                       QString("연결 시간 초과"));
         }
+
+        /*
+        this->close_reason = Manual;
+
+        if (this->p_webSoc != nullptr
+            && this->p_webSoc->state() == QAbstractSocket::UnconnectedState)
+        {
+            this->slot_disconnected();
+        }
+        else if (this->p_webSoc != nullptr
+                 && this->p_webSoc->state() == QAbstractSocket::ConnectedState)
+        {
+            this->p_webSoc->close();
+        }*/
     }
     else
     {
-        this->close_reason = EN_CloseReason::None;
-        // this->slot_disconnected();
+        this->close_reason = None;
+
+        if (this->p_webSoc != nullptr && this->p_webSoc->state() == QAbstractSocket::ConnectedState)
+        {
+            this->p_webSoc->close();
+        }
     }
 
-    qDebug() << "hello?";
     return;
 }
 
@@ -503,7 +523,6 @@ void WK_WebSocket::slot_Recv_TextData(QString recvData)
 void WK_WebSocket::slot_ID_Check()
 {
     qDebug() << Q_FUNC_INFO;
-    this->connect_stat = true;
 
     /* 수정필요 구현 삭제 예정
     struct stat_data st_stat = {0};
@@ -557,9 +576,20 @@ void WK_WebSocket::slot_ID_Resert(bool resert)
                                   Qt::QueuedConnection);
     */
 
+        this->connect_stat = true;
+        this->cnt_Re_connect = 0;
+        QMetaObject::invokeMethod(this->p_stat,
+                                  "slot_set_soc_connect_stat",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(bool, true));
+
         // 모듈 -> Qml 통신 시그널 발생
         QMetaObject::invokeMethod(this->p_Module,
                                   &Cpp_Module::sig_SocSuccess_ToQml,
+                                  Qt::QueuedConnection);
+
+        QMetaObject::invokeMethod(this->p_Module,
+                                  &Cpp_Module::sig_Re_connect_Success_ToQml,
                                   Qt::QueuedConnection);
     }
     else
@@ -958,22 +988,47 @@ void WK_WebSocket::shutdown_restart()
 
 void WK_WebSocket::slot_disconnected()
 {
-    if (this->close_reason == EN_CloseReason::AppQuit)
+    if (this->close_reason == AppQuit)
     {
         return;
     }
-    else if (this->close_reason == EN_CloseReason::Manual)
+    else if (this->close_reason == Manual)
     {
+        qDebug() << Q_FUNC_INFO << " Manual";
         this->p_webSoc->deleteLater();
         this->p_webSoc = nullptr;
         return;
     }
-    else if (this->close_reason == EN_CloseReason::None)
+    else if (this->close_reason == None && this->connect_stat == true)
     {
+        qDebug() << Q_FUNC_INFO << " None";
+        if (this->cnt_Re_connect > 5)
+        {
+            QMetaObject::invokeMethod(this->p_Module,
+                                      &Cpp_Module::sig_Re_connect_UpTo_5_ToQml,
+                                      Qt::BlockingQueuedConnection);
+            this->cnt_Re_connect = 0;
+        }
+
+        this->cnt_Re_connect++;
         this->p_webSoc->deleteLater();
         this->p_webSoc = nullptr;
-        this->slot_Connect_Sv();
-        return;
+
+        QMetaObject::invokeMethod(this->p_stat,
+                                  "slot_set_soc_connect_stat",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(bool, false));
+
+        QTimer::singleShot(3000, this, [this]() {
+            this->slot_Connect_Sv();
+            return;
+        });
+    }
+    else if (this->close_reason == None && this->connect_stat == false)
+    {
+        qDebug() << Q_FUNC_INFO << " None  && this->connect_stat == false";
+        this->p_webSoc->deleteLater();
+        this->p_webSoc = nullptr;
     }
     return;
 }

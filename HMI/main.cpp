@@ -19,6 +19,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<CHARGING_TYPE>("CHARGING_TYPE");
     qRegisterMetaType<charging_stat>("charging_stat");
     qRegisterMetaType<heartbit_data>("heartbit_data");
+    qRegisterMetaType<heartbit_data>("netErr_creditCard");
+    qRegisterMetaType<heartbit_data>("netErr_membershipCard");
 
     engine.rootContext()->setContextProperty("cpp_module", &cpp_module);
     QObject::connect(

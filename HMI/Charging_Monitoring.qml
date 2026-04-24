@@ -90,6 +90,12 @@ Item {
         // 234코일 중지 확인 모드버스 받았으면
         function onSig_coil234_off_check_ToQml()
         {
+            if(cpp_module.statStore.soc_connect_stat === false)
+            {
+                mainWin.netErr_charging_monitoring();
+                return;
+            }
+
             // 충전금액 정산
             // http sv 차액 결제 취소 요청
             cpp_module.set_payment_To_statStore();

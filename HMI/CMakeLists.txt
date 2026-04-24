@@ -57,6 +57,7 @@ qt_add_qml_module(appHMI
         Ems_Charging.qml
         Maintenance.qml
         Test.qml
+        Disconnect_nomal.qml
         ./Qml_Module/Popup_Text.qml
         ./Qml_Module/Keypad_Number.qml
         ./Qml_Module/BackGround.qml
@@ -95,6 +96,7 @@ qt_add_qml_module(appHMI
         ./images/settlement_delay.svg
         ./images/warning.svg
         ./images/maintenance.svg
+        ./images/chrome_dino.svg
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
